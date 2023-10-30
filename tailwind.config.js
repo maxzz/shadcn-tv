@@ -22,5 +22,6 @@ export default {
     plugins: [
         require("tailwindcss-animate"),
         require("./tailwind/tailwind-plugin-shadcn").shadcnPlugin,
+        require("./tailwind/tailwind-plugin-overflow-overlay"),
     ],
 };

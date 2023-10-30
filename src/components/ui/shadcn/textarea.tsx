@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { TextareaHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/utils";
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> { }
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> { }
 
 const TextareaClasses = "\
 px-3 py-2 w-full min-h-[60px] text-sm \
@@ -20,7 +20,7 @@ disabled:cursor-not-allowed \
 border rounded-md shadow-sm \
 flex";
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ({ className, ...rest }, ref) => {
         return (
             <textarea className={cn(TextareaClasses, className)} ref={ref} {...rest} />
@@ -28,5 +28,3 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     }
 );
 Textarea.displayName = "Textarea";
-
-export { Textarea };

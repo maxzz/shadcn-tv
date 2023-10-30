@@ -1,6 +1,7 @@
 export * from './label';
 export * from './input';
 export * from './textarea';
+export * from './textarea-auto-grow';
 export * from './button';
 export * from './dropdown-menu';
 export * from './context-menu';

@@ -1,4 +1,5 @@
 import { SVGAttributes } from "react";
+import "./p-loaders-p2.css";
 
 export function LoaderP12(props: SVGAttributes<SVGSVGElement>) {
     return (

@@ -1,0 +1,64 @@
+:root {
+	--hue: 223;
+	--bg: hsl(var(--hue),90%,90%);
+	--fg: hsl(var(--hue),90%,10%);
+
+	/* --primary: hsl(var(--hue),90%,50%);
+	--trans-dur: 0.3s;
+	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320)); */
+}
+
+.pl3 {
+    display: block;
+    width: 8em;
+    height: 8em;
+}
+
+.pl3__rect {
+    animation: pl1-a 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.pl3__rect {
+    animation-name: pl3;
+}
+.pl3__rect-g {
+    transform-origin: 64px 64px;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue), 90%, 10%);
+        --fg: hsl(var(--hue), 90%, 90%);
+    }
+}
+
+/* Animations */
+
+@keyframes pl3 {
+    from {
+        transform: translate(64px, 0);
+        width: 64px;
+        height: 64px;
+    }
+    25% {
+        transform: translate(0, 0);
+        width: 128px;
+        height: 32px;
+    }
+    50% {
+        transform: translate(0, 0);
+        width: 64px;
+        height: 64px;
+    }
+    75% {
+        transform: translate(0, 0);
+        width: 32px;
+        height: 128px;
+    }
+    to {
+        transform: translate(0, 64px);
+        width: 64px;
+        height: 64px;
+    }
+}

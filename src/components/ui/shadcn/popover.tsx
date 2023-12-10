@@ -6,6 +6,7 @@ import { cn } from "@/utils";
 const Popover = Prim.Root;
 
 const PopoverTrigger = Prim.Trigger;
+const PopoverAnchor = Prim.Anchor;
 
 const PopoverContentClasses = "\
 p-4 w-72 z-50 \
@@ -44,4 +45,4 @@ const PopoverContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentProp
 );
 PopoverContent.displayName = Prim.Content.displayName;
 
-export { Popover, PopoverTrigger, PopoverContent };
+export { Popover, PopoverTrigger, PopoverAnchor, PopoverContent };

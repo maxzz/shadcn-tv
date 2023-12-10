@@ -41,9 +41,9 @@ export function DragHandlers({ doDroppedFilesAtom, activeAtom }: { doDroppedFile
             r('dragleave', _onDragLeave);
             r('drop', _onDrop);
         };
-        
     }, []);
-    return (<></>);
+
+    return null;
 }
 
 export function DropArea() {
@@ -52,8 +52,6 @@ export function DropArea() {
 
     DragHandlers({ doDroppedFilesAtom: doDroppedFilesAtom, activeAtom: activeAtom });
     return (<>
-        {/* <DragHandlers doDroppedFilesAtom={doDroppedFilesAtom} activeAtom={activeAtom} /> */}
-
         {active && <div className={`absolute inset-0 grid place-items-center text-5xl font-bold text-slate-50 bg-slate-800/90 z-10`}>
             Drop it!
         </div>}

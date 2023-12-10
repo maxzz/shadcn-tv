@@ -1,7 +1,7 @@
 import { ThemeSwitch } from "../ui/shadcn";
 import { IconAppLogo } from "../ui/icons/normal";
 
-export function Header() {
+export function Section0_Header() {
     return (
         <div className="px-2 py-3 flex items-center justify-between bg-primary-foreground">
             <div className="flex items-center gap-x-1">

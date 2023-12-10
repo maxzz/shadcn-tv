@@ -1,6 +1,6 @@
-import { FontInputTitleBar } from './top-title-menu';
+import { FontInputTitleBar } from './1-top-row';
 import { Button } from '@/components/ui/shadcn';
-import { DialogDemo } from './font-svg-view';
+import { DialogDemo } from './2-dialog-demo';
 
 function FontInput() {
     return (
@@ -12,17 +12,20 @@ function FontInput() {
 
 function ConvertForm() {
     return (
-        <div className="flex flex-col space-y-2">
-            <FontInput />
+        <div className="flex flex-col space-y-4">
+            <div className="border-muted border-b">
+                <FontInput />
+            </div>
 
-            <Button variant={'outline'}>OK</Button>
-
-            <DialogDemo />
+            <div className="flex items-center gap-2">
+                <Button variant={'outline'}>OK</Button>
+                <DialogDemo />
+            </div>
         </div>
     );
 }
 
-export function Main() {
+export function Section2_Main() {
     return (
         <div className="p-4">
             <ConvertForm />

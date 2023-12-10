@@ -1,6 +1,6 @@
-import { Button } from '../ui/shadcn';
-import { IconMenuHamburger } from '../ui/icons/normal';
-import { DropdownMenu, MenuItemType } from '../ui/ui-dropdown-menu';
+import { Button } from '../../ui/shadcn';
+import { IconMenuHamburger } from '../../ui/icons/normal';
+import { DropdownMenu, MenuItemType } from '../../ui/ui-dropdown-menu';
 
 const topMenuItems: readonly MenuItemType[] = [
     {

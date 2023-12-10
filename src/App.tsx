@@ -1,6 +1,6 @@
-import { Header } from "./components/1-header";
-import { Main } from "./components/2-main";
-import { Footer } from "./components/3-footer";
+import { Section0_Header } from "./components/1-header";
+import { Section2_Main } from "./components/2-main";
+import { Section3_Footer } from "./components/3-footer";
 import { DropArea, UIToaster } from "./components/ui";
 
 export function App() {
@@ -8,9 +8,9 @@ export function App() {
         <UIToaster />
 
         <div className="min-h-screen grid grid-rows-[auto,1fr,auto]">
-            <Header />
-            <Main />
-            <Footer />
+            <Section0_Header />
+            <Section2_Main />
+            <Section3_Footer />
         </div>
 
         <DropArea />

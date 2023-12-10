@@ -3,7 +3,7 @@ import "./p-loaders-p1.css";
 
 export function LoaderP11(props: SVGAttributes<SVGSVGElement>) {
     return (
-        <svg className="pl1" viewBox="0 0 128 128" width="128px" height="128px" {...props}>
+        <svg className="pl1" viewBox="0 0 128 128" {...props}>
             <defs>
                 <linearGradient id="a" x1={0} y1={0} x2={1} y2={1}>
                     <stop offset="0%" />

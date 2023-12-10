@@ -10,3 +10,9 @@ First comes everything related to the position and size of the component, then c
 This is a template project. You can copy everything you need for your project from this project and install the appropriate dependency (mostly from the radix-ui library).
 
 All formatted shardcn components are located in the ```src/comComponents/ui/shadcn``` folder.
+
+# Installation
+
+* add twMerge
+* add tailwind-plugin-shadcn.ts
+  

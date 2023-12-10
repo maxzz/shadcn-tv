@@ -1,6 +1,7 @@
 import { FontInputTitleBar } from './1-top-row';
 import { Button } from '@/components/ui/shadcn';
 import { DialogDemo } from './2-dialog-demo';
+import { LoaderP11, LoaderP12, LoaderP13 } from '../ui/loaders';
 
 function FontInput() {
     return (
@@ -20,6 +21,9 @@ function ConvertForm() {
             <div className="flex items-center gap-2">
                 <Button variant={'outline'}>OK</Button>
                 <DialogDemo />
+                <LoaderP11 />
+                <LoaderP12 />
+                <LoaderP13 />
             </div>
         </div>
     );

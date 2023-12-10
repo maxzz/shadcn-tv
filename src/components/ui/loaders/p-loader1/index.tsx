@@ -1,9 +1,10 @@
 import { SVGAttributes } from "react";
+import { classNames } from "@/utils";
 import "./p-loaders-p1.css";
 
-export function LoaderP11(props: SVGAttributes<SVGSVGElement>) {
+export function LoaderP11({className, ...rest}: SVGAttributes<SVGSVGElement>) {
     return (
-        <svg className="pl1" viewBox="0 0 128 128" {...props}>
+        <svg className={classNames("pl1", className)} viewBox="0 0 128 128" {...rest}>
             <defs>
                 <linearGradient id="a" x1={0} y1={0} x2={1} y2={1}>
                     <stop offset="0%" />

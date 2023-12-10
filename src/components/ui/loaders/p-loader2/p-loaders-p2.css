@@ -8,11 +8,11 @@
 	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320)); */
 }
 
-.pl2 {
+/* .pl2 {
     display: block;
     width: 8em;
     height: 8em;
-}
+} */
 
 .pl2__rect,
 .pl2__rect-g {

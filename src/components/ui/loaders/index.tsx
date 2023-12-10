@@ -1,5 +1,5 @@
 // https://codepen.io/jkantner/pen/YzdpEVO 'Boxy Preloaders'
 
-export * from './p-loaders-p1';
-export * from './p-loaders-p2';
-export * from './p-loaders-p3';
+export * from './p-loader1';
+export * from './p-loader2';
+export * from './p-loader3';

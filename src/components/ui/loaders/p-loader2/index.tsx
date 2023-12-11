@@ -2,20 +2,22 @@ import { SVGAttributes } from "react";
 import "./p-loaders-p2.css";
 import { classNames } from "@/utils";
 
-// hsl(223,90%,90%)
-// hsl(283,90%,50%)
+/**
+ * hsl(223,90%,90%)
+ * hsl(283,90%,50%)
+ *
+ * [--bg:hsl(var(--hue1),90%,90%)] \
+ * [--fg:hsl(var(--hue1),90%,10%)] \
+ * \ 
+ * dark:[--bg:hsl(var(--hue1),90%,10%)] \
+ * dark:[--fg:hsl(var(--hue1),90%,90%)] \
+ */
 const rootClasses = "\
 [--hue1:223] \
 [--hue2:283] \
 \
-[--bg:hsl(var(--hue1),90%,90%)] \
-[--fg:hsl(var(--hue1),90%,10%)] \
-\
 [--primary:hsl(var(--hue1),90%,50%)] \
 [--secondary:hsl(var(--hue2),90%,50%)] \
-\
-dark:[--bg:hsl(var(--hue1),90%,10%)] \
-dark:[--fg:hsl(var(--hue1),90%,90%)] \
 ";
 
 export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
@@ -26,12 +28,10 @@ export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
                     <rect className="pl2__rect" rx={8} ry={8} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>
                 <g className="pl2__rect-g">
-                    <rect className="pl2__rect" rx={8} ry={8} x={44} y={128} width={40} height={24} transform="rotate(180)"
-                    />
+                    <rect className="pl2__rect" rx={8} ry={8} x={44} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>
                 <g className="pl2__rect-g">
-                    <rect className="pl2__rect" rx={8} ry={8} x={88} y={128} width={40} height={24} transform="rotate(180)"
-                    />
+                    <rect className="pl2__rect" rx={8} ry={8} x={88} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>
             </g>
 
@@ -40,12 +40,10 @@ export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
                     <rect className="pl2__rect" rx={8} ry={8} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>
                 <g className="pl2__rect-g">
-                    <rect className="pl2__rect" rx={8} ry={8} x={44} y={128} width={40} height={24} transform="rotate(180)"
-                    />
+                    <rect className="pl2__rect" rx={8} ry={8} x={44} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>
                 <g className="pl2__rect-g">
-                    <rect className="pl2__rect" rx={8} ry={8} x={88} y={128} width={40} height={24} transform="rotate(180)"
-                    />
+                    <rect className="pl2__rect" rx={8} ry={8} x={88} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>
             </g>
         </svg>

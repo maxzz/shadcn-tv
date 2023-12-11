@@ -2,20 +2,22 @@ import { SVGAttributes } from "react";
 import "./p-loaders-p3.css";
 import { classNames } from "@/utils";
 
-// hsl(223,90%,90%)
-// hsl(163,90%,50%)
+/**
+ * hsl(223,90%,90%)
+ * hsl(163,90%,50%)
+ *
+ * [--bg:hsl(var(--hue1),90%,90%)] \
+ * [--fg:hsl(var(--hue1),90%,10%)] \
+ * \ 
+ * dark:[--bg:hsl(var(--hue1),90%,10%)] \
+ * dark:[--fg:hsl(var(--hue1),90%,90%)] \
+ */
 const rootClasses = "\
 [--hue1:223] \
 [--hue2:163] \
 \
-[--bg:hsl(var(--hue1),90%,90%)] \
-[--fg:hsl(var(--hue1),90%,10%)] \
-\
 [--primary:hsl(var(--hue1),90%,50%)] \
 [--secondary:hsl(var(--hue2),90%,50%)] \
-\
-dark:[--bg:hsl(var(--hue1),90%,10%)] \
-dark:[--fg:hsl(var(--hue1),90%,90%)] \
 ";
 
 export function LoaderP13({className, ...rest}: SVGAttributes<SVGSVGElement>) {

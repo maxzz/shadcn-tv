@@ -21,19 +21,25 @@ const rootClasses = "\
 \
 ";
 
-export function LoaderP11({className, ...rest}: SVGAttributes<SVGSVGElement>) {
+export function GradientMask({maskId = "p1loader-grad"}: {maskId?: string} = {}) {
+    return (
+        <defs>
+            <linearGradient id="p1loader-grad" x1={0} y1={0} x2={1} y2={1}>
+                <stop offset="0%" />
+                <stop offset="100%" stopColor="#fff" />
+            </linearGradient>
+
+            <mask id="p1loader-mask">
+                <path fill={`url(#${maskId})`} d="M0 0H128V128H0z" />
+            </mask>
+        </defs>
+    );
+}
+
+export function LoaderP11({ className, ...rest }: SVGAttributes<SVGSVGElement>) {
     return (
         <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
-            <defs>
-                <linearGradient id="p1loader-grad" x1={0} y1={0} x2={1} y2={1}>
-                    <stop offset="0%" />
-                    <stop offset="100%" stopColor="#fff" />
-                </linearGradient>
-
-                <mask id="p1loader-mask">
-                    <path fill="url(#p1loader-grad)" d="M0 0H128V128H0z" />
-                </mask>
-            </defs>
+            <GradientMask />
 
             <g className="pl1__g" fill="var(--primary)">
                 <g className="pl1__rect-g" transform="translate(20 20)">

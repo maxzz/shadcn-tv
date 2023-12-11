@@ -1,6 +1,7 @@
 import { SVGAttributes } from "react";
 import "./p-loaders-p1.css";
 import { classNames } from "@/utils";
+import { GradientMask } from "../p-shared-mask";
 
 /**
  * hsl(223,90%,90%)
@@ -20,25 +21,6 @@ const rootClasses = "\
 [--secondary:hsl(var(--hue2),90%,50%)] \
 \
 ";
-
-/**
- * @param maskId - Document scope unique id (not selector) for the mask. default: "p1loader".
- * @returns 
- */
-export function GradientMask({ maskId = "p1loader" }: { maskId?: string; } = {}) {
-    return (
-        <defs>
-            <linearGradient id={`${maskId}-grad`} x1={0} y1={0} x2={1} y2={1}>
-                <stop offset="0%" />
-                <stop offset="100%" stopColor="#fff" />
-            </linearGradient>
-
-            <mask id={`${maskId}`}>
-                <path fill={`url(#${maskId}-grad)`} d="M0 0H128V128H0z" />
-            </mask>
-        </defs>
-    );
-}
 
 const gradientMaskName = "p1loader";
 

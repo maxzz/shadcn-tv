@@ -1,7 +1,7 @@
 import { SVGAttributes } from "react";
 import "./p-loaders-p2.css";
 import { classNames } from "@/utils";
-import { GradientMask } from "../p-loader1";
+import { GradientMask } from "../p-shared-mask";
 
 /**
  * hsl(223,90%,90%)

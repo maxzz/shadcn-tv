@@ -1,9 +1,23 @@
 import { SVGAttributes } from "react";
 import "./p-loaders-p3.css";
+import { classNames } from "@/utils";
 
-export function LoaderP13(props: SVGAttributes<SVGSVGElement>) {
+// hsl(223,90%,90%)
+// hsl(343,90%,50%)
+const rootClasses = "\
+[--hue1:223] \
+[--hue2:343] \
+[--bg:hsl(var(--hue1),90%,90%)] \
+[--fg:hsl(var(--hue1),90%,10%)] \
+[--primary:hsl(var(--hue1),90%,50%)] \
+[--secondary:hsl(var(--hue2),90%,50%)] \
+dark:[--bg:hsl(var(--hue1),90%,10%)] \
+dark:[--fg:hsl(var(--hue1),90%,90%)] \
+";
+
+export function LoaderP13({className, ...rest}: SVGAttributes<SVGSVGElement>) {
     return (
-        <svg className="pl3" viewBox="0 0 128 128" {...props}>
+        <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
             <g fill="var(--primary)">
                 <rect className="pl3__rect" rx={8} ry={8} width={64} height={64} transform="translate(64)" />
                 <g className="pl3__rect-g" transform="scale(-1)">

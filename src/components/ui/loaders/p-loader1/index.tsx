@@ -2,14 +2,17 @@ import { SVGAttributes } from "react";
 import "./p-loaders-p1.css";
 import { classNames } from "@/utils";
 
+// hsl(223,90%,90%)
+// hsl(343,90%,50%)
 const rootClasses = "\
-[--hue:223] \
-[--bg:hsl(var(--hue),90%,90%)] \
-[--fg:hsl(var(--hue),90%,10%)] \
-[--primary:hsl(var(--hue),90%,50%)] \
-[--secondary:hsl(343,90%,50%)] \
-dark:[--bg:hsl(var(--hue),90%,10%)] \
-dark:[--fg:hsl(var(--hue),90%,90%)] \
+[--hue1:223] \
+[--hue2:343] \
+[--bg:hsl(var(--hue1),90%,90%)] \
+[--fg:hsl(var(--hue1),90%,10%)] \
+[--primary:hsl(var(--hue1),90%,50%)] \
+[--secondary:hsl(var(--hue2),90%,50%)] \
+dark:[--bg:hsl(var(--hue1),90%,10%)] \
+dark:[--fg:hsl(var(--hue1),90%,90%)] \
 ";
 
 export function LoaderP11({className, ...rest}: SVGAttributes<SVGSVGElement>) {

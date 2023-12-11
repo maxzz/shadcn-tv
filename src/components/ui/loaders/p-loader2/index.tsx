@@ -1,9 +1,23 @@
 import { SVGAttributes } from "react";
 import "./p-loaders-p2.css";
+import { classNames } from "@/utils";
 
-export function LoaderP12(props: SVGAttributes<SVGSVGElement>) {
+// hsl(223,90%,90%)
+// hsl(283,90%,50%)
+const rootClasses = "\
+[--hue1:223] \
+[--hue2:283] \
+[--bg:hsl(var(--hue1),90%,90%)] \
+[--fg:hsl(var(--hue1),90%,10%)] \
+[--primary:hsl(var(--hue1),90%,50%)] \
+[--secondary:hsl(var(--hue2),90%,50%)] \
+dark:[--bg:hsl(var(--hue1),90%,10%)] \
+dark:[--fg:hsl(var(--hue1),90%,90%)] \
+";
+
+export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
     return (
-        <svg className="pl2" viewBox="0 0 128 128" {...props}>
+        <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
             <g fill="var(--primary)">
                 <g className="pl2__rect-g">
                     <rect className="pl2__rect" rx={8} ry={8} y={128} width={40} height={24} transform="rotate(180)" />
@@ -18,7 +32,7 @@ export function LoaderP12(props: SVGAttributes<SVGSVGElement>) {
                 </g>
             </g>
 
-            <g fill="hsl(283,90%,50%)" mask="url(#pl-mask)">
+            <g fill="var(--secondary)" mask="url(#pl-mask)">
                 <g className="pl2__rect-g">
                     <rect className="pl2__rect" rx={8} ry={8} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>

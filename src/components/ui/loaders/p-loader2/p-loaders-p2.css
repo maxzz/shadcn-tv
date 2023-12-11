@@ -1,12 +1,20 @@
-:root {
+/* :root {
 	--hue: 223;
 	--bg: hsl(var(--hue),90%,90%);
 	--fg: hsl(var(--hue),90%,10%);
 
-	/* --primary: hsl(var(--hue),90%,50%);
+	--primary: hsl(var(--hue),90%,50%);
 	--trans-dur: 0.3s;
-	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320)); */
-}
+	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+} */
+
+/* Dark theme */
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue), 90%, 10%);
+        --fg: hsl(var(--hue), 90%, 90%);
+    }
+} */
 
 /* .pl2 {
     display: block;
@@ -42,14 +50,6 @@
 }
 .pl2__rect-g:nth-child(3) .pl2__rect {
     transform-origin: 108px 128px;
-}
-
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: hsl(var(--hue), 90%, 10%);
-        --fg: hsl(var(--hue), 90%, 90%);
-    }
 }
 
 /* Animations */

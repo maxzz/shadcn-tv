@@ -2,7 +2,7 @@
  * @param maskId - Document scope unique id (not selector) for the mask. default: "p1loader".
  * @returns 
  */
-export function GradientMask({ maskId = "p1loader" }: { maskId?: string; } = {}) {
+export function GradientMaskDefs({ maskId = "p1loader" }: { maskId?: string; } = {}) {
     return (
         <defs>
             <linearGradient id={`${maskId}-grad`} x1={0} y1={0} x2={1} y2={1}>
@@ -11,7 +11,7 @@ export function GradientMask({ maskId = "p1loader" }: { maskId?: string; } = {})
             </linearGradient>
 
             <mask id={`${maskId}`}>
-                <path fill={`url(#${maskId}-grad)`} d="M0 0H128V128H0z" />
+                <rect x="0" y="0" width="128" height="128" fill={`url(#${maskId}-grad)`} />
             </mask>
         </defs>
     );

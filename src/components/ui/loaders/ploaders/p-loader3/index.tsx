@@ -1,7 +1,7 @@
 import { SVGAttributes } from "react";
 import "./p-loaders-p3.css";
 import { classNames } from "@/utils";
-import { GradientMask } from "../p-shared-mask";
+import { GradientMaskDefs } from "../p-shared-mask";
 
 /**
  * hsl(223,90%,90%)
@@ -26,7 +26,7 @@ const gradientMaskName = "p3loader";
 export function LoaderP13({className, ...rest}: SVGAttributes<SVGSVGElement>) {
     return (
         <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
-            <GradientMask maskId={gradientMaskName} />
+            <GradientMaskDefs maskId={gradientMaskName} />
             
             <g fill="var(--primary)">
                 <rect className="pl3__rect" rx={8} ry={8} width={64} height={64} transform="translate(64)" />

@@ -25,12 +25,13 @@ export function LoaderP11({className, ...rest}: SVGAttributes<SVGSVGElement>) {
     return (
         <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
             <defs>
-                <linearGradient id="p1loader-a" x1={0} y1={0} x2={1} y2={1}>
+                <linearGradient id="p1loader-grad" x1={0} y1={0} x2={1} y2={1}>
                     <stop offset="0%" />
                     <stop offset="100%" stopColor="#fff" />
                 </linearGradient>
-                <mask id="p1loader-b">
-                    <path fill="url(#p1loader-a)" d="M0 0H128V128H0z" />
+
+                <mask id="p1loader-mask">
+                    <path fill="url(#p1loader-grad)" d="M0 0H128V128H0z" />
                 </mask>
             </defs>
 
@@ -45,7 +46,7 @@ export function LoaderP11({className, ...rest}: SVGAttributes<SVGSVGElement>) {
                 </g>
             </g>
 
-            <g className="pl1__g" fill="var(--secondary)" mask="url(#p1loader-b)">
+            <g className="pl1__g" fill="var(--secondary)" mask="url(#p1loader-mask)">
                 <g className="pl1__rect-g" transform="translate(20 20)">
                     <rect className="pl1__rect" rx={8} ry={8} width={40} height={40} />
                     <rect className="pl1__rect" rx={8} ry={8} width={40} height={40} transform="translate(0 48)" />

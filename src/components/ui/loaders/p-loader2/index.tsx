@@ -35,7 +35,7 @@ export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
                 </g>
             </g>
 
-            <g fill="var(--secondary)" mask="url(#pl-mask)">
+            <g fill="var(--secondary)" mask="url(#p1loader-mask)">
                 <g className="pl2__rect-g">
                     <rect className="pl2__rect" rx={8} ry={8} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>

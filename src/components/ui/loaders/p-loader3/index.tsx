@@ -25,13 +25,15 @@ export function LoaderP13({className, ...rest}: SVGAttributes<SVGSVGElement>) {
         <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
             <g fill="var(--primary)">
                 <rect className="pl3__rect" rx={8} ry={8} width={64} height={64} transform="translate(64)" />
+
                 <g className="pl3__rect-g" transform="scale(-1)">
                     <rect className="pl3__rect" rx={8} ry={8} width={64} height={64} transform="translate(64)" />
                 </g>
             </g>
 
-            <g fill="var(--secondary)" mask="url(#pl-mask)">
+            <g fill="var(--secondary)" mask="url(#p1loader-mask)">
                 <rect className="pl3__rect" rx={8} ry={8} width={64} height={64} transform="translate(64)" />
+                
                 <g className="pl3__rect-g" transform="scale(-1)">
                     <rect className="pl3__rect" rx={8} ry={8} width={64} height={64} transform="translate(64)" />
                 </g>

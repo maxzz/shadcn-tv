@@ -4,8 +4,8 @@ export function LoadersTest() {
     return (
         <div className="flex items-center gap-2">
             <LoaderP11 className="w-12 h-12" />
-            <LoaderP12 className="w-8 h-8" />
-            <LoaderP13 className="w-8 h-8" />
+            {/* <LoaderP12 className="w-8 h-8" />
+            <LoaderP13 className="w-8 h-8" /> */}
         </div>
     );
 }

@@ -7,10 +7,13 @@ import { classNames } from "@/utils";
 const rootClasses = "\
 [--hue1:223] \
 [--hue2:283] \
+\
 [--bg:hsl(var(--hue1),90%,90%)] \
 [--fg:hsl(var(--hue1),90%,10%)] \
+\
 [--primary:hsl(var(--hue1),90%,50%)] \
 [--secondary:hsl(var(--hue2),90%,50%)] \
+\
 dark:[--bg:hsl(var(--hue1),90%,10%)] \
 dark:[--fg:hsl(var(--hue1),90%,90%)] \
 ";

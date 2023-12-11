@@ -40,10 +40,12 @@ export function GradientMask({ maskId = "p1loader" }: { maskId?: string; } = {})
     );
 }
 
+const gradientMaskName = "p1loader";
+
 export function LoaderP11({ className, ...rest }: SVGAttributes<SVGSVGElement>) {
     return (
         <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
-            <GradientMask />
+            <GradientMask maskId={gradientMaskName} />
 
             <g className="pl1__g" fill="var(--primary)">
                 <g className="pl1__rect-g" transform="translate(20 20)">
@@ -56,7 +58,7 @@ export function LoaderP11({ className, ...rest }: SVGAttributes<SVGSVGElement>) 
                 </g>
             </g>
 
-            <g className="pl1__g" fill="var(--secondary)" mask="url(#p1loader-mask)">
+            <g className="pl1__g" fill="var(--secondary)" mask={`url(#${gradientMaskName})`}>
                 <g className="pl1__rect-g" transform="translate(20 20)">
                     <rect className="pl1__rect" rx={8} ry={8} width={40} height={40} />
                     <rect className="pl1__rect" rx={8} ry={8} width={40} height={40} transform="translate(0 48)" />

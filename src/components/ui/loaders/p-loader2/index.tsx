@@ -21,10 +21,12 @@ const rootClasses = "\
 [--secondary:hsl(var(--hue2),90%,50%)] \
 ";
 
+const gradientMaskName = "p2loader";
+
 export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
     return (
         <svg className={classNames(rootClasses, className)} viewBox="0 0 128 128" {...rest}>
-            <GradientMask maskId="p2loader" />
+            <GradientMask maskId={gradientMaskName} />
             
             <g fill="var(--primary)">
                 <g className="pl2__rect-g">
@@ -38,7 +40,7 @@ export function LoaderP12({className, ...rest}: SVGAttributes<SVGSVGElement>) {
                 </g>
             </g>
 
-            <g fill="var(--secondary)" mask="url(#p2loader)">
+            <g fill="var(--secondary)" mask={`url(#${gradientMaskName})`}>
                 <g className="pl2__rect-g">
                     <rect className="pl2__rect" rx={8} ry={8} y={128} width={40} height={24} transform="rotate(180)" />
                 </g>

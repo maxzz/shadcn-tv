@@ -2,6 +2,7 @@ import { FontInputTitleBar } from './1-top-row';
 import { Button } from '@/components/ui/shadcn';
 import { DialogDemo } from './2-dialog-demo';
 import { LoadersTest } from './3-loaders';
+import { NeonSwitch } from '../ui/experimental';
 
 function FontInput() {
     return (
@@ -23,6 +24,7 @@ function ConvertForm() {
                 <DialogDemo />
                 
                 <LoadersTest />
+                <NeonSwitch />
             </div>
         </div>
     );

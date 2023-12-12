@@ -9,7 +9,7 @@
     --off-hue: 3;
     --on-hue1: 123;
     --on-hue2: 168;
-    --fg: hsl(var(--hue), 10%, 90%);
+    /* --fg: hsl(var(--hue), 10%, 90%); */
     --primary: hsl(var(--hue), 90%, 50%);
     --trans-dur: 0.6s;
     --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
@@ -28,6 +28,7 @@ body {
         background-color var(--trans-dur),
         color var(--trans-dur);
 } */
+
 .switch,
 .switch__input {
     -webkit-tap-highlight-color: #0000;
@@ -39,6 +40,7 @@ body {
     width: 5em;
     height: 3em;
 }
+
 .switch__base-outer,
 .switch__base-inner {
     display: block;
@@ -56,6 +58,7 @@ body {
     width: 4.75em;
     height: 2.75em;
 }
+
 .switch__base-inner {
     border-radius: 1.125em;
     box-shadow:
@@ -68,6 +71,7 @@ body {
     width: 4.25em;
     height: 2.25em;
 }
+
 .switch__base-neon {
     display: block;
     overflow: visible;
@@ -81,6 +85,7 @@ body {
     stroke-dasharray: 0 104.26 0;
     transition: stroke-dasharray var(--trans-dur) var(--trans-timing);
 }
+
 .switch__input {
     outline: transparent;
     position: relative;
@@ -101,6 +106,7 @@ body {
 .switch__input:focus-visible:before {
     box-shadow: 0 0 0 0.125em var(--primary);
 }
+
 .switch__knob,
 .switch__knob-container {
     border-radius: 1em;
@@ -154,6 +160,7 @@ body {
     height: 2em;
     transition: transform var(--trans-dur) var(--trans-timing);
 }
+
 .switch__led {
     background-color: hsl(var(--off-hue), 90%, 70%);
     border-radius: 50%;
@@ -172,12 +179,14 @@ body {
         background-color var(--trans-dur) var(--trans-timing),
         box-shadow var(--trans-dur) var(--trans-timing);
 }
+
 .switch__text {
     overflow: hidden;
     position: absolute;
     width: 1px;
     height: 1px;
 }
+
 .switch__input:checked ~ .switch__led {
     background-color: hsl(var(--on-hue1), 90%, 70%);
     box-shadow:

@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react-day-picker";
 import "./neon-switch.css"; // https://codepen.io/jkantner/pen/MWzqMrp 'Neon Toggle Switch'
+import { classNames } from "@/utils";
 
 function SwitchFrame() {
     return (
@@ -64,10 +65,20 @@ function SwitchKnob() {
     </>);
 }
 
+const rootClasses = "\
+[--hue:223] \
+[--off-hue:3] \
+[--on-hue1:123] \
+[--on-hue2:168] \
+[--primary:hsl(var(--hue),90%,50%)] \
+[--trans-dur:0.6s] \
+[--trans-timing:cubic-bezier(0.65,0,0.35,1)] \
+\
+";
 
 export function NeonSwitch(props: InputHTMLAttributes) {
     return (
-        <label className="switch">
+        <label className={classNames(rootClasses, "switch")}>
             <input className="switch__input" type="checkbox" role="switch" {...props} />
 
             <span className="switch__base-outer" />

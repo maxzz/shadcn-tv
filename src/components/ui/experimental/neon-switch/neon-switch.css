@@ -35,16 +35,16 @@ body {
 }
 .switch {
     margin: auto;
-    display: block;
     position: relative;
     width: 5em;
     height: 3em;
+    display: block;
 }
 
 .switch__base-outer,
 .switch__base-inner {
-    display: block;
     position: absolute;
+    display: block;
 }
 .switch__base-outer {
     left: 0.125em;
@@ -93,6 +93,7 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
+
     outline: transparent;
     -webkit-appearance: none;
     appearance: none;
@@ -101,8 +102,9 @@ body {
     content: "";
     position: absolute;
     inset: -0.125em;
-    border-radius: 0.125em;
     display: block;
+
+    border-radius: 0.125em;
     box-shadow: 0 0 0 0.125em hsla(var(--hue), 90%, 50%, 0);
     transition: box-shadow 0.15s linear;
 }
@@ -114,17 +116,15 @@ body {
 .switch__knob-container {
     display: block;
     position: absolute;
+
     border-radius: 1em;
 }
 .switch__knob {
     width: 2em;
     height: 2em;
+
     background-color: hsl(var(--hue), 10%, 15%);
-    background-image: radial-gradient(
-            88% 88% at 50% 50%,
-            hsl(var(--hue), 10%, 20%) 47%,
-            hsla(var(--hue), 10%, 20%, 0) 50%
-        ),
+    background-image: radial-gradient(88% 88% at 50% 50%, hsl(var(--hue), 10%, 20%) 47%, hsla(var(--hue), 10%, 20%, 0) 50%),
         radial-gradient(88% 88% at 47% 47%, hsl(var(--hue), 10%, 85%) 45%, hsla(var(--hue), 10%, 85%, 0) 50%),
         radial-gradient(65% 70% at 40% 60%, hsl(var(--hue), 10%, 20%) 46%, hsla(var(--hue), 10%, 20%, 0) 50%);
     box-shadow:

@@ -1,5 +1,5 @@
-import { InputHTMLAttributes } from "react-day-picker";
-import "./neon-switch.css"; // https://codepen.io/jkantner/pen/MWzqMrp 'Neon Toggle Switch'
+import { InputHTMLAttributes } from "react"; // https://codepen.io/jkantner/pen/MWzqMrp 'Neon Toggle Switch'
+import "./neon-switch.css";
 import { classNames } from "@/utils";
 
 function SwitchFrame() {
@@ -42,12 +42,7 @@ function SwitchKnob() {
         <span className="switch__knob-shadow" />
         <span className="switch__knob-container">
             <span className="switch__knob">
-                <svg
-                    className="switch__knob-neon"
-                    viewBox="0 0 48 48"
-                    width="48px"
-                    height="48px"
-                >
+                <svg className="switch__knob-neon" viewBox="0 0 48 48" width="48px" height="48px">
                     <circle
                         fill="none"
                         stroke="url(#switch-gradient2)"
@@ -65,18 +60,26 @@ function SwitchKnob() {
     </>);
 }
 
+// hsl(223,90%,50%) //--hue
+// hsl(123,90%,70%) //--on-hue1
+// hsl(168,90%,70%) //--on-hue2
+
 const rootClasses = "\
 [--hue:223] \
+\
 [--off-hue:3] \
+\
 [--on-hue1:123] \
 [--on-hue2:168] \
+\
 [--primary:hsl(var(--hue),90%,50%)] \
-[--trans-dur:0.6s] \
+\
+[--trans-dur:0.2s] \
 [--trans-timing:cubic-bezier(0.65,0,0.35,1)] \
 \
 ";
 
-export function NeonSwitch(props: InputHTMLAttributes) {
+export function NeonSwitch(props: InputHTMLAttributes<HTMLInputElement>) {
     return (
         <label className={classNames(rootClasses, "switch")}>
             <input className="switch__input" type="checkbox" role="switch" {...props} />

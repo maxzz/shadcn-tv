@@ -4,6 +4,7 @@ import { DialogDemo } from './2-dialog-demo';
 import { LoadersTest } from './3-loaders';
 import { NeonSwitch } from '../ui/experimental';
 import { TableDemo } from '../ui/shadcn/demo/demo-table';
+import { DifferentCases } from './4-different-cases';
 
 function FontInput() {
     return (
@@ -29,7 +30,8 @@ function ConvertForm() {
             </div>
 
             <div className="">
-                <TableDemo />
+                {/* <TableDemo /> */}
+                <DifferentCases />
             </div>
         </div>
     );

@@ -75,7 +75,10 @@ export const columns: ColumnDef<Payment>[] = [
                     </M.DropdownMenuTrigger>
 
                     <M.DropdownMenuContent align="end">
-                        <M.DropdownMenuLabel>Actions</M.DropdownMenuLabel>
+                        <M.DropdownMenuLabel>
+                            Actions
+                        </M.DropdownMenuLabel>
+
                         <M.DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>Copy payment ID</M.DropdownMenuItem>
                         <M.DropdownMenuSeparator />
                         <M.DropdownMenuItem>View customer</M.DropdownMenuItem>
@@ -87,4 +90,3 @@ export const columns: ColumnDef<Payment>[] = [
         },
     },
 ];
-//DataTableDemo

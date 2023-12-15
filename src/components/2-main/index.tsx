@@ -24,15 +24,13 @@ function ConvertForm() {
             <div className="flex items-center gap-2">
                 <Button variant={'outline'}>OK</Button>
                 <DialogDemo />
-
-                {/* <LoadersTest />
-                <NeonSwitch /> */}
             </div>
 
             <div className="">
                 <DifferentCases cases={[
-                    { id: '1', name: "Data table", component: TableDemo },
-                    { id: '2', name: "Data table", component: TableDemo }
+                    { id: '1', name: "Data table", component: <TableDemo /> },
+                    { id: '2', name: "Loaders", component: <LoadersTest /> },
+                    { id: '3', name: "Neon switch", component: <NeonSwitch /> },
                 ]} />
             </div>
         </div>

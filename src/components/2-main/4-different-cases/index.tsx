@@ -9,7 +9,7 @@ import {
 export type Case = {
     id: string;
     name: string;
-    component: () => JSX.Element;
+    component: ReactNode;
 };
 
 export function DifferentCases({ cases }: { cases: Case[]; }) {
@@ -19,7 +19,7 @@ export function DifferentCases({ cases }: { cases: Case[]; }) {
             {cases.map((c) => (
                 <AccordionItem value={c.id} key={c.id}>
                     <AccordionTrigger>{c.name}</AccordionTrigger>
-                    <AccordionContent><c.component /></AccordionContent>
+                    <AccordionContent>{c.component}</AccordionContent>
                 </AccordionItem>
             ))}
 

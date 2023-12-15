@@ -28,8 +28,8 @@ function ConvertForm() {
 
             <div className="">
                 <DifferentCases cases={[
-                    { id: '1', name: "Data table", component: <TableDemo /> },
-                    { id: '2', name: "Loaders", component: <LoadersTest /> },
+                    { id: '1', name: "Table", component: <TableDemo /> },
+                    { id: '2', name: "Loaders", component: <LoadersTest className="m-auto w-1/2 flex items-center justify-between" /> },
                     { id: '3', name: "Neon switch", component: <NeonSwitch /> },
                 ]} />
             </div>

@@ -30,8 +30,8 @@ function ConvertForm() {
             </div>
 
             <div className="">
-                {/* <TableDemo /> */}
-                <DifferentCases />
+                <DifferentCases cases={[{id: '1', name: "Data table", component: TableDemo}]} />
+                <DifferentCases cases={[{id: '2', name: "Data table", component: TableDemo}]} />
             </div>
         </div>
     );

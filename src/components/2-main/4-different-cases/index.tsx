@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import {
     Accordion,
     AccordionContent,
@@ -5,32 +6,23 @@ import {
     AccordionTrigger,
 } from "@/components/ui/shadcn/accordion";
 
-export function DifferentCases() {
+export type Case = {
+    id: string;
+    name: string;
+    component: () => JSX.Element;
+};
+
+export function DifferentCases({ cases }: { cases: Case[]; }) {
     return (
         <Accordion type="single" collapsible className="w-full">
 
-            <AccordionItem value="item-1">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-            </AccordionItem>
+            {cases.map((c) => (
+                <AccordionItem value={c.id} key={c.id}>
+                    <AccordionTrigger>{c.name}</AccordionTrigger>
+                    <AccordionContent><c.component /></AccordionContent>
+                </AccordionItem>
+            ))}
 
-            <AccordionItem value="item-2">
-                <AccordionTrigger>Is it styled?</AccordionTrigger>
-                <AccordionContent>
-                    Yes. It comes with default styles that matches the other
-                    components&apos; aesthetic.
-                </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-3">
-                <AccordionTrigger>Is it animated?</AccordionTrigger>
-                <AccordionContent>
-                    Yes. It's animated by default, but you can disable it if you prefer.
-                </AccordionContent>
-            </AccordionItem>
-            
         </Accordion>
     );
 }

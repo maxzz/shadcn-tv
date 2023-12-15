@@ -173,11 +173,8 @@ export const columns: ColumnDef<Payment>[] = [
 
 export function DataTableDemo() {
     const [sorting, setSorting] = React.useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-        []
-    );
-    const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({});
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = React.useState({});
 
     const table = useReactTable({
@@ -201,6 +198,7 @@ export function DataTableDemo() {
 
     return (
         <div className="w-full">
+
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter emails..."
@@ -216,6 +214,7 @@ export function DataTableDemo() {
                             Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
                         </Button>
                     </M.DropdownMenuTrigger>
+                    
                     <M.DropdownMenuContent align="end">
                         {table
                             .getAllColumns()
@@ -226,9 +225,7 @@ export function DataTableDemo() {
                                         key={column.id}
                                         className="capitalize"
                                         checked={column.getIsVisible()}
-                                        onCheckedChange={(value) =>
-                                            column.toggleVisibility(!!value)
-                                        }
+                                        onCheckedChange={(value) => column.toggleVisibility(!!value)}
                                     >
                                         {column.id}
                                     </M.DropdownMenuCheckboxItem>
@@ -237,6 +234,7 @@ export function DataTableDemo() {
                     </M.DropdownMenuContent>
                 </M.DropdownMenu>
             </div>
+
             <div className="rounded-md border">
                 <T.Table>
                     <T.TableHeader>
@@ -257,41 +255,40 @@ export function DataTableDemo() {
                             </T.TableRow>
                         ))}
                     </T.TableHeader>
+
                     <T.TableBody>
-                        {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <T.TableRow
-                                    key={row.id}
-                                    data-state={row.getIsSelected() && "selected"}
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <T.TableCell key={cell.id}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </T.TableCell>
-                                    ))}
+                        {table.getRowModel().rows?.length
+                            ? (
+                                table.getRowModel().rows.map((row) => (
+                                    <T.TableRow data-state={row.getIsSelected() && "selected"} key={row.id}>
+                                        {row.getVisibleCells().map((cell) => (
+                                            <T.TableCell key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </T.TableCell>
+                                        ))}
+                                    </T.TableRow>
+                                ))
+                            )
+                            : (
+                                <T.TableRow>
+                                    <T.TableCell className="h-24 text-center" colSpan={columns.length}>
+                                        No results.
+                                    </T.TableCell>
                                 </T.TableRow>
-                            ))
-                        ) : (
-                            <T.TableRow>
-                                <T.TableCell
-                                    colSpan={columns.length}
-                                    className="h-24 text-center"
-                                >
-                                    No results.
-                                </T.TableCell>
-                            </T.TableRow>
-                        )}
+                            )}
                     </T.TableBody>
                 </T.Table>
             </div>
+
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
                     {table.getFilteredSelectedRowModel().rows.length} of{" "}
                     {table.getFilteredRowModel().rows.length} row(s) selected.
                 </div>
+
                 <div className="space-x-2">
                     <Button
                         variant="outline"
@@ -311,6 +308,7 @@ export function DataTableDemo() {
                     </Button>
                 </div>
             </div>
+
         </div>
     );
 }

@@ -19,6 +19,9 @@ hover:underline \
 transition-all \
 flex items-center justify-between";
 
+/**
+ * <div>{children}</div> can be accessed from AccordionTrigger as className="[&>div]:w-full [&>div]:text-left"
+*/
 const AccordionTrigger = forwardRef<ElementRef<typeof Prim.Trigger>, ComponentPropsWithoutRef<typeof Prim.Trigger>>(
     ({ className, children, ...rest }, ref) => (
         <Prim.Header className="flex">

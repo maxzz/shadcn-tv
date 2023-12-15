@@ -12,7 +12,7 @@ export type Case = {
     component: ReactNode;
 };
 
-export function DifferentCases({ cases }: { cases: Case[]; }) {
+export function Showcases({ cases }: { cases: Case[]; }) {
     return (
         <Accordion type="single" collapsible className="w-full">
 

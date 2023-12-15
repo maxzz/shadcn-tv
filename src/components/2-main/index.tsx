@@ -4,7 +4,7 @@ import { DialogDemo } from './2-dialog-demo';
 import { LoadersTest } from './3-loaders';
 import { NeonSwitch } from '../ui/experimental';
 import { TableDemo } from '../ui/shadcn/demo/demo-table';
-import { DifferentCases } from './4-different-cases';
+import { Showcases } from './4-showcases';
 import { DataTableDemo } from '../ui/shadcn/demo/demo-data-table';
 
 function FontInput() {
@@ -28,7 +28,7 @@ function ConvertForm() {
             </div>
 
             <div className="">
-                <DifferentCases cases={[
+                <Showcases cases={[
                     { id: '1', name: "Table", component: <TableDemo className="m-auto max-w-xs" /> },
                     { id: '2', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
                     { id: '3', name: "Neon switch", component: <NeonSwitch /> },

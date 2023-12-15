@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/shadcn';
 import { DialogDemo } from './2-dialog-demo';
 import { LoadersTest } from './3-loaders';
 import { NeonSwitch } from '../ui/experimental';
+import { TableDemo } from '../ui/shadcn/demo/demo-table';
 
 function FontInput() {
     return (
@@ -22,9 +23,13 @@ function ConvertForm() {
             <div className="flex items-center gap-2">
                 <Button variant={'outline'}>OK</Button>
                 <DialogDemo />
-                
-                <LoadersTest />
-                <NeonSwitch />
+
+                {/* <LoadersTest />
+                <NeonSwitch /> */}
+            </div>
+
+            <div className="">
+                <TableDemo />
             </div>
         </div>
     );

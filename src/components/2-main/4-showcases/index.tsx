@@ -18,7 +18,7 @@ export function Showcases({ cases }: { cases: Case[]; }) {
 
             {cases.map((c) => (
                 <AccordionItem value={c.id} key={c.id}>
-                    <AccordionTrigger>{c.name}</AccordionTrigger>
+                    <AccordionTrigger className="[&>div]:w-full [&>div]:text-left">{c.name}</AccordionTrigger>
                     <AccordionContent>{c.component}</AccordionContent>
                 </AccordionItem>
             ))}

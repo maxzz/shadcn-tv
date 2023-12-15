@@ -23,7 +23,7 @@ const AccordionTrigger = forwardRef<ElementRef<typeof Prim.Trigger>, ComponentPr
     ({ className, children, ...rest }, ref) => (
         <Prim.Header className="flex">
             <Prim.Trigger ref={ref} className={cn(AccordionTriggerClasses, className)} {...rest}>
-                {children}
+                <div>{children}</div>
                 <ChevronDownIcon className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
             </Prim.Trigger>
         </Prim.Header>

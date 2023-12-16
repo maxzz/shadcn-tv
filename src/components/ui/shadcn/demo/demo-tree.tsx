@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Tree } from "@/components/ui/shadcn/tree";
-// import { Shell } from "@acme/components/shells/shell";
+import { Tree, TreeDataItem } from "@/components/ui/shadcn/tree";
 import { Workflow as IconWorkflow, Folder as IconFolder, Layout as IconLayout } from "lucide-react";
 
-const data = [
+const data: TreeDataItem[] = [
     { id: "1", name: "Unread" },
     { id: "2", name: "Threads" },
     {
@@ -71,18 +70,18 @@ const data = [
 export function DemoTree() {
     const [content, setContent] = useState("Admin Page");
     return (
-        // <Shell className="gap-12 min-h-screen">
-            <div className="flex min-h-full space-x-2">
-                <Tree
-                    data={data}
-                    className="flex-shrink-0 w-[200px] h-[460px] border-[1px]"
-                    initialSlelectedItemId="f12"
-                    onSelectChange={(item) => setContent(item?.name ?? "")}
-                    iconFolder={IconFolder}
-                    iconItem={IconWorkflow}
-                />
-                <div className="flex-1">{content}</div>
+        <div className="flex min-h-full">
+            <Tree
+                data={data}
+                className="shrink-0 w-[220px] h-[460px] border-[1px] rounded-l-md"
+                initialSlelectedItemId="f12"
+                onSelectChange={(item) => setContent(item?.name ?? "")}
+                iconFolder={IconFolder}
+                iconItem={IconWorkflow}
+            />
+            <div className="flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md">
+                {content}
             </div>
-        // </Shell>
+        </div>
     );
 }

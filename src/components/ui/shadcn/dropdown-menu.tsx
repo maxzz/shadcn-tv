@@ -42,11 +42,7 @@ const DropdownMenuSubContent = forwardRef<ElementRef<typeof Prim.SubContent>, Co
 );
 DropdownMenuSubContent.displayName = Prim.SubContent.displayName;
 
-const DropdownMenuContentClasses = `${"\
-p-1 min-w-[8rem] z-50 \
-text-popover-foreground bg-popover \
-border rounded-md shadow-md overflow-hidden \
-"} ${popupAnimatonClasses}`;
+const DropdownMenuContentClasses = DropdownMenuSubContentClasses;
 const DropdownMenuContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content>>(
     ({ className, sideOffset = 4, ...rest }, ref) => (
         <Prim.Portal>

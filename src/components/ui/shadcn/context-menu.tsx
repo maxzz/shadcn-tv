@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from "react";
 import * as Prim from "@radix-ui/react-context-menu";
+import { popupAnimatonClasses } from "./shared";
 import { CheckIcon, ChevronRightIcon, DotFilledIcon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 
@@ -32,28 +33,11 @@ const ContextMenuSubTrigger = forwardRef<ElementRef<typeof Prim.SubTrigger>, Com
 );
 ContextMenuSubTrigger.displayName = Prim.SubTrigger.displayName;
 
-const ContextMenuSubContentClasses = "\
+const ContextMenuSubContentClasses = `${"\
 z-50 p-1 min-w-[8rem] \
-\
-text-popover-foreground \
-bg-popover \
-\
-data-[state=open]:animate-in \
-data-[state=open]:fade-in-0 \
-data-[state=open]:zoom-in-95 \
-\
-data-[state=closed]:animate-out \
-data-[state=closed]:fade-out-0 \
-data-[state=closed]:zoom-out-95 \
-\
-data-[side=bottom]:slide-in-from-top-2 \
-data-[side=left]:slide-in-from-right-2 \
-data-[side=right]:slide-in-from-left-2 \
-data-[side=top]:slide-in-from-bottom-2 \
-\
-overflow-hidden \
-border rounded-md shadow-lg";
-
+text-popover-foreground bg-popover \
+border rounded-md shadow-md overflow-hidden \
+"} ${popupAnimatonClasses}`;
 const ContextMenuSubContent = forwardRef<ElementRef<typeof Prim.SubContent>, ComponentPropsWithoutRef<typeof Prim.SubContent>>(
     ({ className, ...rest }, ref) => (
         <Prim.SubContent ref={ref} className={cn(ContextMenuSubContentClasses, className)} {...rest} />
@@ -61,28 +45,7 @@ const ContextMenuSubContent = forwardRef<ElementRef<typeof Prim.SubContent>, Com
 );
 ContextMenuSubContent.displayName = Prim.SubContent.displayName;
 
-const ContextMenuContentClasses = "\
-z-50 p-1 min-w-[8rem] \
-\
-text-popover-foreground \
-bg-popover \
-\
-data-[state=open]:animate-in \
-data-[state=open]:fade-in-0 \
-data-[state=open]:zoom-in-95 \
-\
-data-[state=closed]:animate-out \
-data-[state=closed]:fade-out-0 \
-data-[state=closed]:zoom-out-95 \
-\
-data-[side=bottom]:slide-in-from-top-2 \
-data-[side=left]:slide-in-from-right-2 \
-data-[side=right]:slide-in-from-left-2 \
-data-[side=top]:slide-in-from-bottom-2 \
-\
-overflow-hidden \
-border rounded-md shadow-md";
-
+const ContextMenuContentClasses = ContextMenuSubContentClasses;
 const ContextMenuContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content>>(
     ({ className, ...rest }, ref) => (
         <Prim.Portal>

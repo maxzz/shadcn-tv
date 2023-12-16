@@ -21,6 +21,37 @@ type TreeProps = {
     iconItem?: LucideIconType;
 };
 
+function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+    const rv: string[] = [];
+
+    if (initialSlelectedItemId) {
+        walkTreeItems(data, initialSlelectedItemId);
+    }
+
+    return rv;
+
+    function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) {
+        if (items instanceof Array) {
+            // eslint-disable-next-line @typescript-eslint/prefer-for-of
+            for (let i = 0; i < items.length; i++) {
+                rv.push(items[i]!.id);
+
+                if (walkTreeItems(items[i]!, targetId) && !expandAll) {
+                    return true;
+                }
+
+                if (!expandAll) {
+                    rv.pop();
+                }
+            }
+        } else if (!expandAll && items.id === targetId) {
+            return true;
+        } else if (items.children) {
+            return walkTreeItems(items.children, targetId);
+        }
+    }
+}
+
 const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSlelectedItemId, onSelectChange, expandAll, iconFolder: folderIcon, iconItem: itemIcon, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = React.useState(initialSlelectedItemId);
@@ -32,40 +63,7 @@ const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<H
             }, [onSelectChange]
         );
 
-        const expandedItemIds = React.useMemo(
-            (): string[] => {
-                if (!initialSlelectedItemId) {
-                    return [];
-                }
-
-                const rv: string[] = [];
-
-                function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) {
-                    if (items instanceof Array) {
-                        // eslint-disable-next-line @typescript-eslint/prefer-for-of
-                        for (let i = 0; i < items.length; i++) {
-                            rv.push(items[i]!.id);
-
-                            if (walkTreeItems(items[i]!, targetId) && !expandAll) {
-                                return true;
-                            }
-
-                            if (!expandAll) {
-                                rv.pop();
-                            }
-                        }
-                    } else if (!expandAll && items.id === targetId) {
-                        return true;
-                    } else if (items.children) {
-                        return walkTreeItems(items.children, targetId);
-                    }
-                }
-
-                walkTreeItems(data, initialSlelectedItemId);
-
-                return rv;
-            }, [data, initialSlelectedItemId]
-        );
+        const expandedItemIds = React.useMemo(() => collectExpandedItemIds(data, initialSlelectedItemId, expandAll), [data, initialSlelectedItemId, expandAll]);
 
         const { ref: refRoot, width, height } = useResizeObserver();
 

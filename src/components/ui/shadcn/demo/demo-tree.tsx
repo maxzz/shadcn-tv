@@ -78,8 +78,8 @@ export function DemoTree() {
                     className="flex-shrink-0 w-[200px] h-[460px] border-[1px]"
                     initialSlelectedItemId="f12"
                     onSelectChange={(item) => setContent(item?.name ?? "")}
-                    folderIcon={IconFolder}
-                    itemIcon={IconWorkflow}
+                    iconFolder={IconFolder}
+                    iconItem={IconWorkflow}
                 />
                 <div className="flex-1">{content}</div>
             </div>

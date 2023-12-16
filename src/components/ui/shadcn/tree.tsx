@@ -17,12 +17,12 @@ type TreeProps = {
     initialSlelectedItemId?: string,
     onSelectChange?: (item: TreeDataItem | undefined) => void,
     expandAll?: boolean,
-    folderIcon?: LucideIconType,
-    itemIcon?: LucideIconType;
+    iconFolder?: LucideIconType,
+    iconItem?: LucideIconType;
 };
 
 const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSlelectedItemId, onSelectChange, expandAll, folderIcon, itemIcon, className, ...rest }, ref) => {
+    ({ data, initialSlelectedItemId, onSelectChange, expandAll, iconFolder: folderIcon, iconItem: itemIcon, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = React.useState<string | undefined>(initialSlelectedItemId);
 
         const handleSelectChange = React.useCallback((item: TreeDataItem | undefined) => {
@@ -88,7 +88,7 @@ const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<H
     }
 );
 
-type TreeItemProps =
+type TreeItemProps = 
     & TreeProps
     & {
         selectedItemId?: string,
@@ -97,6 +97,10 @@ type TreeItemProps =
         FolderIcon?: LucideIconType,
         ItemIcon?: LucideIconType;
     };
+
+const treeItemBaseClasses = "px-2 hover:before:opacity-100 before:absolute before:left-0 before:w-full before:opacity-0 before:bg-muted/80 before:h-[1.75rem] before:-z-10";
+const treeItemSelectedClasses = "before:opacity-100 before:bg-accent text-accent-foreground before:border-l-2 before:border-l-accent-foreground/50 dark:before:border-0";
+const treeItemIconClasses = "h-4 w-4 shrink-0 mr-2 text-accent-foreground/50";
 
 const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttributes<HTMLDivElement>>(
     ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, FolderIcon, ItemIcon, ...rest }, ref) => {
@@ -111,26 +115,14 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttr
                                         <A.Root type="multiple" defaultValue={expandedItemIds}>
                                             <A.Item value={item.id}>
                                                 <AccordionTrigger
-                                                    className={cn(
-                                                        "px-2 hover:before:opacity-100 before:absolute before:left-0 before:w-full before:opacity-0 before:bg-muted/80 before:h-[1.75rem] before:-z-10",
-                                                        selectedItemId === item.id && "before:opacity-100 before:bg-accent text-accent-foreground before:border-l-2 before:border-l-accent-foreground/50 dark:before:border-0"
-                                                    )}
+                                                    className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
                                                     onClick={() => handleSelectChange(item)}
                                                 >
-                                                    {item.icon &&
-                                                        <item.icon
-                                                            className="h-4 w-4 shrink-0 mr-2 text-accent-foreground/50"
-                                                            aria-hidden="true"
-                                                        />
-                                                    }
-                                                    {!item.icon && FolderIcon &&
-                                                        <FolderIcon
-                                                            className="h-4 w-4 shrink-0 mr-2 text-accent-foreground/50"
-                                                            aria-hidden="true"
-                                                        />
-                                                    }
+                                                    {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true"/>}
+                                                    {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true"/>}
                                                     <span className="text-sm truncate">{item.name}</span>
                                                 </AccordionTrigger>
+
                                                 <AccordionContent className="pl-6">
                                                     <TreeItem
                                                         data={item.children ? item.children : item}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tree } from "@/components/ui/shadcn/tree";
 // import { Shell } from "@acme/components/shells/shell";
-import { Workflow, Folder, Layout } from "lucide-react";
+import { Workflow as IconWorkflow, Folder as IconFolder, Layout as IconLayout } from "lucide-react";
 
 const data = [
     { id: "1", name: "Unread" },
@@ -23,12 +23,12 @@ const data = [
                 id: "d1",
                 name: "Alice",
                 children: [
-                    { id: "d11", name: "Alice2", icon: Layout },
+                    { id: "d11", name: "Alice2", icon: IconLayout },
                     { id: "d12", name: "Bob2" },
                     { id: "d13", name: "Charlie2" },
                 ],
             },
-            { id: "d2", name: "Bob", icon: Layout },
+            { id: "d2", name: "Bob", icon: IconLayout },
             { id: "d3", name: "Charlie" },
         ],
     },
@@ -78,8 +78,8 @@ export function DemoTree() {
                     className="flex-shrink-0 w-[200px] h-[460px] border-[1px]"
                     initialSlelectedItemId="f12"
                     onSelectChange={(item) => setContent(item?.name ?? "")}
-                    folderIcon={Folder}
-                    itemIcon={Workflow}
+                    folderIcon={IconFolder}
+                    itemIcon={IconWorkflow}
                 />
                 <div className="flex-1">{content}</div>
             </div>

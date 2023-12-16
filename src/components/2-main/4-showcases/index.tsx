@@ -1,10 +1,5 @@
 import { ReactNode } from "react";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/shadcn/accordion";
+import * as A from "@/components/ui/shadcn/accordion";
 
 export type Case = {
     id: string;
@@ -14,15 +9,15 @@ export type Case = {
 
 export function Showcases({ cases }: { cases: Case[]; }) {
     return (
-        <Accordion type="single" collapsible className="w-full">
+        <A.Accordion type="single" collapsible className="w-full">
 
             {cases.map((c) => (
-                <AccordionItem value={c.id} key={c.id}>
-                    <AccordionTrigger>{c.name}</AccordionTrigger>
-                    <AccordionContent>{c.component}</AccordionContent>
-                </AccordionItem>
+                <A.AccordionItem value={c.id} key={c.id}>
+                    <A.AccordionTrigger>{c.name}</A.AccordionTrigger>
+                    <A.AccordionContent>{c.component}</A.AccordionContent>
+                </A.AccordionItem>
             ))}
 
-        </Accordion>
+        </A.Accordion>
     );
 }

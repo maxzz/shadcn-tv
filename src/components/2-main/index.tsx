@@ -1,7 +1,7 @@
 import { FontInputTitleBar } from './1-top-row';
 import { DialogDemo } from './2-dialog-demo';
 import { Showcases } from './4-showcases';
-import { cases } from './4-showcases/cases';
+import { showcases } from './4-showcases/cases';
 import { Button } from '@/components/ui/shadcn';
 
 function FontInput() {
@@ -25,7 +25,7 @@ function ConvertForm() {
             </div>
 
             <div className="">
-                <Showcases cases={cases} />
+                <Showcases cases={showcases} />
             </div>
         </div>
     );

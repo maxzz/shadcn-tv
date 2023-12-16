@@ -1,12 +1,8 @@
 import { FontInputTitleBar } from './1-top-row';
-import { Button } from '@/components/ui/shadcn';
 import { DialogDemo } from './2-dialog-demo';
-import { LoadersTest } from './3-loaders';
-import { NeonSwitch } from '../ui/experimental';
-import { TableDemo } from '../ui/shadcn/demo/demo-table';
 import { Showcases } from './4-showcases';
-import { DataTableDemo } from '../ui/shadcn/demo/demo-data-table';
-import { SkeletonDemo } from '../ui/shadcn/demo/demo-skeleton';
+import { cases } from './4-showcases/cases';
+import { Button } from '@/components/ui/shadcn';
 
 function FontInput() {
     return (
@@ -29,13 +25,7 @@ function ConvertForm() {
             </div>
 
             <div className="">
-                <Showcases cases={[
-                    { id: '1', name: "Table", component: <TableDemo className="m-auto max-w-xs" /> },
-                    { id: '2', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
-                    { id: '3', name: "Neon switch", component: <NeonSwitch /> },
-                    { id: '4', name: "Data table", component: <DataTableDemo /> },
-                    { id: '5', name: "Skeleton", component: <SkeletonDemo /> },
-                ]} />
+                <Showcases cases={cases} />
             </div>
         </div>
     );

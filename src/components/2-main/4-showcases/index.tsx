@@ -1,11 +1,5 @@
-import { ReactNode } from "react";
 import * as A from "@/components/ui/shadcn/accordion";
-
-export type Case = {
-    id: string;
-    name: string;
-    component: ReactNode;
-};
+import { Case } from "./cases";
 
 export function Showcases({ cases }: { cases: Case[]; }) {
     return (

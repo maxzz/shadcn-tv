@@ -1,7 +1,7 @@
 import React from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
-import useResizeObserver from "use-resize-observer";
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
+import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 
@@ -98,8 +98,23 @@ type TreeItemProps =
         ItemIcon?: LucideIconType;
     };
 
-const treeItemBaseClasses = "px-2 hover:before:opacity-100 before:absolute before:left-0 before:w-full before:opacity-0 before:bg-muted/80 before:h-[1.75rem] before:-z-10";
-const treeItemSelectedClasses = "before:opacity-100 before:bg-accent text-accent-foreground before:border-l-2 before:border-l-accent-foreground/50 dark:before:border-0";
+const treeItemBaseClasses = "\
+px-2 \
+before:absolute \
+before:left-0 \
+before:w-full \
+before:h-[1.75rem] \
+before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
+before:-z-10 \
+";
+const treeItemSelectedClasses = "\
+text-accent-foreground \
+dark:before:border-0 \
+before:bg-accent \
+before:opacity-100 \
+before:border-l-2 \
+before:border-l-accent-foreground/50 \
+";
 const treeItemIconClasses = "h-4 w-4 shrink-0 mr-2 text-accent-foreground/50";
 
 const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttributes<HTMLDivElement>>(
@@ -164,16 +179,37 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttr
     }
 );
 
-const leafBaseClasses = "flex items-center py-2 px-2 cursor-pointer hover:before:opacity-100 before:absolute before:left-0 before:right-1 before:w-full before:opacity-0 before:bg-muted/80 before:h-[1.75rem] before:-z-10";
-const leafSelectedClasses = "before:opacity-100 before:bg-accent text-accent-foreground before:border-l-2 before:border-l-accent-foreground/50 dark:before:border-0";
+const leafBaseClasses = "\
+px-2 py-2 \
+\
+before:absolute \
+before:left-0 \
+before:right-1 \
+before:w-full \
+before:h-[1.75rem] \
+before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
+before:-z-10 \
+\
+cursor-pointer \
+flex items-center \
+";
+const leafSelectedClasses = "\
+text-accent-foreground \
+dark:before:border-0 \
+before:bg-accent \
+before:opacity-100 \
+before:border-l-2 \
+before:border-l-accent-foreground/50 \
+";
+const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
 const Leaf = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & { item: TreeDataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>
 
-                {item.icon && <item.icon className="h-4 w-4 shrink-0 mr-2 text-accent-foreground/50" aria-hidden="true" />}
-                {!item.icon && Icon && <Icon className="h-4 w-4 shrink-0 mr-2 text-accent-foreground/50" aria-hidden="true" />}
+                {item.icon && <item.icon className={leafIconClasses} aria-hidden="true" />}
+                {!item.icon && Icon && <Icon className={leafIconClasses} aria-hidden="true" />}
 
                 <span className="flex-grow text-sm truncate">
                     {item.name}
@@ -188,11 +224,11 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
         <A.Header>
             <A.Trigger
                 ref={ref}
-                className={cn("flex flex-1 w-full items-center py-2 transition-all last:[&[data-state=open]>svg]:rotate-90", className)}
+                className={cn("flex-1 py-2 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 {...rest}
             >
                 {children}
-                <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200 text-accent-foreground/50 ml-auto" />
+                <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />
             </A.Trigger>
         </A.Header>
     )
@@ -203,10 +239,10 @@ const TreeItemContent = React.forwardRef<React.ElementRef<typeof A.Content>, Rea
     ({ className, children, ...rest }, ref) => (
         <A.Content
             ref={ref}
-            className={cn("overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down", className)}
+            className={cn("text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down transition-all overflow-hidden", className)}
             {...rest}
         >
-            <div className="pb-1 pt-0">{children}</div>
+            <div className="pt-0 pb-1">{children}</div>
         </A.Content>
     )
 );

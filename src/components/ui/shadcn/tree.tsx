@@ -39,7 +39,7 @@ export const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttri
         return (
             <div ref={refRoot} className={cn("overflow-hidden", className)}>
                 <ScrollArea style={{ width, height }}>
-                    <div className="relative p-2">
+                    <div className="relative px-2 py-1">
                         <TreeItem
                             ref={ref}
                             data={data}
@@ -180,7 +180,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttr
 );
 
 const leafBaseClasses = "\
-px-2 py-2 \
+px-2 py-1 \
 \
 before:absolute \
 before:left-0 \
@@ -224,7 +224,7 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
         <A.Header>
             <A.Trigger
                 ref={ref}
-                className={cn("flex-1 py-2 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
+                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 {...rest}
             >
                 {children}

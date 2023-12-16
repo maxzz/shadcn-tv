@@ -1,6 +1,7 @@
 //"use client"; // rollup does not like this
 import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from "react";
 import * as Prim from "@radix-ui/react-dropdown-menu";
+import { popupAnimatonClasses } from "./shared";
 import { CheckIcon, ChevronRightIcon, DotFilledIcon, } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 
@@ -29,27 +30,11 @@ const DropdownMenuSubTrigger = forwardRef<ElementRef<typeof Prim.SubTrigger>, Co
 );
 DropdownMenuSubTrigger.displayName = Prim.SubTrigger.displayName;
 
-const DropdownMenuSubContentClasses = "\
+const DropdownMenuSubContentClasses = `${"\
 p-1 min-w-[8rem] z-50 \
-\
-text-popover-foreground \
-bg-popover \
-\
-data-[state=open]:animate-in \
-data-[state=open]:fade-in-0 \
-data-[state=open]:zoom-in-95 \
-\
-data-[state=closed]:animate-out \
-data-[state=closed]:fade-out-0 \
-data-[state=closed]:zoom-out-95 \
-\
-data-[side=bottom]:slide-in-from-top-2 \
-data-[side=left]:slide-in-from-right-2 \
-data-[side=right]:slide-in-from-left-2 \
-data-[side=top]:slide-in-from-bottom-2 \
-\
-overflow-hidden \
-border rounded-md shadow-lg";
+text-popover-foreground bg-popover \
+border rounded-md shadow-md overflow-hidden \
+"} ${popupAnimatonClasses}`;
 const DropdownMenuSubContent = forwardRef<ElementRef<typeof Prim.SubContent>, ComponentPropsWithoutRef<typeof Prim.SubContent>>(
     ({ className, ...rest }, ref) => (
         <Prim.SubContent ref={ref} className={cn(DropdownMenuSubContentClasses, className)} {...rest} />
@@ -57,27 +42,11 @@ const DropdownMenuSubContent = forwardRef<ElementRef<typeof Prim.SubContent>, Co
 );
 DropdownMenuSubContent.displayName = Prim.SubContent.displayName;
 
-const DropdownMenuContentClasses = "\
+const DropdownMenuContentClasses = `${"\
 p-1 min-w-[8rem] z-50 \
-\
-text-popover-foreground \
-bg-popover \
-\
-data-[state=open]:animate-in \
-data-[state=open]:fade-in-0 \
-data-[state=open]:zoom-in-95 \
-\
-data-[state=closed]:animate-out \
-data-[state=closed]:fade-out-0 \
-data-[state=closed]:zoom-out-95 \
-\
-data-[side=bottom]:slide-in-from-top-2 \
-data-[side=left]:slide-in-from-right-2 \
-data-[side=right]:slide-in-from-left-2 \
-data-[side=top]:slide-in-from-bottom-2 \
-\
-overflow-hidden \
-border rounded-md shadow-md";
+text-popover-foreground bg-popover \
+border rounded-md shadow-md overflow-hidden \
+"} ${popupAnimatonClasses}`;
 const DropdownMenuContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content>>(
     ({ className, sideOffset = 4, ...rest }, ref) => (
         <Prim.Portal>

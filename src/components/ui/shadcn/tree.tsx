@@ -23,47 +23,49 @@ type TreeProps = {
 
 const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSlelectedItemId, onSelectChange, expandAll, iconFolder: folderIcon, iconItem: itemIcon, className, ...rest }, ref) => {
-        const [selectedItemId, setSelectedItemId] = React.useState<string | undefined>(initialSlelectedItemId);
+        const [selectedItemId, setSelectedItemId] = React.useState(initialSlelectedItemId);
 
-        const handleSelectChange = React.useCallback((item: TreeDataItem | undefined) => {
-            setSelectedItemId(item?.id);
-            if (onSelectChange) {
-                onSelectChange(item);
-            }
-        }, [onSelectChange]);
+        const handleSelectChange = React.useCallback(
+            (item: TreeDataItem | undefined) => {
+                setSelectedItemId(item?.id);
+                onSelectChange?.(item);
+            }, [onSelectChange]
+        );
 
-        const expandedItemIds = React.useMemo((): string[] => {
-            if (!initialSlelectedItemId) {
-                return [];
-            }
-
-            const rv: string[] = [];
-
-            function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) {
-                if (items instanceof Array) {
-                    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-                    for (let i = 0; i < items.length; i++) {
-                        rv.push(items[i]!.id);
-
-                        if (walkTreeItems(items[i]!, targetId) && !expandAll) {
-                            return true;
-                        }
-
-                        if (!expandAll) {
-                            rv.pop();
-                        }
-                    }
-                } else if (!expandAll && items.id === targetId) {
-                    return true;
-                } else if (items.children) {
-                    return walkTreeItems(items.children, targetId);
+        const expandedItemIds = React.useMemo(
+            (): string[] => {
+                if (!initialSlelectedItemId) {
+                    return [];
                 }
-            }
 
-            walkTreeItems(data, initialSlelectedItemId);
+                const rv: string[] = [];
 
-            return rv;
-        }, [data, initialSlelectedItemId]);
+                function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) {
+                    if (items instanceof Array) {
+                        // eslint-disable-next-line @typescript-eslint/prefer-for-of
+                        for (let i = 0; i < items.length; i++) {
+                            rv.push(items[i]!.id);
+
+                            if (walkTreeItems(items[i]!, targetId) && !expandAll) {
+                                return true;
+                            }
+
+                            if (!expandAll) {
+                                rv.pop();
+                            }
+                        }
+                    } else if (!expandAll && items.id === targetId) {
+                        return true;
+                    } else if (items.children) {
+                        return walkTreeItems(items.children, targetId);
+                    }
+                }
+
+                walkTreeItems(data, initialSlelectedItemId);
+
+                return rv;
+            }, [data, initialSlelectedItemId]
+        );
 
         const { ref: refRoot, width, height } = useResizeObserver();
 
@@ -88,7 +90,7 @@ const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<H
     }
 );
 
-type TreeItemProps = 
+type TreeItemProps =
     & TreeProps
     & {
         selectedItemId?: string,
@@ -118,8 +120,8 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttr
                                                     className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
                                                     onClick={() => handleSelectChange(item)}
                                                 >
-                                                    {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true"/>}
-                                                    {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true"/>}
+                                                    {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
+                                                    {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true" />}
                                                     <span className="text-sm truncate">{item.name}</span>
                                                 </AccordionTrigger>
 

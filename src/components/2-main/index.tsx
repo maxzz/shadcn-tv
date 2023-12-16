@@ -6,6 +6,7 @@ import { NeonSwitch } from '../ui/experimental';
 import { TableDemo } from '../ui/shadcn/demo/demo-table';
 import { Showcases } from './4-showcases';
 import { DataTableDemo } from '../ui/shadcn/demo/demo-data-table';
+import { SkeletonDemo } from '../ui/shadcn/demo/demo-skeleton';
 
 function FontInput() {
     return (
@@ -33,6 +34,7 @@ function ConvertForm() {
                     { id: '2', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
                     { id: '3', name: "Neon switch", component: <NeonSwitch /> },
                     { id: '4', name: "Data table", component: <DataTableDemo /> },
+                    { id: '5', name: "Skeleton", component: <SkeletonDemo /> },
                 ]} />
             </div>
         </div>

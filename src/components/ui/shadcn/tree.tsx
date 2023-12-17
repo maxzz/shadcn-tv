@@ -40,7 +40,7 @@ export const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttri
         return (
             <div ref={refRoot} className={cn("overflow-hidden", className)}>
                 <ScrollArea style={{ width, height }}>
-                    <div className="relative px-2 py-1">
+                    <div className="relative z-0 px-2 py-1">
                         <TreeItem
                             ref={ref}
                             data={data}
@@ -181,7 +181,7 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttr
 );
 
 const leafBaseClasses = "\
-px-2 py-1 \
+px-2 py-1 r1elative \
 \
 before:absolute \
 before:left-0 \
@@ -189,6 +189,9 @@ before:right-1 \
 before:w-full \
 before:h-[1.75rem] \
 before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
+before:!b1g-red-800 \
+_z-20 \
+before:_z-10 \
 before:-z-10 \
 \
 cursor-pointer \
@@ -226,7 +229,8 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
             <A.Trigger
                 ref={ref}
                 // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", "border border-red-500", className)}
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", inputFocusClasses, "focus:rounded", className)}
+                // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", inputFocusClasses, "focus:rounded", className)}
+                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)} tabIndex={-1}
                 // className={cn("flex-1 py-1 !mr-8 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}

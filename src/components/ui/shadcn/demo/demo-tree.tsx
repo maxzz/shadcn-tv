@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tree, TreeDataItem } from "@/components/ui/shadcn/tree";
+import { Tree, TreeDataItem, findTreeItemById } from "@/components/ui/shadcn/tree";
 import { Workflow as IconWorkflow, Folder as IconFolder, Layout as IconLayout } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../shared-styles";
@@ -69,27 +69,10 @@ const data: TreeDataItem[] = [
     },
 ];
 
-function findItemById(id: string, items: TreeDataItem[] | TreeDataItem): TreeDataItem | undefined {
-    if (!Array.isArray(items)) {
-        items = [items];
-    }
-    for (const item of items) {
-        if (item.id === id) {
-            return item;
-        }
-        if (item.children) {
-            const found = findItemById(id, item.children);
-            if (found) {
-                return found;
-            }
-        }
-    }
-}
-
 const initialItemId = "f12";
 
 export function DemoTree() {
-    const [content, setContent] = useState(() => findItemById(initialItemId, data)?.name || "No content selected");
+    const [content, setContent] = useState(() => findTreeItemById(initialItemId, data)?.name || "No content selected");
     return (
         <div className="m-0.5 min-h-full flex">
             <div className={classNames("border-[1px] rounded-l-md", inputFocusClasses)} tabIndex={0}>

@@ -90,6 +90,25 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
     }
 }
 
+export function findTreeItemById(id: string, items: TreeDataItem[] | TreeDataItem | undefined | null): TreeDataItem | undefined {
+    if (id && items) {
+        if (!Array.isArray(items)) {
+            items = [items];
+        }
+        for (const item of items) {
+            if (item.id === id) {
+                return item;
+            }
+            if (item.children) {
+                const found = findTreeItemById(id, item.children);
+                if (found) {
+                    return found;
+                }
+            }
+        }
+    }
+}
+
 type TreeItemProps =
     & TreeProps
     & {

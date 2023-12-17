@@ -73,7 +73,7 @@ export function DemoTree() {
         <div className="flex min-h-full">
             <Tree
                 data={data}
-                className="shrink-0 w-[220px] h-[460px] border-[1px] rounded-l-md"
+                className="shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md"
                 initialSlelectedItemId="f12"
                 onSelectChange={(item) => setContent(item?.name ?? "")}
                 iconFolder={IconFolder}

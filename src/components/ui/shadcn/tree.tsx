@@ -4,6 +4,7 @@ import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
+import { inputFocusClasses } from "../shared-styles";
 
 export type TreeDataItem = {
     id: string;
@@ -224,7 +225,11 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
         <A.Header>
             <A.Trigger
                 ref={ref}
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
+                // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", "border border-red-500", className)}
+                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", inputFocusClasses, "focus:rounded", className)}
+                // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)} tabIndex={-1}
+                // className={cn("flex-1 py-1 !mr-8 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
+                // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 {...rest}
             >
                 {children}
@@ -242,7 +247,7 @@ const TreeItemContent = React.forwardRef<React.ElementRef<typeof A.Content>, Rea
             className={cn("text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down transition-all overflow-hidden", className)}
             {...rest}
         >
-            <div className="pt-0 pb-1">{children}</div>
+            <div>{children}</div>
         </A.Content>
     )
 );

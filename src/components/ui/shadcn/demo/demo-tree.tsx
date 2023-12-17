@@ -73,14 +73,16 @@ export function DemoTree() {
     const [content, setContent] = useState("Admin Page");
     return (
         <div className="m-0.5 min-h-full flex">
-            <Tree
-                data={data}
-                className="shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md"
-                initialSlelectedItemId="f12"
-                onSelectChange={(item) => setContent(item?.name ?? "")}
-                iconFolder={IconFolder}
-                iconItem={IconWorkflow}
-            />
+            <div className={classNames("rounded-l-md", "border-[1px] rounded-l-md", inputFocusClasses)} tabIndex={0}>
+                <Tree
+                    data={data}
+                    className="shrink-0 w-[230px] h-[460px]"
+                    initialSlelectedItemId="f12"
+                    onSelectChange={(item) => setContent(item?.name ?? "")}
+                    iconFolder={IconFolder}
+                    iconItem={IconWorkflow}
+                />
+            </div>
             <div className={classNames("flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
                 {content}
             </div>

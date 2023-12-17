@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Tree, TreeDataItem } from "@/components/ui/shadcn/tree";
 import { Workflow as IconWorkflow, Folder as IconFolder, Layout as IconLayout } from "lucide-react";
+import { classNames } from "@/utils";
+import { inputFocusClasses } from "../../shared-styles";
 
 const data: TreeDataItem[] = [
     { id: "1", name: "Unread" },
@@ -70,7 +72,7 @@ const data: TreeDataItem[] = [
 export function DemoTree() {
     const [content, setContent] = useState("Admin Page");
     return (
-        <div className="flex min-h-full">
+        <div className="m-0.5 min-h-full flex">
             <Tree
                 data={data}
                 className="shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md"
@@ -79,7 +81,7 @@ export function DemoTree() {
                 iconFolder={IconFolder}
                 iconItem={IconWorkflow}
             />
-            <div className="flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md">
+            <div className={classNames("flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
                 {content}
             </div>
         </div>

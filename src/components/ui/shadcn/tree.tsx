@@ -3,7 +3,7 @@ import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
-import { cn } from "@/utils";
+import { classNames, cn } from "@/utils";
 import { inputFocusClasses } from "../shared-styles";
 
 export type TreeDataItem = {
@@ -38,21 +38,24 @@ export const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttri
         const { ref: refRoot, width, height } = useResizeObserver();
 
         return (
-            <div ref={refRoot} className={cn("overflow-hidden", className)}>
-                <ScrollArea style={{ width, height }}>
-                    <div className="relative z-0 px-2 py-1">
-                        <TreeItem
-                            ref={ref}
-                            data={data}
-                            selectedItemId={selectedItemId}
-                            handleSelectChange={handleSelectChange}
-                            expandedItemIds={expandedItemIds}
-                            FolderIcon={folderIcon}
-                            ItemIcon={itemIcon}
-                            {...rest}
-                        />
-                    </div>
-                </ScrollArea>
+            // <div className={inputFocusClasses} tabIndex={0}>
+            <div className={classNames("rounded-l-md", inputFocusClasses)} tabIndex={0}>
+                <div ref={refRoot} className={cn("overflow-hidden", className)}>
+                    <ScrollArea style={{ width, height }}>
+                        <div className="relative z-0 px-2 py-1">
+                            <TreeItem
+                                ref={ref}
+                                data={data}
+                                selectedItemId={selectedItemId}
+                                handleSelectChange={handleSelectChange}
+                                expandedItemIds={expandedItemIds}
+                                FolderIcon={folderIcon}
+                                ItemIcon={itemIcon}
+                                {...rest}
+                            />
+                        </div>
+                    </ScrollArea>
+                </div>
             </div>
         );
     }
@@ -189,9 +192,6 @@ before:right-1 \
 before:w-full \
 before:h-[1.75rem] \
 before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
-before:!b1g-red-800 \
-_z-20 \
-before:_z-10 \
 before:-z-10 \
 \
 cursor-pointer \
@@ -230,8 +230,8 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
                 ref={ref}
                 // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", "border border-red-500", className)}
                 // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", inputFocusClasses, "focus:rounded", className)}
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
-                // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)} tabIndex={-1}
+                // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
+                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)} tabIndex={-1}
                 // className={cn("flex-1 py-1 !mr-8 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 // className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)}
                 {...rest}

@@ -69,15 +69,34 @@ const data: TreeDataItem[] = [
     },
 ];
 
+function findItemById(id: string, items: TreeDataItem[] | TreeDataItem): TreeDataItem | undefined {
+    if (!Array.isArray(items)) {
+        items = [items];
+    }
+    for (const item of items) {
+        if (item.id === id) {
+            return item;
+        }
+        if (item.children) {
+            const found = findItemById(id, item.children);
+            if (found) {
+                return found;
+            }
+        }
+    }
+}
+
+const initialItemId = "f12";
+
 export function DemoTree() {
-    const [content, setContent] = useState("Admin Page");
+    const [content, setContent] = useState(() => findItemById(initialItemId, data)?.name || "No content selected");
     return (
         <div className="m-0.5 min-h-full flex">
-            <div className={classNames("rounded-l-md", "border-[1px] rounded-l-md", inputFocusClasses)} tabIndex={0}>
+            <div className={classNames("border-[1px] rounded-l-md", inputFocusClasses)} tabIndex={0}>
                 <Tree
                     data={data}
                     className="shrink-0 w-[230px] h-[460px]"
-                    initialSlelectedItemId="f12"
+                    initialSlelectedItemId={initialItemId}
                     onSelectChange={(item) => setContent(item?.name ?? "")}
                     iconFolder={IconFolder}
                     iconItem={IconWorkflow}

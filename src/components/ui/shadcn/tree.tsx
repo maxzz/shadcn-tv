@@ -3,8 +3,7 @@ import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
-import { classNames, cn } from "@/utils";
-import { inputFocusClasses } from "../shared-styles";
+import { cn } from "@/utils";
 
 export type TreeDataItem = {
     id: string;
@@ -68,23 +67,25 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
     return rv;
 
     function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) {
-        if (items instanceof Array) {
-            // eslint-disable-next-line @typescript-eslint/prefer-for-of
-            for (let i = 0; i < items.length; i++) {
-                rv.push(items[i]!.id);
+        if (items) {
+            if (items instanceof Array) {
+                // eslint-disable-next-line @typescript-eslint/prefer-for-of
+                for (let i = 0; i < items.length; i++) {
+                    rv.push(items[i].id);
 
-                if (walkTreeItems(items[i]!, targetId) && !expandAll) {
-                    return true;
-                }
+                    if (walkTreeItems(items[i], targetId) && !expandAll) {
+                        return true;
+                    }
 
-                if (!expandAll) {
-                    rv.pop();
+                    if (!expandAll) {
+                        rv.pop();
+                    }
                 }
+            } else if (!expandAll && items.id === targetId) {
+                return true;
+            } else if (items.children) {
+                return walkTreeItems(items.children, targetId);
             }
-        } else if (!expandAll && items.id === targetId) {
-            return true;
-        } else if (items.children) {
-            return walkTreeItems(items.children, targetId);
         }
     }
 }

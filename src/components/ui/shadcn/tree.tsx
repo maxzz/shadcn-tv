@@ -245,7 +245,7 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
         <A.Header>
             <A.Trigger
                 ref={ref}
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 flex items-center", className)} tabIndex={-1}
+                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 outline-none flex items-center", className)} tabIndex={-1}
                 {...rest}
             >
                 {children}

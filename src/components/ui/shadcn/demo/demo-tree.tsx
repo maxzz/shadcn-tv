@@ -75,10 +75,10 @@ export function DemoTree() {
     const [content, setContent] = useState(() => findTreeItemById(initialItemId, data)?.name || "No content selected");
     return (
         <div className="m-0.5 min-h-full flex">
-            <div className={classNames("border-[1px] rounded-l-md", inputFocusClasses)} tabIndex={0}>
+            <div className={classNames("border-[1px] rounded-l-md", inputFocusClasses)} tabIndex={-1}>
                 <Tree
                     data={data}
-                    className="shrink-0 w-[230px] h-[460px]"
+                    className={`shrink-0 w-[230px] h-[460px] ${"border-[1px] rounded-l-md"} ${inputFocusClasses}`}
                     initialSlelectedItemId={initialItemId}
                     onSelectChange={(item) => setContent(item?.name ?? "")}
                     iconFolder={IconFolder}

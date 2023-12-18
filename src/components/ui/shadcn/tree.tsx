@@ -37,7 +37,26 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         const { ref: refRoot, width, height } = useResizeObserver();
 
         return (
-            <div ref={refRoot} className={cn("overflow-hidden", className)}>
+            <div
+                ref={refRoot}
+                className={cn("overflow-hidden", className)}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    console.log("Tree onKeyDown", e.key);
+
+                    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                        e.preventDefault();
+                        const items = data instanceof Array ? data : [data];
+                        const index = items.findIndex((item) => item.id === selectedItemId);
+                        if (index !== -1) {
+                            const nextIndex = e.key === "ArrowDown" ? index + 1 : index - 1;
+                            if (nextIndex >= 0 && nextIndex < items.length) {
+                                handleSelectChange(items[nextIndex]);
+                            }
+                        }
+                    }
+                }}
+            >
                 <ScrollArea style={{ width, height }}>
                     <div className="relative z-0 px-2 py-1">
                         <TreeItem

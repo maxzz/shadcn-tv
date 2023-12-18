@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useRef, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, KeyboardEvent, useCallback, useMemo, useRef, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
@@ -27,16 +27,33 @@ const AttrTreeFolderTrigger = "data-tree-folder-trigger";
 const TypeTreeFolder = "folder";
 const TypeTreeFolderTrigger = "folder-trigger";
 
-function handleKeyDown(root: HTMLDivElement, e: React.KeyboardEvent<HTMLDivElement>) {
+function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
     console.log("TreeItem handleKeyDown", e.key);
 
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
         e.stopPropagation();
 
-        root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`).forEach((item) => {
-            console.log("TreeItem handleKeyDown", item.dataset.treeId);
+        const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => {
+            console.log("TreeItem handleKeyDown", el.dataset.treeId);
+            return { id: el.dataset.treeId, el };
         });
+
+        if (!expandedNow.length) {
+            return;
+        }
+
+        if (!selectedItemId) {
+            return expandedNow[0].id;
+        }
+
+        const index = expandedNow.findIndex((item) => item.id === selectedItemId);
+        if (index !== -1) {
+            const nextIndex = e.key === "ArrowDown" ? index + 1 : index - 1;
+            if (nextIndex >= 0 && nextIndex < expandedNow.length) {
+                return expandedNow[nextIndex].id;
+            }
+        }
 
         // const target = e.target as HTMLElement;
         // const folder = target.closest(`[${AttrTreeFolder}]`);
@@ -74,19 +91,23 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 onKeyDown={(e) => {
                     console.log("Tree onKeyDown", e.key);
 
-                    handleKeyDown(refRoot.current!, e);
-
-                    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-                        e.preventDefault();
-                        const items = data instanceof Array ? data : [data];
-                        const index = items.findIndex((item) => item.id === selectedItemId);
-                        if (index !== -1) {
-                            const nextIndex = e.key === "ArrowDown" ? index + 1 : index - 1;
-                            if (nextIndex >= 0 && nextIndex < items.length) {
-                                handleSelectChange(items[nextIndex]);
-                            }
-                        }
+                    const nextId = getNextId(refRoot.current!, e, selectedItemId);
+                    if (nextId) {
+                        const newItem = findTreeItemById(nextId, data);
+                        handleSelectChange(newItem);
                     }
+
+                    // if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                    //     e.preventDefault();
+                    //     const items = data instanceof Array ? data : [data];
+                    //     const index = items.findIndex((item) => item.id === selectedItemId);
+                    //     if (index !== -1) {
+                    //         const nextIndex = e.key === "ArrowDown" ? index + 1 : index - 1;
+                    //         if (nextIndex >= 0 && nextIndex < items.length) {
+                    //             handleSelectChange(items[nextIndex]);
+                    //         }
+                    //     }
+                    // }
                 }}
             >
                 <ScrollArea style={{ width, height }}>

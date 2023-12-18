@@ -157,6 +157,10 @@ before:border-l-accent-foreground/50 \
 ";
 const treeItemIconClasses = "h-4 w-4 shrink-0 mr-2 text-accent-foreground/50";
 
+const TreeFolder = "folder";
+const TreeTrigger = "folder-trigger";
+const TreeLeaf = "leaf";
+
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
     ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, FolderIcon, ItemIcon, ...rest }, ref) => {
         return (
@@ -169,10 +173,11 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                     {item.children
                                         ? (
                                             <A.Root type="multiple" defaultValue={expandedItemIds}>
-                                                <A.Item value={item.id}>
+                                                <A.Item value={item.id} data-tree-type={TreeFolder}>
                                                     <TreeItemTrigger
                                                         className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
                                                         onClick={() => handleSelectChange(item)}
+                                                        data-tree-type={TreeTrigger}
                                                     >
                                                         {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
                                                         {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true" />}
@@ -197,6 +202,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                 isSelected={selectedItemId === item.id}
                                                 onClick={() => handleSelectChange(item)}
                                                 Icon={ItemIcon}
+                                                data-tree-type={TreeLeaf}
                                             />
                                         )}
                                 </li>

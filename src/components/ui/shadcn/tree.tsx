@@ -1,4 +1,4 @@
-import React from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
@@ -21,18 +21,18 @@ type TreeProps = {
     iconItem?: LucideIconType;
 };
 
-export const Tree = React.forwardRef<HTMLDivElement, TreeProps & React.HTMLAttributes<HTMLDivElement>>(
+export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSlelectedItemId, onSelectChange, expandAll, iconFolder: folderIcon, iconItem: itemIcon, className, ...rest }, ref) => {
-        const [selectedItemId, setSelectedItemId] = React.useState(initialSlelectedItemId);
+        const [selectedItemId, setSelectedItemId] = useState(initialSlelectedItemId);
 
-        const handleSelectChange = React.useCallback(
+        const handleSelectChange = useCallback(
             (item: TreeDataItem | undefined) => {
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
         );
 
-        const expandedItemIds = React.useMemo(() => collectExpandedItemIds(data, initialSlelectedItemId, expandAll), [data, initialSlelectedItemId, expandAll]);
+        const expandedItemIds = useMemo(() => collectExpandedItemIds(data, initialSlelectedItemId, expandAll), [data, initialSlelectedItemId, expandAll]);
 
         const { ref: refRoot, width, height } = useResizeObserver();
 
@@ -138,7 +138,7 @@ before:border-l-accent-foreground/50 \
 ";
 const treeItemIconClasses = "h-4 w-4 shrink-0 mr-2 text-accent-foreground/50";
 
-const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps & React.HTMLAttributes<HTMLDivElement>>(
+const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
     ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, FolderIcon, ItemIcon, ...rest }, ref) => {
         return (
             <div ref={ref} role="tree" className={className} {...rest}>
@@ -224,7 +224,7 @@ before:border-l-accent-foreground/50 \
 ";
 const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
-const Leaf = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & { item: TreeDataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: TreeDataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>
@@ -240,7 +240,7 @@ const Leaf = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
     }
 );
 
-const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, React.ComponentPropsWithoutRef<typeof A.Trigger>>(
+const TreeItemTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger>>(
     ({ className, children, ...rest }, ref) => (
         <A.Header>
             <A.Trigger
@@ -256,7 +256,7 @@ const TreeItemTrigger = React.forwardRef<React.ElementRef<typeof A.Trigger>, Rea
 );
 TreeItemTrigger.displayName = A.Trigger.displayName;
 
-const TreeItemContent = React.forwardRef<React.ElementRef<typeof A.Content>, React.ComponentPropsWithoutRef<typeof A.Content>>(
+const TreeItemContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWithoutRef<typeof A.Content>>(
     ({ className, children, ...rest }, ref) => (
         <A.Content
             ref={ref}

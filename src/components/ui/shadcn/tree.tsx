@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useRef, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
@@ -21,6 +21,34 @@ type TreeProps = {
     iconItem?: LucideIconType;
 };
 
+const AttrTreeId = "data-tree-id";
+const AttrTreeFolder = "data-tree-folder";
+const AttrTreeFolderTrigger = "data-tree-folder-trigger";
+const TypeTreeFolder = "folder";
+const TypeTreeFolderTrigger = "folder-trigger";
+
+function handleKeyDown(root: HTMLDivElement, e: React.KeyboardEvent<HTMLDivElement>) {
+    console.log("TreeItem handleKeyDown", e.key);
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        e.stopPropagation();
+
+        root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`).forEach((item) => {
+            console.log("TreeItem handleKeyDown", item.dataset.treeId);
+        });
+
+        // const target = e.target as HTMLElement;
+        // const folder = target.closest(`[${AttrTreeFolder}]`);
+        // if (folder) {
+        //     const trigger = folder.querySelector(`[${AttrTreeFolderTrigger}]`);
+        //     if (trigger) {
+        //         trigger.click();
+        //     }
+        // }
+    }
+}
+
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSlelectedItemId, onSelectChange, expandAll, iconFolder: folderIcon, iconItem: itemIcon, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = useState(initialSlelectedItemId);
@@ -34,15 +62,19 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 
         const expandedItemIds = useMemo(() => collectExpandedItemIds(data, initialSlelectedItemId, expandAll), [data, initialSlelectedItemId, expandAll]);
 
-        const { ref: refRoot, width, height } = useResizeObserver();
+        const refRoot = useRef<HTMLDivElement | null>(null);
+        const { ref: refRootCb, width, height } = useResizeObserver();
 
         return (
             <div
-                ref={refRoot}
+                ref={(r) => { refRootCb(r); refRoot.current = r; }}
                 className={cn("overflow-hidden", className)}
                 tabIndex={0}
+
                 onKeyDown={(e) => {
                     console.log("Tree onKeyDown", e.key);
+
+                    handleKeyDown(refRoot.current!, e);
 
                     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                         e.preventDefault();
@@ -85,7 +117,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
 
     return rv;
 
-    function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) {
+    function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -157,10 +189,6 @@ before:border-l-accent-foreground/50 \
 ";
 const treeItemIconClasses = "h-4 w-4 shrink-0 mr-2 text-accent-foreground/50";
 
-const AttrTreeId = "data-tree-id";
-const AttrTreeFolder = "data-tree-folder";
-const TypeTreeFolder = "folder";
-
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
     ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, FolderIcon, ItemIcon, ...rest }, ref) => {
         return (
@@ -177,6 +205,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                     <TreeItemTrigger
                                                         className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
                                                         onClick={() => handleSelectChange(item)}
+                                                        data-tree-folder-trigger={TypeTreeFolderTrigger}
                                                     >
                                                         {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
                                                         {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true" />}
@@ -269,11 +298,14 @@ const TreeItemTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsW
         <A.Header>
             <A.Trigger
                 ref={ref}
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 outline-none flex items-center", className)} tabIndex={-1}
+                asChild
+                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 outline-none cursor-pointer flex items-center", className)}
                 {...rest}
             >
-                {children}
-                <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />
+                <div>
+                    {children}
+                    <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />
+                </div>
             </A.Trigger>
         </A.Header>
     )

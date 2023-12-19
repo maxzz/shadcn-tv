@@ -35,14 +35,8 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
         return;
     }
 
-    /**
-     * Get the ID of visible and expanded tree items.
-     */
-    function getExpandedItems(root: HTMLDivElement): { id: string; el: HTMLElement; }[] {
-        return [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
-    }
-
-    const expandedNow = getExpandedItems(root);
+    // Get the id/el of visible and expanded tree items.
+    const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
 
     if (!expandedNow.length) {
         return;

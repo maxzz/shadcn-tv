@@ -53,25 +53,24 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
         return;
     }
 
-    if (e.key === "Enter") {
-        const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
-        isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
-        return;
-    }
-
-    if (e.key === "Home") {
-        return expandedNow[0].id;
-    }
-
-    if (e.key === "End") {
-        return expandedNow[expandedNow.length - 1].id;
-    }
-
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
-        if (nextIndex >= 0 && nextIndex < expandedNow.length) {
-            return expandedNow[nextIndex].id;
+    switch (e.key) {
+        case "ArrowDown":
+        case "ArrowUp": {
+            const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
+            if (nextIndex >= 0 && nextIndex < expandedNow.length) {
+                return expandedNow[nextIndex].id;
+            }
+            break;
         }
+        case "Enter": {
+            const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
+            isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
+            break;
+        }
+        case "End":
+            return expandedNow[expandedNow.length - 1].id;
+        case "Home":
+            return expandedNow[0].id;
     }
 }
 

@@ -37,7 +37,6 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
 
     // Get the id/el of visible and expanded tree items.
     const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
-
     if (!expandedNow.length) {
         return;
     }
@@ -56,10 +55,7 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
 
     if (e.key === "Enter") {
         const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
-        const trigger = isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`);
-        if (trigger) {
-            trigger.click();
-        }
+        isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
         return;
     }
 
@@ -94,25 +90,11 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 tabIndex={0}
 
                 onKeyDown={(e) => {
-                    console.log("Tree onKeyDown", e.key);
-
                     const nextId = getNextId(refRoot.current!, e, selectedItemId);
                     if (nextId) {
                         const newItem = findTreeItemById(nextId, data);
                         handleSelectChange(newItem);
                     }
-
-                    // if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-                    //     e.preventDefault();
-                    //     const items = data instanceof Array ? data : [data];
-                    //     const index = items.findIndex((item) => item.id === selectedItemId);
-                    //     if (index !== -1) {
-                    //         const nextIndex = e.key === "ArrowDown" ? index + 1 : index - 1;
-                    //         if (nextIndex >= 0 && nextIndex < items.length) {
-                    //             handleSelectChange(items[nextIndex]);
-                    //         }
-                    //     }
-                    // }
                 }}
             >
                 <ScrollArea style={{ width, height }}>

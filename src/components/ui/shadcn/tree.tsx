@@ -28,9 +28,9 @@ const TypeTreeFolder = "folder";
 const TypeTreeFolderTrigger = "folder-trigger";
 
 function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
-    //console.log("TreeItem handleKeyDown", e.key);
+    console.log("TreeItem handleKeyDown", e.key);
 
-    const keys = ["ArrowDown", "ArrowUp", "Enter"];
+    const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
     if (!keys.includes(e.key)) {
         return;
     }
@@ -57,6 +57,14 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
         const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
         isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
         return;
+    }
+
+    if (e.key === "Home") {
+        return expandedNow[0].id;
+    }
+
+    if (e.key === "End") {
+        return expandedNow[expandedNow.length - 1].id;
     }
 
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {

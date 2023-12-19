@@ -28,7 +28,7 @@ const TypeTreeFolder = "folder";
 const TypeTreeFolderTrigger = "folder-trigger";
 
 function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
-    console.log("TreeItem handleKeyDown", e.key);
+    //console.log("TreeItem handleKeyDown", e.key);
 
     const keys = ["ArrowDown", "ArrowUp", "Enter"];
     if (!keys.includes(e.key)) {
@@ -56,59 +56,24 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
     }
 
     const selectedIdx = expandedNow.findIndex((item) => item.id === selectedItemId);
+    if (selectedIdx === -1) {
+        return;
+    }
 
     if (e.key === "Enter") {
         const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
-
-        console.log("TreeItem handleKeyDown", isFolder);
-
         const trigger = isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`);
         if (trigger) {
             trigger.click();
         }
-
         return;
     }
 
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-
-        const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => {
-            console.log("TreeItem handleKeyDown", el.dataset.treeId);
-            return { id: el.dataset.treeId, el };
-        });
-
-        if (!expandedNow.length) {
-            return;
+        const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
+        if (nextIndex >= 0 && nextIndex < expandedNow.length) {
+            return expandedNow[nextIndex].id;
         }
-
-        if (!selectedItemId) {
-            return expandedNow[0].id;
-        }
-
-        const index = expandedNow.findIndex((item) => item.id === selectedItemId);
-        if (index !== -1) {
-            const nextIndex = e.key === "ArrowDown" ? index + 1 : index - 1;
-            if (nextIndex >= 0 && nextIndex < expandedNow.length) {
-                return expandedNow[nextIndex].id;
-            }
-        }
-    }
-
-
-    function getExpandedItems2(root: HTMLDivElement, selectedItemId: string | undefined): { expandedNow: { id: string; el: HTMLElement; }[]; index: string | undefined; } {
-        const expandedNow = getExpandedItems(root);
-
-        if (!expandedNow.length) {
-            return { expandedNow, index: undefined };
-        }
-
-        if (!selectedItemId) {
-            return { expandedNow, index: expandedNow[0].id };
-        }
-
-        const index = expandedNow.findIndex((item) => item.id === selectedItemId);
-
-        return { expandedNow, index: index !== -1 ? expandedNow[index].id : undefined };
     }
 }
 

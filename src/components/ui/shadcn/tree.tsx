@@ -27,49 +27,6 @@ const AttrTreeFolderTrigger = "data-tree-folder-trigger";
 const TypeTreeFolder = "folder";
 const TypeTreeFolderTrigger = "folder-trigger";
 
-function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
-    const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
-    if (!keys.includes(e.key)) {
-        return;
-    }
-
-    // Get the id/el of visible and expanded tree items.
-    const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
-    if (!expandedNow.length) {
-        return;
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!selectedItemId) {
-        return expandedNow[0].id;
-    }
-
-    const selectedIdx = expandedNow.findIndex((item) => item.id === selectedItemId);
-    if (selectedIdx !== -1) {
-        switch (e.key) {
-            case "ArrowDown":
-            case "ArrowUp": {
-                const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
-                if (nextIndex >= 0 && nextIndex < expandedNow.length) {
-                    return expandedNow[nextIndex].id;
-                }
-                break;
-            }
-            case "Enter": {
-                const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
-                isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
-                break;
-            }
-            case "End":
-                return expandedNow[expandedNow.length - 1].id;
-            case "Home":
-                return expandedNow[0].id;
-        }
-    }
-}
-
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSlelectedItemId, onSelectChange, expandAll, iconFolder: folderIcon, iconItem: itemIcon, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = useState(initialSlelectedItemId);
@@ -147,9 +104,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
 
 export function findTreeItemById(id: string | undefined, items: TreeDataItem[] | TreeDataItem | undefined | null): TreeDataItem | undefined {
     if (id && items) {
-        if (!Array.isArray(items)) {
-            items = [items];
-        }
+        !Array.isArray(items) && (items = [items]);
         for (const item of items) {
             if (item.id === id) {
                 return item;
@@ -160,6 +115,49 @@ export function findTreeItemById(id: string | undefined, items: TreeDataItem[] |
                     return found;
                 }
             }
+        }
+    }
+}
+
+function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
+    const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
+    if (!keys.includes(e.key)) {
+        return;
+    }
+
+    // Get the id/el of visible and expanded tree items.
+    const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
+    if (!expandedNow.length) {
+        return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!selectedItemId) {
+        return expandedNow[0].id;
+    }
+
+    const selectedIdx = expandedNow.findIndex((item) => item.id === selectedItemId);
+    if (selectedIdx !== -1) {
+        switch (e.key) {
+            case "ArrowDown":
+            case "ArrowUp": {
+                const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
+                if (nextIndex >= 0 && nextIndex < expandedNow.length) {
+                    return expandedNow[nextIndex].id;
+                }
+                break;
+            }
+            case "Enter": {
+                const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
+                isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
+                break;
+            }
+            case "End":
+                return expandedNow[expandedNow.length - 1].id;
+            case "Home":
+                return expandedNow[0].id;
         }
     }
 }

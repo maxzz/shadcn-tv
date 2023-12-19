@@ -30,26 +30,47 @@ const TypeTreeFolderTrigger = "folder-trigger";
 function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
     console.log("TreeItem handleKeyDown", e.key);
 
+    const keys = ["ArrowDown", "ArrowUp", "Enter"];
+    if (!keys.includes(e.key)) {
+        return;
+    }
+
+    /**
+     * Get the ID of visible and expanded tree items.
+     */
+    function getExpandedItems(root: HTMLDivElement): { id: string; el: HTMLElement; }[] {
+        return [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
+    }
+
+    const expandedNow = getExpandedItems(root);
+
+    if (!expandedNow.length) {
+        return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!selectedItemId) {
+        return expandedNow[0].id;
+    }
+
+    const selectedIdx = expandedNow.findIndex((item) => item.id === selectedItemId);
+
     if (e.key === "Enter") {
-        e.preventDefault();
-        e.stopPropagation();
+        const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
 
-        const target = e.target as HTMLElement;
-        const isFolder = target.dataset.state !== undefined;
-        console.log("TreeItem handleKeyDown", isFolder, target.dataset.state);
+        console.log("TreeItem handleKeyDown", isFolder);
 
-        if (isFolder) {
-            const trigger = target.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`);
-            if (trigger) {
-                trigger.click();
-            }
+        const trigger = isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`);
+        if (trigger) {
+            trigger.click();
         }
+
         return;
     }
 
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        e.preventDefault();
-        e.stopPropagation();
 
         const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => {
             console.log("TreeItem handleKeyDown", el.dataset.treeId);
@@ -71,29 +92,18 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
                 return expandedNow[nextIndex].id;
             }
         }
-
-        // const target = e.target as HTMLElement;
-        // const folder = target.closest(`[${AttrTreeFolder}]`);
-        // if (folder) {
-        //     const trigger = folder.querySelector(`[${AttrTreeFolderTrigger}]`);
-        //     if (trigger) {
-        //         trigger.click();
-        //     }
-        // }
     }
 
-    function getExpandedItems(root: HTMLDivElement): { expandedNow: { id: string; el: HTMLElement; }[]; index: string | undefined; } {
-        const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => {
-            console.log("TreeItem handleKeyDown", el.dataset.treeId);
-            return { id: el.dataset.treeId!, el };
-        });
+
+    function getExpandedItems2(root: HTMLDivElement, selectedItemId: string | undefined): { expandedNow: { id: string; el: HTMLElement; }[]; index: string | undefined; } {
+        const expandedNow = getExpandedItems(root);
 
         if (!expandedNow.length) {
             return { expandedNow, index: undefined };
         }
 
         if (!selectedItemId) {
-            return { expandedNow, index: expandedNow[0].id};
+            return { expandedNow, index: expandedNow[0].id };
         }
 
         const index = expandedNow.findIndex((item) => item.id === selectedItemId);

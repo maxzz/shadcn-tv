@@ -28,8 +28,6 @@ const TypeTreeFolder = "folder";
 const TypeTreeFolderTrigger = "folder-trigger";
 
 function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
-    console.log("TreeItem handleKeyDown", e.key);
-
     const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
     if (!keys.includes(e.key)) {
         return;
@@ -49,28 +47,26 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
     }
 
     const selectedIdx = expandedNow.findIndex((item) => item.id === selectedItemId);
-    if (selectedIdx === -1) {
-        return;
-    }
-
-    switch (e.key) {
-        case "ArrowDown":
-        case "ArrowUp": {
-            const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
-            if (nextIndex >= 0 && nextIndex < expandedNow.length) {
-                return expandedNow[nextIndex].id;
+    if (selectedIdx !== -1) {
+        switch (e.key) {
+            case "ArrowDown":
+            case "ArrowUp": {
+                const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
+                if (nextIndex >= 0 && nextIndex < expandedNow.length) {
+                    return expandedNow[nextIndex].id;
+                }
+                break;
             }
-            break;
+            case "Enter": {
+                const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
+                isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
+                break;
+            }
+            case "End":
+                return expandedNow[expandedNow.length - 1].id;
+            case "Home":
+                return expandedNow[0].id;
         }
-        case "Enter": {
-            const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
-            isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
-            break;
-        }
-        case "End":
-            return expandedNow[expandedNow.length - 1].id;
-        case "Home":
-            return expandedNow[0].id;
     }
 }
 

@@ -4,7 +4,7 @@ import { DataTableDemo } from "@/components/ui/shadcn/demo/demo-data-table";
 import { SkeletonDemo } from "@/components/ui/shadcn/demo/demo-skeleton";
 import { TableDemo } from "@/components/ui/shadcn/demo/demo-table";
 import { LoadersTest } from "../3-loaders";
-import { DemoTree } from "@/components/ui/shadcn/demo/demo-tree";
+import { DemoTree, DemoTreeOptimized } from "@/components/ui/shadcn/demo/demo-tree";
 
 export type Showcase = {
     id: string;
@@ -18,5 +18,6 @@ export const showcases: Showcase[] = [
     { id: '3', name: "Data table", component: <DataTableDemo /> },
     { id: '4', name: "Skeleton", component: <SkeletonDemo /> },
     { id: '5', name: "Neon switch", component: <NeonSwitch /> },
-    { id: '6', name: "Tree", component: <DemoTree /> },
+    { id: '6', name: "Tree unoptimized", component: <DemoTree /> },
+    { id: '7', name: "Tree", component: <DemoTreeOptimized /> },
 ];

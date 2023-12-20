@@ -48,7 +48,10 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 ref={(r) => { refRootCb(r); refRoot.current = r; }}
                 className={cn("overflow-hidden", className)}
                 tabIndex={0}
-                onKeyDown={(e) => handleSelectChange(findTreeItemById(getNextId(refRoot.current!, e, selectedItemId), data))}
+                onKeyDown={(e) => {
+                    const nextId = getNextId(refRoot.current!, e, selectedItemId);
+                    nextId && handleSelectChange(findTreeItemById(data, nextId));
+                }}
             >
                 <ScrollArea style={{ width, height }}>
                     <div className="relative z-0 px-2 py-1">
@@ -102,7 +105,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
     }
 }
 
-export function findTreeItemById(id: string | undefined, items: TreeDataItem[] | TreeDataItem | undefined | null): TreeDataItem | undefined {
+export function findTreeItemById(items: TreeDataItem[] | TreeDataItem | undefined | null, id: string | undefined): TreeDataItem | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {
@@ -110,7 +113,7 @@ export function findTreeItemById(id: string | undefined, items: TreeDataItem[] |
                 return item;
             }
             if (item.children) {
-                const found = findTreeItemById(id, item.children);
+                const found = findTreeItemById(item.children, id);
                 if (found) {
                     return found;
                 }

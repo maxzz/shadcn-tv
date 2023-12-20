@@ -72,7 +72,7 @@ const data: TreeDataItem[] = [
 const initialItemId = "f12";
 
 export function DemoTree() {
-    const [content, setContent] = useState(() => findTreeItemById(initialItemId, data)?.name || "No content selected");
+    const [content, setContent] = useState(() => findTreeItemById(data, initialItemId)?.name || "No content selected");
     return (
         <div className="m-0.5 min-h-full flex">
             <Tree

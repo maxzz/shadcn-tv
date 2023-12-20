@@ -5,7 +5,7 @@ function Table1() {
         <>
             <section className="sticky-header-row">
                 <h2>Sticky Header</h2>
-                <div className="container">
+                <div className="test-table-container">
                     <table>
                         <thead>
                             <tr>
@@ -100,7 +100,7 @@ function Table2() {
         <>
             <section className="sticky-first-column">
                 <h2>Sticky First Column</h2>
-                <div className="container">
+                <div className="test-table-container">
                     <table>
                         <thead>
                             <tr>
@@ -160,7 +160,7 @@ function Table3() {
         <>
             <section className="sticky-header-and-first-column">
                 <h2>Sticky Header and First Column</h2>
-                <div className="container">
+                <div className="test-table-container">
                     <table>
                         <thead>
                             <tr>

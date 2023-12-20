@@ -253,10 +253,10 @@ function Table3() {
 
 export function TablesWithStyckyHeaderModules() {
     return (
-        <>
+        <div className="text-xs flex flex-col space-y-4">
             <Table1 />
             <Table2 />
             <Table3 />
-        </>
+        </div>
     );
 }

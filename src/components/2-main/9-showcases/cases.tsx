@@ -16,7 +16,7 @@ export const showcases: Showcase[] = [
     { id: '1', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
     { id: '2', name: "Data table", component: <DataTableDemo /> },
     { id: '3', name: "Table", component: <TableDemo className="m-auto max-w-sm" /> },
-    { id: '41', name: "Table sticky headers with .css", component: <TablesWithStyckyHeaderCss /> },
+    // { id: '41', name: "Table sticky headers with .css", component: <TablesWithStyckyHeaderCss /> },
     { id: '42', name: "Table sticky headers with .module.css", component: <TablesWithStyckyHeaderModules /> },
     { id: '5', name: "Skeleton", component: <SkeletonDemo /> },
     { id: '6', name: "Neon switch", component: <NeonSwitch /> },

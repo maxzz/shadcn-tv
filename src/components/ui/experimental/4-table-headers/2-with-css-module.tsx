@@ -1,5 +1,4 @@
 import styles from "./2-with-css.module.css";
-console.log('styles', styles);
 
 function Table1() {
     return (

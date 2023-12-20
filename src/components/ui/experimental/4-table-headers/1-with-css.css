@@ -1,18 +1,3 @@
-/* * {
-    box-sizing: border-box;
-} */
-
-/* body { */
-    /* padding: 16px; */
-    /* background-color: #1b1c23; */
-    /* color: #d1d1e6; */
-    /* --sticky-cell-border-color: #545d9e; */
-/* } */
-
-/* section {
-    margin-bottom: 64px;
-} */
-
 .test-table-container table {
     border-spacing: 0;
     --sticky-cell-border-color: #545d9e;
@@ -89,8 +74,8 @@
 
 /* Scrollbar */
 .test-table-container::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
 }
 
 /* Track */

@@ -1,4 +1,4 @@
-import "./1-with-css.css"; //https://www.codewithshripal.com/playground/css/sticky-table-headers
+import "./1-with-css.css"; //https://www.codewithshripal.com/playground/css/sticky-table-headers //https://codepen.io/maxzz/pen/xxBKQaR
 
 function Table1() {
     return (

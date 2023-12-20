@@ -13,26 +13,28 @@
     margin-bottom: 64px;
 } */
 
-table {
+.container table {
     border-spacing: 0;
     --sticky-cell-border-color: #545d9e;
 }
 
-th,
-td {
+.container th,
+.container td {
     border: 1px solid #2e3252;
     padding: 8px;
     text-align: left;
 }
 
-th {
+.container th {
     background-color: #272a3f;
 }
 
-td {
+.container td {
     background-color: #212335;
     color: #bdbddb;
 }
+
+/* sticky-header-row */
 
 .sticky-header-row .container {
     width: fit-content;

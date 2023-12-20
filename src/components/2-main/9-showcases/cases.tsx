@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
-import { NeonSwitch } from "@/components/ui/experimental";
+import { NeonSwitch, TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "@/components/ui/experimental";
 import { DataTableDemo } from "@/components/ui/shadcn/demo/demo-data-table";
 import { TableDemo } from "@/components/ui/shadcn/demo/demo-table";
-import { TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "../4-table-headers";
 import { SkeletonDemo } from "@/components/ui/shadcn/demo/demo-skeleton";
-import { LoadersTest } from "../3-loaders";
+import { LoadersTest } from "../../ui/experimental/1-loaders";
 import { DemoTree, DemoTreeOptimized } from "@/components/ui/shadcn/demo/demo-tree";
 
 export type Showcase = {

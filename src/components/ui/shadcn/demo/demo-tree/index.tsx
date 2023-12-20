@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Tree, TreeDataItem, findTreeItemById } from "@/components/ui/shadcn/tree";
 import { Workflow as IconWorkflow, Folder as IconFolder, Layout as IconLayout } from "lucide-react";
 import { classNames } from "@/utils";
-import { inputFocusClasses } from "../../shared-styles";
+import { inputFocusClasses } from "../../../shared-styles";
 
 const data: TreeDataItem[] = [
     { id: "1", name: "Unread" },

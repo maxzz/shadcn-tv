@@ -26,6 +26,7 @@
     filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.4));
     transition: fill 0.4s;
 }
+
 .toggle-checkbox:not(:checked) + .toggle-icon.off,
 .toggle-checkbox:checked ~ .toggle-icon.on {
     fill: #e0f9fc;

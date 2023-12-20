@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { LoadersTest, NeonSwitch, SwitchStyled, TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "@/components/ui/experimental";
+import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "@/components/ui/experimental";
 import { DataTableDemo } from "@/components/ui/shadcn/demo/demo-data-table";
 import { TableDemo } from "@/components/ui/shadcn/demo/demo-table";
 import { SkeletonDemo } from "@/components/ui/shadcn/demo/demo-skeleton";
@@ -19,7 +19,7 @@ export const showcases: Showcase[] = [
     { id: '42', name: "Table sticky headers with .module.css", component: <TablesWithStyckyHeaderModules /> },
     { id: '50', name: "Skeleton", component: <SkeletonDemo /> },
     { id: '61', name: "Switch. neon", component: <NeonSwitch /> },
-    { id: '62', name: "Switch. styled", component: <SwitchStyled /> },
+    { id: '62', name: "Switch. styled", component: <DemoSwitchStyled /> },
     { id: '70', name: "Tree unoptimized", component: <DemoTree /> },
     { id: '80', name: "Tree", component: <DemoTreeOptimized /> },
 ];

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tree, findTreeItemById } from "@/components/ui/shadcn/tree";
+import { Tree, findTreeItemById } from "@/components/ui/shadcn/tree-optimiized-rerenders";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../../shared-styles";

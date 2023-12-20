@@ -250,7 +250,7 @@ function Table3() {
     );
 }
 
-export function Tables() {
+export function TablesWithStyckyHeader() {
     return (
         <>
             <Table1 />

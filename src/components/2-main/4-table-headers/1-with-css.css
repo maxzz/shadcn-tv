@@ -9,6 +9,10 @@ body {
     --sticky-cell-border-color: #545d9e;
 }
 
+section {
+    margin-bottom: 64px;
+}
+
 table {
     border-spacing: 0;
 }
@@ -40,6 +44,8 @@ td {
     border-bottom-color: var(--sticky-cell-border-color);
 }
 
+/* sticky-first-column */
+
 .sticky-first-column .container {
     width: 300px;
     overflow: auto;
@@ -51,26 +57,26 @@ td {
     border-right-color: var(--sticky-cell-border-color);
 }
 
-.sticky-header-and-first-column {
-    /* sticky header */
-    /* sticky first column */
-    /* stick first column header to top, left and give z-index to always render it on top */
-}
+/* sticky-header-and-first-column */
+
 .sticky-header-and-first-column .container {
     width: 400px;
     height: 400px;
     overflow: auto;
 }
+/* sticky header */
 .sticky-header-and-first-column th[scope="col"] {
     position: sticky;
     top: 0;
     border-bottom-color: var(--sticky-cell-border-color);
 }
+/* sticky first column */
 .sticky-header-and-first-column th[scope="row"] {
     position: sticky;
     left: 0;
     border-right-color: var(--sticky-cell-border-color);
 }
+/* stick first column header to top, left and give z-index to always render it on top */
 .sticky-header-and-first-column th[scope="col"]:first-child {
     left: 0;
     z-index: 1;
@@ -98,8 +104,4 @@ td {
 /* Handle on hover */
 .container::-webkit-scrollbar-thumb:hover {
     background-color: #8988aa;
-}
-
-section {
-    margin-bottom: 64px;
 }

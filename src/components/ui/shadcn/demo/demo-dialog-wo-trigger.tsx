@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/shadcn";
 import { Label } from "@/components/ui/shadcn";
 import { Button } from "@/components/ui/shadcn";
 
-export function DialogDemo() {
+export function DialogDemoWoTrigger() {
     const [isOpen, setIsOpen] = useState(false);
     return (<>
         <Button variant="outline" onClick={() => setIsOpen(true)}>Demo dialog</Button>

@@ -1,0 +1,108 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+/* body { */
+    /* padding: 16px; */
+    /* background-color: #1b1c23; */
+    /* color: #d1d1e6; */
+    /* --sticky-cell-border-color: #545d9e; */
+/* } */
+
+/* section {
+    margin-bottom: 64px;
+} */
+
+table {
+    border-spacing: 0;
+    --sticky-cell-border-color: #545d9e;
+}
+
+th,
+td {
+    border: 1px solid #2e3252;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #272a3f;
+}
+
+td {
+    background-color: #212335;
+    color: #bdbddb;
+}
+
+.sticky-header-row .container {
+    width: fit-content;
+    height: 300px;
+    overflow: auto;
+}
+.sticky-header-row th[scope="col"] {
+    position: sticky;
+    top: 0;
+    border-bottom-color: var(--sticky-cell-border-color);
+}
+
+/* sticky-first-column */
+
+.sticky-first-column .container {
+    width: 300px;
+    overflow: auto;
+}
+.sticky-first-column th[scope="col"]:first-child,
+.sticky-first-column th[scope="row"] {
+    position: sticky;
+    left: 0;
+    border-right-color: var(--sticky-cell-border-color);
+}
+
+/* sticky-header-and-first-column */
+
+.sticky-header-and-first-column .container {
+    width: 400px;
+    height: 400px;
+    overflow: auto;
+}
+/* sticky header */
+.sticky-header-and-first-column th[scope="col"] {
+    position: sticky;
+    top: 0;
+    border-bottom-color: var(--sticky-cell-border-color);
+}
+/* sticky first column */
+.sticky-header-and-first-column th[scope="row"] {
+    position: sticky;
+    left: 0;
+    border-right-color: var(--sticky-cell-border-color);
+}
+/* stick first column header to top, left and give z-index to always render it on top */
+.sticky-header-and-first-column th[scope="col"]:first-child {
+    left: 0;
+    z-index: 1;
+    border-right-color: var(--sticky-cell-border-color);
+    border-bottom-color: var(--sticky-cell-border-color);
+}
+
+/* Scrollbar */
+.container::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+.container::-webkit-scrollbar-track {
+    background: black;
+}
+
+/* Handle */
+.container::-webkit-scrollbar-thumb {
+    background-color: #9f9ec7;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #8988aa;
+}

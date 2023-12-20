@@ -1,7 +1,7 @@
 import { FontInputTitleBar } from './1-top-row';
-import { DialogDemo } from './2-dialog-demo';
-import { Showcases } from './4-showcases';
-import { showcases } from './4-showcases/cases';
+import { DialogDemoWoTrigger } from '../ui/shadcn/demo/demo-dialog-wo-trigger';
+import { Showcases } from './9-showcases';
+import { showcases } from './9-showcases/cases';
 import { Button } from '@/components/ui/shadcn';
 
 function FontInput() {
@@ -21,7 +21,7 @@ function ConvertForm() {
 
             <div className="flex items-center gap-2">
                 <Button variant={'outline'}>OK</Button>
-                <DialogDemo />
+                <DialogDemoWoTrigger />
             </div>
 
             <div className="">

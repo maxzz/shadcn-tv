@@ -12,6 +12,12 @@ export type TreeDataItem = {
     children?: TreeDataItem[];
 };
 
+export type TreeDataItemState =
+    & TreeDataItem
+    & {
+        selected: boolean;
+    };
+
 type TreeProps = {
     data: TreeDataItem[] | TreeDataItem,
     initialSlelectedItemId?: string,
@@ -104,6 +110,38 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
         }
     }
 }
+
+function walkItems(items: TreeDataItem[] | TreeDataItem, cb: (item: TreeDataItem) => void) {
+    if (items) {
+        if (items instanceof Array) {
+            // eslint-disable-next-line @typescript-eslint/prefer-for-of
+            for (let i = 0; i < items.length; i++) {
+                cb(items[i]);
+                walkItems(items[i], cb);
+            }
+        } else if (items.children) {
+            walkItems(items.children, cb);
+        }
+    }
+}
+
+/*
+    if (items) {
+        if (items instanceof Array) {
+            // eslint-disable-next-line @typescript-eslint/prefer-for-of
+            for (let i = 0; i < items.length; i++) {
+                cb({ ...items[i], selected: false });
+                walkItems(items[i], cb);
+            }
+        } else if (items.children) {
+            cb({ ...items, selected: false });
+            walkItems(items.children, cb);
+        } else {
+            cb({ ...items, selected: false });
+        }
+    }
+}
+*/
 
 export function findTreeItemById(items: TreeDataItem[] | TreeDataItem | undefined | null, id: string | undefined): TreeDataItem | undefined {
     if (id && items) {

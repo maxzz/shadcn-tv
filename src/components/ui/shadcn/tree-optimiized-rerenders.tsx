@@ -5,75 +5,34 @@ import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 
-type ItemCore = {
+export type ItemNavigation<T> =
+    & {
+        [K in keyof T]: T[K];
+    }
+    & {
+        children?: ItemNavigation<T>[];
+    };
+
+export type ItemCore = {
     id: string;
     name: string;
     icon?: LucideIconType;
 };
 
-export type TreeDataItem<T> =
-    & {
-        [K in keyof T]: T[K];
-    }
-    & {
-        children?: TreeDataItem<T>[];
-    };
-
-export type TreeItemState = {
+export type ItemState = {
     state: {
         selected: boolean;
-    }
+    };
 };
 
-export type TreeDataItemWoState = TreeDataItem<ItemCore>;
-
-export type TreeDataItemState = TreeDataItem<ItemCore & TreeItemState>;
-
-
-
-// export type TreeDataItem<T> = {
-//     id: string;
-//     name: string;
-//     icon?: LucideIconType,
-//     state: T;
-//     children?: TreeDataItem<T>[];
-// };
-
-// export type TreeItemState = {
-//     selected: boolean;
-// };
-
-// export type TreeDataItemState = TreeDataItem<TreeItemState>;
-
-
-
-
-//export type TreeDataItemStateWithChildren = TreeDataItemState & { children: TreeDataItemStateWithChildren[] };
-// export type TreeDataItemStateWithChildren = Omit<TreeDataItemState, 'state'>;
-// export type TreeDataItemWithoutState = Omit<TreeDataItem<undefined>, 'state'>;
-//export type TreeDataItemWithoutState = TreeDataItem<undefined>;
-
-// export type TreeDataItem<T> = {
-//     id: string;
-//     name: string;
-//     icon?: LucideIconType,
-//     children?: T[];
-// };
-
-// export type TreeItemState = {
-//     state: {
-//         selected: boolean;
-//     };
-// };
-
-// export type TreeDataItemState =
-//     & TreeDataItem<TreeDataItemState>
-//     & TreeItemState;
+export type TreeItem = ItemNavigation<ItemCore>;
+export type TreeItemNav = ItemNavigation<any>;
+export type TreeItemWState = ItemNavigation<ItemCore & ItemState>;
 
 type TreeProps = {
-    data: TreeDataItemState[] | TreeDataItemState,
+    data: TreeItemWState[] | TreeItemWState,
     initialSlelectedItemId?: string,
-    onSelectChange?: (item: TreeDataItemState | undefined) => void,
+    onSelectChange?: (item: TreeItemWState | undefined) => void,
     expandAll?: boolean,
     iconFolder?: LucideIconType,
     iconItem?: LucideIconType;
@@ -90,7 +49,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         const [selectedItemId, setSelectedItemId] = useState(initialSlelectedItemId);
 
         const handleSelectChange = useCallback(
-            (item: TreeDataItemState | undefined) => {
+            (item: TreeItemWState | undefined) => {
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
@@ -130,7 +89,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
     }
 );
 
-function collectExpandedItemIds(data: TreeDataItemState[] | TreeDataItemState, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+function collectExpandedItemIds(data: TreeItemWState[] | TreeItemWState, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
     const rv: string[] = [];
 
     if (initialSlelectedItemId) {
@@ -139,7 +98,7 @@ function collectExpandedItemIds(data: TreeDataItemState[] | TreeDataItemState, i
 
     return rv;
 
-    function walkTreeItems(items: TreeDataItemState[] | TreeDataItemState, targetId: string) { // Returns true if item expanded
+    function walkTreeItems(items: TreeItemWState[] | TreeItemWState, targetId: string) { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -163,7 +122,7 @@ function collectExpandedItemIds(data: TreeDataItemState[] | TreeDataItemState, i
     }
 }
 
-export function walkItems<T extends TreeDataItem<any>>(items: T[] | T | undefined, cb: (item: T) => void) {
+export function walkItems<T extends TreeItemNav>(items: T[] | T | undefined, cb: (item: T) => void) {
     if (items) {
         if (items instanceof Array) {
             for (let i = 0; i < items.length; i++) {
@@ -176,7 +135,7 @@ export function walkItems<T extends TreeDataItem<any>>(items: T[] | T | undefine
     }
 }
 
-export function duplicateTree<T extends TreeDataItem<any>>(data: T[]): T[] {
+export function duplicateTree<T extends TreeItemNav>(data: T[]): T[] {
     return data.map((item) => {
         return {
             ...item,
@@ -185,7 +144,7 @@ export function duplicateTree<T extends TreeDataItem<any>>(data: T[]): T[] {
     });
 }
 
-export function findTreeItemById<T extends TreeDataItem<any>>(items: T[] | T | undefined | null, id: string | undefined): T | undefined {
+export function findTreeItemById<T extends TreeItemNav>(items: T[] | T | undefined | null, id: string | undefined): T | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {
@@ -249,7 +208,7 @@ type TreeItemProps =
     & TreeProps
     & {
         selectedItemId?: string,
-        handleSelectChange: (item: TreeDataItemState | undefined) => void,
+        handleSelectChange: (item: TreeItemWState | undefined) => void,
         expandedItemIds: string[],
         FolderIcon?: LucideIconType,
         ItemIcon?: LucideIconType;
@@ -362,7 +321,7 @@ before:border-l-accent-foreground/50 \
 ";
 const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: TreeDataItemState, isSelected?: boolean, Icon?: LucideIconType; }>(
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: TreeItemWState, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>

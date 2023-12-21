@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tree, TreeDataItem, TreeDataItemState, TreeDataItemWoState, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimiized-rerenders";
+import { Tree, ItemNavigation, TreeItemWState, TreeItem, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimiized-rerenders";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../../shared-styles";
@@ -8,10 +8,10 @@ import { proxy } from "valtio";
 
 const initialItemId = "f12";
 
-function addStateToTreeItems(data: TreeDataItemWoState[]): TreeDataItemState[] {
+function addStateToTreeItems(data: TreeItem[]): TreeItemWState[] {
     const newTree = duplicateTree(data);
-    walkItems(newTree, (item) => (item as TreeDataItemState).state = proxy({ selected: false }));
-    return newTree as TreeDataItemState[];
+    walkItems(newTree, (item) => (item as TreeItemWState).state = proxy({ selected: false }));
+    return newTree as TreeItemWState[];
 }
 
 const dataWithState = addStateToTreeItems(data);

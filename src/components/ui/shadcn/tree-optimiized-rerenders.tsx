@@ -5,24 +5,53 @@ import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 
-export type TreeDataItem<T> = {
+type ItemCore = {
     id: string;
     name: string;
-    icon?: LucideIconType,
-    state: T;
-    children?: TreeDataItem<T>[];
+    icon?: LucideIconType;
 };
+
+export type TreeDataItem<T> =
+    & {
+        [K in keyof T]: T[K];
+    }
+    & {
+        children?: TreeDataItem<T>[];
+    };
 
 export type TreeItemState = {
-    selected: boolean;
+    state: {
+        selected: boolean;
+    }
 };
 
-export type TreeDataItemState = TreeDataItem<TreeItemState>;
+export type TreeDataItemWoState = TreeDataItem<ItemCore>;
+
+export type TreeDataItemState = TreeDataItem<ItemCore & TreeItemState>;
+
+
+
+// export type TreeDataItem<T> = {
+//     id: string;
+//     name: string;
+//     icon?: LucideIconType,
+//     state: T;
+//     children?: TreeDataItem<T>[];
+// };
+
+// export type TreeItemState = {
+//     selected: boolean;
+// };
+
+// export type TreeDataItemState = TreeDataItem<TreeItemState>;
+
+
+
 
 //export type TreeDataItemStateWithChildren = TreeDataItemState & { children: TreeDataItemStateWithChildren[] };
 // export type TreeDataItemStateWithChildren = Omit<TreeDataItemState, 'state'>;
 // export type TreeDataItemWithoutState = Omit<TreeDataItem<undefined>, 'state'>;
-export type TreeDataItemWithoutState = TreeDataItem<undefined>;
+//export type TreeDataItemWithoutState = TreeDataItem<undefined>;
 
 // export type TreeDataItem<T> = {
 //     id: string;
@@ -134,7 +163,7 @@ function collectExpandedItemIds(data: TreeDataItemState[] | TreeDataItemState, i
     }
 }
 
-export function walkItems<T extends TreeDataItemWithoutState>(items: T[] | T | undefined, cb: (item: T) => void) {
+export function walkItems<T extends TreeDataItem<any>>(items: T[] | T | undefined, cb: (item: T) => void) {
     if (items) {
         if (items instanceof Array) {
             for (let i = 0; i < items.length; i++) {
@@ -147,7 +176,7 @@ export function walkItems<T extends TreeDataItemWithoutState>(items: T[] | T | u
     }
 }
 
-export function duplicateTree<T extends TreeDataItemWithoutState>(data: T[]): T[] {
+export function duplicateTree<T extends TreeDataItem<any>>(data: T[]): T[] {
     return data.map((item) => {
         return {
             ...item,
@@ -156,7 +185,7 @@ export function duplicateTree<T extends TreeDataItemWithoutState>(data: T[]): T[
     });
 }
 
-export function findTreeItemById(items: TreeDataItemState[] | TreeDataItemState | undefined | null, id: string | undefined): TreeDataItemState | undefined {
+export function findTreeItemById<T extends TreeDataItem<any>>(items: T[] | T | undefined | null, id: string | undefined): T | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {

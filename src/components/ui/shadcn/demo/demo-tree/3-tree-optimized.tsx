@@ -8,13 +8,6 @@ import { proxy } from "valtio";
 
 const initialItemId = "f12";
 
-walkItems(data, (item) => {
-    (item as TreeDataItemState).state = proxy({selected: false})
-    console.log(item.id);
-});
-
-console.log(data);
-
 function duplicateTree(data: TreeDataItem[]): TreeDataItem[] {
     return data.map((item) => {
         return {
@@ -24,15 +17,20 @@ function duplicateTree(data: TreeDataItem[]): TreeDataItem[] {
     });
 }
 
-const newTree = duplicateTree(data);
-console.log(newTree);
+function addTreeItemsState(data: TreeDataItem[]): TreeDataItem[] {
+    const newTree = duplicateTree(data);
+    walkItems(newTree, (item) => (item as TreeDataItemState).state = proxy({ selected: false }));
+    return newTree;
+}
+
+const dataWithState = addTreeItemsState(data);
 
 export function DemoTreeOptimized() {
     const [content, setContent] = useState(() => findTreeItemById(data, initialItemId)?.name || "No content selected");
     return (
         <div className="m-0.5 min-h-full flex">
             <Tree
-                data={data}
+                data={dataWithState}
                 className={`shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md ${inputFocusClasses}`}
                 initialSlelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}

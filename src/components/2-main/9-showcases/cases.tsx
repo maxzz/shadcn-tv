@@ -23,3 +23,5 @@ export const showcases: Showcase[] = [
     { id: '70', name: "Tree unoptimized", component: <DemoTree /> },
     { id: '80', name: "Tree", component: <DemoTreeOptimized /> },
 ];
+
+export const initialCase = "80";

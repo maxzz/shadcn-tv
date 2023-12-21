@@ -90,7 +90,7 @@ function collectExpandedItemIds(data: DataItem[] | DataItem, initialSlelectedIte
 
     return rv;
 
-    function walkTreeItems(items: DataItem[] | DataItem, targetId: string) { // Returns true if item expanded
+    function walkTreeItems(items: DataItem[] | DataItem, targetId: string): true | undefined { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -209,47 +209,48 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
             <div ref={ref} role="tree" className={className} {...rest}>
                 <ul>
                     {data instanceof Array
-                        ? data.map(
-                            (item) => (
-                                <li key={item.id}>
-                                    {item.children
-                                        ? (
-                                            <A.Root type="multiple" defaultValue={expandedItemIds}>
-                                                <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
-                                                    <TreeItemTrigger
-                                                        className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
-                                                        onClick={() => handleSelectChange(item)}
-                                                        data-tree-folder-trigger={TypeTreeFolderTrigger}
-                                                    >
-                                                        {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
-                                                        {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true" />}
-                                                        <span className="text-sm truncate">{item.name}</span>
-                                                    </TreeItemTrigger>
+                        ? (
+                            data.map(
+                                (item) => (
+                                    <li key={item.id}>
+                                        {item.children
+                                            ? (
+                                                <A.Root type="multiple" defaultValue={expandedItemIds}>
+                                                    <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
+                                                        <TreeItemTrigger
+                                                            className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
+                                                            onClick={() => handleSelectChange(item)}
+                                                            data-tree-folder-trigger={TypeTreeFolderTrigger}
+                                                        >
+                                                            {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
+                                                            {!item.icon && FolderIcon && <FolderIcon className={treeItemIconClasses} aria-hidden="true" />}
+                                                            <span className="text-sm truncate">{item.name}</span>
+                                                        </TreeItemTrigger>
 
-                                                    <TreeItemContent className="pl-6">
-                                                        <TreeItem
-                                                            data={item.children ? item.children : item}
-                                                            selectedItemId={selectedItemId}
-                                                            handleSelectChange={handleSelectChange}
-                                                            expandedItemIds={expandedItemIds}
-                                                            FolderIcon={FolderIcon}
-                                                            ItemIcon={ItemIcon}
-                                                        />
-                                                    </TreeItemContent>
-                                                </A.Item>
-                                            </A.Root>
-                                        ) : (
-                                            <Leaf
-                                                item={item}
-                                                isSelected={selectedItemId === item.id}
-                                                onClick={() => handleSelectChange(item)}
-                                                Icon={ItemIcon}
-                                                data-tree-id={item.id}
-                                            />
-                                        )}
-                                </li>
-                            )
-                        )
+                                                        <TreeItemContent className="pl-6">
+                                                            <TreeItem
+                                                                data={item.children ? item.children : item}
+                                                                selectedItemId={selectedItemId}
+                                                                handleSelectChange={handleSelectChange}
+                                                                expandedItemIds={expandedItemIds}
+                                                                FolderIcon={FolderIcon}
+                                                                ItemIcon={ItemIcon}
+                                                            />
+                                                        </TreeItemContent>
+                                                    </A.Item>
+                                                </A.Root>
+                                            ) : (
+                                                <Leaf
+                                                    item={item}
+                                                    isSelected={selectedItemId === item.id}
+                                                    onClick={() => handleSelectChange(item)}
+                                                    Icon={ItemIcon}
+                                                    data-tree-id={item.id}
+                                                />
+                                            )}
+                                    </li>
+                                )
+                            ))
                         : (
                             <li>
                                 <Leaf

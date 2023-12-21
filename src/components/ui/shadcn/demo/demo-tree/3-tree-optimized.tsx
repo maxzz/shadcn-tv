@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Tree, findTreeItemById } from "@/components/ui/shadcn/tree-optimiized-rerenders";
+import { Tree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimiized-rerenders";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../../shared-styles";
 import { data } from "./1-tree-data";
 
 const initialItemId = "f12";
+
+walkItems(data, (item) => {
+    console.log(item.id);
+});
+
 
 export function DemoTreeOptimized() {
     const [content, setContent] = useState(() => findTreeItemById(data, initialItemId)?.name || "No content selected");

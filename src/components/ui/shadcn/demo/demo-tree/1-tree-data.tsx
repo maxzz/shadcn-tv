@@ -8,9 +8,9 @@ export const data: TreeDataItem[] = [
         id: "3",
         name: "Chat Rooms",
         children: [
-            { id: "c1", name: "General" },
-            { id: "c2", name: "Random" },
-            { id: "c3", name: "Open Source Projects" },
+            { id: "3.1", name: "General" },
+            { id: "3.2", name: "Random" },
+            { id: "3.3", name: "Open Source Projects" },
         ],
     },
     {
@@ -18,16 +18,16 @@ export const data: TreeDataItem[] = [
         name: "Direct Messages",
         children: [
             {
-                id: "d1",
+                id: "4.1",
                 name: "Alice",
                 children: [
-                    { id: "d11", name: "Alice2", icon: IconLayout },
-                    { id: "d12", name: "Bob2" },
-                    { id: "d13", name: "Charlie2" },
+                    { id: "4.1.1", name: "Alice2", icon: IconLayout },
+                    { id: "4.1.2", name: "Bob2" },
+                    { id: "4.1.3", name: "Charlie2" },
                 ],
             },
-            { id: "d2", name: "Bob", icon: IconLayout },
-            { id: "d3", name: "Charlie" },
+            { id: "4.2", name: "Bob", icon: IconLayout },
+            { id: "4.3", name: "Charlie" },
         ],
     },
     {
@@ -35,16 +35,16 @@ export const data: TreeDataItem[] = [
         name: "Direct Messages",
         children: [
             {
-                id: "e1",
+                id: "5.1",
                 name: "Alice",
                 children: [
-                    { id: "e11", name: "Alice2" },
-                    { id: "e12", name: "Bob2" },
-                    { id: "e13", name: "Charlie2" },
+                    { id: "5.1.1", name: "Alice2" },
+                    { id: "5.1.2", name: "Bob2" },
+                    { id: "5.1.3", name: "Charlie2" },
                 ],
             },
-            { id: "e2", name: "Bob" },
-            { id: "e3", name: "Charlie" },
+            { id: "5.2", name: "Bob" },
+            { id: "5.3", name: "Charlie" },
         ],
     },
     {
@@ -52,16 +52,16 @@ export const data: TreeDataItem[] = [
         name: "Direct Messages",
         children: [
             {
-                id: "f1",
+                id: "6.1",
                 name: "Alice",
                 children: [
-                    { id: "f11", name: "Alice2" },
-                    { id: "f12", name: "Bob2" },
-                    { id: "f13", name: "Charlie2" },
+                    { id: "6.1.1", name: "Alice2" },
+                    { id: "6.1.2", name: "Bob2" },
+                    { id: "6.1.3", name: "Charlie2" },
                 ],
             },
-            { id: "f2", name: "Bob" },
-            { id: "f3", name: "Charlie" },
+            { id: "6.2", name: "Bob" },
+            { id: "6.3", name: "Charlie" },
         ],
     },
 ];

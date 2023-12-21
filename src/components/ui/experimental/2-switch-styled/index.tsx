@@ -25,7 +25,7 @@ export function SwitchStyled({ className, ...rest }: InputHTMLAttributes<HTMLInp
 
 export function DemoSwitchStyled() {
     return (
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 text-3xl">
             <SwitchStyled />
             <SwitchStyled defaultChecked />
         </div>

@@ -1,7 +1,7 @@
-import { TreeDataItem } from "../../tree";
+import { DataItem } from "../../tree";
 import { Layout as IconLayout } from "lucide-react";
 
-export const data: TreeDataItem[] = [
+export const data: DataItem[] = [
     { id: "1", name: "Unread" },
     { id: "2", name: "Threads" },
     {

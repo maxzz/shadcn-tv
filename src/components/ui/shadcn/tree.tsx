@@ -5,17 +5,17 @@ import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 
-export type TreeDataItem = {
+export type DataItem = {
     id: string;
     name: string;
     icon?: LucideIconType,
-    children?: TreeDataItem[];
+    children?: DataItem[];
 };
 
 type TreeProps = {
-    data: TreeDataItem[] | TreeDataItem,
+    data: DataItem[] | DataItem,
     initialSlelectedItemId?: string,
-    onSelectChange?: (item: TreeDataItem | undefined) => void,
+    onSelectChange?: (item: DataItem | undefined) => void,
     expandAll?: boolean,
     iconFolder?: LucideIconType,
     iconItem?: LucideIconType;
@@ -32,7 +32,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         const [selectedItemId, setSelectedItemId] = useState(initialSlelectedItemId);
 
         const handleSelectChange = useCallback(
-            (item: TreeDataItem | undefined) => {
+            (item: DataItem | undefined) => {
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
@@ -72,7 +72,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
     }
 );
 
-function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+function collectExpandedItemIds(data: DataItem[] | DataItem, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
     const rv: string[] = [];
 
     if (initialSlelectedItemId) {
@@ -81,7 +81,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
 
     return rv;
 
-    function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) { // Returns true if item expanded
+    function walkTreeItems(items: DataItem[] | DataItem, targetId: string) { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -105,7 +105,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
     }
 }
 
-export function findTreeItemById(items: TreeDataItem[] | TreeDataItem | undefined | null, id: string | undefined): TreeDataItem | undefined {
+export function findTreeItemById(items: DataItem[] | DataItem | undefined | null, id: string | undefined): DataItem | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {
@@ -169,7 +169,7 @@ type TreeItemProps =
     & TreeProps
     & {
         selectedItemId?: string,
-        handleSelectChange: (item: TreeDataItem | undefined) => void,
+        handleSelectChange: (item: DataItem | undefined) => void,
         expandedItemIds: string[],
         FolderIcon?: LucideIconType,
         ItemIcon?: LucideIconType;
@@ -282,7 +282,7 @@ before:border-l-accent-foreground/50 \
 ";
 const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: TreeDataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>

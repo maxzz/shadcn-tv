@@ -122,7 +122,7 @@ function collectExpandedItemIds(data: DataItemWState[] | DataItemWState, initial
     }
 }
 
-export function walkItems<T extends DataItemNav>(items: T[] | T | undefined, cb: (item: T) => void) {
+export function walkItems<T extends DataItemNav>(items: T[] | T | undefined, cb: (item: T) => void): void {
     if (items) {
         if (items instanceof Array) {
             for (let i = 0; i < items.length; i++) {

@@ -5,12 +5,21 @@ import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 
-export type DataItem = {
+export type DataItemNavigation<T> =
+    & {
+        [K in keyof T]: T[K];
+    }
+    & {
+        children?: DataItemNavigation<T>[];
+    };
+
+export type DataItemCore = {
     id: string;
     name: string;
-    icon?: LucideIconType,
-    children?: DataItem[];
+    icon?: LucideIconType;
 };
+
+export type DataItem = DataItemNavigation<DataItemCore>;
 
 type TreeProps = {
     data: DataItem[] | DataItem,

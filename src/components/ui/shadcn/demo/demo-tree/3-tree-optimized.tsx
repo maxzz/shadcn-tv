@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { proxy } from "valtio";
-import { Tree, DataItemWState, DataItem, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimiized-rerenders";
+import { Tree, DataItemWState, DataItem, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimized";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../../shared-styles";

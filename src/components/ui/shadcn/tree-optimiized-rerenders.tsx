@@ -12,11 +12,15 @@ export type TreeDataItem = {
     children?: TreeDataItem[];
 };
 
-export type TreeDataItemState =
-    & TreeDataItem
-    & {
+export type TreeItemState = {
+    state: {
         selected: boolean;
     };
+};
+
+export type TreeDataItemState =
+    & TreeDataItem
+    & TreeItemState;
 
 type TreeProps = {
     data: TreeDataItem[] | TreeDataItem,

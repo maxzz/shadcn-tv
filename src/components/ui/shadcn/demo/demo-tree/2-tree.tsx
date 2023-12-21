@@ -5,7 +5,7 @@ import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../../shared-styles";
 import { data } from "./1-tree-data";
 
-const initialItemId = "f12";
+const initialItemId = "6.1.2";
 
 export function DemoTree() {
     const [content, setContent] = useState(() => findTreeItemById(data, initialItemId)?.name || "No content selected");

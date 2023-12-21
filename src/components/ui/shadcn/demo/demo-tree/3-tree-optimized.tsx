@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tree, TreeDataItem, TreeDataItemState, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimiized-rerenders";
+import { Tree, TreeDataItem, TreeDataItemState, TreeDataItemWithoutState, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree-optimiized-rerenders";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "../../../shared-styles";
@@ -8,22 +8,13 @@ import { proxy } from "valtio";
 
 const initialItemId = "f12";
 
-function duplicateTree(data: TreeDataItem[]): TreeDataItem[] {
-    return data.map((item) => {
-        return {
-            ...item,
-            children: item.children ? duplicateTree(item.children) : undefined,
-        };
-    });
-}
-
-function addTreeItemsState(data: TreeDataItem[]): TreeDataItem[] {
+function addStateToTreeItems(data: TreeDataItemWithoutState[]): TreeDataItemState[] {
     const newTree = duplicateTree(data);
     walkItems(newTree, (item) => (item as TreeDataItemState).state = proxy({ selected: false }));
-    return newTree;
+    return newTree as TreeDataItemState[];
 }
 
-const dataWithState = addTreeItemsState(data);
+const dataWithState = addStateToTreeItems(data);
 
 export function DemoTreeOptimized() {
     const [content, setContent] = useState(() => findTreeItemById(data, initialItemId)?.name || "No content selected");

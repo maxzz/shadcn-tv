@@ -5,27 +5,46 @@ import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 
-export type TreeDataItem = {
+export type TreeDataItem<T> = {
     id: string;
     name: string;
     icon?: LucideIconType,
-    children?: TreeDataItem[];
+    state: T;
+    children?: TreeDataItem<T>[];
 };
 
 export type TreeItemState = {
-    state: {
-        selected: boolean;
-    };
+    selected: boolean;
 };
 
-export type TreeDataItemState =
-    & TreeDataItem
-    & TreeItemState;
+export type TreeDataItemState = TreeDataItem<TreeItemState>;
+
+//export type TreeDataItemStateWithChildren = TreeDataItemState & { children: TreeDataItemStateWithChildren[] };
+// export type TreeDataItemStateWithChildren = Omit<TreeDataItemState, 'state'>;
+// export type TreeDataItemWithoutState = Omit<TreeDataItem<undefined>, 'state'>;
+export type TreeDataItemWithoutState = TreeDataItem<undefined>;
+
+// export type TreeDataItem<T> = {
+//     id: string;
+//     name: string;
+//     icon?: LucideIconType,
+//     children?: T[];
+// };
+
+// export type TreeItemState = {
+//     state: {
+//         selected: boolean;
+//     };
+// };
+
+// export type TreeDataItemState =
+//     & TreeDataItem<TreeDataItemState>
+//     & TreeItemState;
 
 type TreeProps = {
-    data: TreeDataItem[] | TreeDataItem,
+    data: TreeDataItemState[] | TreeDataItemState,
     initialSlelectedItemId?: string,
-    onSelectChange?: (item: TreeDataItem | undefined) => void,
+    onSelectChange?: (item: TreeDataItemState | undefined) => void,
     expandAll?: boolean,
     iconFolder?: LucideIconType,
     iconItem?: LucideIconType;
@@ -42,7 +61,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         const [selectedItemId, setSelectedItemId] = useState(initialSlelectedItemId);
 
         const handleSelectChange = useCallback(
-            (item: TreeDataItem | undefined) => {
+            (item: TreeDataItemState | undefined) => {
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
@@ -82,7 +101,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
     }
 );
 
-function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+function collectExpandedItemIds(data: TreeDataItemState[] | TreeDataItemState, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
     const rv: string[] = [];
 
     if (initialSlelectedItemId) {
@@ -91,7 +110,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
 
     return rv;
 
-    function walkTreeItems(items: TreeDataItem[] | TreeDataItem, targetId: string) { // Returns true if item expanded
+    function walkTreeItems(items: TreeDataItemState[] | TreeDataItemState, targetId: string) { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -115,7 +134,7 @@ function collectExpandedItemIds(data: TreeDataItem[] | TreeDataItem, initialSlel
     }
 }
 
-export function walkItems(items: TreeDataItem[] | TreeDataItem, cb: (item: TreeDataItem) => void) {
+export function walkItems<T extends TreeDataItemWithoutState>(items: T[] | T | undefined, cb: (item: T) => void) {
     if (items) {
         if (items instanceof Array) {
             for (let i = 0; i < items.length; i++) {
@@ -128,7 +147,16 @@ export function walkItems(items: TreeDataItem[] | TreeDataItem, cb: (item: TreeD
     }
 }
 
-export function findTreeItemById(items: TreeDataItem[] | TreeDataItem | undefined | null, id: string | undefined): TreeDataItem | undefined {
+export function duplicateTree<T extends TreeDataItemWithoutState>(data: T[]): T[] {
+    return data.map((item) => {
+        return {
+            ...item,
+            children: item.children ? duplicateTree(item.children) : undefined,
+        };
+    });
+}
+
+export function findTreeItemById(items: TreeDataItemState[] | TreeDataItemState | undefined | null, id: string | undefined): TreeDataItemState | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {
@@ -192,7 +220,7 @@ type TreeItemProps =
     & TreeProps
     & {
         selectedItemId?: string,
-        handleSelectChange: (item: TreeDataItem | undefined) => void,
+        handleSelectChange: (item: TreeDataItemState | undefined) => void,
         expandedItemIds: string[],
         FolderIcon?: LucideIconType,
         ItemIcon?: LucideIconType;
@@ -305,7 +333,7 @@ before:border-l-accent-foreground/50 \
 ";
 const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: TreeDataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: TreeDataItemState, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>

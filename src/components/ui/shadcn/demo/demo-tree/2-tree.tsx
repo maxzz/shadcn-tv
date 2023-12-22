@@ -16,8 +16,8 @@ export function DemoTree() {
                 className={`shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md ${inputFocusClasses}`}
                 initialSelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}
-                iconFolder={IconFolder}
-                iconItem={IconWorkflow}
+                IconForFolder={IconFolder}
+                IconForItem={IconWorkflow}
             />
 
             <div className={classNames("flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>

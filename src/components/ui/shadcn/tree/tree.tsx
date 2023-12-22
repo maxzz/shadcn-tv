@@ -10,16 +10,17 @@ import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leaf
 
 type TreeProps = {
     data: DataItem[] | DataItem;
-    initialSelectedItemId?: string;
+
     onSelectChange?: (item: DataItem | undefined) => void;
+    initialSelectedItemId?: string;
     expandAll?: boolean;
 
-    iconFolder?: LucideIconType;
-    iconItem?: LucideIconType;
+    IconForFolder?: LucideIconType;
+    IconForItem?: LucideIconType;
 };
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSelectedItemId, onSelectChange, expandAll, iconFolder, iconItem, className, ...rest }, ref) => {
+    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = useState(initialSelectedItemId);
 
         const handleSelectChange = useCallback(
@@ -52,8 +53,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                             selectedItemId={selectedItemId}
                             handleSelectChange={handleSelectChange}
                             expandedItemIds={expandedItemIds}
-                            IconForFolder={iconFolder}
-                            IconForItem={iconItem}
+                            IconForFolder={IconForFolder}
+                            IconForItem={IconForItem}
                             {...rest}
                         />
                     </div>
@@ -64,14 +65,11 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 );
 
 type TreeItemProps = Prettify<
-    & Pick<TreeProps, 'data'>
+    & Pick<TreeProps, 'data' | 'IconForFolder' | 'IconForItem'>
     & {
         selectedItemId?: string,
         handleSelectChange: (item: DataItem | undefined) => void,
         expandedItemIds: string[],
-
-        IconForFolder?: LucideIconType,
-        IconForItem?: LucideIconType;
     }>;
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(

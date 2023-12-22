@@ -19,12 +19,13 @@ export type DataItemWState = DataItemNavigation<DataItemCore & ItemState>;
 
 type TreeProps = {
     data: DataItemWState[] | DataItemWState;
-    initialSelectedItemId?: string;
+
     onSelectChange?: (item: DataItemWState | undefined) => void;
+    initialSelectedItemId?: string;
     expandAll?: boolean;
 
-    iconFolder?: LucideIconType;
-    iconItem?: LucideIconType;
+    IconForFolder?: LucideIconType;
+    IconForItem?: LucideIconType;
 };
 
 type TreeState = {
@@ -32,7 +33,7 @@ type TreeState = {
 };
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSelectedItemId, onSelectChange, expandAll, iconFolder, iconItem, className, ...rest }, ref) => {
+    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = useState(initialSelectedItemId);
 
         const [state] = useState(() => {
@@ -72,8 +73,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                             selectedItemId={selectedItemId}
                             handleSelectChange={handleSelectChange}
                             expandedItemIds={expandedItemIds}
-                            IconForFolder={iconFolder}
-                            IconForItem={iconItem}
+                            IconForFolder={IconForFolder}
+                            IconForItem={IconForItem}
                             {...rest}
                         />
                     </div>
@@ -84,14 +85,11 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 );
 
 type TreeItemProps = Prettify<
-    & Pick<TreeProps, 'data'>
+    & Pick<TreeProps, 'data' | 'IconForFolder' | 'IconForItem'>
     & {
         selectedItemId?: string,
         handleSelectChange: (item: DataItemWState | undefined) => void,
         expandedItemIds: string[],
-
-        IconForFolder?: LucideIconType,
-        IconForItem?: LucideIconType;
     }>;
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(

@@ -23,7 +23,7 @@ export function DemoTreeOptimized() {
             <Tree
                 data={dataWithState}
                 className={`shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md ${inputFocusClasses}`}
-                initialSlelectedItemId={initialItemId}
+                initialSelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}
                 iconFolder={IconFolder}
                 iconItem={IconWorkflow}

@@ -7,6 +7,7 @@ import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
 import { DataItemNavigation, DataItemCore, DataItemNav, TypeTreeFolder, TypeTreeFolderTrigger } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
+import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
 
 export type ItemState = {
     state: {
@@ -93,74 +94,51 @@ type TreeItemProps = Prettify<
         IconForItem?: LucideIconType;
     }>;
 
-const treeItemBaseClasses = "\
-px-2 \
-before:absolute \
-before:left-0 \
-before:w-full \
-before:h-[1.75rem] \
-before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
-before:-z-10 \
-";
-const treeItemSelectedClasses = "\
-text-accent-foreground \
-dark:before:border-0 \
-before:bg-accent \
-before:opacity-100 \
-before:border-l-2 \
-before:border-l-accent-foreground/50 \
-";
-const treeItemIconClasses = "h-4 w-4 shrink-0 mr-2 text-accent-foreground/50";
-
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
     ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, ...rest }, ref) => {
         return (
             <div ref={ref} role="tree" className={className} {...rest}>
                 <ul>
                     {data instanceof Array
-                        ? (
-                            data.map(
-                                (item) => (
-                                    <li key={item.id}>
-                                        {item.children
-                                            ? (
-                                                <A.Root type="multiple" defaultValue={expandedItemIds}>
-                                                    <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
-                                                        <TreeItemTrigger
-                                                            className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
-                                                            onClick={() => handleSelectChange(item)}
-                                                            data-tree-folder-trigger={TypeTreeFolderTrigger}
-                                                        >
-                                                            {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
-                                                            {!item.icon && IconForFolder && <IconForFolder className={treeItemIconClasses} aria-hidden="true" />}
-                                                            <span className="text-sm truncate">{item.name}</span>
-                                                        </TreeItemTrigger>
-
-                                                        <TreeItemContent className="pl-6">
-                                                            <TreeItem
-                                                                data={item.children}
-                                                                selectedItemId={selectedItemId}
-                                                                handleSelectChange={handleSelectChange}
-                                                                expandedItemIds={expandedItemIds}
-                                                                IconForFolder={IconForFolder}
-                                                                IconForItem={IconForItem}
-                                                            />
-                                                        </TreeItemContent>
-                                                    </A.Item>
-                                                </A.Root>
-                                            ) : (
-                                                <Leaf
-                                                    item={item}
-                                                    isSelected={selectedItemId === item.id}
+                        ? (data.map((item) => (
+                            <li key={item.id}>
+                                {item.children
+                                    ? (
+                                        <A.Root type="multiple" defaultValue={expandedItemIds}>
+                                            <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
+                                                <TreeItemTrigger
+                                                    className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
                                                     onClick={() => handleSelectChange(item)}
-                                                    Icon={IconForItem}
-                                                    data-tree-id={item.id}
-                                                />
-                                            )}
-                                    </li>
-                                )
-                            )
-                        )
+                                                    data-tree-folder-trigger={TypeTreeFolderTrigger}
+                                                >
+                                                    {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
+                                                    {!item.icon && IconForFolder && <IconForFolder className={treeItemIconClasses} aria-hidden="true" />}
+                                                    <span className="text-sm truncate">{item.name}</span>
+                                                </TreeItemTrigger>
+
+                                                <TreeItemContent className="pl-6">
+                                                    <TreeItem
+                                                        data={item.children}
+                                                        selectedItemId={selectedItemId}
+                                                        handleSelectChange={handleSelectChange}
+                                                        expandedItemIds={expandedItemIds}
+                                                        IconForFolder={IconForFolder}
+                                                        IconForItem={IconForItem}
+                                                    />
+                                                </TreeItemContent>
+                                            </A.Item>
+                                        </A.Root>
+                                    ) : (
+                                        <Leaf
+                                            item={item}
+                                            isSelected={selectedItemId === item.id}
+                                            onClick={() => handleSelectChange(item)}
+                                            Icon={IconForItem}
+                                            data-tree-id={item.id}
+                                        />
+                                    )}
+                            </li>
+                        )))
                         : (
                             <li>
                                 <Leaf
@@ -177,30 +155,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
         );
     }
 );
-
-const leafBaseClasses = "\
-px-2 py-1 r1elative \
-\
-before:absolute \
-before:left-0 \
-before:right-1 \
-before:w-full \
-before:h-[1.75rem] \
-before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
-before:-z-10 \
-\
-cursor-pointer \
-flex items-center \
-";
-const leafSelectedClasses = "\
-text-accent-foreground \
-dark:before:border-0 \
-before:bg-accent \
-before:opacity-100 \
-before:border-l-2 \
-before:border-l-accent-foreground/50 \
-";
-const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
 const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItemWState, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {

@@ -20,6 +20,7 @@ export type DataItemCore = {
 };
 
 export type DataItem = DataItemNavigation<DataItemCore>;
+export type DataItemNav = DataItemNavigation<any>;
 
 type TreeProps = {
     data: DataItem[] | DataItem;
@@ -82,7 +83,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
     }
 );
 
-function collectExpandedItemIds(data: DataItem[] | DataItem, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
     const rv: string[] = [];
 
     if (initialSlelectedItemId) {
@@ -91,7 +92,7 @@ function collectExpandedItemIds(data: DataItem[] | DataItem, initialSlelectedIte
 
     return rv;
 
-    function walkTreeItems(items: DataItem[] | DataItem, targetId: string): true | undefined { // Returns true if item expanded
+    function walkTreeItems(items: DataItemNav[] | DataItemNav, targetId: string): true | undefined { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -115,7 +116,7 @@ function collectExpandedItemIds(data: DataItem[] | DataItem, initialSlelectedIte
     }
 }
 
-export function findTreeItemById(items: DataItem[] | DataItem | undefined | null, id: string | undefined): DataItem | undefined {
+export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefined | null, id: string | undefined): T | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {
@@ -175,15 +176,16 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
     }
 }
 
-type TreeItemProps =
-    & Omit<TreeProps, 'iconFolder' | 'iconItem'>
+type TreeItemProps = Prettify<
+    & Pick<TreeProps, 'data'>
     & {
         selectedItemId?: string,
         handleSelectChange: (item: DataItem | undefined) => void,
         expandedItemIds: string[],
+
         IconForFolder?: LucideIconType,
         IconForItem?: LucideIconType;
-    };
+    }>;
 
 const treeItemBaseClasses = "\
 px-2 \

@@ -102,7 +102,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
     }
 );
 
-function collectExpandedItemIds(data: DataItemWState[] | DataItemWState, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
     const rv: string[] = [];
 
     if (initialSlelectedItemId) {
@@ -111,7 +111,7 @@ function collectExpandedItemIds(data: DataItemWState[] | DataItemWState, initial
 
     return rv;
 
-    function walkTreeItems(items: DataItemWState[] | DataItemWState, targetId: string): true | undefined { // Returns true if item expanded
+    function walkTreeItems(items: DataItemNav[] | DataItemNav, targetId: string): true | undefined { // Returns true if item expanded
         if (items) {
             if (items instanceof Array) {
                 // eslint-disable-next-line @typescript-eslint/prefer-for-of
@@ -217,15 +217,16 @@ function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selec
     }
 }
 
-type TreeItemProps =
+type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data'>
     & {
         selectedItemId?: string,
         handleSelectChange: (item: DataItemWState | undefined) => void,
         expandedItemIds: string[],
+
         IconForFolder?: LucideIconType,
         IconForItem?: LucideIconType;
-    };
+    }>;
 
 const treeItemBaseClasses = "\
 px-2 \

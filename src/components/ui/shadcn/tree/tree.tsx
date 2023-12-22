@@ -2,9 +2,9 @@ import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCa
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
-import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { cn } from "@/utils";
-import { DataItem, TypeTreeFolder, TypeTreeFolderTrigger } from "./shared/types";
+import { DataItem, TreenIconType, TypeTreeFolder, TypeTreeFolderTrigger } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
 
@@ -15,13 +15,13 @@ type TreeProps = {
     initialSelectedItemId?: string;
     expandAll?: boolean;
 
-    IconForFolder?: LucideIconType;
-    IconForItem?: LucideIconType;
+    IconForFolder?: TreenIconType;
+    IconForItem?: TreenIconType;
 };
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
-        const [selectedItemId, setSelectedItemId] = useState(initialSelectedItemId);
+        const [selectedItemId, setSelectedItemId] = useState<string | undefined>(initialSelectedItemId);
 
         const handleSelectChange = useCallback(
             (item: DataItem | undefined) => {
@@ -89,9 +89,14 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                     onClick={() => handleSelectChange(item)}
                                                     data-tree-folder-trigger={TypeTreeFolderTrigger}
                                                 >
-                                                    {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
+                                                    <TreeIconAndText item={item} Icon={IconForFolder} classes={treeItemIconClasses} />
+
+                                                    {/* {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
                                                     {!item.icon && IconForFolder && <IconForFolder className={treeItemIconClasses} aria-hidden="true" />}
-                                                    <span className="text-sm truncate">{item.name}</span>
+
+                                                    <span className="text-sm truncate">
+                                                        {item.name}
+                                                    </span> */}
                                                 </TreeItemTrigger>
 
                                                 <TreeItemContent className="pl-6">
@@ -134,17 +139,30 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
     }
 );
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
+function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
+    return (<>
+        {item.icon && <item.icon className={classes} aria-hidden="true" />}
+        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
+
+        <span className="flex-grow text-sm truncate">
+            {item.name}
+        </span>
+    </>);
+}
+
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: TreenIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>
 
-                {item.icon && <item.icon className={leafIconClasses} aria-hidden="true" />}
+                <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} />
+
+                {/* {item.icon && <item.icon className={leafIconClasses} aria-hidden="true" />}
                 {!item.icon && Icon && <Icon className={leafIconClasses} aria-hidden="true" />}
 
                 <span className="flex-grow text-sm truncate">
                     {item.name}
-                </span>
+                </span> */}
             </div>
         );
     }

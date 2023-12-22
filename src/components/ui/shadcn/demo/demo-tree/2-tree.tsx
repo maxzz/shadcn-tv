@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { classNames } from "@/utils";
 import { inputFocusClasses } from "@/components/ui/shared-styles";
-import { Tree, findTreeItemById } from "@/components/ui/shadcn/tree/tree";
+import { findTreeItemById } from "@/components/ui/shadcn/tree";
+import { Tree } from "@/components/ui/shadcn/tree/tree";
 import { data } from "./1-tree-data";
-
 const initialItemId = "6.1.2";
 
 export function DemoTree() {

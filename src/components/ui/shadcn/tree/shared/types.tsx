@@ -1,4 +1,4 @@
-import { type LucideIcon as LucideIconType } from "lucide-react";
+import { type LucideIcon as LucideIconType } from "lucide-react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
 
 export type DataItemNavigation<T> =
     & {

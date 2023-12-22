@@ -1,12 +1,12 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useRef, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import { proxy } from "valtio";
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
-import { DataItemNavigation, DataItemCore, DataItemNav, TypeTreeFolder, TypeTreeFolderTrigger } from "./types";
-import { findTreeItemById, getNextId } from "./utils";
+import { DataItemNavigation, DataItemCore, DataItemNav, TypeTreeFolder, TypeTreeFolderTrigger } from "./shared/types";
+import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 
 export type ItemState = {
     state: {
@@ -81,39 +81,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         );
     }
 );
-
-function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
-    const rv: string[] = [];
-
-    if (initialSlelectedItemId) {
-        walkTreeItems(data, initialSlelectedItemId);
-    }
-
-    return rv;
-
-    function walkTreeItems(items: DataItemNav[] | DataItemNav, targetId: string): true | undefined { // Returns true if item expanded
-        if (items) {
-            if (items instanceof Array) {
-                // eslint-disable-next-line @typescript-eslint/prefer-for-of
-                for (let i = 0; i < items.length; i++) {
-                    rv.push(items[i].id);
-
-                    if (walkTreeItems(items[i], targetId) && !expandAll) {
-                        return true;
-                    }
-
-                    if (!expandAll) {
-                        rv.pop();
-                    }
-                }
-            } else if (!expandAll && items.id === targetId) {
-                return true;
-            } else if (items.children) {
-                return walkTreeItems(items.children, targetId);
-            }
-        }
-    }
-}
 
 type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data'>

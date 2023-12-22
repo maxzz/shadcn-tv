@@ -40,6 +40,39 @@ export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefin
     }
 }
 
+export function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
+    const rv: string[] = [];
+
+    if (initialSlelectedItemId) {
+        walkTreeItems(data, initialSlelectedItemId);
+    }
+
+    return rv;
+
+    function walkTreeItems(items: DataItemNav[] | DataItemNav, targetId: string): true | undefined { // Returns true if item expanded
+        if (items) {
+            if (items instanceof Array) {
+                // eslint-disable-next-line @typescript-eslint/prefer-for-of
+                for (let i = 0; i < items.length; i++) {
+                    rv.push(items[i].id);
+
+                    if (walkTreeItems(items[i], targetId) && !expandAll) {
+                        return true;
+                    }
+
+                    if (!expandAll) {
+                        rv.pop();
+                    }
+                }
+            } else if (!expandAll && items.id === targetId) {
+                return true;
+            } else if (items.children) {
+                return walkTreeItems(items.children, targetId);
+            }
+        }
+    }
+}
+
 export function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
     const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
     if (!keys.includes(e.key)) {

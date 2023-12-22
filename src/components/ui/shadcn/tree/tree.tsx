@@ -1,68 +1,28 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, KeyboardEvent, useCallback, useMemo, useRef, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useRef, useState } from "react"; // https://github.com/shadcn-ui/ui/issues/355#issuecomment-1703767574 'G: shadcn tree'
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight, type LucideIcon as LucideIconType } from "lucide-react";
 import { cn } from "@/utils";
-import { proxy } from "valtio";
-
-export type DataItemNavigation<T> =
-    & {
-        [K in keyof T]: T[K];
-    }
-    & {
-        children?: DataItemNavigation<T>[];
-    };
-
-export type DataItemCore = {
-    id: string;
-    name: string;
-    icon?: LucideIconType;
-};
-
-export type ItemState = {
-    state: {
-        selected: boolean;
-    };
-};
-
-export type DataItem = DataItemNavigation<DataItemCore>;
-export type DataItemNav = DataItemNavigation<any>;
-export type DataItemWState = DataItemNavigation<DataItemCore & ItemState>;
+import { DataItem, DataItemNav, TypeTreeFolder, TypeTreeFolderTrigger } from "./types";
+import { getNextId } from "./utils";
 
 type TreeProps = {
-    data: DataItemWState[] | DataItemWState;
+    data: DataItem[] | DataItem;
     initialSelectedItemId?: string;
-    onSelectChange?: (item: DataItemWState | undefined) => void;
+    onSelectChange?: (item: DataItem | undefined) => void;
     expandAll?: boolean;
 
     iconFolder?: LucideIconType;
     iconItem?: LucideIconType;
 };
 
-type TreeState = {
-    selectedId: string | undefined;
-};
-
-const AttrTreeId = "data-tree-id";
-const AttrTreeFolder = "data-tree-folder";
-const AttrTreeFolderTrigger = "data-tree-folder-trigger";
-const TypeTreeFolder = "folder";
-const TypeTreeFolderTrigger = "folder-trigger";
-
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSelectedItemId, onSelectChange, expandAll, iconFolder, iconItem, className, ...rest }, ref) => {
         const [selectedItemId, setSelectedItemId] = useState(initialSelectedItemId);
 
-        const [state] = useState(() => {
-            const uiState = proxy<TreeState>({
-                selectedId: undefined,
-            });
-            return uiState;
-        });
-
         const handleSelectChange = useCallback(
-            (item: DataItemWState | undefined) => {
+            (item: DataItem | undefined) => {
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
@@ -135,28 +95,6 @@ function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initialSlelec
     }
 }
 
-export function walkItems<T extends DataItemNav>(items: T[] | T | undefined, cb: (item: T) => void): void {
-    if (items) {
-        if (items instanceof Array) {
-            for (let i = 0; i < items.length; i++) {
-                cb(items[i]);
-                walkItems(items[i], cb);
-            }
-        } else if (items.children) {
-            walkItems(items.children, cb);
-        }
-    }
-}
-
-export function duplicateTree<T extends DataItemNav>(data: T[]): T[] {
-    return data.map((item) => {
-        return {
-            ...item,
-            children: item.children ? duplicateTree(item.children) : undefined,
-        };
-    });
-}
-
 export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefined | null, id: string | undefined): T | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
@@ -174,54 +112,11 @@ export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefin
     }
 }
 
-function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
-    const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
-    if (!keys.includes(e.key)) {
-        return;
-    }
-
-    // Get the id/el of visible and expanded tree items.
-    const expandedNow = [...root.querySelectorAll<HTMLDivElement>(`[${AttrTreeId}]`)].map((el) => ({ id: el.dataset.treeId!, el }));
-    if (!expandedNow.length) {
-        return;
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!selectedItemId) {
-        return expandedNow[0].id;
-    }
-
-    const selectedIdx = expandedNow.findIndex((item) => item.id === selectedItemId);
-    if (selectedIdx !== -1) {
-        switch (e.key) {
-            case "ArrowDown":
-            case "ArrowUp": {
-                const nextIndex = e.key === "ArrowDown" ? selectedIdx + 1 : selectedIdx - 1;
-                if (nextIndex >= 0 && nextIndex < expandedNow.length) {
-                    return expandedNow[nextIndex].id;
-                }
-                break;
-            }
-            case "Enter": {
-                const isFolder = expandedNow[selectedIdx]?.el.dataset.state !== undefined;
-                isFolder && expandedNow[selectedIdx]?.el.querySelector<HTMLElement>(`[${AttrTreeFolderTrigger}]`)?.click();
-                break;
-            }
-            case "End":
-                return expandedNow[expandedNow.length - 1].id;
-            case "Home":
-                return expandedNow[0].id;
-        }
-    }
-}
-
 type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data'>
     & {
         selectedItemId?: string,
-        handleSelectChange: (item: DataItemWState | undefined) => void,
+        handleSelectChange: (item: DataItem | undefined) => void,
         expandedItemIds: string[],
 
         IconForFolder?: LucideIconType,
@@ -337,7 +232,7 @@ before:border-l-accent-foreground/50 \
 ";
 const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItemWState, isSelected?: boolean, Icon?: LucideIconType; }>(
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: LucideIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>

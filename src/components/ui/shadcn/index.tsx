@@ -30,7 +30,7 @@ export * from './skeleton';
 export * from './command';
 export * from './progress';
 export * from './calendar';
-export * from './tree';
+export * from './tree/tree';
 // export * from './tree-optimized';
 export * from './theme-toggle-switch';
 export * from '../nun/theme-provider';

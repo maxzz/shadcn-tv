@@ -1,4 +1,4 @@
-import { DataItem } from "../../tree";
+import { DataItem } from "@/components/ui/shadcn/tree";
 import { Layout as IconLayout } from "lucide-react";
 
 export const data: DataItem[] = [

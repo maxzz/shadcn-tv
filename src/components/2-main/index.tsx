@@ -34,9 +34,7 @@ function ConvertForm() {
 export function Section2_Main() {
     return (
         <ScrollArea className="p-4">
-        {/* <div className="p-4 overflow-overlay smallscroll"> */}
             <ConvertForm />
-        {/* </div> */}
         </ScrollArea>
     );
 }

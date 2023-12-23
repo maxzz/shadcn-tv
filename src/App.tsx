@@ -7,7 +7,7 @@ export function App() {
     return (<>
         <UIToaster />
 
-        <div className="h-screen grid grid-rows-[auto,1fr,auto] overflow-auto">
+        <div className="h-screen grid grid-rows-[auto,1fr,auto]">
             <Section0_Header />
             <Section2_Main />
             <Section3_Footer />

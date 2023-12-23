@@ -31,9 +31,12 @@ function ConvertForm() {
     );
 }
 
+//G: 'css comensate scrollbar horizontal shift'
+//https://stackoverflow.com/questions/9341465/prevent-a-centered-layout-from-shifting-its-position-when-scrollbar-appears
+//https://aykevl.nl/2014/09/fix-jumping-scrollbar
 export function Section2_Main() {
     return (
-        <div className="p-4 overflow-overlay smallscroll">
+        <div className="p-4 overflow-overlay smallscroll ml-[calc(100vw-100%)]">
             <ConvertForm />
         </div>
     );

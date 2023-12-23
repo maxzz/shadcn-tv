@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef, useCallback, useMemo, useRef, useState } from "react";
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, SyntheticEvent, forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
@@ -24,7 +24,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         const [selectedItemId, setSelectedItemId] = useState<string | undefined>(initialSelectedItemId);
 
         const handleSelectChange = useCallback(
-            (item: DataItem | undefined) => {
+            (event: SyntheticEvent<any>, item: DataItem | undefined) => {
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
@@ -42,7 +42,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 tabIndex={0}
                 onKeyDown={(e) => {
                     const nextId = getNextId(refRoot.current!, e, selectedItemId);
-                    nextId && handleSelectChange(findTreeItemById(data, nextId));
+                    nextId && handleSelectChange(e, findTreeItemById(data, nextId));
                 }}
             >
                 <ScrollArea style={{ width, height }}>
@@ -68,7 +68,7 @@ type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data' | 'IconForFolder' | 'IconForItem'>
     & {
         selectedItemId?: string,
-        handleSelectChange: (item: DataItem | undefined) => void,
+        handleSelectChange: (event: SyntheticEvent<any>, item: DataItem | undefined) => void,
         expandedItemIds: string[],
     }>;
 
@@ -86,7 +86,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                             <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
                                                 <TreeItemTrigger
                                                     className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
-                                                    onClick={() => handleSelectChange(item)}
+                                                    onClick={(e) => handleSelectChange(e, item)}
                                                     data-tree-folder-trigger={TypeTreeFolderTrigger}
                                                 >
                                                     <TreeIconAndText item={item} Icon={IconForFolder} classes={treeItemIconClasses} />
@@ -108,7 +108,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                         <Leaf
                                             item={item}
                                             isSelected={selectedItemId === item.id}
-                                            onClick={() => handleSelectChange(item)}
+                                            onClick={(e) => handleSelectChange(e, item)}
                                             Icon={IconForItem}
                                             data-tree-id={item.id}
                                         />
@@ -120,7 +120,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                 <Leaf
                                     item={data}
                                     isSelected={selectedItemId === data.id}
-                                    onClick={() => handleSelectChange(data)}
+                                    onClick={(e) => handleSelectChange(e, data)}
                                     Icon={IconForItem}
                                 />
                             </li>

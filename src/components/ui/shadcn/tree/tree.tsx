@@ -90,13 +90,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                     data-tree-folder-trigger={TypeTreeFolderTrigger}
                                                 >
                                                     <TreeIconAndText item={item} Icon={IconForFolder} classes={treeItemIconClasses} />
-
-                                                    {/* {item.icon && <item.icon className={treeItemIconClasses} aria-hidden="true" />}
-                                                    {!item.icon && IconForFolder && <IconForFolder className={treeItemIconClasses} aria-hidden="true" />}
-
-                                                    <span className="text-sm truncate">
-                                                        {item.name}
-                                                    </span> */}
                                                 </TreeItemTrigger>
 
                                                 <TreeItemContent className="pl-6">
@@ -154,15 +147,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
             <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>
-
                 <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} />
-
-                {/* {item.icon && <item.icon className={leafIconClasses} aria-hidden="true" />}
-                {!item.icon && Icon && <Icon className={leafIconClasses} aria-hidden="true" />}
-
-                <span className="flex-grow text-sm truncate">
-                    {item.name}
-                </span> */}
             </div>
         );
     }

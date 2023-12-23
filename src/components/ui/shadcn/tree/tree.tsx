@@ -25,6 +25,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 
         const handleSelectChange = useCallback(
             (event: SyntheticEvent<any>, item: DataItem | undefined) => {
+                event.stopPropagation();
                 setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [onSelectChange]
@@ -45,7 +46,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                     nextId && handleSelectChange(e, findTreeItemById(data, nextId));
                 }}
             >
-                <ScrollArea style={{ width, height }}>
+                <ScrollArea style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)}>
                     <div className="relative z-0 px-2 py-1">
                         <TreeItem
                             ref={ref}

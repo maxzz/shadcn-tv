@@ -42,6 +42,8 @@ export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefin
 
 export function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initialSlelectedItemId: string | undefined, expandAll: boolean | undefined): string[] {
     const rv: string[] = [];
+    console.log("-------------------collectExpandedItemIds", data);
+    
 
     if (initialSlelectedItemId) {
         walkTreeItems(data, initialSlelectedItemId);

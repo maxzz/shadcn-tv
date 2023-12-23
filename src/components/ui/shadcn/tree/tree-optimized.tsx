@@ -35,7 +35,7 @@ type TreeState = {
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
-        const [selectedItemId, setSelectedItemId] = useState<string | undefined>(initialSelectedItemId);
+        // const [selectedItemId, setSelectedItemId] = useState<string | undefined>(initialSelectedItemId);
 
         const [treeState] = useState(() => {
             const uiState = proxy<TreeState>({
@@ -70,6 +70,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         const refRoot = useRef<HTMLDivElement | null>(null);
         const { ref: refRootCb, width, height } = useResizeObserver();
 
+        console.log("Tree", data);
+
         return (
             <div
                 ref={(r) => { refRootCb(r); refRoot.current = r; }}
@@ -85,7 +87,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                         <TreeItem
                             ref={ref}
                             data={data}
-                            selectedItemId={selectedItemId}
+                            //selectedItemId={selectedItemId}
                             handleSelectChange={handleSelectChange}
                             expandedItemIds={expandedItemIds}
                             IconForFolder={IconForFolder}
@@ -104,13 +106,13 @@ type HandleSelectChange = (event: SyntheticEvent<any>, item: DataItemWState | un
 type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data' | 'IconForFolder' | 'IconForItem'>
     & {
-        selectedItemId?: string;
+        //selectedItemId?: string;
         handleSelectChange: HandleSelectChange;
         expandedItemIds: string[];
     }>;
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
-    ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, ...rest }, ref) => {
+    ({ className, data, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, ...rest }, ref) => {
         return (
             <div ref={ref} role="tree" className={className} {...rest}>
                 <ul>
@@ -135,7 +137,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                 <TreeItemContent className="pl-6">
                                                     <TreeItem
                                                         data={item.children}
-                                                        selectedItemId={selectedItemId}
+                                                        //selectedItemId={selectedItemId}
                                                         handleSelectChange={handleSelectChange}
                                                         expandedItemIds={expandedItemIds}
                                                         IconForFolder={IconForFolder}
@@ -195,7 +197,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
 const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; }>(
     ({ className, item, Icon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
-        console.log('Folder', item.name, selected);
+        // console.log('Folder', item.name, selected);
         
         return (
             <TreeItemTrigger

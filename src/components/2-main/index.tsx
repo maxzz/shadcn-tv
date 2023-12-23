@@ -2,7 +2,7 @@ import { FontInputTitleBar } from './1-top-row';
 import { DialogDemoWoTrigger } from '../ui/shadcn/demo/demo-dialog-wo-trigger';
 import { Showcases } from './9-showcases';
 import { showcases } from './9-showcases/cases';
-import { Button } from '@/components/ui/shadcn';
+import { Button, ScrollArea } from '@/components/ui/shadcn';
 
 function FontInput() {
     return (
@@ -33,8 +33,10 @@ function ConvertForm() {
 
 export function Section2_Main() {
     return (
-        <div className="p-4 overflow-overlay smallscroll">
+        <ScrollArea className="p-4">
+        {/* <div className="p-4 overflow-overlay smallscroll"> */}
             <ConvertForm />
-        </div>
+        {/* </div> */}
+        </ScrollArea>
     );
 }

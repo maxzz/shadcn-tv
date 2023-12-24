@@ -131,17 +131,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
     }
 );
 
-function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
-    return (<>
-        {item.icon && <item.icon className={classes} aria-hidden="true" />}
-        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
-
-        <span className="flex-grow text-sm truncate">
-            {item.name}
-        </span>
-    </>);
-}
-
 const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: TreenIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
@@ -205,3 +194,14 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
     )
 );
 FolderContent.displayName = 'Tree.Folder.Content';
+
+function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
+    return (<>
+        {item.icon && <item.icon className={classes} aria-hidden="true" />}
+        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
+
+        <span className="flex-grow text-sm truncate">
+            {item.name}
+        </span>
+    </>);
+}

@@ -1,14 +1,13 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, ReactNode, SyntheticEvent, forwardRef, useCallback, useMemo, useRef, useState } from "react";
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, SyntheticEvent, forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import { proxy, useSnapshot } from "valtio";
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/utils";
-import { DataItemNavigation, DataItemCore, DataItemNav, TypeTreeFolder, TypeTreeFolderTrigger, DataItem, TreenIconType } from "./shared/types";
+import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, DataItem, TreenIconType } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
-import { tr } from "date-fns/locale";
 
 export type ItemState = {
     state: {
@@ -35,7 +34,6 @@ type TreeState = {
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
-        // const [selectedItemId, setSelectedItemId] = useState<string | undefined>(initialSelectedItemId);
 
         const [treeState] = useState(() => {
             const uiState = proxy<TreeState>({
@@ -60,7 +58,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                     treeState.selectedId = undefined;
                 }
 
-                //setSelectedItemId(item?.id);
                 onSelectChange?.(item);
             }, [treeState, onSelectChange]
         );
@@ -69,8 +66,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 
         const refRoot = useRef<HTMLDivElement | null>(null);
         const { ref: refRootCb, width, height } = useResizeObserver();
-
-        console.log("Tree", data);
 
         return (
             <div
@@ -87,7 +82,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                         <TreeItem
                             ref={ref}
                             data={data}
-                            //selectedItemId={selectedItemId}
                             handleSelectChange={handleSelectChange}
                             expandedItemIds={expandedItemIds}
                             IconForFolder={IconForFolder}
@@ -106,7 +100,6 @@ type HandleSelectChange = (event: SyntheticEvent<any>, item: DataItemWState | un
 type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data' | 'IconForFolder' | 'IconForItem'>
     & {
-        //selectedItemId?: string;
         handleSelectChange: HandleSelectChange;
         expandedItemIds: string[];
     }>;
@@ -132,7 +125,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                 <FolderContent className="pl-6">
                                                     <TreeItem
                                                         data={item.children}
-                                                        //selectedItemId={selectedItemId}
                                                         handleSelectChange={handleSelectChange}
                                                         expandedItemIds={expandedItemIds}
                                                         IconForFolder={IconForFolder}
@@ -165,17 +157,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
         );
     }
 );
-
-function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
-    return (<>
-        {item.icon && <item.icon className={classes} aria-hidden="true" />}
-        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
-
-        <span className="flex-grow text-sm truncate">
-            {item.name}
-        </span>
-    </>);
-}
 
 const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItemWState, Icon?: TreenIconType; }>(
     ({ className, item, Icon, ...rest }, ref) => {
@@ -237,8 +218,21 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
             className={cn("text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down transition-all overflow-hidden", className)}
             {...rest}
         >
-            <div>{children}</div>
+            <div>
+                {children}
+            </div>
         </A.Content>
     )
 );
 FolderContent.displayName = 'Tree.Folder.Content';
+
+function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
+    return (<>
+        {item.icon && <item.icon className={classes} aria-hidden="true" />}
+        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
+
+        <span className="flex-grow text-sm truncate">
+            {item.name}
+        </span>
+    </>);
+}

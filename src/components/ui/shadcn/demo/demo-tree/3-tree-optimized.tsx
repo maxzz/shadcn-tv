@@ -18,7 +18,11 @@ function addStateToTreeItems(data: DataItem[]): DataItemWState[] {
 const dataWithState = addStateToTreeItems(data);
 
 export function DemoTreeOptimized() {
-    const [content, setContent] = useState(() => findTreeItemById(data, initialItemId)?.name || "No content selected");
+    const [content, setContent] = useState(() => {
+        const initialItem = findTreeItemById(dataWithState, initialItemId);
+        initialItem && (initialItem.state.selected = true);
+        return initialItem?.name || "No content selected";
+    });
 
     const TreeMemo = useMemo(
         () => {
@@ -36,7 +40,7 @@ export function DemoTreeOptimized() {
     return (
         <div className="m-0.5 min-h-full flex">
             {TreeMemo}
-            
+
             <div className={classNames("flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
                 {content}
             </div>

@@ -20,7 +20,6 @@ const dataWithState = addStateToTreeItems(data);
 export function DemoTreeOptimized() {
     const [content, setContent] = useState(() => {
         const initialItem = findTreeItemById(dataWithState, initialItemId);
-        initialItem && (initialItem.state.selected = true);
         return initialItem?.name || "No content selected";
     });
 

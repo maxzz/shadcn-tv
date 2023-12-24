@@ -42,6 +42,22 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
             return uiState;
         });
 
+        const expandedItemIds = useMemo(
+            () => {
+                const rv = collectExpandedItemIds(data, initialSelectedItemId, expandAll);
+
+                const selectedNow = findTreeItemById(data, treeState.selectedId);
+                selectedNow && (selectedNow.state.selected = false);
+
+                const last = findTreeItemById(data, rv[rv.length - 1]);
+                if (last) {
+                    last.state.selected = true;
+                    treeState.selectedId = last.id;
+                }
+                return rv;
+            }, [data, initialSelectedItemId, expandAll]
+        );
+
         const handleSelectChange = useCallback(
             (event: SyntheticEvent<any>, item: DataItemWState | undefined) => {
                 event.stopPropagation();
@@ -60,20 +76,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 
                 onSelectChange?.(item);
             }, [treeState, onSelectChange]
-        );
-
-        const expandedItemIds = useMemo(
-            () => {
-                const rv = collectExpandedItemIds(data, initialSelectedItemId, expandAll);
-
-                const last = findTreeItemById(data, rv[rv.length - 1]);
-                if (last && 'state' in last) {
-                    last.state.selected = true;
-                    treeState.selectedId = last.id;
-                }
-            
-                return rv;
-            }, [data, initialSelectedItemId, expandAll]
         );
 
         const refRoot = useRef<HTMLDivElement | null>(null);

@@ -46,8 +46,6 @@ export function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initia
     if (initialSlelectedItemId) {
         walkTreeItems(data, initialSlelectedItemId);
     }
-    // console.log('collectExpandedItemIds1', rv);
-    // console.log('collectExpandedItemIds2', data);
 
     return rv;
 
@@ -59,10 +57,7 @@ export function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initia
                     rv.push(items[i].id);
 
                     if (walkTreeItems(items[i], targetId) && !expandAll) {
-                        // if ('state' in items[i]) {
-                        //     items[i].state.expanded = true;
-                        // }
-                        return true;
+                        return true; // true since the item is expanded.
                     }
 
                     if (!expandAll) {

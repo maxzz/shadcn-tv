@@ -33,73 +33,36 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
 
     const container = React.useRef<HTMLDivElement | null>(null);
 
-    const onMouseDown = React.useCallback(function (event: React.MouseEvent) {
+    const onMouseDown = React.useCallback((event: React.MouseEvent) => {
         if (!container.current) {
             return;
         }
-        console.log('onMouseDown', position);
 
-        event.preventDefault(); // This is needed to prevent text selection in Safari
+        event.preventDefault(); // This will prevent text selection in Safari.
 
         const { current: containerElm } = container;
 
         const rect = containerElm.getBoundingClientRect();
-        // const offset = vertical
-        //     ? containerElm.offsetTop + containerOfs.y
-        //     : containerElm.offsetLeft + containerOfs.x;
+        const offset = vertical ? window.scrollY + rect.y : window.scrollX + rect.x;
+        const size = vertical ? containerElm.offsetHeight : containerElm.offsetWidth;
 
-        const ofs = (el: HTMLElement) => {
-            const rect = el.getBoundingClientRect();
-            return {
-                x: rect.left + window.scrollX,
-                y: rect.top  + window.scrollY,
-            };
-        };
-
-        // const getOffsetRight = (e) => {
-        //     let left = e.offsetWidth + e.offsetLeft;
-        //     function traverse(eRef) {
-        //         eRef = eRef.offsetParent; // `.offsetParent` is faster than `.parentElement`
-        //         if (eRef) {
-        //             left += eRef.offsetLeft;
-        //             traverse(eRef);
-        //         }
-        //     }
-        //     traverse(e);
-        //     return document.scrollWidth - left;
-        // };
-
-        // const offset = vertical
-        //     ? containerElm.offsetTop + rect.y
-        //     : containerElm.offsetLeft + rect.x;
-
-        const offset = vertical
-            ? window.scrollY + rect.y
-            : window.scrollX + rect.x;
-
-        const size = vertical
-            ? containerElm.offsetHeight
-            : containerElm.offsetWidth;
-
-        const moveHandler = (event: MouseEvent) => {
+        const onMoveMove = (event: MouseEvent) => {
             event.preventDefault();
 
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
             const rounded = +withDigits(Math.min(Math.max(minPersent, newPosition), maxPersent));
             // Using 99% as the max value prevents the divider from disappearing
             setPosition(rounded);
-
-            console.log(`onMouseDown position=${position} newPosition=${newPosition} rounded=${rounded}`);
         };
 
-        const upHandler = () => {
-            document.removeEventListener('mousemove', moveHandler);
-            document.removeEventListener('mouseup', upHandler);
+        const onMouseUp = () => {
+            document.removeEventListener('mousemove', onMoveMove);
+            document.removeEventListener('mouseup', onMouseUp);
             onResize?.(position);
         };
 
-        document.addEventListener('mousemove', moveHandler);
-        document.addEventListener('mouseup', upHandler);
+        document.addEventListener('mousemove', onMoveMove);
+        document.addEventListener('mouseup', onMouseUp);
     }, [vertical, position, container]);
 
     let childrenArr = React.Children.toArray(children);

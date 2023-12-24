@@ -85,13 +85,20 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                     ? (
                                         <A.Root type="multiple" defaultValue={expandedItemIds}>
                                             <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
-                                                <TreeItemTrigger
+                                                {/* <TreeItemTrigger
                                                     className={cn(treeItemBaseClasses, selectedItemId === item.id && treeItemSelectedClasses)}
                                                     onClick={(e) => handleSelectChange(e, item)}
                                                     data-tree-folder-trigger={TypeTreeFolderTrigger}
                                                 >
                                                     <TreeIconAndText item={item} Icon={IconForFolder} classes={treeItemIconClasses} />
-                                                </TreeItemTrigger>
+                                                </TreeItemTrigger> */}
+
+                                                <Folder
+                                                    item={item}
+                                                    isSelected={selectedItemId === item.id}
+                                                    Icon={IconForFolder}
+                                                    onClick={(e) => handleSelectChange(e, item)}
+                                                />
 
                                                 <TreeItemContent className="pl-6">
                                                     <TreeItem
@@ -123,6 +130,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                     isSelected={selectedItemId === data.id}
                                     onClick={(e) => handleSelectChange(e, data)}
                                     Icon={IconForItem}
+                                    data-tree-id={data.id}
                                 />
                             </li>
                         )
@@ -147,9 +155,28 @@ function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: Treen
 const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: TreenIconType; }>(
     ({ className, item, isSelected, Icon, ...rest }, ref) => {
         return (
-            <div ref={ref} className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)} {...rest}>
+            <div
+                ref={ref}
+                className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)}
+                {...rest}
+            >
                 <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} />
             </div>
+        );
+    }
+);
+
+const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItem, isSelected?: boolean, Icon?: TreenIconType; }>(
+    ({ className, item, isSelected, Icon, ...rest }, ref) => {
+        return (
+            <TreeItemTrigger
+                className={cn(treeItemBaseClasses, isSelected && treeItemSelectedClasses)}
+                data-tree-folder-trigger={TypeTreeFolderTrigger}
+                ref={ref}
+                {...rest}
+            >
+                <TreeIconAndText item={item} Icon={Icon} classes={treeItemIconClasses} />
+            </TreeItemTrigger>
         );
     }
 );

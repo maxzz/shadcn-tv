@@ -1,0 +1,39 @@
+.splitpane-content {
+    flex: 1;
+    /* for Firefox, otherwise it overflows the parent*/
+    min-height: 0;
+    min-width: 0;
+}
+
+.splitpane {
+    flex: 1;
+    /* for Firefox, otherwise it overflows the parent*/
+    min-height: 0;
+    min-width: 0;
+}
+
+.splitpane-divider {
+    /*background-color: #ddd;*/
+    z-index: 1000;
+    transition: background-color .1s ease .4s;
+}
+
+.splitpane-divider.horizontal {
+    width: 3px;
+}
+
+.splitpane-divider.vertical {
+    height: 3px;
+}
+
+.splitpane-divider:hover {
+    background-color: rgb(45, 143, 255);
+    /* background-color: #999; */
+    /* cursor: col-resize; */
+    cursor: ew-resize;
+}
+
+.splitpane-divider.vertical:hover {
+    /* cursor: row-resize; */
+    cursor: ns-resize;
+}

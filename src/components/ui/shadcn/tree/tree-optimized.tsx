@@ -48,7 +48,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
             (event: SyntheticEvent<any>, item: DataItemWState | undefined) => {
                 event.stopPropagation();
 
-                if(treeState.selectedId) {
+                if (treeState.selectedId) {
                     const prevItem = findTreeItemById(data, treeState.selectedId);
                     prevItem && (prevItem.state.selected = false);
                 }
@@ -132,7 +132,11 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                     <TreeIconAndText item={item} Icon={IconForFolder} classes={treeItemIconClasses} />
                                                 </TreeItemTrigger> */}
 
-                                                <Folder item={item} Icon={IconForFolder} onClick={(e) => handleSelectChange(e, item)} />
+                                                <Folder
+                                                    item={item}
+                                                    Icon={IconForFolder}
+                                                    onClick={(e) => handleSelectChange(e, item)}
+                                                />
 
                                                 <TreeItemContent className="pl-6">
                                                     <TreeItem
@@ -162,6 +166,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                     item={data}
                                     onClick={(e) => handleSelectChange(e, data)}
                                     Icon={IconForItem}
+                                    data-tree-id={data.id}
                                 />
                             </li>
                         )
@@ -187,7 +192,11 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
     ({ className, item, Icon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
         return (
-            <div ref={ref} className={cn(leafBaseClasses, className, selected && leafSelectedClasses)} {...rest}>
+            <div
+                ref={ref}
+                className={cn(leafBaseClasses, className, selected && leafSelectedClasses)}
+                {...rest}
+            >
                 <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} />
             </div>
         );
@@ -197,8 +206,6 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
 const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; }>(
     ({ className, item, Icon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
-        // console.log('Folder', item.name, selected);
-        
         return (
             <TreeItemTrigger
                 className={cn(treeItemBaseClasses, selected && treeItemSelectedClasses)}

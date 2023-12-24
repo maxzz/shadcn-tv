@@ -12,7 +12,7 @@ const defaultSettings: AppSettings = {
     treeState,
 };
 
-const STORE_KEY = "webfont-tools-app-settings";
+const STORE_KEY = "shadcn-tv-app-settings";
 
 export const appSettings = proxy<AppSettings>(initialSettings());
 
@@ -34,5 +34,6 @@ subscribe(appSettings, () => {
 });
 
 subscribe(appSettings, () => {
+    console.log('appSettings changed', appSettings);
     localStorage.setItem(STORE_KEY, JSON.stringify(appSettings));
 });

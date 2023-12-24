@@ -1,6 +1,7 @@
 import React from 'react';
 import { classNames, withDigits } from '@/utils';
 import './SimpleSplitPane.css';
+import { el } from 'date-fns/locale';
 
 const baseStyle: React.CSSProperties = {
     flex: '1',
@@ -36,25 +37,65 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
         if (!container.current) {
             return;
         }
+        console.log('onMouseDown', position);
 
         event.preventDefault(); // This is needed to prevent text selection in Safari
 
-        const containerOfs = container.current.getBoundingClientRect();
-        const offset = vertical ? container.current.offsetTop + containerOfs.y : container.current.offsetLeft + containerOfs.x;
-        const size = vertical ? container.current.offsetHeight : container.current.offsetWidth;
+        const { current: containerElm } = container;
+
+        const rect = containerElm.getBoundingClientRect();
+        // const offset = vertical
+        //     ? containerElm.offsetTop + containerOfs.y
+        //     : containerElm.offsetLeft + containerOfs.x;
+
+        const ofs = (el: HTMLElement) => {
+            const rect = el.getBoundingClientRect();
+            return {
+                x: rect.left + window.scrollX,
+                y: rect.top  + window.scrollY,
+            };
+        };
+
+        // const getOffsetRight = (e) => {
+        //     let left = e.offsetWidth + e.offsetLeft;
+        //     function traverse(eRef) {
+        //         eRef = eRef.offsetParent; // `.offsetParent` is faster than `.parentElement`
+        //         if (eRef) {
+        //             left += eRef.offsetLeft;
+        //             traverse(eRef);
+        //         }
+        //     }
+        //     traverse(e);
+        //     return document.scrollWidth - left;
+        // };
+
+        // const offset = vertical
+        //     ? containerElm.offsetTop + rect.y
+        //     : containerElm.offsetLeft + rect.x;
+
+        const offset = vertical
+            ? window.scrollY + rect.y
+            : window.scrollX + rect.x;
+
+        const size = vertical
+            ? containerElm.offsetHeight
+            : containerElm.offsetWidth;
 
         const moveHandler = (event: MouseEvent) => {
             event.preventDefault();
 
             const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
+            const rounded = +withDigits(Math.min(Math.max(minPersent, newPosition), maxPersent));
             // Using 99% as the max value prevents the divider from disappearing
-            setPosition(+withDigits(Math.min(Math.max(minPersent, newPosition), maxPersent)));
+            setPosition(rounded);
+
+            console.log(`onMouseDown position=${position} newPosition=${newPosition} rounded=${rounded}`);
         };
 
         const upHandler = () => {
             document.removeEventListener('mousemove', moveHandler);
             document.removeEventListener('mouseup', upHandler);
-            onResize && onResize(position);
+            onResize?.(position);
         };
 
         document.addEventListener('mousemove', moveHandler);

@@ -28,7 +28,7 @@ export function DemoTreeOptimized() {
         () => {
             return <Tree
                 data={dataWithState}
-                className={`w-full border-[1px] rounded-l-md ${inputFocusClasses}`}
+                className={`w-full h-full border-[1px] rounded-l-md ${inputFocusClasses}`}
                 initialSelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}
                 IconForFolder={IconFolder}

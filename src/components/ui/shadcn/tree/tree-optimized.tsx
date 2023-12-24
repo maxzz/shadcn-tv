@@ -84,14 +84,14 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         return (
             <div
                 ref={(r) => { refRootCb(r); refRoot.current = r; }}
-                className={cn("w-full overflow-hidden", className)}
+                className={cn("overflow-hidden", className)}
                 tabIndex={0}
                 onKeyDown={(e) => {
                     const nextId = getNextId(refRoot.current!, e, treeState.selectedId);
                     nextId && handleSelectChange(e, findTreeItemById(data, nextId));
                 }}
             >
-                <ScrollArea className="scr" style={{ height }} onClick={(e) => handleSelectChange(e, undefined)}>
+                <ScrollArea className="scr" style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)}>
                     <div className="relative z-0 px-2 py-1" >
                         <TreeItem
                             ref={ref}

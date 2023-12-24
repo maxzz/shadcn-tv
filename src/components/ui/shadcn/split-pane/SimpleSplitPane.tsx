@@ -1,7 +1,6 @@
 import React from 'react';
 import { classNames, withDigits } from '@/utils';
 import './SimpleSplitPane.css';
-import { el } from 'date-fns/locale';
 
 const baseStyle: React.CSSProperties = {
     flex: '1',
@@ -20,7 +19,7 @@ export type SplitPaneProps = {
     maxPersent?: number,
     className?: string;
     children: React.ReactNode;
-    onResize?: (position: number) => void;
+    onResize?: () => void;
 };
 
 type SplitPaneDataProps = {
@@ -58,12 +57,12 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
         const onMouseUp = () => {
             document.removeEventListener('mousemove', onMoveMove);
             document.removeEventListener('mouseup', onMouseUp);
-            onResize?.(position);
+            onResize?.();
         };
 
         document.addEventListener('mousemove', onMoveMove);
         document.addEventListener('mouseup', onMouseUp);
-    }, [vertical, position, container]);
+    }, [container, vertical]);
 
     let childrenArr = React.Children.toArray(children);
     if (childrenArr.length < 2) {

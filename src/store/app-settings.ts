@@ -1,6 +1,6 @@
 import { Theme, themeApply } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
-import { TreeState, treeState } from "./case-tree-state";
+import { TreeState, defaultTreeState } from "./case-tree-state";
 
 export type AppSettings = {
     theme: Theme;
@@ -9,7 +9,7 @@ export type AppSettings = {
 
 const defaultSettings: AppSettings = {
     theme: 'light',
-    treeState,
+    treeState: defaultTreeState,
 };
 
 const STORE_KEY = "shadcn-tv-app-settings";
@@ -34,6 +34,5 @@ subscribe(appSettings, () => {
 });
 
 subscribe(appSettings, () => {
-    console.log('appSettings changed', appSettings);
     localStorage.setItem(STORE_KEY, JSON.stringify(appSettings));
 });

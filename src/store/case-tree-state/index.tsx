@@ -1,9 +1,7 @@
-import { proxy } from "valtio";
-
 export type TreeState = {
     splitterPos: number;
 };
 
-export const treeState = proxy<TreeState>({
+export const defaultTreeState: TreeState ={
     splitterPos: 30,
-});
+};

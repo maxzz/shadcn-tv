@@ -1,19 +1,22 @@
 import { Theme, themeApply } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
+import { TreeState, treeState } from "./case-tree-state";
 
 export type AppSettings = {
     theme: Theme;
+    treeState: TreeState;
 };
 
 const defaultSettings: AppSettings = {
     theme: 'light',
+    treeState,
 };
 
 const STORE_KEY = "webfont-tools-app-settings";
 
-export const appSettings = proxy<AppSettings>(initSettings());
+export const appSettings = proxy<AppSettings>(initialSettings());
 
-function initSettings(): AppSettings {
+function initialSettings(): AppSettings {
     const savedSettings = localStorage.getItem(STORE_KEY);
     if (savedSettings) {
         try {
@@ -28,5 +31,8 @@ themeApply(appSettings.theme);
 
 subscribe(appSettings, () => {
     themeApply(appSettings.theme);
+});
+
+subscribe(appSettings, () => {
     localStorage.setItem(STORE_KEY, JSON.stringify(appSettings));
 });

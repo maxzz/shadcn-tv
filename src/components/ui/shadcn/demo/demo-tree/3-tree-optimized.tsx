@@ -6,6 +6,7 @@ import { data } from "./1-tree-data";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { inputFocusClasses } from "@/components/ui/shared-styles";
 import { classNames } from "@/utils";
+import { SimpleSplitPane } from "../../split-pane";
 
 const initialItemId = "6.1.2";
 
@@ -27,7 +28,7 @@ export function DemoTreeOptimized() {
         () => {
             return <Tree
                 data={dataWithState}
-                className={`shrink-0 w-[230px] h-[460px] border-[1px] rounded-l-md ${inputFocusClasses}`}
+                className={`w-full border-[1px] rounded-l-md ${inputFocusClasses}`}
                 initialSelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}
                 IconForFolder={IconFolder}
@@ -38,11 +39,17 @@ export function DemoTreeOptimized() {
 
     return (
         <div className="m-0.5 min-h-full flex">
-            {TreeMemo}
 
-            <div className={classNames("flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
-                {content}
-            </div>
+            <SimpleSplitPane vertical={false} className="splitpane" minPersent={24}>
+                <div className="w-full h-[460px]">
+                    {TreeMemo}
+                </div>
+
+                <div className={classNames("flex-1 px-2 py-1 border-[1px] border-l-0 rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
+                    {content}
+                </div>
+            </SimpleSplitPane>
+
         </div>
     );
 }

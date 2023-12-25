@@ -31,6 +31,15 @@ const styleA = (vertical: boolean, position: number): React.CSSProperties => {
     }
     return rv;
 };
+const styleR = (vertical: boolean, position: number): React.CSSProperties => {
+    const rv = { ...baseStyle };
+    if (vertical) {
+        rv.minHeight = rv.maxHeight = 100 - position + '%'; // top
+    } else {
+        rv.minWidth = rv.maxWidth = 100 - position + '%'; // left
+    }
+    return rv;
+};
 const styleB: React.CSSProperties = { ...baseStyle, minWidth: 0, minHeight: 0, };
 
 export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
@@ -85,7 +94,8 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
                 {childrenArr[0]}
             </div>
             <div className={classNames('splitpane-divider', vertical ? 'vertical' : 'horizontal')} onMouseDown={onMouseDown} />
-            <div style={styleB}>
+            {/* <div style={styleB}> */}
+            <div style={styleR(vertical, position)}>
                 {childrenArr[1]}
             </div>
         </div>

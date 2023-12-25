@@ -31,16 +31,16 @@ const styleA = (vertical: boolean, position: number): React.CSSProperties => {
     }
     return rv;
 };
+const styleB: React.CSSProperties = { ...baseStyle, minWidth: 0, minHeight: 0, };
 const styleR = (vertical: boolean, position: number): React.CSSProperties => {
-    const rv = { ...baseStyle };
+    const rv = { ...styleB };
     if (vertical) {
-        rv.minHeight = rv.maxHeight = 100 - position + '%'; // top
+        rv.minHeight = rv.maxHeight = 90 - position + '%'; // top
     } else {
-        rv.minWidth = rv.maxWidth = 100 - position + '%'; // left
+        rv.minWidth = rv.maxWidth = 90 - position + '%'; // left
     }
     return rv;
 };
-const styleB: React.CSSProperties = { ...baseStyle, minWidth: 0, minHeight: 0, };
 
 export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
     const { vertical = true, min = 1, max = 99, className, children, position, setPosition, onResize } = props;

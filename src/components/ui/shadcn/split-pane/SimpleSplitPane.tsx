@@ -1,22 +1,16 @@
 import React from 'react';
-import { classNames, withDigits } from '@/utils';
+import { clamp, classNames, withDigits } from '@/utils';
 import './SimpleSplitPane.css';
 
-const baseStyle: React.CSSProperties = {
-    flex: '1',
-    display: 'flex',
-};
-
-const styleB: React.CSSProperties = {
-    ...baseStyle,
-    minWidth: 0,
-    minHeight: 0,
-};
-
+/**
+ * The position is actually the size (width or height) of the first (left or top)
+ * panel as a percentage of the size of the parent container.
+ * The size of the remaining elements is determined by flexbox.
+ */
 export type SplitPaneProps = {
     vertical?: boolean;
-    minPersent?: number,
-    maxPersent?: number,
+    min?: number,           // percent
+    max?: number,           // percent
     className?: string;
     children: React.ReactNode;
     onResize?: () => void;
@@ -27,8 +21,20 @@ type SplitPaneDataProps = {
     setPosition: (value: number) => void,
 };
 
+const baseStyle: React.CSSProperties = { display: 'flex', flex: '1', };
+const styleA = (vertical: boolean, position: number): React.CSSProperties => {
+    const rv = { ...baseStyle };
+    if (vertical) {
+        rv.minHeight = rv.maxHeight = position + '%'; // top
+    } else {
+        rv.minWidth = rv.maxWidth = position + '%'; // left
+    }
+    return rv;
+};
+const styleB: React.CSSProperties = { ...baseStyle, minWidth: 0, minHeight: 0, };
+
 export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
-    const { vertical = true, minPersent = 1, maxPersent = 99, className, children, position, setPosition, onResize } = props;
+    const { vertical = true, min = 1, max = 99, className, children, position, setPosition, onResize } = props;
 
     const container = React.useRef<HTMLDivElement | null>(null);
 
@@ -48,8 +54,8 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
         const onMoveMove = (event: MouseEvent) => {
             event.preventDefault();
 
-            const newPosition = ((vertical ? event.pageY : event.pageX) - offset) / size * 100;
-            const rounded = +withDigits(Math.min(Math.max(minPersent, newPosition), maxPersent));
+            const newPosition = (((vertical ? event.pageY : event.pageX) - offset) / size) * 100;
+            const rounded = +withDigits(clamp(newPosition, min, max));
             // Using 99% as the max value prevents the divider from disappearing
             setPosition(rounded);
         };
@@ -73,16 +79,9 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
         );
     }
 
-    const styleA = { ...baseStyle };
-    if (vertical) {
-        styleA.minHeight = styleA.maxHeight = position + '%'; // top
-    } else {
-        styleA.minWidth = styleA.maxWidth = position + '%'; // left
-    }
-
     return (
         <div ref={container} className={className} style={{ display: 'flex', flexDirection: vertical ? 'column' : 'row' }}>
-            <div style={styleA}>
+            <div style={styleA(vertical, position)}>
                 {childrenArr[0]}
             </div>
             <div className={classNames('splitpane-divider', vertical ? 'vertical' : 'horizontal')} onMouseDown={onMouseDown} />
@@ -92,6 +91,3 @@ export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) 
         </div>
     );
 }
-
-//TODO: styles - done
-//TODO: highlight moving bar by timer - done

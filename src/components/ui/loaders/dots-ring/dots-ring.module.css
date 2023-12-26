@@ -1,3 +1,5 @@
+/* https://codepen.io/josetxu/pen/gOEYMyQ */
+
 :root {
     --w: #fafafa;
     --b: #141414;
@@ -28,7 +30,7 @@ body {
 
 /* input */
 
-/* .control {
+.control {
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -41,7 +43,7 @@ body {
 }
 .control:checked + .bg:before {
     content: "CLICK TO DARK";
-} */
+}
 
 /* bg */
 

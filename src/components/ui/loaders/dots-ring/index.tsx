@@ -1,4 +1,4 @@
-import "./dots-ring.css"; // https://codepen.io/josetxu/pen/gOEYMyQ
+//import "./dots-ring.css";
 import styles from "./dots-ring.module.css";
 
 console.log("styles", styles);
@@ -6,24 +6,24 @@ console.log("styles", styles);
 export function LoaderDotsRing() {
     return (
         <div className="">
-            <input className="control" type="checkbox" />
-            <div className="bg" />
-            <div className="content">
-                <div className="dots">
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
-                    <div className="dot"> <span /> </div>
+            <input className={styles.control} type="checkbox" />
+            <div className={styles.bg} />
+            <div className={styles.content}>
+                <div className={styles.dots}>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
+                    <div className={styles.dot}> <span /> </div>
 
-                    <div className="ring" />
+                    <div className={styles.ring} />
                 </div>
             </div>
         </div>

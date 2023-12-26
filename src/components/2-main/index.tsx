@@ -3,6 +3,7 @@ import { DialogDemoWoTrigger } from '../ui/shadcn/demo/demo-dialog-wo-trigger';
 import { Showcases } from './9-showcases';
 import { showcases } from './9-showcases/cases';
 import { Button, ScrollArea } from '@/components/ui/shadcn';
+import { DemoTreeOptimized } from '../ui/shadcn/demo/demo-tree';
 
 function FontInput() {
     return (
@@ -32,9 +33,12 @@ function ConvertForm() {
 }
 
 export function Section2_Main() {
-    return (
+    return (<>
+        {/* <div className="p-4 overflow-hidden">
+            <DemoTreeOptimized />
+        </div> */}
         <ScrollArea className="p-4">
             <ConvertForm />
         </ScrollArea>
-    );
+    </>);
 }

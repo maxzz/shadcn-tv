@@ -1,10 +1,13 @@
 /* https://codepen.io/josetxu/pen/gOEYMyQ */
 
-:root {
+.dots-ring {
     --w: #fafafa;
     --b: #141414;
     --s: 1s;
     --d: calc(var(--s) / 6);
+    --dot-size: 1vmin;
+
+    position: relative;
 }
 
 /* * {
@@ -27,16 +30,26 @@ body {
     justify-content: center;
 }
 
+.content {
+    width: 50vmin;
+    height: 50vmin;
+    /* width: 100%;
+    height: 100%; */
+    background: #f000;
+    animation: spin 8s linear 0s infinite;
+}
 
-/* input */
+/* control */
 
 .control {
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw;
+    height: 100vh; */
+
     position: absolute;
-    z-index: 4;
+    inset: 0;
     opacity: 0;
     cursor: pointer;
+    z-index: 4;
 }
 .control:checked ~ div {
     filter: invert(1);
@@ -47,46 +60,46 @@ body {
 
 /* bg */
 
-.bg:before {
-    content: "CLICK TO LIGHT";
-    position: absolute;
-    color: var(--w);
-    width: 100%;
-    text-align: center;
-    bottom: 10vh;
-    font-family: Arial, Helvetica, serif;
-    font-size: 12px;
-    text-shadow: 0 0 1px var(--w);
-    opacity: 0.25;
-}
-
 .bg {
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw;
+    height: 100vh; */
+    /* width: 100%;
+    height: 100%; */
     position: absolute;
     background: var(--b);
     z-index: -2;
+    inset: 0;
+}
+
+.bg:before {
+    content: "CLICK TO LIGHT";
+
+    position: absolute;
+    /* width: 100%; */
+    /* bottom: 10vh; */
+    top: 100px;
+    left: 0;
+
+    color: var(--w);
+    font-family: Arial, Helvetica, serif;
+    font-size: 12px;
+    /* text-align: center; */
+    text-shadow: 0 0 1px var(--w);
+    opacity: 0.25;
 }
 
 /* ring */
 
 .ring {
-    border: 1.5vmin solid var(--w);
     width: 64%;
     height: 64%;
+    border: 1.5vmin solid var(--w);
     border-radius: 100%;
-    z-index: 0;
     box-shadow:
         0 0 0 1vmin var(--b),
         0 0 0 1vmin var(--b) inset;
     animation: spin 8s linear 0s infinite reverse;
-}
-
-.content {
-    width: 50vmin;
-    height: 50vmin;
-    background: #f000;
-    animation: spin 8s linear 0s infinite;
+    z-index: 0;
 }
 
 .dots {
@@ -99,25 +112,29 @@ body {
 /* dot */
 
 .dot {
-    width: 50%;
     position: absolute;
-    height: 7vmin;
-    background: #f000;
     left: 0;
+    width: 50%;
+    height: 7vmin;
+    
+    background: #f000;
     transform-origin: 100% 50%;
     z-index: -1;
     animation: over-ring calc(var(--s) * 2) linear 0s infinite;
 }
 .dot span {
+    position: absolute;
+    left: 0;
+
     width: 5.5vmin;
     height: 5.5vmin;
-    left: 0;
-    border: 1vmin solid var(--b);
-    position: absolute;
+    
     background: var(--w);
+    border: 1vmin solid var(--b);
     border-radius: 100%;
     animation: ball var(--s) ease-in-out 0s infinite alternate;
 }
+
 .dot:nth-child(1) {
     transform: rotate(-30deg);
     animation-delay: calc(var(--d) * 0);
@@ -210,9 +227,15 @@ body {
 }
 @keyframes ball {
     100% {
-        left: 12vmin;
+        /* left: 12vmin;
         width: 4vmin;
-        height: 4vmin;
+        height: 4vmin; */
+        /* left: 12%;
+        width: 4%;
+        height: 4%; */
+        left: calc(var(--dot-size) * 12);
+        width: calc(var(--dot-size) * 4);
+        height: calc(var(--dot-size) * 4);
     }
 }
 @keyframes over-ring {

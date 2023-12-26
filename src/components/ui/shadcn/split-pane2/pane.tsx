@@ -1,18 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-/** @packageDocumentation
- * @module ContentView
- */
 import * as React from "react";
 import { classNames } from "@/utils";
 
 /** Based on react-split-pane package. See https://github.com/tomkp/react-split-pane/blob/master/LICENSE */
 
-/**
- * @internal
- */
 export interface PaneProps {
     className?: string;
     size?: string | number;
@@ -22,9 +12,6 @@ export interface PaneProps {
     children?: React.ReactNode;
 }
 
-/**
- * @internal
- */
 export function Pane(props: PaneProps) {
     const { children, className, split, style, size, eleRef } = props;
 

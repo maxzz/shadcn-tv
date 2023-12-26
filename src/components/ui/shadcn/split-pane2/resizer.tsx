@@ -1,18 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-/** @packageDocumentation
- * @module ContentView
- */
 import * as React from "react";
 import { classNames } from "@/utils";
 
 /** Based on react-split-pane package. See https://github.com/tomkp/react-split-pane/blob/master/LICENSE */
 
-/**
- * @internal
- */
 export interface ResizerProps {
     split?: "vertical" | "horizontal";
     style?: React.CSSProperties;
@@ -24,9 +14,6 @@ export interface ResizerProps {
     onDoubleClick?: (event: MouseEvent) => void;
 }
 
-/**
- * @internal
- */
 export function Resizer(props: ResizerProps) {
     const {
         className,

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { classNames } from "@/utils";
+import "./resizer.css";
 
 /** Based on react-split-pane package. See https://github.com/tomkp/react-split-pane/blob/master/LICENSE */
 
@@ -45,14 +46,12 @@ export function Resizer(props: ResizerProps) {
                 onTouchEnd();
             }}
             onClick={(event) => {
-                // istanbul ignore else
                 if (onClick) {
                     event.preventDefault();
                     onClick(event.nativeEvent);
                 }
             }}
             onDoubleClick={(event) => {
-                // istanbul ignore else
                 if (onDoubleClick) {
                     event.preventDefault();
                     onDoubleClick(event.nativeEvent);

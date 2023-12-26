@@ -3,3 +3,4 @@
 export * from './ploaders/p-loader1';
 export * from './ploaders/p-loader2';
 export * from './ploaders/p-loader3';
+export * from './dots-ring';

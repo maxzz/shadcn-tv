@@ -34,11 +34,11 @@ function ConvertForm() {
 
 export function Section2_Main() {
     return (<>
-        {/* <div className="p-4 overflow-hidden">
+        <div className="p-4 overflow-hidden">
             <DemoTreeOptimized />
-        </div> */}
-        <ScrollArea className="p-4">
+        </div>
+        {/* <ScrollArea className="p-4">
             <ConvertForm />
-        </ScrollArea>
+        </ScrollArea> */}
     </>);
 }

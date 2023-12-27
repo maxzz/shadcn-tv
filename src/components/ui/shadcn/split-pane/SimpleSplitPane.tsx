@@ -31,7 +31,7 @@ const styleA = (vertical: boolean, position: number): React.CSSProperties => {
     }
     return rv;
 };
-const styleB: React.CSSProperties = { ...baseStyle, minWidth: 0, minHeight: 0, overflow: 'hidden' };
+const styleB: React.CSSProperties = { ...baseStyle, minWidth: 0, minHeight: 0 };
 const styleR = (vertical: boolean, position: number): React.CSSProperties => {
     const rv = { ...styleB };
     if (vertical) {

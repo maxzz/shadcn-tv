@@ -39,15 +39,15 @@ export function DemoTreeOptimized() {
 
     return (
         // <div className="mr-4 w-full grid grid-cols-1 min-w-0">
-        <div className="mr-12 overflow-hidden">
+        <div className="mr-12">
 
-            <SimpleSplitPane vertical={false} className="splitpane overflow-hidden" min={24}>
+            <SimpleSplitPane vertical={false} className="splitpane" min={24} max={100}>
                 <div className="w-full h-[460px]">
                     {TreeMemo}
                 </div>
 
                 <div className="flex-1 min-w-0 overflow-hidden">
-                    <div className={classNames("flex-1 px-2 py-1 w-full h-full border border-l-0 rounded-r-md z-10 min-w-0 overflow-hidden", inputFocusClasses)} tabIndex={0}>
+                    <div className={classNames("flex-1 px-2 py-1 w-full h-full border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
                         {content}
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useMemo, CSSProperties } from "react";
 import { classNames } from "@/utils";
 
 /** Based on react-split-pane package. See https://github.com/tomkp/react-split-pane/blob/master/LICENSE */
@@ -15,13 +15,10 @@ export interface PaneProps {
 export function Pane(props: PaneProps) {
     const { children, className, split, style, size, eleRef } = props;
 
-    const paneClasses = React.useMemo(
-        () => classNames("Pane", split, className),
-        [split, className]
-    );
+    const paneClasses = useMemo(() => classNames("Pane", split, className), [split, className]);
 
-    const paneStyle = React.useMemo(() => {
-        const baseStyle: Partial<React.CSSProperties> = {
+    const paneStyle = useMemo(() => {
+        const baseStyle: Partial<CSSProperties> = {
             flex: 1,
             position: "relative",
             outline: "none",
@@ -37,10 +34,7 @@ export function Pane(props: PaneProps) {
             baseStyle.flex = "none";
         }
 
-        return {
-            ...style,
-            ...baseStyle,
-        } as React.CSSProperties;
+        return { ...style, ...baseStyle, } as CSSProperties;
     }, [size, split, style]);
 
     return (

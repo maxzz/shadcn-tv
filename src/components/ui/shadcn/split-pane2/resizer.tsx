@@ -27,10 +27,7 @@ export function Resizer(props: ResizerProps) {
         style,
     } = props;
 
-    const resizerClasses = React.useMemo(
-        () => classNames(split, className),
-        [split, className]
-    );
+    const resizerClasses = React.useMemo(() => classNames(split, className), [split, className]);
 
     return (
         <span

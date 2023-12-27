@@ -73,20 +73,14 @@ function unFocus(ownerDoc: Document | undefined) {
         try {
             const winSelection = ownerDoc.defaultView?.getSelection();
             winSelection?.removeAllRanges();
-        } catch (_e) { }
+        } catch (error) { }
     }
 }
 
-function getDefaultSize(
-    defaultSize?: number | string,
-    minSize?: string | number,
-    maxSize?: string | number,
-    draggedSize?: number
-) {
+function getDefaultSize(defaultSize?: number | string, minSize?: string | number, maxSize?: string | number, draggedSize?: number) {
     if (typeof draggedSize === "number") {
         const min = typeof minSize === "number" ? minSize : 0;
-        const max =
-            typeof maxSize === "number" && maxSize >= 0 ? maxSize : Infinity;
+        const max = typeof maxSize === "number" && maxSize >= 0 ? maxSize : Infinity;
         return Math.max(min, Math.min(max, draggedSize));
     }
     if (defaultSize !== undefined) {
@@ -160,24 +154,21 @@ export function SplitPane(props: SplitPaneProps) {
                     right: 0,
                 }
                 : {
-                    bottom: 0,
                     flexDirection: "column",
-                    minHeight: "100%",
                     top: 0,
+                    bottom: 0,
                     width: "100%",
+                    minHeight: "100%",
                 };
 
         return {
-            display: "flex",
             flex: 1,
-            height: "100%",
             position: "absolute",
+            height: "100%",
+            display: "flex",
             outline: "none",
-            overflow: "hidden",
-            MozUserSelect: "text",
-            WebkitUserSelect: "text",
-            msUserSelect: "text",
             userSelect: "text",
+            overflow: "hidden",
             ...style,
             ...directionSpecificParts,
         } as React.CSSProperties;
@@ -214,6 +205,7 @@ export function SplitPane(props: SplitPaneProps) {
     const processMove = React.useCallback(
         (x: number, y: number) => {
             unFocus(splitPane.current?.ownerDocument);
+
             const isPrimaryFirst = primary === "first";
             const ref = isPrimaryFirst ? pane1.current : pane2.current;
             const ref2 = isPrimaryFirst ? pane2.current : pane1.current;
@@ -232,36 +224,22 @@ export function SplitPane(props: SplitPaneProps) {
                         if (Math.abs(positionDelta) < step) {
                             return;
                         }
-                        // Integer division
-                        positionDelta = ~~(positionDelta / step) * step;
+                        positionDelta = ~~(positionDelta / step) * step; // Integer division
                     }
                     let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
 
-                    const pane1Order = parseInt(
-                        node.ownerDocument?.defaultView?.getComputedStyle(node).order ??
-                        "0",
-                        10
-                    );
-                    const pane2Order = parseInt(
-                        node2.ownerDocument?.defaultView?.getComputedStyle(node2).order ??
-                        "0",
-                        10
-                    );
+                    const pane1Order = parseInt(node.ownerDocument?.defaultView?.getComputedStyle(node).order ?? "0", 10);
+                    const pane2Order = parseInt(node2.ownerDocument?.defaultView?.getComputedStyle(node2).order ?? "0", 10);
                     if (pane1Order > pane2Order) {
                         sizeDelta = -sizeDelta;
                     }
 
                     let newMaxSize = maxSize;
-                    if (
-                        typeof maxSize === "number" &&
-                        maxSize !== undefined &&
-                        maxSize <= 0
-                    ) {
+                    if (typeof maxSize === "number" && maxSize !== undefined && maxSize <= 0) {
                         if (split === "vertical") {
                             newMaxSize = splitPaneDiv.getBoundingClientRect().width + maxSize;
                         } else {
-                            newMaxSize =
-                                splitPaneDiv.getBoundingClientRect().height + maxSize;
+                            newMaxSize = splitPaneDiv.getBoundingClientRect().height + maxSize;
                         }
                     }
 
@@ -270,11 +248,7 @@ export function SplitPane(props: SplitPaneProps) {
 
                     if (typeof minSize === "number" && newSize < minSize) {
                         newSize = minSize;
-                    } else if (
-                        typeof newMaxSize === "number" &&
-                        newMaxSize !== undefined &&
-                        newSize > newMaxSize
-                    ) {
+                    } else if (typeof newMaxSize === "number" && newMaxSize !== undefined && newSize > newMaxSize) {
                         newSize = newMaxSize;
                     } else {
                         setPosition(newPosition);
@@ -331,16 +305,16 @@ export function SplitPane(props: SplitPaneProps) {
     );
 
     React.useEffect(() => {
-        const ownerDoc = splitPane.current?.ownerDocument;
-        if (!ownerDoc) return;
+        const doc = splitPane.current?.ownerDocument;
+        if (!doc) return;
 
-        ownerDoc.addEventListener("mouseup", onMouseUp);
-        ownerDoc.addEventListener("mousemove", onMouseMove);
-        ownerDoc.addEventListener("touchmove", onTouchMove);
+        doc.addEventListener("mouseup", onMouseUp);
+        doc.addEventListener("mousemove", onMouseMove);
+        doc.addEventListener("touchmove", onTouchMove);
         return () => {
-            ownerDoc.removeEventListener("mouseup", onMouseUp);
-            ownerDoc.removeEventListener("mousemove", onMouseMove);
-            ownerDoc.removeEventListener("touchmove", onTouchMove);
+            doc.removeEventListener("mouseup", onMouseUp);
+            doc.removeEventListener("mousemove", onMouseMove);
+            doc.removeEventListener("touchmove", onTouchMove);
         };
     }, [onMouseMove, onMouseUp, onTouchMove]);
 
@@ -368,7 +342,7 @@ export function SplitPane(props: SplitPaneProps) {
                 split={split}
                 style={resizerStyle}
             />
-            
+
             <Pane
                 className={pane2Classes}
                 key="pane2"

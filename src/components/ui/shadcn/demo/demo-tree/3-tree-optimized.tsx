@@ -46,9 +46,11 @@ export function DemoTreeOptimized() {
                     {TreeMemo}
                 </div>
 
-                <div className={classNames("flex-1 w-full h-full border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
-                    <div className="px-2 py-1 min-w-0 overflow-hidden">
-                        {content}
+                <div className={classNames("flex-1 w-full h-full min-w-0 border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
+                    <div className="min-w-0 overflow-hidden">
+                        <div className="px-2 py-1">
+                            {content}
+                        </div>
                     </div>
                 </div>
             </SimpleSplitPane>

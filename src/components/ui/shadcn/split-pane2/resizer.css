@@ -1,4 +1,4 @@
-.Resizer {
+.resizer {
   background: #f00;
   opacity: 0.2;
   z-index: 1;
@@ -10,14 +10,14 @@
   background-clip: padding-box;
 }
 
-.Resizer:hover {
+.resizer:hover {
   -webkit-transition: all 2s ease;
   transition: all 2s ease;
 }
 
 /* horizontal */
 
-.Resizer.horizontal {
+.resizer.horizontal {
   height: 11px;
   margin: -5px 0;
   border-top: 5px solid rgba(255, 255, 255, 0);
@@ -26,14 +26,14 @@
   width: 100%;
 }
 
-.Resizer.horizontal:hover {
+.resizer.horizontal:hover {
   border-top: 5px solid rgba(0, 0, 0, 0.5);
   border-bottom: 5px solid rgba(0, 0, 0, 0.5);
 }
 
 /* vertical */
 
-.Resizer.vertical {
+.resizer.vertical {
   width: 11px;
   margin: 0 -5px;
   border-left: 5px solid rgba(255, 255, 255, 0);
@@ -41,16 +41,16 @@
   cursor: col-resize;
 }
 
-.Resizer.vertical:hover {
+.resizer.vertical:hover {
   border-left: 5px solid rgba(0, 0, 0, 0.5);
   border-right: 5px solid rgba(0, 0, 0, 0.5);
 }
 
 /* disabled */
 
-.Resizer.disabled {
+.resizer.disabled {
   cursor: not-allowed;
 }
-.Resizer.disabled:hover {
+.resizer.disabled:hover {
   border-color: transparent;
 }

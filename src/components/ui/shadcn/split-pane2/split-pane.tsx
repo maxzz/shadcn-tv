@@ -106,13 +106,17 @@ export function SplitPane(props: SplitPaneProps) {
         defaultSize,
         maxSize,
         children,
+
         paneStyle,
         pane1Style,
         pane2Style,
+
         className,
+
         paneClassName,
         pane1ClassName,
         pane2ClassName,
+
         onDragStarted,
         onDragFinished,
         step,
@@ -177,7 +181,7 @@ export function SplitPane(props: SplitPaneProps) {
     const pane1DivStyle = { ...paneStyle, ...pane1Style };
     const pane2DivStyle = { ...paneStyle, ...pane2Style };
     const resizerStyle = React.useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
-    const resizerClasses = React.useMemo(() => classNames("Resizer", !allowResize && "disabled"), [allowResize]);
+    const resizerClasses = React.useMemo(() => classNames("resizer", !allowResize && "disabled"), [allowResize]);
     const splitPaneClasses = React.useMemo(() => classNames("SplitPane", className, split, !allowResize && "disabled"), [className, split, allowResize]);
     const pane1Classes = React.useMemo(() => classNames("Pane1", paneClassName, pane1ClassName), [paneClassName, pane1ClassName]);
     const pane2Classes = React.useMemo(() => classNames("Pane2", paneClassName, pane2ClassName), [paneClassName, pane2ClassName]);

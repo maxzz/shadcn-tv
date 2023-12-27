@@ -43,10 +43,7 @@ const styleR = (vertical: boolean, position: number): React.CSSProperties => {
 };
 
 export function SimpleSplitPaneBody(props: SplitPaneProps & SplitPaneDataProps) {
-    const { vertical = true, min = 1, max = 100, className, children, position, setPosition, onResize } = props;
-
-    console.log('SimpleSplitPaneBody', { vertical, min, max, className, children, position, setPosition, onResize });
-    
+    const { vertical = true, min = 0, max = 100, className, children, position, setPosition, onResize } = props;
 
     const container = React.useRef<HTMLDivElement | null>(null);
 

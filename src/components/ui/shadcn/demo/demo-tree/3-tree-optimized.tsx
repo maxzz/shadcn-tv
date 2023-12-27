@@ -41,7 +41,7 @@ export function DemoTreeOptimized() {
         // <div className="mr-4 w-full grid grid-cols-1 min-w-0">
         <div className="mr-12">
 
-            <SimpleSplitPane vertical={false} className="splitpane" min={0} max={100}>
+            <SimpleSplitPane vertical={false} className="splitpane">
                 <div className="w-full h-[460px]">
                     {TreeMemo}
                 </div>

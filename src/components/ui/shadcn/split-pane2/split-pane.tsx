@@ -165,10 +165,11 @@ export function SplitPane(props: SplitPaneProps) {
     const pane2DivStyle = { ...paneStyle, ...pane2Style };
     const resizerStyle = useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
 
+    const paneCls = `${resizerstyles.resizer} ${splitVertical ? resizerstyles.vertical : resizerstyles.horizontal}`;
     const resizerClasses = useMemo(() => classNames(resizerstyles.resizer, !allowResize && "disabled"), [allowResize]);
     const splitPaneClasses = useMemo(() => classNames("SplitPane", className, split, !allowResize && "disabled"), [className, split, allowResize]);
-    const pane1Classes = useMemo(() => classNames("Pane1", paneClassName, pane1ClassName), [paneClassName, pane1ClassName]);
-    const pane2Classes = useMemo(() => classNames("Pane2", paneClassName, pane2ClassName), [paneClassName, pane2ClassName]);
+    const pane1Classes = useMemo(() => classNames("Pane1", paneClassName, paneCls, pane1ClassName), [paneClassName, pane1ClassName]);
+    const pane2Classes = useMemo(() => classNames("Pane2", paneClassName, paneCls, pane2ClassName), [paneClassName, pane2ClassName]);
 
     const initializeDrag = useCallback(
         (x: number, y: number) => {

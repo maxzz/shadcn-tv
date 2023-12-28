@@ -34,9 +34,9 @@ function ConvertForm() {
 
 export function Section2_Main() {
     return (<>
-        {/* <div className="m-4 _overflow-hidden">
+        <div className="m-4 overflow-hidden">
             <DemoTreeOptimized />
-        </div> */}
+        </div>
 
         <ScrollArea className="p-4">
             <ConvertForm />

@@ -13,6 +13,9 @@ export type Showcase = {
 };
 
 export const showcases: Showcase[] = [
+    { id: '80', name: "Tree", component: <DemoTreeOptimized /> },
+
+    /*
     { id: '10', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
     { id: '20', name: "Data table", component: <DataTableDemo /> },
     { id: '30', name: "Table", component: <TableDemo className="m-auto max-w-sm" /> },
@@ -22,8 +25,9 @@ export const showcases: Showcase[] = [
     { id: '61', name: "Switch. neon", component: <NeonSwitch /> },
     { id: '62', name: "Switch. styled", component: <DemoSwitchStyled /> },
     { id: '70', name: "Tree unoptimized", component: <DemoTree /> },
-    { id: '80', name: "Tree", component: <DemoTreeOptimized /> },
+    // { id: '80', name: "Tree", component: <DemoTreeOptimized /> },
+    */
     { id: '81', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "81";
+export const initialCase = "80";

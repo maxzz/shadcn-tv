@@ -1,12 +1,11 @@
-import * as React from "react";
-import { CSSProperties } from "react";
+import { CSSProperties, Children, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Pane } from "./pane";
 import { Resizer } from "./resizer";
 import { classNames } from "@/utils";
 
 export interface SplitPaneProps {
     allowResize?: boolean;                              // Pass false to disable resizing.
-    children: React.ReactNode[];                        // The array of two react nodes, one for each pane.
+    children: ReactNode[];                        // The array of two react nodes, one for each pane.
     primary?: "first" | "second";                       // Determines which pane maintains its size when browser window is resized.
 
     /** You can limit the maximal size of the 'fixed' pane using the maxSize parameter with a positive value
@@ -32,11 +31,11 @@ export interface SplitPaneProps {
     onResizerClick?: (event: MouseEvent) => void;       // Callback is invoked if user clicks on Resizer..
     onResizerDoubleClick?: (event: MouseEvent) => void; // Callback is invoked if user double clicks on Resizer.
 
-    style?: React.CSSProperties;                        // Styling to be applied to the main container.
-    paneStyle?: React.CSSProperties;                    // Styling to be applied to both panes.
-    pane1Style?: React.CSSProperties;                   // Styling to be applied to the first pane, with precedence over paneStyle.
-    pane2Style?: React.CSSProperties;                   // Styling to be applied to the second pane, with precedence over paneStyle.
-    resizerStyle?: React.CSSProperties;                 // Styling to be applied to the resizer bar.
+    style?: CSSProperties;                        // Styling to be applied to the main container.
+    paneStyle?: CSSProperties;                    // Styling to be applied to both panes.
+    pane1Style?: CSSProperties;                   // Styling to be applied to the first pane, with precedence over paneStyle.
+    pane2Style?: CSSProperties;                   // Styling to be applied to the second pane, with precedence over paneStyle.
+    resizerStyle?: CSSProperties;                 // Styling to be applied to the resizer bar.
 
     className?: string;                                 // Class name to be added to the SplitPane div.
     paneClassName?: string;                             // Class name to be added to each Pane's div.
@@ -70,8 +69,8 @@ function selectDefaultSize(defaultSize?: number | string, minSize?: string | num
     return minSize;
 }
 
-function removeNullChildren(children: React.ReactNode[]) {
-    return React.Children.toArray(children).filter((child) => child);
+function removeNullChildren(children: ReactNode[]) {
+    return Children.toArray(children).filter((child) => child);
 }
 
 function getSplitPaneStyle(splitVertical: boolean, style: CSSProperties | undefined) {
@@ -99,7 +98,7 @@ function getSplitPaneStyle(splitVertical: boolean, style: CSSProperties | undefi
         overflow: "hidden",
         ...style,
         ...directionSpecificParts,
-    } as React.CSSProperties;
+    } as CSSProperties;
 }
 
 /**
@@ -134,45 +133,45 @@ export function SplitPane(props: SplitPaneProps) {
     } = props;
 
     // honor same defaults as react-split-pane
-    const split = React.useMemo(() => (props.split === "horizontal" ? props.split : "vertical"), [props.split]);
-    const splitVertical = React.useMemo(() => (props.split !== "horizontal"), [props.split]);
+    const split = useMemo(() => (props.split === "horizontal" ? props.split : "vertical"), [props.split]);
+    const splitVertical = useMemo(() => (props.split !== "horizontal"), [props.split]);
 
-    const allowResize = React.useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
-    const minSize = React.useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
+    const allowResize = useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
+    const minSize = useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
     const initialSize = size !== undefined ? size : selectDefaultSize(defaultSize, minSize, maxSize);
 
-    const [position, setPosition] = React.useState(0);
-    const [draggedSize, setDraggedSize] = React.useState<number | undefined>();
-    const [active, setActive] = React.useState(false);
+    const [position, setPosition] = useState(0);
+    const [draggedSize, setDraggedSize] = useState<number | undefined>();
+    const [active, setActive] = useState(false);
 
-    const isPrimaryFirst = React.useMemo(() => (props.primary !== "second"), [props.primary]);
-    const [pane1Size, setPane1Size] = React.useState(() => isPrimaryFirst ? initialSize : undefined);
-    const [pane2Size, setPane2Size] = React.useState(() => !isPrimaryFirst ? initialSize : undefined);
+    const isPrimaryFirst = useMemo(() => (props.primary !== "second"), [props.primary]);
+    const [pane1Size, setPane1Size] = useState(() => isPrimaryFirst ? initialSize : undefined);
+    const [pane2Size, setPane2Size] = useState(() => !isPrimaryFirst ? initialSize : undefined);
 
-    const splitPane = React.useRef<HTMLDivElement>(null);
-    const pane1 = React.useRef<HTMLDivElement>(null);
-    const pane2 = React.useRef<HTMLDivElement>(null);
+    const splitPane = useRef<HTMLDivElement>(null);
+    const pane1 = useRef<HTMLDivElement>(null);
+    const pane2 = useRef<HTMLDivElement>(null);
 
-    const notNullChildren = React.useMemo(() => removeNullChildren(children), [children]);
+    const notNullChildren = useMemo(() => removeNullChildren(children), [children]);
 
-    React.useEffect(
+    useEffect(
         () => {
             isPrimaryFirst ? setPane1Size(initialSize) : setPane2Size(initialSize);
             isPrimaryFirst ? setPane2Size(undefined) : setPane1Size(undefined);
         }, [initialSize, isPrimaryFirst]
     );
 
-    const splitPaneStyle = React.useMemo(() => getSplitPaneStyle(splitVertical, style), [splitVertical, style]);
+    const splitPaneStyle = useMemo(() => getSplitPaneStyle(splitVertical, style), [splitVertical, style]);
     const pane1DivStyle = { ...paneStyle, ...pane1Style };
     const pane2DivStyle = { ...paneStyle, ...pane2Style };
-    const resizerStyle = React.useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
+    const resizerStyle = useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
 
-    const resizerClasses = React.useMemo(() => classNames("resizer", !allowResize && "disabled"), [allowResize]);
-    const splitPaneClasses = React.useMemo(() => classNames("SplitPane", className, split, !allowResize && "disabled"), [className, split, allowResize]);
-    const pane1Classes = React.useMemo(() => classNames("Pane1", paneClassName, pane1ClassName), [paneClassName, pane1ClassName]);
-    const pane2Classes = React.useMemo(() => classNames("Pane2", paneClassName, pane2ClassName), [paneClassName, pane2ClassName]);
+    const resizerClasses = useMemo(() => classNames("resizer", !allowResize && "disabled"), [allowResize]);
+    const splitPaneClasses = useMemo(() => classNames("SplitPane", className, split, !allowResize && "disabled"), [className, split, allowResize]);
+    const pane1Classes = useMemo(() => classNames("Pane1", paneClassName, pane1ClassName), [paneClassName, pane1ClassName]);
+    const pane2Classes = useMemo(() => classNames("Pane2", paneClassName, pane2ClassName), [paneClassName, pane2ClassName]);
 
-    const initializeDrag = React.useCallback(
+    const initializeDrag = useCallback(
         (x: number, y: number) => {
             unselect(splitPane.current?.ownerDocument);
 
@@ -184,7 +183,7 @@ export function SplitPane(props: SplitPaneProps) {
         [onDragStarted, splitVertical]
     );
 
-    const onTouchStart = React.useCallback(
+    const onTouchStart = useCallback(
         (event: TouchEvent) => {
             if (allowResize) {
                 initializeDrag(event.touches[0].clientX, event.touches[0].clientY);
@@ -193,7 +192,7 @@ export function SplitPane(props: SplitPaneProps) {
         [allowResize, initializeDrag]
     );
 
-    const processMove = React.useCallback(
+    const processMove = useCallback(
         (x: number, y: number) => {
             unselect(splitPane.current?.ownerDocument);
 
@@ -256,7 +255,7 @@ export function SplitPane(props: SplitPaneProps) {
         [maxSize, minSize, onChange, position, isPrimaryFirst, splitVertical, step]
     );
 
-    const onTouchMove = React.useCallback(
+    const onTouchMove = useCallback(
         (event: TouchEvent) => {
             if (!allowResize || !active) return;
             processMove(event.touches[0].clientX, event.touches[0].clientY);
@@ -264,7 +263,7 @@ export function SplitPane(props: SplitPaneProps) {
         [active, allowResize, processMove]
     );
 
-    const onMouseMove = React.useCallback(
+    const onMouseMove = useCallback(
         (event: MouseEvent) => {
             if (!allowResize || !active) return;
             processMove(event.clientX, event.clientY);
@@ -272,7 +271,7 @@ export function SplitPane(props: SplitPaneProps) {
         [active, allowResize, processMove]
     );
 
-    const onMouseDown = React.useCallback(
+    const onMouseDown = useCallback(
         (event: MouseEvent) => {
             if (allowResize) {
                 event.preventDefault();
@@ -282,14 +281,14 @@ export function SplitPane(props: SplitPaneProps) {
         [allowResize, initializeDrag]
     );
 
-    const processResizeFinished = React.useCallback(() => {
+    const processResizeFinished = useCallback(() => {
         if (draggedSize !== undefined && allowResize && active) {
-            onDragFinished && onDragFinished(draggedSize);
+            onDragFinished?.(draggedSize);
         }
         setActive(false);
     }, [draggedSize, allowResize, active, onDragFinished]);
 
-    const onMouseUp = React.useCallback(
+    const onMouseUp = useCallback(
         (event: MouseEvent) => {
             event.preventDefault();
             processResizeFinished();
@@ -297,7 +296,7 @@ export function SplitPane(props: SplitPaneProps) {
         [processResizeFinished]
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
         const doc = splitPane.current?.ownerDocument;
         if (!doc) return;
 

@@ -77,7 +77,7 @@ function unFocus(ownerDoc: Document | undefined) {
     }
 }
 
-function getDefaultSize(defaultSize?: number | string, minSize?: string | number, maxSize?: string | number, draggedSize?: number) {
+function selectDefaultSize(defaultSize?: number | string, minSize?: string | number, maxSize?: string | number, draggedSize?: number) {
     if (typeof draggedSize === "number") {
         const min = typeof minSize === "number" ? minSize : 0;
         const max = typeof maxSize === "number" && maxSize >= 0 ? maxSize : Infinity;
@@ -126,20 +126,23 @@ export function SplitPane(props: SplitPaneProps) {
     } = props;
 
     // honor same defaults as react-split-pane
-    const allowResize = React.useMemo(() => (undefined !== props.allowResize ? props.allowResize : true), [props.allowResize]);
-    const minSize = React.useMemo(() => (undefined !== props.minSize ? props.minSize : 50), [props.minSize]);
-    const primary = React.useMemo(() => (undefined !== props.primary ? props.primary : "first"), [props.primary]);
-    const split = React.useMemo(() => (undefined !== props.split ? props.split : "vertical"), [props.split]);
-    const initialSize = size !== undefined ? size : getDefaultSize(defaultSize, minSize, maxSize);
+    const allowResize = React.useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
+    const minSize = React.useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
+    const primary = React.useMemo(() => (props.primary !== undefined ? props.primary : "first"), [props.primary]);
+    const split = React.useMemo(() => (props.split !== undefined ? props.split : "vertical"), [props.split]);
+    const initialSize = size !== undefined ? size : selectDefaultSize(defaultSize, minSize, maxSize);
 
     const [position, setPosition] = React.useState(0);
     const [draggedSize, setDraggedSize] = React.useState<number | undefined>();
     const [active, setActive] = React.useState(false);
+    
     const [pane1Size, setPane1Size] = React.useState(() => primary === "first" ? initialSize : undefined);
     const [pane2Size, setPane2Size] = React.useState(() => primary === "second" ? initialSize : undefined);
+    
     const splitPane = React.useRef<HTMLDivElement>(null);
     const pane1 = React.useRef<HTMLDivElement>(null);
     const pane2 = React.useRef<HTMLDivElement>(null);
+
     const notNullChildren = React.useMemo(() => removeNullChildren(children), [children]);
 
     React.useEffect(
@@ -190,7 +193,7 @@ export function SplitPane(props: SplitPaneProps) {
         (x: number, y: number) => {
             unFocus(splitPane.current?.ownerDocument);
             const newPosition = split === "vertical" ? x : y;
-            onDragStarted && onDragStarted();
+            onDragStarted?.();
             setActive(true);
             setPosition(newPosition);
         },
@@ -218,9 +221,11 @@ export function SplitPane(props: SplitPaneProps) {
             if (ref && ref2 && splitPaneDiv) {
                 const node = ref;
                 const node2 = ref2;
+
                 if (node.getBoundingClientRect) {
                     const width = node.getBoundingClientRect().width;
                     const height = node.getBoundingClientRect().height;
+
                     const current = split === "vertical" ? x : y;
                     const oldSize = split === "vertical" ? width : height;
                     let positionDelta = position - current;
@@ -294,7 +299,7 @@ export function SplitPane(props: SplitPaneProps) {
     );
 
     const processResizeFinished = React.useCallback(() => {
-        if (undefined !== draggedSize && allowResize && active) {
+        if (draggedSize !== undefined && allowResize && active) {
             onDragFinished && onDragFinished(draggedSize);
         }
         setActive(false);

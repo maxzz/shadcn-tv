@@ -74,9 +74,9 @@ function removeNullChildren(children: React.ReactNode[]) {
     return React.Children.toArray(children).filter((child) => child);
 }
 
-function getSplitPaneStyle(split: SplitPaneProps["split"], style: CSSProperties | undefined) {
+function getSplitPaneStyle(splitVertical: boolean, style: CSSProperties | undefined) {
     const directionSpecificParts =
-        split === "vertical"
+        splitVertical
             ? {
                 flexDirection: "row",
                 left: 0,
@@ -134,7 +134,9 @@ export function SplitPane(props: SplitPaneProps) {
     } = props;
 
     // honor same defaults as react-split-pane
-    const split = React.useMemo(() => (props.split !== undefined ? props.split : "vertical"), [props.split]);
+    const split = React.useMemo(() => (props.split === "horizontal" ? props.split : "vertical"), [props.split]);
+    const splitVertical = React.useMemo(() => (props.split !== "horizontal"), [props.split]);
+
     const allowResize = React.useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
     const minSize = React.useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
     const initialSize = size !== undefined ? size : selectDefaultSize(defaultSize, minSize, maxSize);
@@ -160,7 +162,7 @@ export function SplitPane(props: SplitPaneProps) {
         }, [initialSize, isPrimaryFirst]
     );
 
-    const splitPaneStyle = React.useMemo(() => getSplitPaneStyle(split, style), [split, style]);
+    const splitPaneStyle = React.useMemo(() => getSplitPaneStyle(splitVertical, style), [splitVertical, style]);
     const pane1DivStyle = { ...paneStyle, ...pane1Style };
     const pane2DivStyle = { ...paneStyle, ...pane2Style };
     const resizerStyle = React.useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
@@ -174,12 +176,12 @@ export function SplitPane(props: SplitPaneProps) {
         (x: number, y: number) => {
             unselect(splitPane.current?.ownerDocument);
 
-            const newPosition = split === "vertical" ? x : y;
+            const newPosition = splitVertical ? x : y;
             onDragStarted?.();
             setActive(true);
             setPosition(newPosition);
         },
-        [onDragStarted, split]
+        [onDragStarted, splitVertical]
     );
 
     const onTouchStart = React.useCallback(
@@ -209,8 +211,8 @@ export function SplitPane(props: SplitPaneProps) {
                 const width = node.getBoundingClientRect().width;
                 const height = node.getBoundingClientRect().height;
 
-                const current = split === "vertical" ? x : y;
-                const oldSize = split === "vertical" ? width : height;
+                const current = splitVertical ? x : y;
+                const oldSize = splitVertical ? width : height;
                 let positionDelta = position - current;
                 if (step) {
                     if (Math.abs(positionDelta) < step) {
@@ -228,7 +230,7 @@ export function SplitPane(props: SplitPaneProps) {
 
                 let newMaxSize = maxSize;
                 if (typeof maxSize === "number" && maxSize !== undefined && maxSize <= 0) {
-                    if (split === "vertical") {
+                    if (splitVertical) {
                         newMaxSize = splitPaneDiv.getBoundingClientRect().width + maxSize;
                     } else {
                         newMaxSize = splitPaneDiv.getBoundingClientRect().height + maxSize;
@@ -251,7 +253,7 @@ export function SplitPane(props: SplitPaneProps) {
                 isPrimaryFirst ? setPane1Size(newSize) : setPane2Size(newSize);
             }
         },
-        [maxSize, minSize, onChange, position, isPrimaryFirst, split, step]
+        [maxSize, minSize, onChange, position, isPrimaryFirst, splitVertical, step]
     );
 
     const onTouchMove = React.useCallback(

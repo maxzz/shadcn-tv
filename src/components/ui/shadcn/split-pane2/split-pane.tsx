@@ -134,7 +134,7 @@ export function SplitPane(props: SplitPaneProps) {
     const splitVertical = useMemo(() => (props.split !== "horizontal"), [props.split]);
 
     const allowResize = useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
-    
+
     const minSize = useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
     const initialSize = size !== undefined ? size : selectDefaultSize(defaultSize, minSize, maxSize);
 
@@ -146,9 +146,9 @@ export function SplitPane(props: SplitPaneProps) {
     const [pane1Size, setPane1Size] = useState(() => isPrimaryFirst ? initialSize : undefined);
     const [pane2Size, setPane2Size] = useState(() => !isPrimaryFirst ? initialSize : undefined);
 
-    const splitPane = useRef<HTMLDivElement>(null);
-    const pane1 = useRef<HTMLDivElement>(null);
-    const pane2 = useRef<HTMLDivElement>(null);
+    const splitPaneRef = useRef<HTMLDivElement>(null);
+    const pane1Ref = useRef<HTMLDivElement>(null);
+    const pane2Ref = useRef<HTMLDivElement>(null);
 
     const notNullChildren = useMemo(() => removeNullChildren(children), [children]);
 
@@ -171,7 +171,7 @@ export function SplitPane(props: SplitPaneProps) {
 
     const initializeDrag = useCallback(
         (x: number, y: number) => {
-            unselect(splitPane.current?.ownerDocument);
+            unselect(splitPaneRef.current?.ownerDocument);
 
             const newPosition = splitVertical ? x : y;
             onDragStarted?.();
@@ -192,11 +192,11 @@ export function SplitPane(props: SplitPaneProps) {
 
     const processMove = useCallback(
         (x: number, y: number) => {
-            unselect(splitPane.current?.ownerDocument);
+            unselect(splitPaneRef.current?.ownerDocument);
 
-            const ref = isPrimaryFirst ? pane1.current : pane2.current;
-            const ref2 = isPrimaryFirst ? pane2.current : pane1.current;
-            const splitPaneDiv = splitPane.current;
+            const ref = isPrimaryFirst ? pane1Ref.current : pane2Ref.current;
+            const ref2 = isPrimaryFirst ? pane2Ref.current : pane1Ref.current;
+            const splitPaneDiv = splitPaneRef.current;
 
             if (ref && ref2 && splitPaneDiv) {
                 const node = ref;
@@ -295,7 +295,7 @@ export function SplitPane(props: SplitPaneProps) {
     );
 
     useEffect(() => {
-        const doc = splitPane.current?.ownerDocument;
+        const doc = splitPaneRef.current?.ownerDocument;
         if (!doc) return;
 
         doc.addEventListener("mouseup", onMouseUp);
@@ -309,11 +309,11 @@ export function SplitPane(props: SplitPaneProps) {
     }, [onMouseMove, onMouseUp, onTouchMove]);
 
     return (
-        <div className={splitPaneClasses} ref={splitPane} style={splitPaneStyle}>
+        <div className={splitPaneClasses} ref={splitPaneRef} style={splitPaneStyle}>
             <Pane
                 className={pane1Classes}
                 key="pane1"
-                eleRef={pane1}
+                eleRef={pane1Ref}
                 size={pane1Size}
                 split={split}
                 style={pane1DivStyle}
@@ -336,7 +336,7 @@ export function SplitPane(props: SplitPaneProps) {
             <Pane
                 className={pane2Classes}
                 key="pane2"
-                eleRef={pane2}
+                eleRef={pane2Ref}
                 size={pane2Size}
                 split={split}
                 style={pane2DivStyle}

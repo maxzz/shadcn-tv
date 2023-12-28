@@ -1,7 +1,5 @@
 import styles from "./dots-ring.module.css";
-
-console.log("styles", styles);
-
+// console.log("styles", styles);
 
 export function LoaderDotsRing() {
     return (

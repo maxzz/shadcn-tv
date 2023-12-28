@@ -1,4 +1,5 @@
 import * as React from "react";
+import { CSSProperties } from "react";
 import { Pane } from "./pane";
 import { Resizer } from "./resizer";
 import { classNames } from "@/utils";
@@ -73,6 +74,34 @@ function removeNullChildren(children: React.ReactNode[]) {
     return React.Children.toArray(children).filter((c) => c);
 }
 
+function getSplitPaneStyle(split: SplitPaneProps["split"], style: CSSProperties | undefined) {
+    const directionSpecificParts =
+        split === "vertical"
+            ? {
+                flexDirection: "row",
+                left: 0,
+                right: 0,
+            }
+            : {
+                flexDirection: "column",
+                top: 0,
+                bottom: 0,
+                width: "100%",
+                minHeight: "100%",
+            };
+    return {
+        flex: 1,
+        position: "absolute",
+        height: "100%",
+        display: "flex",
+        outline: "none",
+        userSelect: "text",
+        overflow: "hidden",
+        ...style,
+        ...directionSpecificParts,
+    } as React.CSSProperties;
+}
+
 /**
  * Local TypeScript implementation of `SplitPane` from `react-split-pane` package since that
  * package is not regularly maintained.
@@ -131,37 +160,11 @@ export function SplitPane(props: SplitPaneProps) {
         }, [initialSize, primary]
     );
 
-    const splitPaneStyle = React.useMemo(() => {
-        const directionSpecificParts =
-            split === "vertical"
-                ? {
-                    flexDirection: "row",
-                    left: 0,
-                    right: 0,
-                }
-                : {
-                    flexDirection: "column",
-                    top: 0,
-                    bottom: 0,
-                    width: "100%",
-                    minHeight: "100%",
-                };
-        return {
-            flex: 1,
-            position: "absolute",
-            height: "100%",
-            display: "flex",
-            outline: "none",
-            userSelect: "text",
-            overflow: "hidden",
-            ...style,
-            ...directionSpecificParts,
-        } as React.CSSProperties;
-    }, [split, style]);
-
+    const splitPaneStyle = React.useMemo(() => getSplitPaneStyle(split, style), [split, style]);
     const pane1DivStyle = { ...paneStyle, ...pane1Style };
     const pane2DivStyle = { ...paneStyle, ...pane2Style };
     const resizerStyle = React.useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
+    
     const resizerClasses = React.useMemo(() => classNames("resizer", !allowResize && "disabled"), [allowResize]);
     const splitPaneClasses = React.useMemo(() => classNames("SplitPane", className, split, !allowResize && "disabled"), [className, split, allowResize]);
     const pane1Classes = React.useMemo(() => classNames("Pane1", paneClassName, pane1ClassName), [paneClassName, pane1ClassName]);

@@ -3,9 +3,12 @@ import { Pane } from "./pane";
 import { Resizer } from "./resizer";
 import { classNames } from "@/utils";
 
+// `SplitPane` from `react-split-pane` package since that package is not regularly maintained
+// and has no TypeScript. See https://github.com/tomkp/react-split-pane
+
 export interface SplitPaneProps {
     allowResize?: boolean;                              // Pass false to disable resizing.
-    children: ReactNode[];                        // The array of two react nodes, one for each pane.
+    children: ReactNode[];                              // The array of two react nodes, one for each pane.
     primary?: "first" | "second";                       // Determines which pane maintains its size when browser window is resized.
 
     /** You can limit the maximal size of the 'fixed' pane using the maxSize parameter with a positive value
@@ -31,11 +34,11 @@ export interface SplitPaneProps {
     onResizerClick?: (event: MouseEvent) => void;       // Callback is invoked if user clicks on Resizer..
     onResizerDoubleClick?: (event: MouseEvent) => void; // Callback is invoked if user double clicks on Resizer.
 
-    style?: CSSProperties;                        // Styling to be applied to the main container.
-    paneStyle?: CSSProperties;                    // Styling to be applied to both panes.
-    pane1Style?: CSSProperties;                   // Styling to be applied to the first pane, with precedence over paneStyle.
-    pane2Style?: CSSProperties;                   // Styling to be applied to the second pane, with precedence over paneStyle.
-    resizerStyle?: CSSProperties;                 // Styling to be applied to the resizer bar.
+    style?: CSSProperties;                              // Styling to be applied to the main container.
+    paneStyle?: CSSProperties;                          // Styling to be applied to both panes.
+    pane1Style?: CSSProperties;                         // Styling to be applied to the first pane, with precedence over paneStyle.
+    pane2Style?: CSSProperties;                         // Styling to be applied to the second pane, with precedence over paneStyle.
+    resizerStyle?: CSSProperties;                       // Styling to be applied to the resizer bar.
 
     className?: string;                                 // Class name to be added to the SplitPane div.
     paneClassName?: string;                             // Class name to be added to each Pane's div.
@@ -101,12 +104,6 @@ function getSplitPaneStyle(splitVertical: boolean, style: CSSProperties | undefi
     } as CSSProperties;
 }
 
-/**
- * Local TypeScript implementation of `SplitPane` from `react-split-pane` package since that
- * package is not regularly maintained.
- * See https://github.com/tomkp/react-split-pane/blob/master/LICENSE.
- * @public
- */
 export function SplitPane(props: SplitPaneProps) {
     const {
         size,
@@ -137,6 +134,7 @@ export function SplitPane(props: SplitPaneProps) {
     const splitVertical = useMemo(() => (props.split !== "horizontal"), [props.split]);
 
     const allowResize = useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
+    
     const minSize = useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
     const initialSize = size !== undefined ? size : selectDefaultSize(defaultSize, minSize, maxSize);
 
@@ -144,7 +142,7 @@ export function SplitPane(props: SplitPaneProps) {
     const [draggedSize, setDraggedSize] = useState<number | undefined>();
     const [active, setActive] = useState(false);
 
-    const isPrimaryFirst = useMemo(() => (props.primary !== "second"), [props.primary]);
+    const isPrimaryFirst = useMemo(() => props.primary !== "second", [props.primary]);
     const [pane1Size, setPane1Size] = useState(() => isPrimaryFirst ? initialSize : undefined);
     const [pane2Size, setPane2Size] = useState(() => !isPrimaryFirst ? initialSize : undefined);
 
@@ -156,8 +154,8 @@ export function SplitPane(props: SplitPaneProps) {
 
     useEffect(
         () => {
-            isPrimaryFirst ? setPane1Size(initialSize) : setPane2Size(initialSize);
-            isPrimaryFirst ? setPane2Size(undefined) : setPane1Size(undefined);
+            setPane1Size(isPrimaryFirst ? initialSize : undefined);
+            setPane2Size(isPrimaryFirst ? undefined : initialSize);
         }, [initialSize, isPrimaryFirst]
     );
 

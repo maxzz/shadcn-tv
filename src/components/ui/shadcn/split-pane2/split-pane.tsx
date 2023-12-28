@@ -71,7 +71,7 @@ function selectDefaultSize(defaultSize?: number | string, minSize?: string | num
 }
 
 function removeNullChildren(children: React.ReactNode[]) {
-    return React.Children.toArray(children).filter((c) => c);
+    return React.Children.toArray(children).filter((child) => child);
 }
 
 function getSplitPaneStyle(split: SplitPaneProps["split"], style: CSSProperties | undefined) {
@@ -134,18 +134,18 @@ export function SplitPane(props: SplitPaneProps) {
     } = props;
 
     // honor same defaults as react-split-pane
+    const split = React.useMemo(() => (props.split !== undefined ? props.split : "vertical"), [props.split]);
     const allowResize = React.useMemo(() => (props.allowResize !== undefined ? props.allowResize : true), [props.allowResize]);
     const minSize = React.useMemo(() => (props.minSize !== undefined ? props.minSize : 50), [props.minSize]);
-    const primary = React.useMemo(() => (props.primary !== undefined ? props.primary : "first"), [props.primary]);
-    const split = React.useMemo(() => (props.split !== undefined ? props.split : "vertical"), [props.split]);
     const initialSize = size !== undefined ? size : selectDefaultSize(defaultSize, minSize, maxSize);
 
     const [position, setPosition] = React.useState(0);
     const [draggedSize, setDraggedSize] = React.useState<number | undefined>();
     const [active, setActive] = React.useState(false);
 
-    const [pane1Size, setPane1Size] = React.useState(() => primary === "first" ? initialSize : undefined);
-    const [pane2Size, setPane2Size] = React.useState(() => primary === "second" ? initialSize : undefined);
+    const isPrimaryFirst = React.useMemo(() => (props.primary !== "second"), [props.primary]);
+    const [pane1Size, setPane1Size] = React.useState(() => isPrimaryFirst ? initialSize : undefined);
+    const [pane2Size, setPane2Size] = React.useState(() => !isPrimaryFirst ? initialSize : undefined);
 
     const splitPane = React.useRef<HTMLDivElement>(null);
     const pane1 = React.useRef<HTMLDivElement>(null);
@@ -155,9 +155,9 @@ export function SplitPane(props: SplitPaneProps) {
 
     React.useEffect(
         () => {
-            primary === "first" ? setPane1Size(initialSize) : setPane2Size(initialSize);
-            primary === "first" ? setPane2Size(undefined) : setPane1Size(undefined);
-        }, [initialSize, primary]
+            isPrimaryFirst ? setPane1Size(initialSize) : setPane2Size(initialSize);
+            isPrimaryFirst ? setPane2Size(undefined) : setPane1Size(undefined);
+        }, [initialSize, isPrimaryFirst]
     );
 
     const splitPaneStyle = React.useMemo(() => getSplitPaneStyle(split, style), [split, style]);
@@ -195,7 +195,6 @@ export function SplitPane(props: SplitPaneProps) {
         (x: number, y: number) => {
             unselect(splitPane.current?.ownerDocument);
 
-            const isPrimaryFirst = primary === "first";
             const ref = isPrimaryFirst ? pane1.current : pane2.current;
             const ref2 = isPrimaryFirst ? pane2.current : pane1.current;
             const splitPaneDiv = splitPane.current;
@@ -252,7 +251,7 @@ export function SplitPane(props: SplitPaneProps) {
                 isPrimaryFirst ? setPane1Size(newSize) : setPane2Size(newSize);
             }
         },
-        [maxSize, minSize, onChange, position, primary, split, step]
+        [maxSize, minSize, onChange, position, isPrimaryFirst, split, step]
     );
 
     const onTouchMove = React.useCallback(

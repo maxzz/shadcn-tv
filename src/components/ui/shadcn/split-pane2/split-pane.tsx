@@ -164,7 +164,7 @@ export function SplitPane(props: SplitPaneProps) {
     const pane1DivStyle = { ...paneStyle, ...pane1Style };
     const pane2DivStyle = { ...paneStyle, ...pane2Style };
     const resizerStyle = React.useMemo(() => props.resizerStyle ?? {}, [props.resizerStyle]);
-    
+
     const resizerClasses = React.useMemo(() => classNames("resizer", !allowResize && "disabled"), [allowResize]);
     const splitPaneClasses = React.useMemo(() => classNames("SplitPane", className, split, !allowResize && "disabled"), [className, split, allowResize]);
     const pane1Classes = React.useMemo(() => classNames("Pane1", paneClassName, pane1ClassName), [paneClassName, pane1ClassName]);
@@ -173,6 +173,7 @@ export function SplitPane(props: SplitPaneProps) {
     const initializeDrag = React.useCallback(
         (x: number, y: number) => {
             unSelect(splitPane.current?.ownerDocument);
+
             const newPosition = split === "vertical" ? x : y;
             onDragStarted?.();
             setActive(true);
@@ -203,51 +204,52 @@ export function SplitPane(props: SplitPaneProps) {
                 const node = ref;
                 const node2 = ref2;
 
-                if (node.getBoundingClientRect) {
-                    const width = node.getBoundingClientRect().width;
-                    const height = node.getBoundingClientRect().height;
-
-                    const current = split === "vertical" ? x : y;
-                    const oldSize = split === "vertical" ? width : height;
-                    let positionDelta = position - current;
-                    if (step) {
-                        if (Math.abs(positionDelta) < step) {
-                            return;
-                        }
-                        positionDelta = ~~(positionDelta / step) * step; // Integer division
-                    }
-                    let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
-
-                    const pane1Order = parseInt(node.ownerDocument?.defaultView?.getComputedStyle(node).order ?? "0", 10);
-                    const pane2Order = parseInt(node2.ownerDocument?.defaultView?.getComputedStyle(node2).order ?? "0", 10);
-                    if (pane1Order > pane2Order) {
-                        sizeDelta = -sizeDelta;
-                    }
-
-                    let newMaxSize = maxSize;
-                    if (typeof maxSize === "number" && maxSize !== undefined && maxSize <= 0) {
-                        if (split === "vertical") {
-                            newMaxSize = splitPaneDiv.getBoundingClientRect().width + maxSize;
-                        } else {
-                            newMaxSize = splitPaneDiv.getBoundingClientRect().height + maxSize;
-                        }
-                    }
-
-                    let newSize = oldSize - sizeDelta;
-                    const newPosition = position - positionDelta;
-
-                    if (typeof minSize === "number" && newSize < minSize) {
-                        newSize = minSize;
-                    } else if (typeof newMaxSize === "number" && newMaxSize !== undefined && newSize > newMaxSize) {
-                        newSize = newMaxSize;
-                    } else {
-                        setPosition(newPosition);
-                    }
-
-                    onChange && onChange(newSize);
-                    setDraggedSize(newSize);
-                    isPrimaryFirst ? setPane1Size(newSize) : setPane2Size(newSize);
+                if (!node.getBoundingClientRect) {
+                    return;
                 }
+                const width = node.getBoundingClientRect().width;
+                const height = node.getBoundingClientRect().height;
+
+                const current = split === "vertical" ? x : y;
+                const oldSize = split === "vertical" ? width : height;
+                let positionDelta = position - current;
+                if (step) {
+                    if (Math.abs(positionDelta) < step) {
+                        return;
+                    }
+                    positionDelta = ~~(positionDelta / step) * step; // Integer division
+                }
+                let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
+
+                const pane1Order = parseInt(node.ownerDocument?.defaultView?.getComputedStyle(node).order ?? "0", 10);
+                const pane2Order = parseInt(node2.ownerDocument?.defaultView?.getComputedStyle(node2).order ?? "0", 10);
+                if (pane1Order > pane2Order) {
+                    sizeDelta = -sizeDelta;
+                }
+
+                let newMaxSize = maxSize;
+                if (typeof maxSize === "number" && maxSize !== undefined && maxSize <= 0) {
+                    if (split === "vertical") {
+                        newMaxSize = splitPaneDiv.getBoundingClientRect().width + maxSize;
+                    } else {
+                        newMaxSize = splitPaneDiv.getBoundingClientRect().height + maxSize;
+                    }
+                }
+
+                let newSize = oldSize - sizeDelta;
+                const newPosition = position - positionDelta;
+
+                if (typeof minSize === "number" && newSize < minSize) {
+                    newSize = minSize;
+                } else if (typeof newMaxSize === "number" && newMaxSize !== undefined && newSize > newMaxSize) {
+                    newSize = newMaxSize;
+                } else {
+                    setPosition(newPosition);
+                }
+
+                onChange?.(newSize);
+                setDraggedSize(newSize);
+                isPrimaryFirst ? setPane1Size(newSize) : setPane2Size(newSize);
             }
         },
         [maxSize, minSize, onChange, position, primary, split, step]

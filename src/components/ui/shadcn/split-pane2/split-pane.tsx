@@ -44,7 +44,7 @@ export interface SplitPaneProps {
     pane2ClassName?: string;                            // Class name to be added to Pane2's div.
 }
 
-function unSelect(ownerDoc: Document | undefined) {
+function unselect(ownerDoc: Document | undefined) {
     if (!ownerDoc) return;
 
     const docSelection = ownerDoc.getSelection();
@@ -172,7 +172,7 @@ export function SplitPane(props: SplitPaneProps) {
 
     const initializeDrag = React.useCallback(
         (x: number, y: number) => {
-            unSelect(splitPane.current?.ownerDocument);
+            unselect(splitPane.current?.ownerDocument);
 
             const newPosition = split === "vertical" ? x : y;
             onDragStarted?.();
@@ -193,7 +193,7 @@ export function SplitPane(props: SplitPaneProps) {
 
     const processMove = React.useCallback(
         (x: number, y: number) => {
-            unSelect(splitPane.current?.ownerDocument);
+            unselect(splitPane.current?.ownerDocument);
 
             const isPrimaryFirst = primary === "first";
             const ref = isPrimaryFirst ? pane1.current : pane2.current;

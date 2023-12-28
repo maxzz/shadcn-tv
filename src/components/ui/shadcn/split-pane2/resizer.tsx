@@ -1,6 +1,5 @@
 import { CSSProperties, useMemo } from "react";
 import { classNames } from "@/utils";
-import "./resizer.css";
 
 /** Based on react-split-pane package. See https://github.com/tomkp/react-split-pane/blob/master/LICENSE */
 

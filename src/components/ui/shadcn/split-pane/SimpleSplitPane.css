@@ -28,7 +28,7 @@
 }
 
 .splitpane-divider:hover {
-    background-color: rgb(45, 143, 255);
+    background-color: hsl(212, 100%, 59%);
     /* background-color: #999; */
     /* cursor: col-resize; */
     cursor: ew-resize;

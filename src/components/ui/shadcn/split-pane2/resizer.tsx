@@ -1,4 +1,4 @@
-import * as React from "react";
+import { CSSProperties, useMemo } from "react";
 import { classNames } from "@/utils";
 import "./resizer.css";
 
@@ -6,7 +6,7 @@ import "./resizer.css";
 
 export interface ResizerProps {
     split?: "vertical" | "horizontal";
-    style?: React.CSSProperties;
+    style?: CSSProperties;
     className: string;
     onMouseDown: (event: MouseEvent) => void;
     onTouchEnd: () => void;
@@ -27,7 +27,7 @@ export function Resizer(props: ResizerProps) {
         style,
     } = props;
 
-    const resizerClasses = React.useMemo(() => classNames(split, className), [split, className]);
+    const resizerClasses = useMemo(() => classNames(split, className), [split, className]);
 
     return (
         <span
@@ -35,9 +35,7 @@ export function Resizer(props: ResizerProps) {
             className={resizerClasses}
             style={style}
             onMouseDown={(event) => onMouseDown(event.nativeEvent)}
-            onTouchStart={(event) => {
-                onTouchStart(event.nativeEvent);
-            }}
+            onTouchStart={(event) => onTouchStart(event.nativeEvent)}
             onTouchEnd={(event) => {
                 event.preventDefault();
                 onTouchEnd();

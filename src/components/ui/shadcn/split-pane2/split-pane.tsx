@@ -3,19 +3,11 @@ import { Pane } from "./pane";
 import { Resizer } from "./resizer";
 import { classNames } from "@/utils";
 
-/**
- * Props for [[SplitPane]] component
- * @public
- */
 export interface SplitPaneProps {
-    /** Pass false to disable resizing */
-    allowResize?: boolean;
-    /** The array of two react nodes, one for each pane. */
-    children: React.ReactNode[];
-    /** Determines which pane maintains its size when browser window is resized.*/
-    primary?: "first" | "second";
+    allowResize?: boolean;                              // Pass false to disable resizing.
+    children: React.ReactNode[];                        // The array of two react nodes, one for each pane.
+    primary?: "first" | "second";                       // Determines which pane maintains its size when browser window is resized.
 
-    minSize?: string | number;
     /** You can limit the maximal size of the 'fixed' pane using the maxSize parameter with a positive value
      * (measured in pixels but state just a number). If you wrap the SplitPane into a container component
      * (yes you can, just remember the container has to have the relative or absolute positioning), then you'll need to limit
@@ -24,46 +16,34 @@ export interface SplitPaneProps {
      * will stop at the border of the SplitPane component and think this you'll be able to pick it again and drag it back then.
      *  And more: if you set the maxSize to negative value (e.g. -200), then the splitter stops 200px before the border
      * (in other words it sets the minimal size of the 'resizable' pane in this case). This can be useful also in the
-     * full-screen case of use. */
+     * full-screen case of use.
+     */
     maxSize?: string | number;
-    /** Default initial size of primary pane */
-    defaultSize?: string | number;
-    /** Size of primary pane */
-    size?: string | number;
-    /** You can use the step prop to only allow resizing in fixed increments. */
-    step?: number;
+    minSize?: string | number;
+    defaultSize?: string | number;                      // Default initial size of primary pane.
+    size?: string | number;                             // Size of primary pane.
+    step?: number;                                      // You can use the step prop to only allow resizing in fixed increments..
     split?: "vertical" | "horizontal";
-    /** This callback is invoked when a drag start. */
-    onDragStarted?: () => void;
-    /** This callback is invoked when a drag ends. */
-    onDragFinished?: (newSize: number) => void;
-    /** Callback is invoked with the current drag during a drag event.*/
-    onChange?: (newSize: number) => void;
-    /** Callback is invoked if user clicks on Resizer. */
-    onResizerClick?: (event: MouseEvent) => void;
-    /** Callback is invoked if user double clicks on Resizer. */
-    onResizerDoubleClick?: (event: MouseEvent) => void;
-    /** Styling to be applied to the main container */
-    style?: React.CSSProperties;
-    /** Styling to be applied to both panes */
-    paneStyle?: React.CSSProperties;
-    /** Styling to be applied to the first pane, with precedence over paneStyle */
-    pane1Style?: React.CSSProperties;
-    /** Styling to be applied to the second pane, with precedence over paneStyle */
-    pane2Style?: React.CSSProperties;
-    /** Styling to be applied to the resizer bar */
-    resizerStyle?: React.CSSProperties;
-    /** Class name to be added to the SplitPane div */
-    className?: string;
-    /** Class name to be added to each Pane's div */
-    paneClassName?: string;
-    /** Class name to be added to Pane1's div */
-    pane1ClassName?: string;
-    /** Class name to be added to Pane2's div */
-    pane2ClassName?: string;
+
+    onDragStarted?: () => void;                         // This callback is invoked when a drag start..
+    onDragFinished?: (newSize: number) => void;         // This callback is invoked when a drag ends..
+    onChange?: (newSize: number) => void;               // Callback is invoked with the current drag during a drag event.
+    onResizerClick?: (event: MouseEvent) => void;       // Callback is invoked if user clicks on Resizer..
+    onResizerDoubleClick?: (event: MouseEvent) => void; // Callback is invoked if user double clicks on Resizer.
+
+    style?: React.CSSProperties;                        // Styling to be applied to the main container.
+    paneStyle?: React.CSSProperties;                    // Styling to be applied to both panes.
+    pane1Style?: React.CSSProperties;                   // Styling to be applied to the first pane, with precedence over paneStyle.
+    pane2Style?: React.CSSProperties;                   // Styling to be applied to the second pane, with precedence over paneStyle.
+    resizerStyle?: React.CSSProperties;                 // Styling to be applied to the resizer bar.
+
+    className?: string;                                 // Class name to be added to the SplitPane div.
+    paneClassName?: string;                             // Class name to be added to each Pane's div.
+    pane1ClassName?: string;                            // Class name to be added to Pane1's div.
+    pane2ClassName?: string;                            // Class name to be added to Pane2's div.
 }
 
-function unFocus(ownerDoc: Document | undefined) {
+function unSelect(ownerDoc: Document | undefined) {
     if (!ownerDoc) return;
 
     const docSelection = ownerDoc.getSelection();
@@ -101,25 +81,24 @@ function removeNullChildren(children: React.ReactNode[]) {
  */
 export function SplitPane(props: SplitPaneProps) {
     const {
-        style,
         size,
         defaultSize,
         maxSize,
+        step,
         children,
 
+        style,
         paneStyle,
         pane1Style,
         pane2Style,
 
         className,
-
         paneClassName,
         pane1ClassName,
         pane2ClassName,
 
         onDragStarted,
         onDragFinished,
-        step,
         onChange,
         onResizerClick,
         onResizerDoubleClick,
@@ -135,10 +114,10 @@ export function SplitPane(props: SplitPaneProps) {
     const [position, setPosition] = React.useState(0);
     const [draggedSize, setDraggedSize] = React.useState<number | undefined>();
     const [active, setActive] = React.useState(false);
-    
+
     const [pane1Size, setPane1Size] = React.useState(() => primary === "first" ? initialSize : undefined);
     const [pane2Size, setPane2Size] = React.useState(() => primary === "second" ? initialSize : undefined);
-    
+
     const splitPane = React.useRef<HTMLDivElement>(null);
     const pane1 = React.useRef<HTMLDivElement>(null);
     const pane2 = React.useRef<HTMLDivElement>(null);
@@ -167,7 +146,6 @@ export function SplitPane(props: SplitPaneProps) {
                     width: "100%",
                     minHeight: "100%",
                 };
-
         return {
             flex: 1,
             position: "absolute",
@@ -191,7 +169,7 @@ export function SplitPane(props: SplitPaneProps) {
 
     const initializeDrag = React.useCallback(
         (x: number, y: number) => {
-            unFocus(splitPane.current?.ownerDocument);
+            unSelect(splitPane.current?.ownerDocument);
             const newPosition = split === "vertical" ? x : y;
             onDragStarted?.();
             setActive(true);
@@ -211,7 +189,7 @@ export function SplitPane(props: SplitPaneProps) {
 
     const processMove = React.useCallback(
         (x: number, y: number) => {
-            unFocus(splitPane.current?.ownerDocument);
+            unSelect(splitPane.current?.ownerDocument);
 
             const isPrimaryFirst = primary === "first";
             const ref = isPrimaryFirst ? pane1.current : pane2.current;

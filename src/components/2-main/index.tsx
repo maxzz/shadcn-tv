@@ -33,15 +33,15 @@ function ConvertForm() {
 }
 
 export function Section2_Main() {
-    return (
-        <div className="1flex flex-col overflow-hidden">
-            <div className="m-4 overflow-hidden">
+    return (<>
+        {/* <div className="flex flex-col overflow-hidden"> */}
+            <div className="m-4 h-[160px] overflow-hidden">
                 <DemoTreeOptimized />
             </div>
 
             <ScrollArea className="p-4 min-w-0 overflow-hidden">
                 <ConvertForm />
             </ScrollArea>
-        </div>
-    );
+        {/* </div> */}
+        </>);
 }

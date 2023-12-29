@@ -16,7 +16,7 @@ const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithou
     ({ className, children, ...rest }, ref) => (
         <Prim.Root ref={ref} className={cn("relative overflow-hidden", className)} {...rest}>
 
-            <Prim.Viewport className="h-full w-full rounded-[inherit] [&>div]:![display:block]">
+            <Prim.Viewport data-as-table className="h-full w-full rounded-[inherit] [&[data-as-table='true']>div]:![display:block]">
                 {children}
             </Prim.Viewport>
 

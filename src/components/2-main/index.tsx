@@ -34,7 +34,7 @@ function ConvertForm() {
 
 export function Section2_Main() {
     return (<>
-        <ScrollArea className="p-4 min-w-0 overflow-hidden">
+        <ScrollArea className="p-4 min-w-0 overflow-hidden" data-no-table>
             <ConvertForm />
         </ScrollArea>
 

@@ -21,8 +21,8 @@ export const showcases: Showcase[] = [
     { id: '50', name: "Skeleton", component: <SkeletonDemo /> },
     { id: '61', name: "Switch. neon", component: <NeonSwitch /> },
     { id: '62', name: "Switch. styled", component: <DemoSwitchStyled /> },
-    { id: '63', name: "Splitter", component: <DemoSplitter /> },
-    { id: '71', name: "Tree unoptimized", component: <DemoTree /> },
+    // { id: '63', name: "Splitter", component: <DemoSplitter /> },
+    // { id: '71', name: "Tree unoptimized", component: <DemoTree /> },
     { id: '72', name: "Tree", component: <DemoTreeOptimized /> },
 ];
 

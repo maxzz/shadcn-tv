@@ -33,13 +33,19 @@ function ConvertForm() {
 }
 
 export function Section2_Main() {
-    return (<>
-        <ScrollArea className="p-4 min-w-0 overflow-hidden" data-no-table>
-            <ConvertForm />
-        </ScrollArea>
+    return (
+        <div className="min-h-0 grid grid-rows-[1fr,auto,auto]">
+            <ScrollArea className="flex-1 p-4 min-w-0 overflow-hidden" data-no-table>
+                <ConvertForm />
+            </ScrollArea>
 
-        <div className="m-4 h-[160px] overflow-hidden">
-            <DemoTreeOptimized />
+
+                <div className="mx-4">Non-scrollable area</div>
+                <div className="mx-4 mb-12 h-[160px] overflow-hidden">
+
+                    <DemoTreeOptimized />
+                </div>
+
         </div>
-    </>);
+    );
 }

@@ -5,6 +5,7 @@ import { TableDemo } from "@/components/2-main/2-demo/demo-table";
 import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";
 import { DemoTree, DemoTreeOptimized } from "@/components/2-main/2-demo/demo-tree";
 import { DemoSplitter } from "@/components/2-main/2-demo/demo-tree2";
+import { GradientColorPickerExample } from "@/components/ui/shadcn/gradient-color-picker";
 
 export type Showcase = {
     id: string;
@@ -24,6 +25,7 @@ export const showcasesData: Showcase[] = [
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
     // { id: '71', name: "Tree unoptimized", component: <DemoTree /> },
     { id: '72', name: "Tree", component: <DemoTreeOptimized /> },
+    { id: '80', name: "Gradient color picker", component: <GradientColorPickerExample /> },
 ];
 
 export const initialCase = "72";

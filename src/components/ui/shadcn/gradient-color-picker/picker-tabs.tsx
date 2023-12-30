@@ -1,5 +1,5 @@
 import { TabsContent } from '../tabs';
-import { GradientButton } from './gradient-button';
+import { SelectButton } from './select-button';
 
 const solids = [
     '#e2e2e2',
@@ -67,12 +67,12 @@ export function TabGradient({ background, setBackground }: { background: string;
                 ))}
             </div>
 
-            <GradientButton background={background}>
+            <SelectButton background={background}>
                 💡 Get more at{' '}
                 <a href="https://gradient.page/css/ui-gradients" className="font-bold hover:underline" target="_blank">
                     GradientPage
                 </a>
-            </GradientButton>
+            </SelectButton>
         </TabsContent>
     );
 }
@@ -91,7 +91,7 @@ export function TabImage({ background, setBackground }: { background: string; se
                 ))}
             </div>
 
-            <GradientButton background={background}>
+            <SelectButton background={background}>
                 🔓 Get more{' '}
                 <a href="https://gradient.page/wallpapers" className="font-bold hover:underline" target="_blank">
                     wallpapers
@@ -102,7 +102,7 @@ export function TabImage({ background, setBackground }: { background: string; se
                         GradientPage
                     </a>, get 80%
                 </div>
-            </GradientButton>
+            </SelectButton>
         </TabsContent>
     );
 }

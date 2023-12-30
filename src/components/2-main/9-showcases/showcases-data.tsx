@@ -5,7 +5,7 @@ import { TableDemo } from "@/components/2-main/2-demo/demo-table";
 import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";
 import { DemoTree, DemoTreeOptimized } from "@/components/2-main/2-demo/demo-tree";
 import { DemoSplitter } from "@/components/2-main/2-demo/demo-tree2";
-import { GradientColorPickerExample } from "@/components/ui/shadcn/gradient-color-picker";
+import { GradientColorPickerExample } from "../2-demo/demo-color-picker";
 
 export type Showcase = {
     id: string;

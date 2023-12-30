@@ -1,5 +1,4 @@
 import { TabsContent } from '../../tabs';
-import { SelectButton } from '../select-button';
 
 const solids = [
     '#e2e2e2',

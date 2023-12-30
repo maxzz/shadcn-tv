@@ -1,9 +1,9 @@
 import { FontInputTitleBar } from './1-top-row';
-import { DialogDemoWoTrigger } from '../ui/shadcn/demo/demo-dialog-wo-trigger';
+import { DialogDemoWoTrigger } from './2-demo/demo-dialog-wo-trigger';
 import { Showcases } from './9-showcases';
 import { showcases } from './9-showcases/cases';
 import { Button, ScrollArea } from '@/components/ui/shadcn';
-import { DemoTreeOptimized } from '../ui/shadcn/demo/demo-tree';
+import { DemoTreeOptimized } from './2-demo/demo-tree';
 
 function FontInput() {
     return (
@@ -39,13 +39,10 @@ export function Section2_Main() {
                 <ConvertForm />
             </ScrollArea>
 
-
-                <div className="mx-4">Non-scrollable area</div>
-                <div className="mx-4 mb-12 h-[160px] overflow-hidden">
-
-                    <DemoTreeOptimized />
-                </div>
-
+            <div className="mx-4">Non-scrollable area</div>
+            <div className="mx-4 mb-12 h-[160px] overflow-hidden">
+                <DemoTreeOptimized />
+            </div>
         </div>
     );
 }

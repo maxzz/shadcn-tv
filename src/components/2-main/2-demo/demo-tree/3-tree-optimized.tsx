@@ -6,7 +6,7 @@ import { data } from "./1-tree-data";
 import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { inputFocusClasses } from "@/components/ui/shared-styles";
 import { classNames } from "@/utils";
-import { SimpleSplitPane } from "../../split-pane";
+import { SimpleSplitPane } from "../../../ui/shadcn/split-pane";
 
 const initialItemId = "6.1.2";
 

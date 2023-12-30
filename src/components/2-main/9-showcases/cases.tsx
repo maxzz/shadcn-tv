@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "@/components/ui/experimental";
-import { DataTableDemo } from "@/components/ui/shadcn/demo/demo-data-table";
-import { TableDemo } from "@/components/ui/shadcn/demo/demo-table";
-import { SkeletonDemo } from "@/components/ui/shadcn/demo/demo-skeleton";
-import { DemoTree, DemoTreeOptimized } from "@/components/ui/shadcn/demo/demo-tree";
-import { DemoSplitter } from "@/components/ui/shadcn/demo/demo-tree2";
+import { DataTableDemo } from "@/components/2-main/2-demo/demo-data-table";
+import { TableDemo } from "@/components/2-main/2-demo/demo-table";
+import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";
+import { DemoTree, DemoTreeOptimized } from "@/components/2-main/2-demo/demo-tree";
+import { DemoSplitter } from "@/components/2-main/2-demo/demo-tree2";
 
 export type Showcase = {
     id: string;

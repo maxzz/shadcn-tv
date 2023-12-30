@@ -1,4 +1,4 @@
-import { SplitPane } from "../../split-pane2";
+import { SplitPane } from "../../../ui/shadcn/split-pane2";
 
 export function DemoSplitter() {
     return (

@@ -12,9 +12,11 @@ function FontInput() {
     );
 }
 
+const sectionBackgroundClasses = 'bg-muted/30 border-muted-foreground/30 border-t border-b';
+
 function ConvertForm() {
     return (
-        <div className="mx-4 flex flex-col space-y-4">
+        <div className={`p-4 flex flex-col space-y-4 ${sectionBackgroundClasses}`}>
             <div className="border-muted border-b">
                 <FontInput />
             </div>
@@ -29,18 +31,30 @@ function ConvertForm() {
     );
 }
 
+function ButtomFixedSection() {
+    return (
+        <div className={`px-4 py-2 ${sectionBackgroundClasses}`}>
+            <div className="mb-1">
+                Fixed height non-scrollable area
+            </div>
+
+            <div className="h-[160px] overflow-hidden">
+                <DemoTreeOptimized />
+            </div>
+        </div>
+    );
+}
+
 export function Section2_Main() {
     return (
-        <div className="min-h-0 grid grid-rows-[1fr,auto,auto]">
+        <div className="min-h-0 grid grid-rows-[auto,1fr,auto]">
             <ConvertForm />
+
             <ScrollArea className="flex-1 p-4 min-w-0 overflow-hidden" data-fixed-width>
                 <Showcases cases={showcasesData} />
             </ScrollArea>
 
-            <div className="mx-4">Non-scrollable area</div>
-            <div className="mx-4 mb-12 h-[160px] overflow-hidden">
-                <DemoTreeOptimized />
-            </div>
+            <ButtomFixedSection />
         </div>
     );
 }

@@ -35,7 +35,7 @@ function ConvertForm() {
 export function Section2_Main() {
     return (
         <div className="min-h-0 grid grid-rows-[1fr,auto,auto]">
-            <ScrollArea className="flex-1 p-4 min-w-0 overflow-hidden" data-no-table>
+            <ScrollArea className="flex-1 p-4 min-w-0 overflow-hidden" data-fixed-width>
                 <ConvertForm />
             </ScrollArea>
 

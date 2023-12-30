@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "@/components/ui/experimental";
+import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderCss, TablesWithStyckyHeaderModules } from "@/components/2-main/3-experimental";
 import { DataTableDemo } from "@/components/2-main/2-demo/demo-data-table";
 import { TableDemo } from "@/components/2-main/2-demo/demo-table";
 import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";

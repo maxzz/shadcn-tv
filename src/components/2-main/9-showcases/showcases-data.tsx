@@ -12,7 +12,7 @@ export type Showcase = {
     component: ReactNode;
 };
 
-export const showcases: Showcase[] = [
+export const showcasesData: Showcase[] = [
     { id: '10', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
     { id: '20', name: "Data table", component: <DataTableDemo /> },
     { id: '30', name: "Table", component: <TableDemo className="m-auto max-w-sm" /> },

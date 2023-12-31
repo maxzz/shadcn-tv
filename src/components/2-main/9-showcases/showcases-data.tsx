@@ -12,16 +12,21 @@ function TableInTabs() {
     return (
         <Tabs defaultValue="table1">
             <TabsList>
-                <TabsTrigger value="table1">Table1</TabsTrigger>
-                <TabsTrigger value="table2">Table2</TabsTrigger>
+                <TabsTrigger value="table1">Data table</TabsTrigger>
+                <TabsTrigger value="table2">Table</TabsTrigger>
+                <TabsTrigger value="table3">Table sticky headers with .module.css</TabsTrigger>
             </TabsList>
 
             <TabsContent value="table1">
-                <div className="">1</div>
+                <DataTableDemo />
             </TabsContent>
 
             <TabsContent value="table2">
-                <div className="">2</div>
+                <TableDemo className="m-auto max-w-sm" />
+            </TabsContent>
+
+            <TabsContent value="table3">
+                <TablesWithStyckyHeaderModules />
             </TabsContent>
         </Tabs>
     );

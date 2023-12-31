@@ -6,6 +6,26 @@ import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";
 import { DemoTree, DemoTreeOptimized } from "@/components/2-main/2-demo/demo-tree";
 import { DemoSplitter } from "@/components/2-main/2-demo/demo-tree2";
 import { GradientColorPickerExample } from "../2-demo/demo-color-picker";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
+
+function TableInTabs() {
+    return (
+        <Tabs defaultValue="table1">
+            <TabsList>
+                <TabsTrigger value="table1">Table1</TabsTrigger>
+                <TabsTrigger value="table2">Table2</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="table1">
+                <div className="">1</div>
+            </TabsContent>
+
+            <TabsContent value="table2">
+                <div className="">2</div>
+            </TabsContent>
+        </Tabs>
+    );
+}
 
 export type Showcase = {
     id: string;
@@ -14,6 +34,8 @@ export type Showcase = {
 };
 
 export const showcasesData: Showcase[] = [
+    { id: '01', name: "Tables", component: <TableInTabs /> },
+
     { id: '10', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
     { id: '20', name: "Data table", component: <DataTableDemo /> },
     { id: '30', name: "Table", component: <TableDemo className="m-auto max-w-sm" /> },
@@ -28,4 +50,4 @@ export const showcasesData: Showcase[] = [
     { id: '80', name: "Gradient color picker", component: <GradientColorPickerExample /> },
 ];
 
-export const initialCase = "72";
+export const initialCase = "01";

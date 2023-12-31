@@ -32,25 +32,6 @@ function TableInTabs() {
     );
 }
 
-function SwitchInTabs() {
-    return (
-        <Tabs defaultValue="switch1">
-            <TabsList>
-                <TabsTrigger value="switch1">Neon switch</TabsTrigger>
-                <TabsTrigger value="switch2">Styled switch</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="switch1">
-                <NeonSwitch />
-            </TabsContent>
-
-            <TabsContent value="switch2">
-                <DemoSwitchStyled />
-            </TabsContent>
-        </Tabs>
-    );
-}
-
 function LoadersInTab() {
     return (
         <Tabs defaultValue="loaders1">
@@ -70,6 +51,30 @@ function LoadersInTab() {
     );
 }
 
+function SwitchInTabs() {
+    return (
+        <Tabs defaultValue="switch1">
+            <TabsList>
+                <TabsTrigger value="switch1">Neon switch</TabsTrigger>
+                <TabsTrigger value="switch2">Styled switch</TabsTrigger>
+                <TabsTrigger value="switch3">Gradient color picker</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="switch1">
+                <NeonSwitch />
+            </TabsContent>
+
+            <TabsContent value="switch2">
+                <DemoSwitchStyled />
+            </TabsContent>
+
+            <TabsContent value="switch3">
+                <GradientColorPickerExample />
+            </TabsContent>
+        </Tabs>
+    );
+}
+
 export type Showcase = {
     id: string;
     name: string;
@@ -80,12 +85,9 @@ export const showcasesData: Showcase[] = [
     { id: '10', name: "Tables", component: <TableInTabs /> },
     { id: '20', name: "Loaders", component: <LoadersInTab /> },
     { id: '30', name: "Switches", component: <SwitchInTabs /> },
-    { id: '40', name: "Gradient color picker", component: <GradientColorPickerExample /> },
-
+    { id: '41', name: "Tree", component: <DemoTreeOptimized /> },
+    // { id: '42', name: "Tree unoptimized", component: <DemoTree /> },
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
-    
-    // { id: '71', name: "Tree unoptimized", component: <DemoTree /> },
-    { id: '72', name: "Tree", component: <DemoTreeOptimized /> },
 ];
 
 export const initialCase = "01";

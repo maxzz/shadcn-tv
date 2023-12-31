@@ -3,7 +3,7 @@ import { Button } from '../button';
 import { Input } from '../input';
 import { Popover, PopoverContent, PopoverTrigger, } from '../popover';
 import { Tabs, TabsList, TabsTrigger } from '../tabs';
-import { TabSolid, TabGradient, TabImage } from './tabs';
+import { TabSolid, TabGradient, TabImage } from './tab-pages';
 import { cn } from '@/utils';
 import { Paintbrush } from 'lucide-react';
 

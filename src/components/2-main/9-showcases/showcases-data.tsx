@@ -13,9 +13,9 @@ function TableInTabs() {
     return (
         <Tabs defaultValue="table1">
             <TabsList>
-                <TabsTrigger value="table2">Simple table</TabsTrigger>
-                <TabsTrigger value="table1">Data table</TabsTrigger>
-                <TabsTrigger value="table3">Table sticky headers with .module.css</TabsTrigger>
+                <TabsTrigger value="table1">Simple table</TabsTrigger>
+                <TabsTrigger value="table2">Data table</TabsTrigger>
+                <TabsTrigger value="table3">Sticky headers table</TabsTrigger>
             </TabsList>
 
             <TabsContent value="table1">

@@ -32,6 +32,25 @@ function TableInTabs() {
     );
 }
 
+function SwitchInTabs() {
+    return (
+        <Tabs defaultValue="switch1">
+            <TabsList>
+                <TabsTrigger value="switch1">Neon switch</TabsTrigger>
+                <TabsTrigger value="switch2">Styled switch</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="switch1">
+                <NeonSwitch />
+            </TabsContent>
+
+            <TabsContent value="switch2">
+                <DemoSwitchStyled />
+            </TabsContent>
+        </Tabs>
+    );
+}
+
 export type Showcase = {
     id: string;
     name: string;
@@ -43,13 +62,16 @@ export const showcasesData: Showcase[] = [
 
     { id: '10', name: "Loaders", component: <LoadersTest className="m-auto max-w-sm flex items-center justify-between" /> },
     { id: '50', name: "Skeleton", component: <SkeletonDemo /> },
-    { id: '61', name: "Switch. neon", component: <NeonSwitch /> },
-    { id: '62', name: "Switch. styled", component: <DemoSwitchStyled /> },
+
+    { id: '60', name: "Switch", component: <SwitchInTabs /> },
+    // { id: '61', name: "Switch. neon", component: <NeonSwitch /> },
+    // { id: '62', name: "Switch. styled", component: <DemoSwitchStyled /> },
+
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
     
     // { id: '71', name: "Tree unoptimized", component: <DemoTree /> },
     { id: '72', name: "Tree", component: <DemoTreeOptimized /> },
-    
+
     { id: '80', name: "Gradient color picker", component: <GradientColorPickerExample /> },
 ];
 

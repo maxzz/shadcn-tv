@@ -3,7 +3,7 @@ import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderModule
 import { DataTableDemo } from "@/components/2-main/2-demo/demo-data-table";
 import { TableDemo } from "@/components/2-main/2-demo/demo-table";
 import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";
-import { DemoTree, DemoTreeOptimized } from "@/components/2-main/2-demo/demo-tree";
+import { DemoTree, DemoTreeOptimized, DemoTreeOptimizedContent } from "@/components/2-main/2-demo/demo-tree";
 import { DemoSplitter } from "@/components/2-main/2-demo/demo-tree2";
 import { GradientColorPickerExample } from "../2-demo/demo-color-picker";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
@@ -91,9 +91,10 @@ export const showcasesData: Showcase[] = [
     { id: '10', name: "Tables", component: <TableInTabs /> },
     { id: '20', name: "Loaders", component: <LoadersInTab /> },
     { id: '30', name: "Switches", component: <SwitchInTabs /> },
-    { id: '41', name: "Tree", component: <DemoTreeOptimized /> },
+    { id: '41', name: "Tree", component: <DemoTreeOptimized> <DemoTreeOptimizedContent /> </DemoTreeOptimized> },
+    // { id: '41', name: "Tree", component: <DemoTreeOptimized /> },
     // { id: '42', name: "Tree unoptimized", component: <DemoTree /> },
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "01";
+export const initialCase = "41";

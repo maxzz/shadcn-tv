@@ -1,3 +1,5 @@
+import "./radial.css";
+
 export function RadialLoader() {
     return (
         <div className="flexBox">

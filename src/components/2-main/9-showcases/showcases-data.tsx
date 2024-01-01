@@ -7,7 +7,7 @@ import { DemoTree, DemoTreeOptimized } from "@/components/2-main/2-demo/demo-tre
 import { DemoSplitter } from "@/components/2-main/2-demo/demo-tree2";
 import { GradientColorPickerExample } from "../2-demo/demo-color-picker";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { LoaderDotsRing } from "@/components/ui/loaders";
+import { LoaderDotsRing, RadialLoader } from "@/components/ui/loaders";
 
 function TableInTabs() {
     return (
@@ -39,7 +39,8 @@ function LoadersInTab() {
             <TabsList>
                 <TabsTrigger value="loaders1">Loaders</TabsTrigger>
                 <TabsTrigger value="loaders2">Circle loader</TabsTrigger>
-                <TabsTrigger value="loaders3">Skeleton</TabsTrigger>
+                <TabsTrigger value="loaders3">Radial</TabsTrigger>
+                <TabsTrigger value="loaders4">Skeleton</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -51,6 +52,10 @@ function LoadersInTab() {
             </TabsContent>
 
             <TabsContent value="loaders3">
+                <RadialLoader />
+            </TabsContent>
+
+            <TabsContent value="loaders4">
                 <SkeletonDemo />
             </TabsContent>
         </Tabs>

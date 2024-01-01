@@ -16,16 +16,9 @@ body {
 .flexBox {
     width: 100%;
     height: 100%;
-    box-align: center;
-    -moz-box-align: center;
-    -webkit-box-align: center;
-    align-items: center;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #preloader {

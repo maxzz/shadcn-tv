@@ -17,12 +17,12 @@
 }
 
 #preloader .a {
-    margin: 0 auto 0;
+    /* margin: 0 auto 0; */
     padding: 3%;
     width: 100%;
     height: 100%;
 
-    vertical-align: middle;
+    /* vertical-align: middle; */
 
     background: transparent;
     border-top: solid 8px transparent;
@@ -33,12 +33,12 @@
 }
 
 #preloader .b {
-    margin: 0 auto 0;
+    /* margin: 0 auto 0; */
     padding: 4%;
     width: 100%;
     height: 100%;
 
-    vertical-align: middle;
+    /* vertical-align: middle; */
 
     background: transparent;
     border-top: solid 36px #444;
@@ -50,7 +50,7 @@
 
 /* Animations */
 
-#preloader {
+/* #preloader {
     animation: preloaderscaling 1s infinite linear;
 }
 
@@ -69,7 +69,7 @@
         transform: scale(0.36);
         box-shadow: 0 0 0 #444, 0 0 0 #444, 0 0 0 #444, 0 0 0 #444;
     }
-}
+} */
 
 #preloader .a {
     animation: rotate-clock-wise 3s infinite linear;

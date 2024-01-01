@@ -1,6 +1,6 @@
 /* https://codepen.io/fsanterva/pen/dyjLEX */
 
-#preloader {
+/* #preloader { */
     /* position: absolute;
     margin: 0 auto;
     padding: 0.3%;
@@ -15,9 +15,9 @@
 
     /* border: solid 14px #444; */
     /* border-radius: 50%; */
-}
+/* } */
 
-#preloader .a {
+/* #preloader .a { */
     /* position: absolute;
     inset: 0; */
     /* margin: 0 auto 0; */
@@ -33,9 +33,9 @@
     border-bottom: solid 8px transparent;
     border-left: solid 8px #444; */
     /* border-radius: 50%; */
-}
+/* } */
 
-#preloader .b {
+/* #preloader .b { */
     /* position: absolute;
     inset: 0; */
 
@@ -52,7 +52,7 @@
     border-bottom: solid 36px #444;
     border-left: solid 36px transparent;
     border-radius: 50%; */
-}
+/* } */
 
 /* Animations */
 
@@ -77,7 +77,8 @@
     }
 } */
 
-#preloader .a {
+/* #preloader  */
+.a {
     animation: rotate-clock-wise 3s infinite linear;
 }
 
@@ -91,7 +92,8 @@
     }
 }
 
-#preloader .b {
+/* #preloader  */
+.b {
     animation: rotate-anti-clock-wise 0.9s infinite linear;
 }
 

@@ -1,26 +1,5 @@
 /* https://codepen.io/fsanterva/pen/dyjLEX */
 
-/* html,
-body {
-    color: #444;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    background: #202121 url("https://raw.githubusercontent.com/codepen24/imgStore/master/trame.png") repeat center top;
-    font:
-        normal normal normal 14px/100% "Oswald",
-        sans-serif;
-    line-height: 23px;
-} */
-
-.flexBox {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 #preloader {
     position: absolute;
     margin: 0 auto;
@@ -30,7 +9,9 @@ body {
     right: 0;
     width: 200px;
     height: 200px;
-    
+    /* width: 100px;
+    height: 100px; */
+
     border: solid 14px #444;
     border-radius: 50%;
 }
@@ -67,6 +48,8 @@ body {
     border-radius: 50%;
 }
 
+/* Animations */
+
 #preloader {
     animation: preloaderscaling 1s infinite linear;
 }
@@ -74,29 +57,20 @@ body {
 @keyframes preloaderscaling {
     0% {
         transform: scale(0.36);
-        box-shadow:
-            0 0 0 #444,
-            0 0 0 #444,
-            0 0 0 #444,
-            0 0 0 #444;
+        box-shadow: 0 0 0 #444, 0 0 0 #444, 0 0 0 #444, 0 0 0 #444;
     }
+
     50% {
-        box-shadow:
-            0 0 0 #444,
-            0 0 0 #444,
-            0 0 0 #444,
-            0 0 0 #444;
         transform: scale(0.3);
+        box-shadow: 0 0 0 #444, 0 0 0 #444, 0 0 0 #444, 0 0 0 #444;
     }
+
     100% {
-        box-shadow:
-            0 0 0 #444,
-            0 0 0 #444,
-            0 0 0 #444,
-            0 0 0 #444;
         transform: scale(0.36);
+        box-shadow: 0 0 0 #444, 0 0 0 #444, 0 0 0 #444, 0 0 0 #444;
     }
 }
+
 #preloader .a {
     animation: rotate-clock-wise 3s infinite linear;
 }
@@ -105,14 +79,12 @@ body {
     0% {
         transform: rotateZ(0deg);
     }
+
     100% {
         transform: rotateZ(360deg);
     }
 }
 
-/* ===============================================
-MAIN BODY
-============================================= -- */
 #preloader .b {
     animation: rotate-anti-clock-wise 0.9s infinite linear;
 }
@@ -121,6 +93,7 @@ MAIN BODY
     0% {
         transform: rotateZ(360deg);
     }
+
     100% {
         transform: rotateZ(0deg);
     }

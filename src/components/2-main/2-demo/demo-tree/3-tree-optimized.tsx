@@ -18,7 +18,7 @@ function addStateToTreeItems(data: DataItem[]): DataItemWState[] {
 
 const dataWithState = addStateToTreeItems(data);
 
-export function DemoTreeOptimizedContent() {
+export function DemoTreeOptimized() {
     const [content, setContent] = useState(() => {
         const initialItem = findTreeItemById(dataWithState, initialItemId);
         return initialItem?.name || "No content selected";
@@ -37,126 +37,23 @@ export function DemoTreeOptimizedContent() {
         }, []
     );
 
-    return (<>
-        <div className="w-full">
-            {TreeMemo}
-        </div>
-
-        <div className={classNames("flex-1 w-full h-full min-w-0 border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
-            <div className="min-w-0 overflow-hidden">
-                <div className="px-2 py-1">
-                    {content}
-                </div>
-            </div>
-        </div>
-    </>);
-}
-
-export function DemoTreeOptimizedContent1() {
-    const [content, setContent] = useState(() => {
-        const initialItem = findTreeItemById(dataWithState, initialItemId);
-        return initialItem?.name || "No content selected";
-    });
-
-    const TreeMemo = useMemo(
-        () => {
-            return <Tree
-                data={dataWithState}
-                className={`w-full h-full border rounded-l-md ${inputFocusClasses}`}
-                initialSelectedItemId={initialItemId}
-                onSelectChange={(item) => setContent(item?.name ?? "")}
-                IconForFolder={IconFolder}
-                IconForItem={IconWorkflow}
-            />;
-        }, []
-    );
-
-    return (<>
-        <div className="w-full">
-            {TreeMemo}
-        </div>
-    </>);
-}
-
-export function DemoTreeOptimizedContent2() {
-    const [content, setContent] = useState(() => {
-        const initialItem = findTreeItemById(dataWithState, initialItemId);
-        return initialItem?.name || "No content selected";
-    });
-
-    const TreeMemo = useMemo(
-        () => {
-            return <Tree
-                data={dataWithState}
-                className={`w-full h-full border rounded-l-md ${inputFocusClasses}`}
-                initialSelectedItemId={initialItemId}
-                onSelectChange={(item) => setContent(item?.name ?? "")}
-                IconForFolder={IconFolder}
-                IconForItem={IconWorkflow}
-            />;
-        }, []
-    );
-
-    return (<>
-        <div className={classNames("flex-1 w-full h-full min-w-0 border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
-            <div className="min-w-0 overflow-hidden">
-                <div className="px-2 py-1">
-                    {content}
-                </div>
-            </div>
-        </div>
-    </>);
-}
-
-export function DemoTreeOptimized({ children1, children2 }: { children1?: ReactNode; children2?: ReactNode; }) {
     return (
         <div className="mr-12 p-0.5 w-full h-full">
 
             <SimpleSplitPane vertical={false} className="splitpane h-full">
-                {children1}
-                {children2}
+                <div className="w-full">
+                    {TreeMemo}
+                </div>
+
+                <div className={classNames("flex-1 w-full h-full min-w-0 border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
+                    <div className="min-w-0 overflow-hidden">
+                        <div className="px-2 py-1">
+                            {content}
+                        </div>
+                    </div>
+                </div>
             </SimpleSplitPane>
 
         </div>
     );
 }
-
-// export function DemoTreeOptimized() {
-//     const [content, setContent] = useState(() => {
-//         const initialItem = findTreeItemById(dataWithState, initialItemId);
-//         return initialItem?.name || "No content selected";
-//     });
-
-//     const TreeMemo = useMemo(
-//         () => {
-//             return <Tree
-//                 data={dataWithState}
-//                 className={`w-full h-full border rounded-l-md ${inputFocusClasses}`}
-//                 initialSelectedItemId={initialItemId}
-//                 onSelectChange={(item) => setContent(item?.name ?? "")}
-//                 IconForFolder={IconFolder}
-//                 IconForItem={IconWorkflow}
-//             />;
-//         }, []
-//     );
-
-//     return (
-//         <div className="mr-12 p-0.5 w-full h-full">
-
-//             <SimpleSplitPane vertical={false} className="splitpane h-full">
-//                 <div className="w-full">
-//                     {TreeMemo}
-//                 </div>
-
-//                 <div className={classNames("flex-1 w-full h-full min-w-0 border border-l rounded-r-md z-10", inputFocusClasses)} tabIndex={0}>
-//                     <div className="min-w-0 overflow-hidden">
-//                         <div className="px-2 py-1">
-//                             {content}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </SimpleSplitPane>
-
-//         </div>
-//     );
-// }

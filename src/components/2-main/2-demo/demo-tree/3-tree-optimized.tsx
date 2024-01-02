@@ -7,6 +7,7 @@ import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
 import { inputFocusClasses } from "@/components/ui/shared-styles";
 import { classNames } from "@/utils";
 import { SimpleSplitPane } from "../../../ui/shadcn/split-pane";
+import { Checkbox } from "@/components/ui/shadcn";
 
 const initialItemId = "6.1.2";
 
@@ -53,6 +54,18 @@ export function DemoTreeOptimized() {
                     </div>
                 </div>
             </SimpleSplitPane>
+
+            <div className="mt-2 text-sm text-muted-foreground">
+                <label className="flex items-center">
+                    <Checkbox className="mr-2" />
+                    Icons first
+                </label>
+
+                <label className="flex items-center">
+                    <Checkbox className="mr-2" />
+                    Hide folder icons
+                </label>
+            </div>
 
         </div>
     );

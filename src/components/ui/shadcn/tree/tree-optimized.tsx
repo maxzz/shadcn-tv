@@ -17,22 +17,26 @@ export type ItemState = {
 
 export type DataItemWState = DataItemNavigation<DataItemCore & ItemState>;
 
-type TreeProps = {
-    data: DataItemWState[] | DataItemWState;
+type TreeOptions = { arrowFirst?: boolean; hideFolderIcon?: boolean; };
 
-    onSelectChange?: (item: DataItemWState | undefined) => void;
-    initialSelectedItemId?: string;
-    expandAll?: boolean;
+type TreeProps =
+    & {
+        data: DataItemWState[] | DataItemWState;
 
-    IconForFolder?: TreenIconType;
-    IconForItem?: TreenIconType;
-};
+        onSelectChange?: (item: DataItemWState | undefined) => void;
+        initialSelectedItemId?: string;
+        expandAll?: boolean;
+
+        IconForFolder?: TreenIconType;
+        IconForItem?: TreenIconType;
+    }
+    & TreeOptions;
 
 type TreeState = {
     selectedId: string | undefined;
 };
 
-export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement> & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
+export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, className, ...rest }, ref) => {
 
         const [treeState] = useState(() => {
@@ -118,9 +122,11 @@ type TreeItemProps = Prettify<
     & {
         handleSelectChange: HandleSelectChange;
         expandedItemIds: string[];
-    }>;
+    }
+    & TreeOptions
+>;
 
-const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement> & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
+const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
     ({ className, data, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, ...rest }, ref) => {
         return (
             <div ref={ref} role="tree" className={className} {...rest}>
@@ -149,7 +155,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                         IconForItem={IconForItem}
                                                         arrowFirst={arrowFirst}
                                                         hideFolderIcon={hideFolderIcon}
-                                                                                />
+                                                    />
                                                 </FolderContent>
                                             </A.Item>
                                         </A.Root>
@@ -195,7 +201,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
 );
 Leaf.displayName = 'Tree.Leaf';
 
-const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; } & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
+const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; } & TreeOptions>(
     ({ className, item, Icon, arrowFirst = true, hideFolderIcon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
         return (
@@ -213,7 +219,7 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
 );
 Folder.displayName = 'Tree.Folder';
 
-const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & { arrowFirst?: boolean; }>(
+const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & Pick<TreeOptions, 'arrowFirst'>>(
     ({ className, children, arrowFirst, ...rest }, ref) => {
         const ArrowIcon = <ChevronRight className={classNames("shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200", arrowFirst && "mr-2")} />;
         return (
@@ -251,7 +257,7 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
 );
 FolderContent.displayName = 'Tree.Folder.Content';
 
-function TreeIconAndText({ item, Icon, classes, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; classes: string; } & { hideFolderIcon?: boolean; }) {
+function TreeIconAndText({ item, Icon, classes, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; classes: string; } & Pick<TreeOptions, 'hideFolderIcon'>) {
     return (<>
         {item.icon && <item.icon className={classes} aria-hidden="true" />}
         {!item.icon && Icon && !hideFolderIcon && <Icon className={classes} aria-hidden="true" />}

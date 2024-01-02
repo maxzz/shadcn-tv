@@ -19,6 +19,7 @@ data-[state=checked]:text-accent \
 data-[state=checked]:bg-muted-foreground \
 \
 border rounded-sm shadow";
+// original was: border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground
 
 const Checkbox = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithoutRef<typeof Prim.Root>>(
     ({ className, ...rest }, ref) => (

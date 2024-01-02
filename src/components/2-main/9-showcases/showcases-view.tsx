@@ -1,7 +1,7 @@
 import * as A from "@/components/ui/shadcn/accordion";
-import { Showcase, initialCase } from "./showcases-data";
+import { Showcase } from "./cases";
 
-export function Showcases({ cases }: { cases: Showcase[]; }) {
+export function ShowcasesView({ cases, initialCase }: { cases: Showcase[]; initialCase: string | undefined }) {
     return (
         <A.Accordion className="w-full" type="single" collapsible defaultValue={initialCase}>
 

@@ -1,2 +1,2 @@
-export * from "./showcases-data"
-export * from "./showcases"
+export * from "./cases";
+export * from "./showcases-view";

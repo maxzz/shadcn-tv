@@ -8,13 +8,13 @@ export type DataItemNavigation<T> =
         children?: DataItemNavigation<T>[];
     };
 
+export type TreenIconType = LucideIconType;
+
 export type DataItemCore = {
     id: string;
     name: string;
-    icon?: LucideIconType;
+    icon?: TreenIconType;
 };
-
-export type TreenIconType = LucideIconType;
 
 export type DataItem = DataItemNavigation<DataItemCore>;
 export type DataItemNav = DataItemNavigation<any>;

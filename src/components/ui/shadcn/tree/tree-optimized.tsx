@@ -206,18 +206,19 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
 );
 Folder.displayName = 'Tree.Folder';
 
-const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger>>(
-    ({ className, children, ...rest }, ref) => (
+const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & { arrowFirst?: boolean; }>(
+    ({ className, children, arrowFirst = false, ...rest }, ref) => (
         <A.Header>
             <A.Trigger
                 asChild
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 outline-none cursor-pointer flex items-center", className)}
+                className={cn("flex-1 py-1 w-full transition-all outline-none cursor-pointer flex items-center", arrowFirst ? "first:[&[data-state=open]>svg]:rotate-90" : "last:[&[data-state=open]>svg]:rotate-90", className)}
                 ref={ref}
                 {...rest}
             >
                 <div>
+                    {arrowFirst && <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />}
                     {children}
-                    <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />
+                    {!arrowFirst && <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />}
                 </div>
             </A.Trigger>
         </A.Header>

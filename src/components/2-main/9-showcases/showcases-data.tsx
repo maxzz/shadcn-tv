@@ -1,13 +1,18 @@
 import { ReactNode } from "react";
-import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderModules } from "@/components/2-main/3-experimental";
-import { DataTableDemo } from "@/components/2-main/2-demo/demo-data-table";
-import { TableDemo } from "@/components/2-main/2-demo/demo-table";
-import { SkeletonDemo } from "@/components/2-main/2-demo/demo-skeleton";
-import { DemoTreeWithOptions } from "@/components/2-main/2-demo/demo-tree";
-import { GradientColorPickerExample } from "../2-demo/demo-color-picker";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
+
+import { SimpleTableDemo, DataTableDemo } from "../2-demo/1-demo-tables";
+
 import { LoaderDotsRing, RadialLoader } from "@/components/ui/loaders";
-import { ResizableDemo } from "../2-demo/demo-resizable";
+import { SkeletonDemo } from "../2-demo/2-loaders/4-demo-skeleton";
+
+import { LoadersTest, NeonSwitch, DemoSwitchStyled, TablesWithStyckyHeaderModules } from "../3-experimental";
+import { GradientColorPickerExample } from "../2-demo/3-switches/3-demo-color-picker";
+
+import { DemoTreeWithOptions } from "../2-demo/4-demo-tree";
+
+import { ResizableDemo } from "../2-demo/5-demo-resizable";
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 
 function TableInTabs() {
     return (
@@ -19,7 +24,7 @@ function TableInTabs() {
             </TabsList>
 
             <TabsContent value="table1">
-                <TableDemo className="m-auto max-w-sm" />
+                <SimpleTableDemo className="m-auto max-w-sm" />
             </TabsContent>
 
             <TabsContent value="table2">

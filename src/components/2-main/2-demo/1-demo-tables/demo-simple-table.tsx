@@ -55,7 +55,7 @@ const invoices = [
     },
 ];
 
-export function TableDemo(props: HTMLAttributes<HTMLTableElement>) {
+export function SimpleTableDemo(props: HTMLAttributes<HTMLTableElement>) {
     return (
         <Table {...props}>
             <TableCaption>

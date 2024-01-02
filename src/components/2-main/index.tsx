@@ -2,7 +2,7 @@ import { FontInputTitleBar } from './1-top-row';
 import { DialogDemoWoTrigger } from './2-demo/demo-dialog-wo-trigger';
 import { Showcases, showcasesData } from './9-showcases';
 import { Button, ScrollArea } from '@/components/ui/shadcn';
-import { DemoTreeWithOptions } from './2-demo/demo-tree';
+import { DemoTreeWithOptions } from './2-demo/4-demo-tree';
 
 function FontInput() {
     return (

@@ -1,5 +1,5 @@
 import * as A from "@/components/ui/shadcn/accordion";
-import { Showcase } from "./cases";
+import { Showcase } from ".";
 
 export function ShowcasesView({ cases, initialCase }: { cases: Showcase[]; initialCase: string | undefined }) {
     return (

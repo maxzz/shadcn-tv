@@ -4,7 +4,7 @@ import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight } from "lucide-react";
-import { cn } from "@/utils";
+import { classNames, cn } from "@/utils";
 import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, DataItem, TreenIconType } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
@@ -190,17 +190,17 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
 Leaf.displayName = 'Tree.Leaf';
 
 const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; } & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
-    ({ className, item, Icon, arrowFirst, hideFolderIcon, ...rest }, ref) => {
+    ({ className, item, Icon, arrowFirst = true, hideFolderIcon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
         return (
             <FolderTrigger
                 className={cn(treeItemBaseClasses, selected && treeItemSelectedClasses)}
                 data-tree-folder-trigger={TypeTreeFolderTrigger}
-                arrowFirst
+                arrowFirst={arrowFirst}
                 ref={ref}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon classes={treeItemIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon={true} classes={treeItemIconClasses} />
             </FolderTrigger>
         );
     }
@@ -209,7 +209,7 @@ Folder.displayName = 'Tree.Folder';
 
 const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & { arrowFirst?: boolean; }>(
     ({ className, children, arrowFirst, ...rest }, ref) => {
-        const ArrowIcon = <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />;
+        const ArrowIcon = <ChevronRight className={classNames("shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200", arrowFirst && "mr-2")} />;
         return (
             <A.Header>
                 <A.Trigger

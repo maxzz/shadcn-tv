@@ -7,6 +7,7 @@ import { DemoTreeWithOptions } from "@/components/2-main/2-demo/demo-tree";
 import { GradientColorPickerExample } from "../2-demo/demo-color-picker";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { LoaderDotsRing, RadialLoader } from "@/components/ui/loaders";
+import { ResizableDemo } from "../2-demo/demo-resizable";
 
 function TableInTabs() {
     return (
@@ -96,8 +97,8 @@ export const showcasesData: Showcase[] = [
     { id: '20', name: "Loaders", component: <LoadersInTab /> },
     { id: '30', name: "Switches", component: <SwitchInTabs /> },
     { id: '41', name: "Tree", component: <DemoTreeWithOptions /> },
-    // { id: '42', name: "Tree unoptimized", component: <DemoTree /> },
+    { id: '51', name: "Resizable", component: <ResizableDemo /> },
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "41";
+export const initialCase = "51";

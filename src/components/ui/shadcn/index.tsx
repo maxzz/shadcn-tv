@@ -31,7 +31,10 @@ export * from './command';
 export * from './progress';
 export * from './calendar';
 export * from './tree';
+
 export * from './theme-toggle-switch';
 export * from '../nun/theme-provider';
 export * from '../nun/theme-toggle-menu';
 export * from '../nun/theme-select';
+
+export * from './resizer';

@@ -25,6 +25,9 @@ export function DemoTreeOptimized() {
         return initialItem?.name || "No content selected";
     });
 
+    const [arrowFirst, setArrowFirst] = useState(true);
+    const [hideFolderIcon, setHideFolderIcon] = useState(false);
+
     const TreeMemo = useMemo(
         () => {
             return <Tree
@@ -34,8 +37,10 @@ export function DemoTreeOptimized() {
                 onSelectChange={(item) => setContent(item?.name ?? "")}
                 IconForFolder={IconFolder}
                 IconForItem={IconWorkflow}
+                arrowFirst={arrowFirst}
+                hideFolderIcon={hideFolderIcon}
             />;
-        }, []
+        }, [arrowFirst, hideFolderIcon]
     );
 
     return (
@@ -57,12 +62,12 @@ export function DemoTreeOptimized() {
 
             <div className="mt-2 text-sm text-muted-foreground">
                 <label className="flex items-center">
-                    <Checkbox className="mr-2" />
+                    <Checkbox className="mr-2" checked={arrowFirst} onCheckedChange={() => setArrowFirst(!arrowFirst)} />
                     Icons first
                 </label>
 
                 <label className="flex items-center">
-                    <Checkbox className="mr-2" />
+                    <Checkbox className="mr-2" checked={hideFolderIcon} onCheckedChange={() => setHideFolderIcon(!hideFolderIcon)} />
                     Hide folder icons
                 </label>
             </div>

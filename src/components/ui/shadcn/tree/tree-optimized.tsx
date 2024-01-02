@@ -204,7 +204,7 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
                 ref={ref}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon={true} classes={treeItemIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon={hideFolderIcon} classes={treeItemIconClasses} />
             </FolderTrigger>
         );
     }

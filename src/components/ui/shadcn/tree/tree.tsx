@@ -1,37 +1,86 @@
 import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, SyntheticEvent, forwardRef, useCallback, useMemo, useRef, useState } from "react";
+import { proxy, useSnapshot } from "valtio";
 import * as A from "@radix-ui/react-accordion";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight } from "lucide-react";
-import { cn } from "@/utils";
-import { DataItem, TreenIconType, TypeTreeFolder, TypeTreeFolderTrigger } from "./shared/types";
+import { classNames, cn } from "@/utils";
+import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, DataItem, TreenIconType } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
 
-type TreeProps = {
-    data: DataItem[] | DataItem;
+export type ItemState = {
+    state: {
+        selected: boolean;
+    };
+};
 
-    onSelectChange?: (item: DataItem | undefined) => void;
-    initialSelectedItemId?: string;
-    expandAll?: boolean;
+export type DataItemWState = DataItemNavigation<DataItemCore & ItemState>;
 
-    IconForFolder?: TreenIconType;
-    IconForItem?: TreenIconType;
+type TreeOptions = { arrowFirst?: boolean; hideFolderIcon?: boolean; };
+
+type TreeProps =
+    & {
+        data: DataItemWState[] | DataItemWState;
+
+        onSelectChange?: (item: DataItemWState | undefined) => void;
+        initialSelectedItemId?: string;
+        expandAll?: boolean;
+
+        IconForFolder?: TreenIconType;
+        IconForItem?: TreenIconType;
+    }
+    & TreeOptions;
+
+type TreeState = {
+    selectedId: string | undefined;
 };
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
-        const [selectedItemId, setSelectedItemId] = useState<string | undefined>(initialSelectedItemId);
+    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, className, ...rest }, ref) => {
 
-        const handleSelectChange = useCallback(
-            (event: SyntheticEvent<any>, item: DataItem | undefined) => {
-                event.stopPropagation();
-                setSelectedItemId(item?.id);
-                onSelectChange?.(item);
-            }, [onSelectChange]
+        const [treeState] = useState(() => {
+            const uiState = proxy<TreeState>({
+                selectedId: undefined,
+            });
+            return uiState;
+        });
+
+        const expandedItemIds = useMemo(
+            () => {
+                const rv = collectExpandedItemIds(data, initialSelectedItemId, expandAll);
+
+                const selectedNow = findTreeItemById(data, treeState.selectedId);
+                selectedNow && (selectedNow.state.selected = false);
+
+                const last = findTreeItemById(data, rv[rv.length - 1]);
+                if (last) {
+                    last.state.selected = true;
+                    treeState.selectedId = last.id;
+                }
+                return rv;
+            }, [data, initialSelectedItemId, expandAll]
         );
 
-        const expandedItemIds = useMemo(() => collectExpandedItemIds(data, initialSelectedItemId, expandAll), [data, initialSelectedItemId, expandAll]);
+        const handleSelectChange = useCallback(
+            (event: SyntheticEvent<any>, item: DataItemWState | undefined) => {
+                event.stopPropagation();
+
+                if (treeState.selectedId) {
+                    const prevItem = findTreeItemById(data, treeState.selectedId);
+                    prevItem && (prevItem.state.selected = false);
+                }
+
+                if (item) {
+                    item.state.selected = !item.state.selected;
+                    treeState.selectedId = item.id;
+                } else {
+                    treeState.selectedId = undefined;
+                }
+
+                onSelectChange?.(item);
+            }, [treeState, onSelectChange]
+        );
 
         const refRoot = useRef<HTMLDivElement | null>(null);
         const { ref: refRootCb, width, height } = useResizeObserver();
@@ -39,23 +88,24 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         return (
             <div
                 ref={(r) => { refRootCb(r); refRoot.current = r; }}
-                className={cn("overflow-hidden", className)}
+                className={cn("_overflow-hidden", className)}
                 tabIndex={0}
                 onKeyDown={(e) => {
-                    const nextId = getNextId(refRoot.current!, e, selectedItemId);
+                    const nextId = getNextId(refRoot.current!, e, treeState.selectedId);
                     nextId && handleSelectChange(e, findTreeItemById(data, nextId));
                 }}
             >
-                <ScrollArea style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)}>
-                    <div className="relative z-0 px-2 py-1">
+                <ScrollArea className="tree-scroll" style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)}>
+                    <div className="relative z-0 px-2 py-1" >
                         <TreeItem
                             ref={ref}
                             data={data}
-                            selectedItemId={selectedItemId}
                             handleSelectChange={handleSelectChange}
                             expandedItemIds={expandedItemIds}
                             IconForFolder={IconForFolder}
                             IconForItem={IconForItem}
+                            arrowFirst={arrowFirst}
+                            hideFolderIcon={hideFolderIcon}
                             {...rest}
                         />
                     </div>
@@ -65,16 +115,19 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
     }
 );
 
+type HandleSelectChange = (event: SyntheticEvent<any>, item: DataItemWState | undefined) => void;
+
 type TreeItemProps = Prettify<
     & Pick<TreeProps, 'data' | 'IconForFolder' | 'IconForItem'>
     & {
-        selectedItemId?: string,
-        handleSelectChange: (event: SyntheticEvent<any>, item: DataItem | undefined) => void,
-        expandedItemIds: string[],
-    }>;
+        handleSelectChange: HandleSelectChange;
+        expandedItemIds: string[];
+    }
+    & TreeOptions
+>;
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
-    ({ className, data, selectedItemId, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, ...rest }, ref) => {
+    ({ className, data, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, ...rest }, ref) => {
         return (
             <div ref={ref} role="tree" className={className} {...rest}>
                 <ul>
@@ -87,19 +140,21 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                             <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
                                                 <Folder
                                                     item={item}
-                                                    isSelected={selectedItemId === item.id}
                                                     Icon={IconForFolder}
+                                                    arrowFirst={arrowFirst}
+                                                    hideFolderIcon={hideFolderIcon}
                                                     onClick={(e) => handleSelectChange(e, item)}
                                                 />
 
                                                 <FolderContent className="pl-6">
                                                     <TreeItem
                                                         data={item.children}
-                                                        selectedItemId={selectedItemId}
                                                         handleSelectChange={handleSelectChange}
                                                         expandedItemIds={expandedItemIds}
                                                         IconForFolder={IconForFolder}
                                                         IconForItem={IconForItem}
+                                                        arrowFirst={arrowFirst}
+                                                        hideFolderIcon={hideFolderIcon}
                                                     />
                                                 </FolderContent>
                                             </A.Item>
@@ -107,7 +162,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                     ) : (
                                         <Leaf
                                             item={item}
-                                            isSelected={selectedItemId === item.id}
                                             onClick={(e) => handleSelectChange(e, item)}
                                             Icon={IconForItem}
                                         />
@@ -118,7 +172,6 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                             <li>
                                 <Leaf
                                     item={data}
-                                    isSelected={selectedItemId === data.id}
                                     onClick={(e) => handleSelectChange(e, data)}
                                     Icon={IconForItem}
                                 />
@@ -131,54 +184,61 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
     }
 );
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItem, isSelected?: boolean, Icon?: TreenIconType; }>(
-    ({ className, item, isSelected, Icon, ...rest }, ref) => {
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItemWState, Icon?: TreenIconType; }>(
+    ({ className, item, Icon, ...rest }, ref) => {
+        const { selected } = useSnapshot(item.state);
         return (
             <div
                 ref={ref}
-                className={cn(leafBaseClasses, className, isSelected && leafSelectedClasses)}
+                className={cn(leafBaseClasses, className, selected && leafSelectedClasses)}
                 data-tree-id={item.id}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} hideFolderIcon={false} />
             </div>
         );
     }
 );
 Leaf.displayName = 'Tree.Leaf';
 
-const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItem, isSelected?: boolean, Icon?: TreenIconType; }>(
-    ({ className, item, isSelected, Icon, ...rest }, ref) => {
+const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; } & TreeOptions>(
+    ({ className, item, Icon, arrowFirst = true, hideFolderIcon, ...rest }, ref) => {
+        const { selected } = useSnapshot(item.state);
         return (
             <FolderTrigger
-                className={cn(treeItemBaseClasses, isSelected && treeItemSelectedClasses)}
+                className={cn(treeItemBaseClasses, selected && treeItemSelectedClasses)}
                 data-tree-folder-trigger={TypeTreeFolderTrigger}
+                arrowFirst={arrowFirst}
                 ref={ref}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} classes={treeItemIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon={hideFolderIcon} classes={treeItemIconClasses} />
             </FolderTrigger>
         );
     }
 );
 Folder.displayName = 'Tree.Folder';
 
-const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger>>(
-    ({ className, children, ...rest }, ref) => (
-        <A.Header>
-            <A.Trigger
-                ref={ref}
-                asChild
-                className={cn("flex-1 py-1 w-full transition-all last:[&[data-state=open]>svg]:rotate-90 outline-none cursor-pointer flex items-center", className)}
-                {...rest}
-            >
-                <div>
-                    {children}
-                    <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />
-                </div>
-            </A.Trigger>
-        </A.Header>
-    )
+const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & Pick<TreeOptions, 'arrowFirst'>>(
+    ({ className, children, arrowFirst, ...rest }, ref) => {
+        const ArrowIcon = <ChevronRight className={classNames("shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200", arrowFirst && "mr-2")} />;
+        return (
+            <A.Header>
+                <A.Trigger
+                    asChild
+                    className={cn("flex-1 py-1 w-full transition-all outline-none cursor-pointer flex items-center", arrowFirst ? "first:[&[data-state=open]>svg]:rotate-90" : "last:[&[data-state=open]>svg]:rotate-90", className)}
+                    ref={ref}
+                    {...rest}
+                >
+                    <div>
+                        {arrowFirst && <>{ArrowIcon}</>}
+                        {children}
+                        {!arrowFirst && <>{ArrowIcon}</>}
+                    </div>
+                </A.Trigger>
+            </A.Header>
+        );
+    }
 );
 FolderTrigger.displayName = 'Tree.Folder.Trigger';
 
@@ -189,16 +249,18 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
             className={cn("text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down transition-all overflow-hidden", className)}
             {...rest}
         >
-            <div>{children}</div>
+            <div>
+                {children}
+            </div>
         </A.Content>
     )
 );
 FolderContent.displayName = 'Tree.Folder.Content';
 
-function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
+function TreeIconAndText({ item, Icon, classes, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; classes: string; } & Pick<TreeOptions, 'hideFolderIcon'>) {
     return (<>
         {item.icon && <item.icon className={classes} aria-hidden="true" />}
-        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
+        {!item.icon && Icon && !hideFolderIcon && <Icon className={classes} aria-hidden="true" />}
 
         <span className="flex-grow text-sm truncate">
             {item.name}

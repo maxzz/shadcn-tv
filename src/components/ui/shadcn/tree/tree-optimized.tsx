@@ -147,7 +147,9 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                         expandedItemIds={expandedItemIds}
                                                         IconForFolder={IconForFolder}
                                                         IconForItem={IconForItem}
-                                                    />
+                                                        arrowFirst={arrowFirst}
+                                                        hideFolderIcon={hideFolderIcon}
+                                                                                />
                                                 </FolderContent>
                                             </A.Item>
                                         </A.Root>

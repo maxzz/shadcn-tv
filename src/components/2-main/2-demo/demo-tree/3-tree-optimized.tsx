@@ -26,7 +26,7 @@ export function DemoTreeOptimized() {
     });
 
     const [arrowFirst, setArrowFirst] = useState(true);
-    const [hideFolderIcon, setHideFolderIcon] = useState(false);
+    const [hideFolderIcon, setHideFolderIcon] = useState(true);
 
     const TreeMemo = useMemo(
         () => {

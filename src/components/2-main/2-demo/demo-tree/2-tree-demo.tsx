@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
-import { proxy } from "valtio";
+import { proxy, useSnapshot } from "valtio";
 import { Tree, DataItemWState, DataItem, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree";
 import { data } from "./1-tree-data";
-import { Workflow as IconWorkflow, Folder as IconFolder } from "lucide-react";
+import { AppWindow as IconFile, Folder as IconFolder } from "lucide-react"; // Workflow as IconFile, File as IconFile
 import { inputFocusClasses } from "@/components/ui/shared-styles";
 import { classNames } from "@/utils";
 import { SimpleSplitPane } from "../../../ui/shadcn/split-pane";
 import { Checkbox } from "@/components/ui/shadcn";
+import { appSettings } from "@/store";
 
 const initialItemId = "6.1.2";
 
@@ -18,14 +19,13 @@ function addStateToTreeItems(data: DataItem[]): DataItemWState[] {
 
 const dataWithState = addStateToTreeItems(data);
 
-export function DemoTreeOptimized() {
+export function DemoTreeWithOptions() {
     const [content, setContent] = useState(() => {
         const initialItem = findTreeItemById(dataWithState, initialItemId);
         return initialItem?.name || "No content selected";
     });
 
-    const [arrowFirst, setArrowFirst] = useState(true);
-    const [hideFolderIcon, setHideFolderIcon] = useState(true);
+    const { arrowFirst: snapArrowFirst, hideFolderIcon: snapHideFolderIcon } = useSnapshot(appSettings.treeState);
 
     const TreeMemo = useMemo(
         () => {
@@ -35,11 +35,11 @@ export function DemoTreeOptimized() {
                 initialSelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}
                 IconForFolder={IconFolder}
-                IconForItem={IconWorkflow}
-                arrowFirst={arrowFirst}
-                hideFolderIcon={hideFolderIcon}
+                IconForItem={IconFile}
+                arrowFirst={snapArrowFirst}
+                hideFolderIcon={snapHideFolderIcon}
             />;
-        }, [arrowFirst, hideFolderIcon]
+        }, [snapArrowFirst, snapHideFolderIcon]
     );
 
     return (
@@ -61,12 +61,12 @@ export function DemoTreeOptimized() {
 
             <div className="mt-2 text-sm text-muted-foreground">
                 <label className="flex items-center">
-                    <Checkbox className="mr-2" checked={arrowFirst} onCheckedChange={() => setArrowFirst(!arrowFirst)} />
+                    <Checkbox className="mr-2" checked={snapArrowFirst} onCheckedChange={() => appSettings.treeState.arrowFirst = !appSettings.treeState.arrowFirst } />
                     Icons first
                 </label>
 
                 <label className="flex items-center">
-                    <Checkbox className="mr-2" checked={hideFolderIcon} onCheckedChange={() => setHideFolderIcon(!hideFolderIcon)} />
+                    <Checkbox className="mr-2" checked={snapHideFolderIcon} onCheckedChange={() => appSettings.treeState.hideFolderIcon = !appSettings.treeState.hideFolderIcon} />
                     Hide folder icons
                 </label>
             </div>

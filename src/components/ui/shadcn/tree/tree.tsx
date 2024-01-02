@@ -17,9 +17,7 @@ export type ItemState = {
 
 export type DataItemWState = DataItemNavigation<DataItemCore & ItemState>;
 
-type TreeOptions = { arrowFirst?: boolean; hideFolderIcon?: boolean; };
-
-type TreeProps =
+type TreeProps = Prettify<
     & {
         data: DataItemWState[] | DataItemWState;
 
@@ -30,8 +28,10 @@ type TreeProps =
         IconForFolder?: TreenIconType;
         IconForItem?: TreenIconType;
     }
-    & TreeOptions;
+    & TreeOptions
+>;
 
+type TreeOptions = { arrowFirst?: boolean; hideFolderIcon?: boolean; };
 type TreeState = {
     selectedId: string | undefined;
 };

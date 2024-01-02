@@ -32,8 +32,8 @@ type TreeState = {
     selectedId: string | undefined;
 };
 
-export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, className, ...rest }, ref) => {
+export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement> & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
+    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, className, ...rest }, ref) => {
 
         const [treeState] = useState(() => {
             const uiState = proxy<TreeState>({
@@ -100,6 +100,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                             expandedItemIds={expandedItemIds}
                             IconForFolder={IconForFolder}
                             IconForItem={IconForItem}
+                            arrowFirst={arrowFirst}
+                            hideFolderIcon={hideFolderIcon}
                             {...rest}
                         />
                     </div>
@@ -118,8 +120,8 @@ type TreeItemProps = Prettify<
         expandedItemIds: string[];
     }>;
 
-const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
-    ({ className, data, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, ...rest }, ref) => {
+const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement> & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
+    ({ className, data, handleSelectChange, expandedItemIds, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, ...rest }, ref) => {
         return (
             <div ref={ref} role="tree" className={className} {...rest}>
                 <ul>
@@ -133,6 +135,8 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                                 <Folder
                                                     item={item}
                                                     Icon={IconForFolder}
+                                                    arrowFirst={arrowFirst}
+                                                    hideFolderIcon={hideFolderIcon}
                                                     onClick={(e) => handleSelectChange(e, item)}
                                                 />
 

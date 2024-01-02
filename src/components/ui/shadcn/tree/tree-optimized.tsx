@@ -182,24 +182,25 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
                 data-tree-id={item.id}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} hideFolderIcon={false} />
             </div>
         );
     }
 );
 Leaf.displayName = 'Tree.Leaf';
 
-const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; }>(
-    ({ className, item, Icon, ...rest }, ref) => {
+const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; } & { arrowFirst?: boolean; hideFolderIcon?: boolean; }>(
+    ({ className, item, Icon, arrowFirst, hideFolderIcon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
         return (
             <FolderTrigger
                 className={cn(treeItemBaseClasses, selected && treeItemSelectedClasses)}
                 data-tree-folder-trigger={TypeTreeFolderTrigger}
+                arrowFirst
                 ref={ref}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} classes={treeItemIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon classes={treeItemIconClasses} />
             </FolderTrigger>
         );
     }
@@ -207,22 +208,25 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
 Folder.displayName = 'Tree.Folder';
 
 const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & { arrowFirst?: boolean; }>(
-    ({ className, children, arrowFirst = false, ...rest }, ref) => (
-        <A.Header>
-            <A.Trigger
-                asChild
-                className={cn("flex-1 py-1 w-full transition-all outline-none cursor-pointer flex items-center", arrowFirst ? "first:[&[data-state=open]>svg]:rotate-90" : "last:[&[data-state=open]>svg]:rotate-90", className)}
-                ref={ref}
-                {...rest}
-            >
-                <div>
-                    {arrowFirst && <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />}
-                    {children}
-                    {!arrowFirst && <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />}
-                </div>
-            </A.Trigger>
-        </A.Header>
-    )
+    ({ className, children, arrowFirst, ...rest }, ref) => {
+        const ArrowIcon = <ChevronRight className="shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200" />;
+        return (
+            <A.Header>
+                <A.Trigger
+                    asChild
+                    className={cn("flex-1 py-1 w-full transition-all outline-none cursor-pointer flex items-center", arrowFirst ? "first:[&[data-state=open]>svg]:rotate-90" : "last:[&[data-state=open]>svg]:rotate-90", className)}
+                    ref={ref}
+                    {...rest}
+                >
+                    <div>
+                        {arrowFirst && <>{ArrowIcon}</>}
+                        {children}
+                        {!arrowFirst && <>{ArrowIcon}</>}
+                    </div>
+                </A.Trigger>
+            </A.Header>
+        );
+    }
 );
 FolderTrigger.displayName = 'Tree.Folder.Trigger';
 
@@ -241,10 +245,10 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
 );
 FolderContent.displayName = 'Tree.Folder.Content';
 
-function TreeIconAndText({ item, Icon, classes }: { item: DataItem; Icon?: TreenIconType; classes: string; }) {
+function TreeIconAndText({ item, Icon, classes, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; classes: string; } & { hideFolderIcon?: boolean; }) {
     return (<>
         {item.icon && <item.icon className={classes} aria-hidden="true" />}
-        {!item.icon && Icon && <Icon className={classes} aria-hidden="true" />}
+        {!item.icon && Icon && !hideFolderIcon && <Icon className={classes} aria-hidden="true" />}
 
         <span className="flex-grow text-sm truncate">
             {item.name}

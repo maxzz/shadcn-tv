@@ -5,22 +5,15 @@ export function PaginationDemo() {
         <div className="flex flex-col items-center justify-center w-full h-full">
             <P.Pagination>
                 <P.PaginationContent>
-                    
-                    <P.PaginationItem>
-                        <P.PaginationPrevious href="#" />
-                    </P.PaginationItem>
 
-                    <P.PaginationItem>
-                        <P.PaginationLink href="#">1</P.PaginationLink>
-                    </P.PaginationItem>
+                    <P.PaginationPrevious href="#" />
 
-                    <P.PaginationItem>
-                        <P.PaginationEllipsis />
-                    </P.PaginationItem>
+                    <P.PaginationLink href="#">1</P.PaginationLink>
+                    <P.PaginationLink href="#" isActive>2</P.PaginationLink>
+                    <P.PaginationLink href="#">3</P.PaginationLink>
+                    <P.PaginationEllipsis />
 
-                    <P.PaginationItem>
-                        <P.PaginationNext href="#" />
-                    </P.PaginationItem>
+                    <P.PaginationNext href="#" />
 
                 </P.PaginationContent>
             </P.Pagination>

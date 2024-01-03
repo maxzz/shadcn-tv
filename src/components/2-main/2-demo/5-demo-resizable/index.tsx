@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizer";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizable";
 
 export function ResizableDemo() {
     return (

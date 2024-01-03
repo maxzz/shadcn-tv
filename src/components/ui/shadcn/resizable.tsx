@@ -1,4 +1,4 @@
-import * as R from "react-resizable-panels";
+import * as R from "react-resizable-panels"; // https://github.com/bvaughn/react-resizable-panels
 import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 

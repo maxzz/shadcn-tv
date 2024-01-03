@@ -37,4 +37,4 @@ export * from '../nun/theme-provider';
 export * from '../nun/theme-toggle-menu';
 export * from '../nun/theme-select';
 
-export * from './resizer';
+export * from './resizable';

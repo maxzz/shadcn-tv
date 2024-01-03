@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 
 export function Pagination({ className, ...rest }: ComponentProps<"nav">) {
     return (
-        <nav className={cn("mx-auto flex w-full justify-center", className)} role="navigation" aria-label="pagination." {...rest} />
+        <nav className={cn("mx-auto w-full flex justify-center", className)} role="navigation" aria-label="pagination" {...rest} />
     );
 }
 
@@ -33,8 +33,8 @@ export function PaginationLink({ className, isActive, size = "icon", ...rest }: 
 
 export function PaginationPrevious({ className, ...rest }: ComponentProps<typeof PaginationLink>) {
     return (
-        <PaginationLink className={cn("gap-1 pl-2.5", className)} aria-label="Go to previous page" size="default" {...rest}>
-            <ChevronLeftIcon className="h-4 w-4" />
+        <PaginationLink className={cn("pl-3 gap-1", className)} aria-label="Go to previous page" size="default" {...rest}>
+            <ChevronLeftIcon className="w-4 h-4" />
             <span>
                 Previous
             </span>
@@ -44,19 +44,19 @@ export function PaginationPrevious({ className, ...rest }: ComponentProps<typeof
 
 export function PaginationNext({ className, ...rest }: ComponentProps<typeof PaginationLink>) {
     return (
-        <PaginationLink className={cn("gap-1 pr-2.5", className)} aria-label="Go to next page" size="default" {...rest}>
+        <PaginationLink className={cn("pr-3 gap-1", className)} aria-label="Go to next page" size="default" {...rest}>
             <span>
                 Next
             </span>
-            <ChevronRightIcon className="h-4 w-4" />
+            <ChevronRightIcon className="w-4 h-4" />
         </PaginationLink>
     );
 }
 
 export function PaginationEllipsis({ className, ...rest }: ComponentProps<"span">) {
     return (
-        <span className={cn("flex h-9 w-9 items-center justify-center", className)} aria-hidden {...rest}>
-            <DotsHorizontalIcon className="h-4 w-4" />
+        <span className={cn("w-9 h-9 flex items-center justify-center", className)} aria-hidden {...rest}>
+            <DotsHorizontalIcon className="w-4 h-4" />
             <span className="sr-only">
                 More pages
             </span>

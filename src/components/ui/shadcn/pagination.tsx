@@ -16,11 +16,6 @@ export const PaginationContent = forwardRef<HTMLUListElement, ComponentProps<"ul
 );
 PaginationContent.displayName = "Pagination.Content";
 
-export const PaginationItem = forwardRef<HTMLLIElement, ComponentProps<"li">>(
-    ({ ...props }, ref) => <li ref={ref} {...props} />
-);
-PaginationItem.displayName = "Pagination.Item";
-
 type PaginationLinkProps =
     & {
         isActive?: boolean;
@@ -30,12 +25,11 @@ type PaginationLinkProps =
 
 export function PaginationLink({ className, isActive, size = "icon", ...rest }: PaginationLinkProps) {
     return (
-        <PaginationItem>
+        <li>
             <a className={cn(buttonVariants({ variant: isActive ? "outline" : "ghost", size, }), className)} aria-current={isActive ? "page" : undefined} {...rest} />
-        </PaginationItem>
+        </li>
     );
 }
-PaginationLink.displayName = "Pagination.Link";
 
 export function PaginationPrevious({ className, ...rest }: ComponentProps<typeof PaginationLink>) {
     return (
@@ -47,7 +41,6 @@ export function PaginationPrevious({ className, ...rest }: ComponentProps<typeof
         </PaginationLink>
     );
 }
-PaginationPrevious.displayName = "Pagination.Previous";
 
 export function PaginationNext({ className, ...rest }: ComponentProps<typeof PaginationLink>) {
     return (

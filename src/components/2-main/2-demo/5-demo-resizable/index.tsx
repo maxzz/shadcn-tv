@@ -1,7 +1,6 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizable";
+import { appSettings } from "@/store";
 import { PanelGroupStorage } from "react-resizable-panels";
-import { proxy } from "valtio";
-import { proxyMap } from "valtio/utils";
 
 // const storage: PanelGroupStorage = {
 //     getItem: (name: string): string => {
@@ -13,28 +12,16 @@ import { proxyMap } from "valtio/utils";
 //     }
 // }
 
-const resizablesStorage = proxy<{ positions: Map<string, string>; }>(
-    {
-        positions: new Map(),
-    },
-    // {
-    //     onSet(obj, prop, val) {
-    //         console.log('onSet', obj, prop, val);
-    //         obj.positions.set(prop, val);
-    //         return true;
-    //     },
-    // }
-);
 
 const storage: PanelGroupStorage = {
     getItem(name: string): string {
-        const rv = resizablesStorage.positions.get(name) || '';
+        const rv = appSettings.resisablesState.positions.get(name) || '';
         console.log(`getItem() name: %c${name} rv: ${rv}`, 'background-color: black; color: dodgerblue');
         return rv;
     },
     setItem(name: string, value: string): void {
         console.log(`setItem() name: %c${name} ${value}`, 'background-color: black; color: limegreen'); // {"{\"defaultSize\":25},{\"defaultSize\":50}":{"expandToSizes":{},"layout":[50,50]}}
-        resizablesStorage.positions.set(name, value);
+        appSettings.resisablesState.positions.set(name, value);
     }
 };
 

@@ -30,8 +30,7 @@ function initialSettings(): AppSettings {
         } catch (error) {
         }
     }
-    mergeConfigRecursively(defaultSettings, rv);
-    return rv;
+    return mergeConfigRecursively(defaultSettings, rv);
 }
 
 themeApply(appSettings.theme);

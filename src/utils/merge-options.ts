@@ -10,7 +10,7 @@ export function mergeDefaultAndLoaded<T extends Record<string, unknown>>({ defau
 /**
  * https://github.com/vitejs/vite/blob/main/packages/vite/src/node/utils.ts
  */
-export function mergeConfigRecursively(defaults: Record<string, any>, overrides: Record<string, any> | undefined | null, rootPath: string = ''): Record<string, any> {
+export function mergeConfigRecursively<T extends Record<string, any>>(defaults: T, overrides: Record<string, any> | undefined | null, rootPath: string = ''): T {
     if (!overrides) {
         return defaults;
     }
@@ -18,13 +18,13 @@ export function mergeConfigRecursively(defaults: Record<string, any>, overrides:
     const rv: Record<string, any> = { ...defaults };
 
     for (const key in overrides) {
+
         const value = overrides[key];
         if (value == null) {
             continue;
         }
 
         const existing = rv[key];
-
         if (existing == null) {
             rv[key] = value;
             continue;
@@ -43,13 +43,13 @@ export function mergeConfigRecursively(defaults: Record<string, any>, overrides:
         rv[key] = value;
     }
 
-    return rv;
-}
-
-export function arraify<T>(target: T | T[]): T[] {
-    return Array.isArray(target) ? target : [target];
+    return rv as T;
 }
 
 export function isObject(value: unknown): value is Record<string, any> {
     return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+export function arraify<T>(target: T | T[]): T[] {
+    return Array.isArray(target) ? target : [target];
 }

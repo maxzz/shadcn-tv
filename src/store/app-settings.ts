@@ -48,11 +48,17 @@ subscribe(appSettings, () => {
 });
 
 subscribe(appSettings, () => {
-    const newSettings = appSettings;
-    if (newSettings.resisablesState) {
-        newSettings.resisablesState.positions = Object.fromEntries(Object.entries(newSettings.resisablesState.positions)) as any;
-    }
+    
+    const newSettings = Object.fromEntries(Object.entries(appSettings));
+    console.log('save settings 1 newSettings', newSettings);
+    console.log('save settings 2 appSettings', appSettings);
+    console.log('save settings 3 fromEntries', Object.fromEntries(Object.entries(appSettings.resisablesState.positions)));
+
+    // // const newSettings = appSettings;
+    // if (appSettings.resisablesState?.positions) {
+    //     newSettings.resisablesState.positions = Object.fromEntries(Object.entries(appSettings.resisablesState.positions)) as any;
+    // }
     const str = JSON.stringify(newSettings);
-    console.log('save settings', str);
-    localStorage.setItem(STORE_KEY, str);
+    console.log('save settings 4', str);
+    // localStorage.setItem(STORE_KEY, str);
 });

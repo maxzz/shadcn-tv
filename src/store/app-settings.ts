@@ -2,6 +2,7 @@ import { Theme, themeApply } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
 import { TreeState, defaultTreeState } from "./case-tree-state";
 import { ResizablesState, defaultResizablesStorage } from "./case-resizables";
+import { debounce } from "@/utils";
 
 export type AppSettings = {
     theme: Theme;
@@ -25,11 +26,9 @@ function initialSettings(): AppSettings {
     if (savedSettings) {
         try {
             rv = JSON.parse(savedSettings);
-            console.log('load settings 1', rv);
         } catch (error) {
         }
     }
-    console.log('initialSettings', rv);
     if (!rv.resisablesState?.positions) {
         rv.resisablesState = defaultSettings.resisablesState;
     }
@@ -42,8 +41,9 @@ subscribe(appSettings, () => {
     themeApply(appSettings.theme);
 });
 
-subscribe(appSettings, () => {
+const saveDebounced = debounce(() => {
     const str = JSON.stringify(appSettings);
-    console.log('save settings 4', str);
     localStorage.setItem(STORE_KEY, str);
-});
+}, 400);
+
+subscribe(appSettings, saveDebounced);

@@ -1,5 +1,7 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizable";
 import { PanelGroupStorage } from "react-resizable-panels";
+import { proxy } from "valtio";
+import { proxyMap } from "valtio/utils";
 
 // const storage: PanelGroupStorage = {
 //     getItem: (name: string): string => {
@@ -11,16 +13,41 @@ import { PanelGroupStorage } from "react-resizable-panels";
 //     }
 // }
 
+const resizablesStorage = proxy<{ positions: Map<string, string>; }>(
+    {
+        positions: new Map(),
+    },
+    // {
+    //     onSet(obj, prop, val) {
+    //         console.log('onSet', obj, prop, val);
+    //         obj.positions.set(prop, val);
+    //         return true;
+    //     },
+    // }
+);
+
 const storage: PanelGroupStorage = {
     getItem(name: string): string {
-        console.log(`getItem() name: %c${name}`, 'background-color: black; color: dodgerblue');
-        return '10'
+        const rv = resizablesStorage.positions.get(name) || '';
+        console.log(`getItem() name: %c${name} rv: ${rv}`, 'background-color: black; color: dodgerblue');
+        return rv;
     },
     setItem(name: string, value: string): void {
         console.log(`setItem() name: %c${name} ${value}`, 'background-color: black; color: limegreen'); // {"{\"defaultSize\":25},{\"defaultSize\":50}":{"expandToSizes":{},"layout":[50,50]}}
-        console.log(JSON.parse(value));
+        resizablesStorage.positions.set(name, value);
     }
-}
+};
+
+// const storage: PanelGroupStorage = {
+//     getItem(name: string): string {
+//         console.log(`getItem() name: %c${name}`, 'background-color: black; color: dodgerblue');
+//         return '10';
+//     },
+//     setItem(name: string, value: string): void {
+//         console.log(`setItem() name: %c${name} ${value}`, 'background-color: black; color: limegreen'); // {"{\"defaultSize\":25},{\"defaultSize\":50}":{"expandToSizes":{},"layout":[50,50]}}
+//         console.log(JSON.parse(value));
+//     }
+// };
 
 export function ResizableDemo() {
     return (
@@ -45,6 +72,8 @@ export function ResizableDemo() {
                     onLayout={(layout) => {
                         //console.log('layout2', layout);
                     }}
+                    autoSaveId="tm-example2"
+                    storage={storage}
                 >
 
                     <ResizablePanel defaultSize={25}>

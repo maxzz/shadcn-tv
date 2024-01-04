@@ -1,8 +1,7 @@
 import { Theme, themeApply } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
 import { TreeState, defaultTreeState } from "./case-tree-state";
-import { ResizablesState } from "./case-resizables";
-import { proxyMap } from "valtio/utils";
+import { ResizablesState, defaultResizablesStorage } from "./case-resizables";
 
 export type AppSettings = {
     theme: Theme;
@@ -13,9 +12,7 @@ export type AppSettings = {
 const defaultSettings: AppSettings = {
     theme: 'light',
     treeState: defaultTreeState,
-    resisablesState: {
-        positions: proxyMap(),
-    }
+    resisablesState: defaultResizablesStorage,
 };
 
 const STORE_KEY = "shadcn-tv-app-settings";
@@ -28,16 +25,14 @@ function initialSettings(): AppSettings {
     if (savedSettings) {
         try {
             rv = JSON.parse(savedSettings);
+            console.log('load settings 1', rv);
         } catch (error) {
         }
     }
+    console.log('initialSettings', rv);
     if (!rv.resisablesState?.positions) {
         rv.resisablesState = defaultSettings.resisablesState;
-    } else {
-        console.log('restore positions', Object.entries(rv.resisablesState.positions));
-        rv.resisablesState.positions = proxyMap(Object.entries(rv.resisablesState.positions));
     }
-    console.log('initialSettings', rv);
     return rv;
 }
 
@@ -48,17 +43,7 @@ subscribe(appSettings, () => {
 });
 
 subscribe(appSettings, () => {
-    
-    const newSettings = Object.fromEntries(Object.entries(appSettings));
-    console.log('save settings 1 newSettings', newSettings);
-    console.log('save settings 2 appSettings', appSettings);
-    console.log('save settings 3 fromEntries', Object.fromEntries(Object.entries(appSettings.resisablesState.positions)));
-
-    // // const newSettings = appSettings;
-    // if (appSettings.resisablesState?.positions) {
-    //     newSettings.resisablesState.positions = Object.fromEntries(Object.entries(appSettings.resisablesState.positions)) as any;
-    // }
-    const str = JSON.stringify(newSettings);
+    const str = JSON.stringify(appSettings);
     console.log('save settings 4', str);
-    // localStorage.setItem(STORE_KEY, str);
+    localStorage.setItem(STORE_KEY, str);
 });

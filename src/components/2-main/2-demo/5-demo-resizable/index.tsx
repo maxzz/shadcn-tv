@@ -15,13 +15,13 @@ import { PanelGroupStorage } from "react-resizable-panels";
 
 const storage: PanelGroupStorage = {
     getItem(name: string): string {
-        const rv = appSettings.resisablesState.positions.get(name) || '';
+        const rv = appSettings.resisablesState.positions[name] || '';
         console.log(`getItem() name: %c${name} rv: ${rv}`, 'background-color: black; color: dodgerblue');
         return rv;
     },
     setItem(name: string, value: string): void {
         console.log(`setItem() name: %c${name} ${value}`, 'background-color: black; color: limegreen'); // {"{\"defaultSize\":25},{\"defaultSize\":50}":{"expandToSizes":{},"layout":[50,50]}}
-        appSettings.resisablesState.positions.set(name, value);
+        appSettings.resisablesState.positions[name] = value;
     }
 };
 

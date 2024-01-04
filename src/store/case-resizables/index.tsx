@@ -2,6 +2,6 @@ export type ResizablesState = {
     positions: Record<string, string>;
 };
 
-export const defaultResizablesStorage = {
+export const defaultResizablesState = {
     positions: {},
 };

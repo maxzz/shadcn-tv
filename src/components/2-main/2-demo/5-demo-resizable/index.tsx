@@ -16,9 +16,7 @@ export function ResizableDemo() {
         <ResizablePanelGroup direction="horizontal" className="w-full _max-w-md rounded-lg border" autoSaveId="tm-example" storage={panelsStorage}>
 
             <ResizablePanel defaultSize={25}>
-                <div className="p-6 h-[200px] flex items-center justify-center">
-                    <span className="font-semibold">One</span>
-                </div>
+                <PanelA />
             </ResizablePanel>
 
             <ResizableHandle withHandle />
@@ -27,22 +25,42 @@ export function ResizableDemo() {
                 <ResizablePanelGroup direction="vertical" autoSaveId="tm-example2" storage={panelsStorage}>
 
                     <ResizablePanel defaultSize={25}>
-                        <div className="p-6 h-full flex items-center justify-center">
-                            <span className="font-semibold">Two</span>
-                        </div>
+                        <PanelB />
                     </ResizablePanel>
 
                     <ResizableHandle />
 
                     <ResizablePanel defaultSize={75}>
-                        <div className="p-6 h-full flex items-center justify-center">
-                            <span className="font-semibold">Three</span>
-                        </div>
+                        <PanelC />
                     </ResizablePanel>
 
                 </ResizablePanelGroup>
             </ResizablePanel>
 
         </ResizablePanelGroup>
+    );
+}
+
+function PanelA() {
+    return (
+        <div className="p-6 h-[200px] flex items-center justify-center">
+            <span className="font-semibold">One</span>
+        </div>
+    );
+}
+
+function PanelB() {
+    return (
+        <div className="p-6 h-full flex items-center justify-center">
+            <span className="font-semibold">Two</span>
+        </div>
+    );
+}
+
+function PanelC() {
+    return (
+        <div className="p-6 h-full flex items-center justify-center">
+            <span className="font-semibold">Three</span>
+        </div>
     );
 }

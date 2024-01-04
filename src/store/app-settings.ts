@@ -1,8 +1,9 @@
 import { Theme, themeApply } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
 import { TreeState, defaultTreeState } from "./case-tree-state";
-import { ResizablesState, defaultResizablesStorage } from "./case-resizables";
+import { ResizablesState, defaultResizablesState } from "./case-resizables";
 import { debounce } from "@/utils";
+import { mergeConfigRecursively } from "@/utils/merge-options";
 
 export type AppSettings = {
     theme: Theme;
@@ -13,7 +14,7 @@ export type AppSettings = {
 const defaultSettings: AppSettings = {
     theme: 'light',
     treeState: defaultTreeState,
-    resisablesState: defaultResizablesStorage,
+    resisablesState: defaultResizablesState,
 };
 
 const STORE_KEY = "shadcn-tv-app-settings";
@@ -29,21 +30,14 @@ function initialSettings(): AppSettings {
         } catch (error) {
         }
     }
-    if (!rv.resisablesState?.positions) {
-        rv.resisablesState = defaultSettings.resisablesState;
-    }
+    mergeConfigRecursively(defaultSettings, rv);
     return rv;
 }
 
 themeApply(appSettings.theme);
-
 subscribe(appSettings, () => {
     themeApply(appSettings.theme);
 });
 
-const saveDebounced = debounce(() => {
-    const str = JSON.stringify(appSettings);
-    localStorage.setItem(STORE_KEY, str);
-}, 400);
-
+const saveDebounced = debounce(() => localStorage.setItem(STORE_KEY, JSON.stringify(appSettings)), 400);
 subscribe(appSettings, saveDebounced);

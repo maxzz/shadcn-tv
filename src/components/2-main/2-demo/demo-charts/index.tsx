@@ -1,4 +1,5 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"; // https://github.com/shadcn-ui/ui/blob/main/apps/www/app/examples/dashboard/components/overview.tsx
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/shadcn";
 
 const data = [
     {
@@ -51,9 +52,9 @@ const data = [
     },
 ];
 
-export function ChartsDemo() {
+function Charts() {
     return (
-        <ResponsiveContainer width="100%" height={350}>
+        <ResponsiveContainer width="100%" height={100}>
             <BarChart data={data}>
                 <XAxis
                     dataKey="name"
@@ -79,3 +80,17 @@ export function ChartsDemo() {
         </ResponsiveContainer>
     );
 }
+
+export function ChartsDemo() {
+    return (
+        <Card className="max-w-md">
+            <CardHeader>
+                <CardTitle>Overview</CardTitle>
+            </CardHeader>
+            <CardContent className="pl-2">
+                <Charts />
+            </CardContent>
+        </Card>
+    );
+}
+

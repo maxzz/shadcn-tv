@@ -2,6 +2,7 @@ import { Theme, themeApply } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
 import { TreeState, defaultTreeState } from "./case-tree-state";
 import { ResizablesState } from "./case-resizables";
+import { proxyMap } from "valtio/utils";
 
 export type AppSettings = {
     theme: Theme;
@@ -13,7 +14,7 @@ const defaultSettings: AppSettings = {
     theme: 'light',
     treeState: defaultTreeState,
     resisablesState: {
-        positions: new Map(),
+        positions: proxyMap(),
     }
 };
 
@@ -33,8 +34,10 @@ function initialSettings(): AppSettings {
     if (!rv.resisablesState?.positions) {
         rv.resisablesState = defaultSettings.resisablesState;
     } else {
-        rv.resisablesState.positions = new Map(rv.resisablesState.positions);
+        console.log('restore positions', Object.entries(rv.resisablesState.positions));
+        rv.resisablesState.positions = proxyMap(Object.entries(rv.resisablesState.positions));
     }
+    console.log('initialSettings', rv);
     return rv;
 }
 
@@ -47,7 +50,9 @@ subscribe(appSettings, () => {
 subscribe(appSettings, () => {
     const newSettings = appSettings;
     if (newSettings.resisablesState) {
-        newSettings.resisablesState.positions = Object.fromEntries(newSettings.resisablesState.positions.entries()) as any;
+        newSettings.resisablesState.positions = Object.fromEntries(Object.entries(newSettings.resisablesState.positions)) as any;
     }
-    localStorage.setItem(STORE_KEY, JSON.stringify(appSettings));
+    const str = JSON.stringify(newSettings);
+    console.log('save settings', str);
+    localStorage.setItem(STORE_KEY, str);
 });

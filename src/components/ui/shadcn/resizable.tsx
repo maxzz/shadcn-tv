@@ -1,7 +1,10 @@
-import * as R from "react-resizable-panels"; // https://github.com/bvaughn/react-resizable-panels
+import * as R from "react-resizable-panels";
 import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 
+/**
+ * https://github.com/bvaughn/react-resizable-panels
+ */
 const ResizablePanelGroup = ({ className, ...rest }: React.ComponentProps<typeof R.PanelGroup>) => (
     <R.PanelGroup
         className={cn("w-full h-full flex data-[panel-group-direction=vertical]:flex-col", className)}

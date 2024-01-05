@@ -7,6 +7,9 @@ function manualChunks(id: string) { //https://rollupjs.org/configuration-options
     if (id.includes("@radix-ui")) {
         return "radix-ui";
     }
+    if (id.includes("recharts")) {
+        return "recharts";
+    }
     // if (id.includes("node_modules")) {
     //     return "vendor";
     // }

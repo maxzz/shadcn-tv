@@ -2,11 +2,18 @@ import * as React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 import { Button } from "@/components/ui/shadcn/button";
-import useEmblaCarousel, {
+import {
     type EmblaCarouselType as CarouselApi,
     type EmblaOptionsType as CarouselOptions,
     type EmblaPluginType as CarouselPlugin,
-} from "embla-carousel-react";
+} from "embla-carousel";
+import useEmblaCarousel from "embla-carousel-react";
+
+// import useEmblaCarousel, {
+//     type EmblaCarouselType as CarouselApi,
+//     type EmblaOptionsType as CarouselOptions,
+//     type EmblaPluginType as CarouselPlugin,
+// } from "embla-carousel-react";
 
 type CarouselProps = {
     opts?: CarouselOptions;

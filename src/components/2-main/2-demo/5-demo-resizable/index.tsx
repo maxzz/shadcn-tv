@@ -15,7 +15,7 @@ export function ResizableDemo() {
     return (
         <ResizablePanelGroup direction="horizontal" className="w-full _max-w-md rounded-lg border" autoSaveId="tm-example" storage={panelsStorage}>
 
-            <ResizablePanel defaultSize={25} collapsible={true}>
+            <ResizablePanel defaultSize={25}>
                 <PanelA />
             </ResizablePanel>
 

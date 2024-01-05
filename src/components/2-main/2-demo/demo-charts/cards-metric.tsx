@@ -1,11 +1,7 @@
-import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts"; // https://github.com/shadcn-ui/ui/blob/main/apps/www/registry/new-york/example/cards/metric.tsx
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/shadcn/card";
+import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
+import * as C from "@/components/ui/shadcn/card";
+
+// https://github.com/shadcn-ui/ui/blob/main/apps/www/registry/new-york/example/cards/metric.tsx
 
 const data = [
     {
@@ -38,100 +34,81 @@ const data = [
     },
 ];
 
-export function CardsMetric() {
-    //   const { theme: mode } = useTheme()
-    //   const [config] = useConfig()
-
-    //   const theme = themes.find((theme) => theme.name === config.theme)
-
+function Charts() {
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>
-                    Exercise Minutes
-                </CardTitle>
-                <CardDescription>
-                    Your exercise minutes are ahead of where you normally are.
-                </CardDescription>
-            </CardHeader>
+        <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
 
-            <CardContent className="pb-4">
-                <div className="h-[200px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 0 }}>
-                            <Tooltip
-                                content={({ active, payload }) => {
-                                    if (active && payload && payload.length) {
-                                        return (
-                                            <div className="rounded-lg border bg-background p-2 shadow-sm">
-                                                <div className="grid grid-cols-2 gap-2">
-                                                    <div className="flex flex-col">
-                                                        <span className="text-[0.70rem] uppercase text-muted-foreground">
-                                                            Average
-                                                        </span>
-                                                        <span className="font-bold text-muted-foreground">
-                                                            {payload[0].value}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex flex-col">
-                                                        <span className="text-[0.70rem] uppercase text-muted-foreground">
-                                                            Today
-                                                        </span>
-                                                        <span className="font-bold">
-                                                            {payload[1].value}
-                                                        </span>
-                                                    </div>
+                <LineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 0 }}>
+                    <Tooltip
+                        content={
+                            ({ active, payload }) => {
+                                if (active && payload && payload.length) {
+                                    return (
+                                        <div className="rounded-lg border bg-background p-2 shadow-sm">
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <div className="flex flex-col">
+                                                    <span className="text-[0.70rem] uppercase text-muted-foreground">
+                                                        Average
+                                                    </span>
+                                                    <span className="font-bold text-muted-foreground">
+                                                        {payload[0].value}
+                                                    </span>
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-[0.70rem] uppercase text-muted-foreground">
+                                                        Today
+                                                    </span>
+                                                    <span className="font-bold">
+                                                        {payload[1].value}
+                                                    </span>
                                                 </div>
                                             </div>
-                                        );
-                                    }
-                                    return null;
-                                }}
-                            />
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            }
+                        }
+                    />
 
-                            <Line
-                                type="monotone"
-                                strokeWidth={2}
-                                dataKey="average"
-                                activeDot={{
-                                    r: 6,
-                                    style: { fill: "var(--theme-primary)", opacity: 0.25 },
-                                }}
-                                // style={
-                                //     {
-                                //         stroke: "var(--theme-primary)",
-                                //         opacity: 0.25,
-                                //         // "--theme-primary": `hsl(${
-                                //         //   theme?.cssVars[mode === "dark" ? "dark" : "light"].primary
-                                //         // })`,
-                                //     } as React.CSSProperties
-                                // }
-                                className="stroke-primary opacity-25"
-                            />
+                    <Line
+                        type="monotone"
+                        strokeWidth={2}
+                        dataKey="average"
+                        activeDot={{ r: 6, style: { fill: "var(--theme-primary)", opacity: 0.25 } }}
+                        className="stroke-primary opacity-25"
+                    />
 
-                            <Line
-                                type="monotone"
-                                dataKey="today"
-                                strokeWidth={2}
-                                activeDot={{
-                                    r: 8,
-                                    style: { fill: "var(--theme-primary)" },
-                                }}
-                                // style={
-                                //     {
-                                //         stroke: "var(--theme-primary)",
-                                //         // "--theme-primary": `hsl(${
-                                //         //   theme?.cssVars[mode === "dark" ? "dark" : "light"].primary
-                                //         // })`,
-                                //     } as React.CSSProperties
-                                // }
-                                className="stroke-primary"
-                            />
-                            
-                        </LineChart>
-                    </ResponsiveContainer>
-                </div>
-            </CardContent>
-        </Card>
+                    <Line
+                        type="monotone"
+                        dataKey="today"
+                        strokeWidth={2}
+                        activeDot={{ r: 8, style: { fill: "var(--theme-primary)" } }}
+                        className="stroke-primary"
+                    />
+
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
+    );
+}
+
+export function CardsMetric() {
+    return (
+        <C.Card>
+            <C.CardHeader>
+                <C.CardTitle>
+                    Exercise Minutes
+                </C.CardTitle>
+                <C.CardDescription>
+                    Your exercise minutes are ahead of where you normally are.
+                </C.CardDescription>
+            </C.CardHeader>
+
+            <C.CardContent className="pb-4">
+                <Charts />
+            </C.CardContent>
+        </C.Card>
     );
 }

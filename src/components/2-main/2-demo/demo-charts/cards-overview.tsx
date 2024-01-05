@@ -1,5 +1,7 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"; // https://github.com/shadcn-ui/ui/blob/main/apps/www/app/examples/dashboard/components/overview.tsx
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/shadcn";
+
+// https://github.com/shadcn-ui/ui/blob/main/apps/www/app/examples/dashboard/components/overview.tsx
 
 const data = [
     {

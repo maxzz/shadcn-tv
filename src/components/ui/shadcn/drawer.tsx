@@ -1,116 +1,60 @@
-import * as React from "react";
-import { Drawer as DrawerPrimitive } from "vaul";
-
+import { ComponentProps, forwardRef, ElementRef, ComponentPropsWithoutRef, HTMLAttributes } from "react";
+import { Drawer as D } from "vaul";
 import { cn } from "@/utils";
 
-const Drawer = ({
-    shouldScaleBackground = true,
-    ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-    <DrawerPrimitive.Root
-        shouldScaleBackground={shouldScaleBackground}
-        {...props}
-    />
-);
+export function Drawer({ shouldScaleBackground = true, ...rest }: ComponentProps<typeof D.Root>) {
+    return (
+        <D.Root shouldScaleBackground={shouldScaleBackground} {...rest} />
+    );
+}
 Drawer.displayName = "Drawer";
 
-const DrawerTrigger = DrawerPrimitive.Trigger;
+export const DrawerTrigger = D.Trigger;
+export const DrawerPortal = D.Portal;
+export const DrawerClose = D.Close;
 
-const DrawerPortal = DrawerPrimitive.Portal;
+export const DrawerOverlay = forwardRef<ElementRef<typeof D.Overlay>, ComponentPropsWithoutRef<typeof D.Overlay>>(
+    ({ className, ...rest }, ref) => (
+        <D.Overlay ref={ref} className={cn("fixed inset-0 bg-black/80 z-50", className)} {...rest} />
+    )
+);
+DrawerOverlay.displayName = D.Overlay.displayName;
 
-const DrawerClose = DrawerPrimitive.Close;
-
-const DrawerOverlay = React.forwardRef<
-    React.ElementRef<typeof DrawerPrimitive.Overlay>,
-    React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-    <DrawerPrimitive.Overlay
-        ref={ref}
-        className={cn("fixed inset-0 z-50 bg-black/80", className)}
-        {...props}
-    />
-));
-DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
-
-const DrawerContent = React.forwardRef<
-    React.ElementRef<typeof DrawerPrimitive.Content>,
-    React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-    <DrawerPortal>
-        <DrawerOverlay />
-        <DrawerPrimitive.Content
-            ref={ref}
-            className={cn(
-                "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
-                className
-            )}
-            {...props}
-        >
-            <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-            {children}
-        </DrawerPrimitive.Content>
-    </DrawerPortal>
-));
+export const DrawerContent = forwardRef<ElementRef<typeof D.Content>, ComponentPropsWithoutRef<typeof D.Content>>(
+    ({ className, children, ...rest }, ref) => (
+        <DrawerPortal>
+            <DrawerOverlay />
+            <D.Content ref={ref} className={cn("fixed mt-24 inset-x-0 bottom-0 h-auto bg-background z-50 border rounded-t-[10px] flex flex-col", className)} {...rest}>
+                <div className="mx-auto mt-4 w-[100px] h-2 bg-muted rounded-full" />
+                {children}
+            </D.Content>
+        </DrawerPortal>
+    )
+);
 DrawerContent.displayName = "DrawerContent";
 
-const DrawerHeader = ({
-    className,
-    ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-    <div
-        className={cn("grid gap-1.5 p-4 text-center sm:text-left", className)}
-        {...props}
-    />
+export function DrawerHeader({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <div className={cn("p-4 text-center sm:text-left grid gap-1.5", className)} {...rest} />
+    );
+}
+
+export function DrawerFooter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <div className={cn("mt-auto p-4 flex flex-col gap-2", className)} {...rest} />
+    );
+}
+
+export const DrawerTitle = forwardRef<ElementRef<typeof D.Title>, ComponentPropsWithoutRef<typeof D.Title>>(
+    ({ className, ...rest }, ref) => (
+        <D.Title ref={ref} className={cn("text-lg font-semibold leading-none tracking-tight", className)} {...rest} />
+    )
 );
-DrawerHeader.displayName = "DrawerHeader";
+DrawerTitle.displayName = D.Title.displayName;
 
-const DrawerFooter = ({
-    className,
-    ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-    <div
-        className={cn("mt-auto flex flex-col gap-2 p-4", className)}
-        {...props}
-    />
+export const DrawerDescription = forwardRef<ElementRef<typeof D.Description>, ComponentPropsWithoutRef<typeof D.Description>>(
+    ({ className, ...rest }, ref) => (
+        <D.Description ref={ref} className={cn("text-sm text-muted-foreground", className)} {...rest} />
+    )
 );
-DrawerFooter.displayName = "DrawerFooter";
-
-const DrawerTitle = React.forwardRef<
-    React.ElementRef<typeof DrawerPrimitive.Title>,
-    React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
->(({ className, ...props }, ref) => (
-    <DrawerPrimitive.Title
-        ref={ref}
-        className={cn(
-            "text-lg font-semibold leading-none tracking-tight",
-            className
-        )}
-        {...props}
-    />
-));
-DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
-
-const DrawerDescription = React.forwardRef<
-    React.ElementRef<typeof DrawerPrimitive.Description>,
-    React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
->(({ className, ...props }, ref) => (
-    <DrawerPrimitive.Description
-        ref={ref}
-        className={cn("text-sm text-muted-foreground", className)}
-        {...props}
-    />
-));
-DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
-
-export {
-    Drawer,
-    DrawerPortal,
-    DrawerOverlay,
-    DrawerTrigger,
-    DrawerClose,
-    DrawerContent,
-    DrawerHeader,
-    DrawerFooter,
-    DrawerTitle,
-    DrawerDescription,
-};
+DrawerDescription.displayName = D.Description.displayName;

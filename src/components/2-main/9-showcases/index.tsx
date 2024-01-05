@@ -6,6 +6,7 @@ import { DemoTreeWithOptions } from "../2-demo/4-demo-tree";
 import { ResizableDemo } from "../2-demo/5-demo-resizable";
 import { ChartsInTabs } from "./cases/4-charts";
 import { CarouselDemo } from "../2-demo/7-demo-carousel";
+import { DrawerDemo } from "../2-demo/demo-drawer";
 
 export * from "./cases/types";
 export * from "./showcases-view";
@@ -18,6 +19,7 @@ export const showcasesData: Showcase[] = [
     { id: '51', name: "Resizable", component: <ResizableDemo /> },
     { id: '52', name: "Charts", component: <ChartsInTabs /> },
     { id: '53', name: "Carousel", component: <CarouselDemo /> },
+    { id: '54', name: "Drawer", component: <DrawerDemo /> },
     
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];

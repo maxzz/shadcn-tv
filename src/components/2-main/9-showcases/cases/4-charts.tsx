@@ -3,7 +3,7 @@ import { CardsMetric, ChartsOverview } from "../../2-demo/demo-charts";
 
 export function ChartsInTabs() {
     return (
-        <Tabs defaultValue="switch1">
+        <Tabs defaultValue="charts2">
             <TabsList>
                 <TabsTrigger value="charts1">Overview</TabsTrigger>
                 <TabsTrigger value="charts2">Metric</TabsTrigger>

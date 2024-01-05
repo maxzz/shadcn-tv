@@ -39,7 +39,7 @@ function Charts() {
         <div className="h-[100px]">
             <ResponsiveContainer width="100%" height="100%">
 
-                <LineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 0 }}>
+                <LineChart data={data} margin={{ top: 7, right: 10, left: 10, bottom: 0 }}>
                     <Tooltip
                         content={
                             ({ active, payload }) => {

@@ -4,7 +4,6 @@ import { LoadersInTab } from "./cases/2-loaders";
 import { SwitchInTabs } from "./cases/3-switches";
 import { DemoTreeWithOptions } from "../2-demo/4-demo-tree";
 import { ResizableDemo } from "../2-demo/5-demo-resizable";
-import { PaginationDemo } from "../2-demo/demo-pagination";
 import { ChartsInTabs } from "./cases/4-charts";
 
 export * from "./cases/types";
@@ -16,9 +15,7 @@ export const showcasesData: Showcase[] = [
     { id: '30', name: "Switches", component: <SwitchInTabs /> },
     { id: '41', name: "Tree", component: <DemoTreeWithOptions /> },
     { id: '51', name: "Resizable", component: <ResizableDemo /> },
-    { id: '52', name: "Pagination", component: <PaginationDemo /> },
-
-    { id: '53', name: "Charts", component: <ChartsInTabs /> },
+    { id: '52', name: "Charts", component: <ChartsInTabs /> },
     
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];

@@ -1,9 +1,16 @@
-import * as React from "react";
+import { ComponentProps, HTMLAttributes, createContext, forwardRef, KeyboardEvent, useCallback, useContext, useEffect, useState } from "react";
+import { type EmblaCarouselType, type EmblaOptionsType, type EmblaPluginType } from "embla-carousel";
+import useEmblaCarousel from "embla-carousel-react";
+import { Button } from "@/components/ui/shadcn/button";
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
-import { Button } from "@/components/ui/shadcn/button";
-import { type EmblaCarouselType as CarouselApi, type EmblaOptionsType as CarouselOptions, type EmblaPluginType as CarouselPlugin, } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
+
+/**
+ * https://github.com/davidjerleke/embla-carousel/issues/647#issuecomment-1868273239 'EmblaOptionsType doesn't exists in React'
+ */
+export type CarouselApi = EmblaCarouselType;
+export type CarouselOptions = EmblaOptionsType;
+export type CarouselPlugin = EmblaPluginType;
 
 type CarouselProps = {
     opts?: CarouselOptions;
@@ -23,27 +30,27 @@ type CarouselContextProps =
     }
     & CarouselProps;
 
-const CarouselContext = React.createContext<CarouselContextProps | null>(null);
+const CarouselContext = createContext<CarouselContextProps | null>(null);
 
 function useCarousel(): CarouselContextProps {
-    const context = React.useContext(CarouselContext);
+    const context = useContext(CarouselContext);
     if (!context) {
         throw new Error("useCarousel must be used within a <Carousel />");
     }
     return context;
 }
+
 /**
  * https://github.com/davidjerleke/embla-carousel
- * https://github.com/davidjerleke/embla-carousel/issues/647#issuecomment-1868273239 'EmblaOptionsType doesn't exists in React'
  */
-const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
+export const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & CarouselProps>(
     ({ orientation = "horizontal", opts, setApi, plugins, className, children, ...rest }, ref) => {
 
         const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: orientation === "horizontal" ? "x" : "y", }, plugins);
-        const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-        const [canScrollNext, setCanScrollNext] = React.useState(false);
+        const [canScrollPrev, setCanScrollPrev] = useState(false);
+        const [canScrollNext, setCanScrollNext] = useState(false);
 
-        const onSelect = React.useCallback(
+        const onSelect = useCallback(
             (api: CarouselApi) => {
                 if (!api) {
                     return;
@@ -54,11 +61,11 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
             }, []
         );
 
-        const scrollPrev = React.useCallback(() => api?.scrollPrev(), [api]);
-        const scrollNext = React.useCallback(() => api?.scrollNext(), [api]);
+        const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
+        const scrollNext = useCallback(() => api?.scrollNext(), [api]);
 
-        const handleKeyDown = React.useCallback(
-            (event: React.KeyboardEvent<HTMLDivElement>) => {
+        const handleKeyDown = useCallback(
+            (event: KeyboardEvent<HTMLDivElement>) => {
                 if (event.key === "ArrowLeft") {
                     event.preventDefault();
                     scrollPrev();
@@ -70,14 +77,14 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
             }, [scrollPrev, scrollNext]
         );
 
-        React.useEffect(() => {
+        useEffect(() => {
             if (!api || !setApi) {
                 return;
             }
             setApi(api);
         }, [api, setApi]);
 
-        React.useEffect(() => {
+        useEffect(() => {
             if (!api) {
                 return;
             }
@@ -120,7 +127,7 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 );
 Carousel.displayName = "Carousel";
 
-const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+export const CarouselContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...rest }, ref) => {
         const { carouselRef, orientation } = useCarousel();
         return (
@@ -136,7 +143,7 @@ const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
 );
 CarouselContent.displayName = "Carousel.Content";
 
-const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+export const CarouselItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...rest }, ref) => {
         const { orientation } = useCarousel();
         return (
@@ -152,7 +159,7 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 );
 CarouselItem.displayName = "Carousel.Item";
 
-const CarouselPrev = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
+export const CarouselPrev = forwardRef<HTMLButtonElement, ComponentProps<typeof Button>>(
     ({ className, variant = "outline", size = "icon", ...rest }, ref) => {
         const { orientation, scrollPrev, canScrollPrev } = useCarousel();
         return (
@@ -179,7 +186,7 @@ const CarouselPrev = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 );
 CarouselPrev.displayName = "Carousel.Prev";
 
-const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
+export const CarouselNext = forwardRef<HTMLButtonElement, ComponentProps<typeof Button>>(
     ({ className, variant = "outline", size = "icon", ...rest }, ref) => {
         const { orientation, scrollNext, canScrollNext } = useCarousel();
         return (
@@ -205,12 +212,3 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
     }
 );
 CarouselNext.displayName = "Carousel.Next";
-
-export {
-    type CarouselApi,
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselPrev,
-    CarouselNext,
-};

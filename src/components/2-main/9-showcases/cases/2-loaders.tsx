@@ -1,4 +1,4 @@
-import { LoaderDotsRing, RadialLoader } from "@/components/ui/loaders";
+import { LoaderDotsRing, RadialLoader, SvgSpinner } from "@/components/ui/loaders";
 import { SkeletonDemo } from "../../2-demo/2-loaders/4-demo-skeleton";
 import { LoadersTest } from "../../3-experimental";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
@@ -11,8 +11,9 @@ export function LoadersInTab() {
                 <TabsTrigger value="loaders1">Loaders</TabsTrigger>
                 <TabsTrigger value="loaders2">Circle loader</TabsTrigger>
                 <TabsTrigger value="loaders3">Radial</TabsTrigger>
-                <TabsTrigger value="loaders4">Skeleton</TabsTrigger>
-                <TabsTrigger value="loaders5">Pagination</TabsTrigger>
+                <TabsTrigger value="loaders4">Spinner</TabsTrigger>
+                <TabsTrigger value="loaders5">Skeleton</TabsTrigger>
+                <TabsTrigger value="loaders6">Pagination</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -27,11 +28,15 @@ export function LoadersInTab() {
                 <RadialLoader />
             </TabsContent>
 
-            <TabsContent value="loaders4" className="my-8">
-                <SkeletonDemo />
+            <TabsContent value="loaders4">
+                <SvgSpinner className="w-12 h-12" />
             </TabsContent>
 
             <TabsContent value="loaders5" className="my-8">
+                <SkeletonDemo />
+            </TabsContent>
+
+            <TabsContent value="loaders7" className="my-8">
                 <PaginationDemo />
             </TabsContent>
         </Tabs>

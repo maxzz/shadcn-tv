@@ -29,7 +29,9 @@ export function LoadersInTab() {
             </TabsContent>
 
             <TabsContent value="loaders4">
-                <SvgSpinner className="w-12 h-12 stroke-[5] stroke-sky-500" />
+                <div className="my-8 flex items-center justify-center">
+                    <SvgSpinner className="w-8 h-8 stroke-[5] stroke-sky-500" />
+                </div>
             </TabsContent>
 
             <TabsContent value="loaders5" className="my-8">

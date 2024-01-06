@@ -7,16 +7,16 @@ const methods: toastKeys[] = ['success', 'info', 'warning', 'error', /*'custom',
 
 function randomToast() {
     const method: toastKeys = methods[Math.floor(Math.random() * methods.length)];
-    const message = "Event has been created";
-    const description = `Toda ${new Date().toLocaleString().replace(/\//g, ".")}`;
+    const message = `Event has been created as "${method}" toast`;
+    const description = `Today ${new Date().toLocaleString().replace(/\//g, ".")}`;
     
-    // const action = {
-    //     label: "Undo",
-    //     onClick: () => console.log("Undo"),
-    // };
-    // toast[method](message, { description, action });
-    
-    toast[method](message, { description });
+    const action = {
+        label: "Undo",
+        onClick: () => console.log("Undo"),
+    };
+
+    toast[method](message, { description, action });
+    // toast[method](message, { description });
 }
 
 export function SonnerDemo() {

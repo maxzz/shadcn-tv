@@ -15,6 +15,24 @@ export function App() {
         </div>
 
         <DropArea />
-        <Toaster />
+        <Toaster
+            // toastOptions={{
+            //     unstyled: true,
+            //     // classNames: {
+            //     //     error: 'bg-red-400',
+            //     //     success: 'text-green-400',
+            //     //     warning: 'text-yellow-400',
+            //     //     info: 'bg-blue-400',
+            //     // },
+            //     // classNames: {
+            //     //     toast: 'bg-blue-400',
+            //     //     title: 'text-red-400 text-2xl',
+            //     //     description: 'text-red-400',
+            //     //     actionButton: 'bg-zinc-400',
+            //     //     cancelButton: 'bg-orange-400',
+            //     //     closeButton: 'bg-lime-400',
+            //     // },
+            // }}
+        />
     </>);
 }

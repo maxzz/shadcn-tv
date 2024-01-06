@@ -7,7 +7,6 @@ import { Toaster } from "./components/ui/shadcn";
 export function App() {
     return (<>
         <UIToaster />
-        <Toaster />
 
         <div className="h-screen grid grid-rows-[auto,1fr,auto]">
             <Section0_Header />
@@ -16,5 +15,6 @@ export function App() {
         </div>
 
         <DropArea />
+        <Toaster />
     </>);
 }

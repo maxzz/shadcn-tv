@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 import * as R from "react-resizable-panels";
 import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
@@ -42,18 +42,6 @@ data-[panel-group-direction=vertical]:after:h-1 \
 \
 flex items-center justify-center \
 ";
-
-// function ResizableHandle({ withHandle, className, ...rest }: R.PanelResizeHandleProps & { withHandle?: boolean; }) {
-//     return (
-//         <R.PanelResizeHandle className={cn(ResizableHandleClasses, className)} {...rest}>
-//             {withHandle && (
-//                 <div className="w-3 h-4 rounded-sm border bg-border flex items-center justify-center z-10">
-//                     <DragHandleDots2Icon className="h-2.5 w-2.5" />
-//                 </div>
-//             )}
-//         </R.PanelResizeHandle>
-//     );
-// }
 
 function ResizableHandle({ withHandle, className, ...rest }: ComponentProps<typeof R.PanelResizeHandle> & { withHandle?: boolean; }) {
     return (

@@ -29,7 +29,7 @@ export function LoadersInTab() {
             </TabsContent>
 
             <TabsContent value="loaders4">
-                <SvgSpinner className="w-12 h-12" />
+                <SvgSpinner className="w-12 h-12 stroke-[5] stroke-sky-500" />
             </TabsContent>
 
             <TabsContent value="loaders5" className="my-8">

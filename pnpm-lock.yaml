@@ -99,8 +99,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
   date-fns:
-    specifier: ^2.30.0
-    version: 2.30.0
+    specifier: ^3.1.0
+    version: 3.1.0
   embla-carousel:
     specifier: 8.0.0-rc18
     version: 8.0.0-rc18
@@ -121,7 +121,7 @@ dependencies:
     version: 18.2.0
   react-day-picker:
     specifier: ^8.10.0
-    version: 8.10.0(date-fns@2.30.0)(react@18.2.0)
+    version: 8.10.0(date-fns@3.1.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -150,8 +150,8 @@ dependencies:
     specifier: ^9.1.0
     version: 9.1.0(react-dom@18.2.0)(react@18.2.0)
   valtio:
-    specifier: ^1.12.1
-    version: 1.12.1(@types/react@18.2.46)(react@18.2.0)
+    specifier: ^1.13.0
+    version: 1.13.0(@types/react@18.2.46)(react@18.2.0)
   vaul:
     specifier: ^0.8.0
     version: 0.8.0(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -176,8 +176,8 @@ devDependencies:
     specifier: ^8.4.33
     version: 8.4.33
   rollup-plugin-visualizer:
-    specifier: ^5.9.2
-    version: 5.9.2
+    specifier: ^5.12.0
+    version: 5.12.0
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -2587,11 +2587,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
-    dependencies:
-      '@babel/runtime': 7.23.1
+  /date-fns@3.1.0:
+    resolution: {integrity: sha512-ZO7yefXV/wCWzd3I9haCHmfzlfA3i1a2HHO7ZXjtJrRjXt8FULKJ2Vl8wji3XYF4dQ0ZJ/tokXDZeYlFvgms9Q==}
     dev: false
 
   /debug@4.3.4:
@@ -2614,12 +2611,12 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /derive-valtio@0.1.0(valtio@1.12.1):
+  /derive-valtio@0.1.0(valtio@1.13.0):
     resolution: {integrity: sha512-OCg2UsLbXK7GmmpzMXhYkdO64vhJ1ROUUGaTFyHjVwEdMEcTTRj7W1TxLbSBxdY8QLBPCcp66MTyaSy0RpO17A==}
     peerDependencies:
       valtio: '*'
     dependencies:
-      valtio: 1.12.1(@types/react@18.2.46)(react@18.2.0)
+      valtio: 1.13.0(@types/react@18.2.46)(react@18.2.0)
     dev: false
 
   /detect-node-es@1.1.0:
@@ -3197,13 +3194,13 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  /react-day-picker@8.10.0(date-fns@2.30.0)(react@18.2.0):
+  /react-day-picker@8.10.0(date-fns@3.1.0)(react@18.2.0):
     resolution: {integrity: sha512-mz+qeyrOM7++1NCb1ARXmkjMkzWVh2GL9YiPbRjKe0zHccvekk4HE+0MPOZOrosn8r8zTHIIeOUXTmXRqmkRmg==}
     peerDependencies:
       date-fns: ^2.28.0 || ^3.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      date-fns: 2.30.0
+      date-fns: 3.1.0
       react: 18.2.0
     dev: false
 
@@ -3432,12 +3429,12 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  /rollup-plugin-visualizer@5.9.2:
-    resolution: {integrity: sha512-waHktD5mlWrYFrhOLbti4YgQCn1uR24nYsNuXxg7LkPH8KdTXVWR9DNY1WU0QqokyMixVXJS4J04HNrVTMP01A==}
+  /rollup-plugin-visualizer@5.12.0:
+    resolution: {integrity: sha512-8/NU9jXcHRs7Nnj07PF2o4gjxmm9lXIrZ8r175bT9dK8qoLlvKTwRMArRCMgpMGlq8CTLugRvEmyMeMXIU2pNQ==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
-      rollup: 2.x || 3.x
+      rollup: 2.x || 3.x || 4.x
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -3727,8 +3724,8 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  /valtio@1.12.1(@types/react@18.2.46)(react@18.2.0):
-    resolution: {integrity: sha512-R0V4H86Xi2Pp7pmxN/EtV4Q6jr6PMN3t1IwxEvKUp6160r8FimvPh941oWyeK1iec/DTsh9Jb3Q+GputMS8SYg==}
+  /valtio@1.13.0(@types/react@18.2.46)(react@18.2.0):
+    resolution: {integrity: sha512-s2VkxxFyaJwjpIheJonRa/34HWS1EpsEjw9OW9l3j8G4cbIw7lruspOjyv+z2o4BrGx351BH+VWb8sZHkrlyYA==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -3740,7 +3737,7 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.46
-      derive-valtio: 0.1.0(valtio@1.12.1)
+      derive-valtio: 0.1.0(valtio@1.13.0)
       proxy-compare: 2.5.1
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)

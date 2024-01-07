@@ -206,39 +206,25 @@ export function escapeHtmlEntities(rawString: string): string {
 async function getLanguageExtension(language: Language): Promise<Extension> {
     switch (language) {
         case "css":
-            const { cssLanguage } = await importCache.readAsync(
-                "@codemirror/lang-css"
-            );
+            const { cssLanguage } = await importCache.readAsync("@codemirror/lang-css");
             return cssLanguage.extension;
         case "html":
-            const { htmlLanguage } = await importCache.readAsync(
-                "@codemirror/lang-html"
-            );
+            const { htmlLanguage } = await importCache.readAsync("@codemirror/lang-html");
             return htmlLanguage.extension;
         case "javascript":
-            const { javascriptLanguage } = await importCache.readAsync(
-                "@codemirror/lang-javascript"
-            );
+            const { javascriptLanguage } = await importCache.readAsync("@codemirror/lang-javascript");
             return javascriptLanguage.extension;
         case "jsx":
-            const { jsxLanguage } = await importCache.readAsync(
-                "@codemirror/lang-javascript"
-            );
+            const { jsxLanguage } = await importCache.readAsync("@codemirror/lang-javascript");
             return jsxLanguage.extension;
         case "markdown":
-            const { markdownLanguage } = await importCache.readAsync(
-                "@codemirror/lang-markdown"
-            );
+            const { markdownLanguage } = await importCache.readAsync("@codemirror/lang-markdown");
             return markdownLanguage.extension;
         case "tsx":
-            const { tsxLanguage } = await importCache.readAsync(
-                "@codemirror/lang-javascript"
-            );
+            const { tsxLanguage } = await importCache.readAsync("@codemirror/lang-javascript");
             return tsxLanguage.extension;
         case "typescript":
-            const { typescriptLanguage } = await importCache.readAsync(
-                "@codemirror/lang-javascript"
-            );
+            const { typescriptLanguage } = await importCache.readAsync("@codemirror/lang-javascript");
             return typescriptLanguage.extension;
         default:
             throw Error(`Unsupported language: "${language}"`);

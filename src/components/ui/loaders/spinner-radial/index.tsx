@@ -1,6 +1,6 @@
 import styles from "./radial.module.css";
 
-export function RadialLoader() {
+export function SpinnerRadial() {
     return (
         <div className="p-4 text-green-950 flex items-center justify-center">
 

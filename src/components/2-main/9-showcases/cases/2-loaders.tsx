@@ -1,4 +1,4 @@
-import { LoaderDotsRing, RadialLoader, SpinnerDiv, SpinnerSvg } from "@/components/ui/loaders";
+import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { LoadersTest, SkeletonDemo } from "../../2-demo/2-loaders";
 import { PaginationDemo } from "../../2-demo/demo-pagination";
@@ -24,7 +24,7 @@ export function LoadersInTab() {
             </TabsContent>
 
             <TabsContent value="loaders3">
-                <RadialLoader />
+                <SpinnerRadial />
             </TabsContent>
 
             <TabsContent value="loaders4">

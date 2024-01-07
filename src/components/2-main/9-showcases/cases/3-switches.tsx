@@ -1,6 +1,5 @@
-import { NeonSwitch, DemoSwitchStyled } from "../../3-experimental";
-import { GradientColorPickerExample } from "../../2-demo/3-switches/3-demo-color-picker";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
+import { DemoSwitchStyled, GradientColorPickerExample, NeonSwitch } from "../../2-demo/3-switches";
 
 export function SwitchInTabs() {
     return (

@@ -1,7 +1,6 @@
-import { LoaderDotsRing, RadialLoader, SpinnerDiv, SvgSpinner } from "@/components/ui/loaders";
-import { SkeletonDemo } from "../../2-demo/2-loaders/4-demo-skeleton";
-import { LoadersTest } from "../../3-experimental";
+import { LoaderDotsRing, RadialLoader, SpinnerDiv, SpinnerSvg } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
+import { LoadersTest, SkeletonDemo } from "../../2-demo/2-loaders";
 import { PaginationDemo } from "../../2-demo/demo-pagination";
 
 export function LoadersInTab() {
@@ -30,7 +29,7 @@ export function LoadersInTab() {
 
             <TabsContent value="loaders4">
                 <div className="my-8 flex items-center justify-center gap-8">
-                    <SvgSpinner className="w-8 h-8 stroke-[5] stroke-sky-500" />
+                    <SpinnerSvg className="w-8 h-8 stroke-[5] stroke-sky-500" />
                     <SpinnerDiv className="w-8 h-8" />
                 </div>
             </TabsContent>

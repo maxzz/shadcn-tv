@@ -1,6 +1,5 @@
 import { Code } from "@/components/ui/editor";
-import Example from "./example";
-import sharedStyles from "./shared.module.css";
+import { Example } from "./example";
 
 const CODE = `
 import {
@@ -47,31 +46,31 @@ export function EditorDemo() {
                     </p>
                     <ul>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code="collapse(): void" />
+                            <Code className="mr-4" language="typescript" code="collapse(): void" />
                             Collapse the panel to its minimum size
                         </li>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code="expand(): void" />
+                            <Code className="mr-4" language="typescript" code="expand(): void" />
                             Expand the panel to its previous size
                         </li>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code={`getId(): string`} />
+                            <Code className="mr-4" language="typescript" code={`getId(): string`} />
                             Panel id
                         </li>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code={`getSize(): number`} />
+                            <Code className="mr-4" language="typescript" code={`getSize(): number`} />
                             Panel's current size in (in both percentage and pixel units)
                         </li>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code="isCollapsed(): boolean" />
+                            <Code className="mr-4" language="typescript" code="isCollapsed(): boolean" />
                             Panel is currently collapsed
                         </li>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code="isExpanded(): boolean" />
+                            <Code className="mr-4" language="typescript" code="isExpanded(): boolean" />
                             Panel is currently expanded
                         </li>
                         <li>
-                            <Code className={sharedStyles.InlineCode} language="typescript" code={`resize(size: number): void`} />
+                            <Code className="mr-4" language="typescript" code={`resize(size: number): void`} />
                             Resize the panel to the specified size (either percentage or pixel units)
                         </li>
                     </ul>

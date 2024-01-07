@@ -11,10 +11,10 @@ type ExampleProps = {
     title: string;
 };
 
-export default function Example({ code, exampleNode, headerNode, language = "jsx", title }: ExampleProps) {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+export function Example({ code, exampleNode, headerNode, language = "jsx", title }: ExampleProps) {
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
 
     return (
         <div className={styles.Route}>

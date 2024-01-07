@@ -6,8 +6,8 @@
 //  https://github.com/bvaughn/react-resizable-panels/blob/main/packages/react-resizable-panels-website/src/routes/examples/ImperativePanelApi.tsx#L57
 //  https://github.com/bvaughn/react-resizable-panels/blob/main/packages/react-resizable-panels-website/src/routes/examples/Example.tsx#L9
 
-import "./root.css";
-import "./code-mirror.css";
+import "./codemirror-root.css";
+import "./codemirror.css";
 
 export * from "./suspense/syntax-parsing-cache";
 export * from "./code";

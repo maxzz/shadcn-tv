@@ -19,15 +19,7 @@ type CodeProps = {
 
 export function Code({ className = "", code, language = "jsx", showLineNumbers = false, }: CodeProps) {
     return (
-        <Suspense
-            fallback={
-                <Fallback
-                    className={className}
-                    code={code}
-                    showLineNumbers={showLineNumbers}
-                />
-            }
-        >
+        <Suspense fallback={<Fallback className={className} code={code} showLineNumbers={showLineNumbers} />} >
             <Parser
                 className={className}
                 code={code}
@@ -52,7 +44,7 @@ function Fallback({ className, code, showLineNumbers, }: { className: string; co
 
                 return escaped;
             });
-    }, [showLineNumbers, code]);
+    }, [code, showLineNumbers]);
 
     const maxLineNumberLength = `${htmlLines.length + 1}`.length;
 
@@ -68,11 +60,7 @@ function Fallback({ className, code, showLineNumbers, }: { className: string; co
 function Parser({ className, code, language, showLineNumbers, }: { className: string; code: string; language: Language; showLineNumbers: boolean; }) {
     const tokens = syntaxParsingCache.read(code, language);
     return (
-        <TokenRenderer
-            className={className}
-            tokens={tokens}
-            showLineNumbers={showLineNumbers}
-        />
+        <TokenRenderer className={className} tokens={tokens} showLineNumbers={showLineNumbers} />
     );
 }
 

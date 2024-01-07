@@ -28,6 +28,11 @@ export type ParserData = {
     rawTextPercentage: number;
 };
 
+type CurrentLineState = {
+    parsedTokens: ParsedTokens;
+    rawString: string;
+};
+
 export const DEFAULT_MAX_CHARACTERS = 500_000;
 export const DEFAULT_MAX_TIME = 5_000;
 
@@ -35,14 +40,9 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
     config: { immutable: true },
     debugLabel: "syntaxParsingCache",
     getKey: ([code, language]) => `${code}-${language}`,
+
     load: async ([code, language]) => {
         const languageExtension = await getLanguageExtension(language);
-        const parsedTokens: ParsedTokens[] = [];
-
-        const currentLineState = {
-            parsedTokens: [] as ParsedTokens,
-            rawString: "",
-        };
 
         // The logic below to trim code sections only works with "\n"
         code = code.replace(/\r\n?|\n|\u2028|\u2029/g, "\n");
@@ -60,31 +60,31 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
             code = code.slice(0, index + 1);
         }
 
-        const state = EditorState.create({
-            doc: code,
-            extensions: [languageExtension],
-        });
+        const state = EditorState.create({ doc: code, extensions: [languageExtension], });
 
         const tree = ensureSyntaxTree(state!, DEFAULT_MAX_CHARACTERS, DEFAULT_MAX_TIME);
-        if (tree === null) {
+        if (!tree) {
             return [];
         }
 
-        let characterIndex = 0;
-        let parsedCharacterIndex = 0;
+        const rv: ParsedTokens[] = [];
+        const currentLineState: CurrentLineState = {
+            parsedTokens: [],
+            rawString: "",
+        };
 
-        highlightTree(
-            tree,
-            classHighlighter,
-            (from: number, to: number, className: string) => {
+        let characterIndex = 0;
+
+        highlightTree(tree, classHighlighter,
+            (from: number, to: number, tokenClassName: string) => {
                 if (from > characterIndex) {
                     // No style applied to the token between position and from.
-                    // This typically indicates white space or newline characters.
-                    processSection(currentLineState, parsedTokens, code.slice(characterIndex, from), "");
+                    // This typically indicates whitespace or newline characters.
+                    const whitespace = code.slice(characterIndex, from);
+                    processSection(currentLineState, rv, whitespace, "");
                 }
-
-                processSection(currentLineState, parsedTokens, code.slice(from, to), className);
-
+                const token = code.slice(from, to);
+                processSection(currentLineState, rv, token, tokenClassName);
                 characterIndex = to;
             }
         );
@@ -93,13 +93,14 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
         if (characterIndex < maxPosition) {
             // No style applied on the trailing text.
             // This typically indicates white space or newline characters.
-            processSection(currentLineState, parsedTokens, code.slice(characterIndex, maxPosition), "");
+            processSection(currentLineState, rv, code.slice(characterIndex, maxPosition), "");
         }
 
         if (currentLineState.parsedTokens.length) {
-            parsedTokens.push(currentLineState.parsedTokens);
+            rv.push(currentLineState.parsedTokens);
         }
 
+        let parsedCharacterIndex = 0;
         parsedCharacterIndex += characterIndex + 1;
 
         // Anything that's left should de-opt to plain text.
@@ -109,10 +110,9 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
             let parsedLineTokens: ParsedToken[] = [];
 
             while (true) {
-                const line =
-                    nextIndex >= 0
-                        ? code.substring(parsedCharacterIndex, nextIndex)
-                        : code.substring(parsedCharacterIndex);
+                const line = nextIndex >= 0
+                    ? code.substring(parsedCharacterIndex, nextIndex)
+                    : code.substring(parsedCharacterIndex);
 
                 parsedLineTokens.push({
                     columnIndex: 0,
@@ -121,10 +121,11 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
                 });
 
                 if (nextIndex >= 0) {
-                    parsedTokens.push(parsedLineTokens);
+                    rv.push(parsedLineTokens);
 
                     parsedLineTokens = [];
-                } else if (nextIndex === -1) {
+                }
+                else if (nextIndex === -1) {
                     break;
                 }
 
@@ -133,33 +134,24 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
             }
 
             if (parsedLineTokens.length) {
-                parsedTokens.push(parsedLineTokens);
+                rv.push(parsedLineTokens);
             }
         }
 
-        return parsedTokens;
+        return rv;
     },
 });
 
-function processSection(
-    currentLineState: {
-        parsedTokens: ParsedTokens;
-        rawString: string;
-    },
-    parsedTokens: ParsedTokens[],
-    section: string,
-    className: string
-) {
+function processSection(currentLineState: CurrentLineState, parsedTokens: ParsedTokens[], section: string, className: string) {
     const tokenType = className?.substring(4) ?? null; // Remove "tok-" prefix;
 
     let index = 0;
     let nextIndex = section.indexOf("\n");
 
     while (true) {
-        const substring =
-            nextIndex >= 0
-                ? section.substring(index, nextIndex)
-                : section.substring(index);
+        const substring = nextIndex >= 0
+            ? section.substring(index, nextIndex)
+            : section.substring(index);
 
         const token: ParsedToken = {
             columnIndex: currentLineState.rawString.length,

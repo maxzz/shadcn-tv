@@ -1,6 +1,5 @@
-import { SimpleTableDemo, DataTableDemo } from "../../2-demo/1-demo-tables";
-import { TablesWithStyckyHeaderModules } from "../../3-experimental";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
+import { SimpleTableDemo, DataTableDemo, TablesWithStyckyHeaderModules } from "../../2-demo/1-demo-tables";
 
 export function TableInTabs() {
     return (

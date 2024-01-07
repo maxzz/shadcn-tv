@@ -4,3 +4,4 @@ export * from './ploaders/p-loader3';
 export * from './dots-ring';
 export * from './radial';
 export * from './svg-spinner';
+export * from './spinner-div';

@@ -1,6 +1,6 @@
 import { Code } from "@/components/ui/editor";
-import sharedStyles from "@/components/ui/editor/shared.module.css";
 import Example from "./example";
+import sharedStyles from "./shared.module.css";
 
 const CODE = `
 import {

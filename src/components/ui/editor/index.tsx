@@ -7,6 +7,7 @@
 //  https://github.com/bvaughn/react-resizable-panels/blob/main/packages/react-resizable-panels-website/src/routes/examples/Example.tsx#L9
 
 import "./root.css";
-import "./CodeMirror.css";
+import "./code-mirror.css";
 
-export * from "./Code";
+export * from "./suspense/syntax-parsing-cache";
+export * from "./code";

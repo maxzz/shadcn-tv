@@ -6,9 +6,9 @@ import {
     escapeHtmlEntities,
     parsedTokensToHtml,
     syntaxParsingCache,
-} from "./suspense/SyntaxParsingCache";
+} from "./suspense/syntax-parsing-cache";
 
-import styles from "./Code.module.css";
+import styles from "./code.module.css";
 
 type CodeProps = {
     className?: string;

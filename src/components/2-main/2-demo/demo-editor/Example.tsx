@@ -1,9 +1,7 @@
 import { ReactNode, useLayoutEffect } from "react";
+import { Code, Language } from "@/components/ui/editor";
 
-import { Code } from "@/components/ui/editor";
-import { Language } from "@/components/ui/editor/suspense/SyntaxParsingCache";
-
-import styles from "./Example.module.css";
+import styles from "./example.module.css";
 
 type ExampleProps = {
     code: string;
@@ -22,7 +20,9 @@ export default function Example({ code, exampleNode, headerNode, language = "jsx
         <div className={styles.Route}>
             <h1 className={styles.Header}>
                 {/* <Link className={styles.HomeLink} to="/">Home</Link> */}
-                <span className={styles.Title}>{title}</span>
+                <span className={styles.Title}>
+                    {title}
+                </span>
             </h1>
 
             {headerNode}

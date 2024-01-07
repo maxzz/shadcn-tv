@@ -2,7 +2,7 @@ import { ensureSyntaxTree } from "@codemirror/language";
 import { EditorState, Extension } from "@codemirror/state";
 import { classHighlighter, highlightTree } from "@lezer/highlight";
 import { createCache } from "suspense";
-import { importCache } from "./ImportCache";
+import { importCache } from "./import-cache";
 
 export type Language =
     | "css"

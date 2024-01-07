@@ -1,6 +1,6 @@
 import { SVGAttributes } from "react";
 import { classNames } from "@/utils";
-import styles from "./svg-spinner.module.css";
+import styles from "./spinner-svg.module.css";
 
 // https://codepen.io/supah/pen/BjYLdW
 

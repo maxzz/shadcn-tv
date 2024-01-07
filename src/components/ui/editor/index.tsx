@@ -6,6 +6,7 @@
 //  https://github.com/bvaughn/react-resizable-panels/blob/main/packages/react-resizable-panels-website/src/routes/examples/ImperativePanelApi.tsx#L57
 //  https://github.com/bvaughn/react-resizable-panels/blob/main/packages/react-resizable-panels-website/src/routes/examples/Example.tsx#L9
 
+import "./root.css";
 import "./CodeMirror.css";
 
 export * from "./Code";

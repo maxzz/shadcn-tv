@@ -8,6 +8,7 @@ import { ChartsInTabs } from "./cases/4-charts";
 import { CarouselDemo } from "../2-demo/7-demo-carousel";
 import { DrawerDemo } from "../2-demo/demo-drawer";
 import { SonnerDemo } from "../2-demo/demo-sonner";
+import { EditorDemo } from "../2-demo/demo-editor";
 
 export * from "./cases/types";
 export * from "./showcases-view";
@@ -22,8 +23,9 @@ export const showcasesData: Showcase[] = [
     { id: '53', name: "Carousel", component: <CarouselDemo /> },
     { id: '54', name: "Drawer", component: <DrawerDemo /> },
     { id: '55', name: "Sonner", component: <SonnerDemo /> },
+    { id: '56', name: "Editor", component: <EditorDemo /> },
     
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "51";
+export const initialCase = "56";

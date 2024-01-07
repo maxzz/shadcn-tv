@@ -3,6 +3,15 @@
     "private": true,
     "version": "0.0.1",
     "dependencies": {
+        "@codemirror/lang-css": "latest",
+        "@codemirror/lang-html": "latest",
+        "@codemirror/lang-javascript": "latest",
+        "@codemirror/lang-markdown": "latest",
+        "@codemirror/language": "latest",
+        "@codemirror/state": "latest",
+        "@lezer/highlight": "latest",
+        "suspense": "^0.0.38",
+                
         "@radix-ui/react-accordion": "^1.1.2",
         "@radix-ui/react-alert-dialog": "^1.0.5",
         "@radix-ui/react-aspect-ratio": "^1.0.3",

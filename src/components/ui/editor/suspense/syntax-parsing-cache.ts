@@ -13,13 +13,6 @@ export type ParsedToken = {
 
 export type ParsedTokens = ParsedToken[];
 
-// export type ParserData = {
-//     parsedTokensByLine: ParsedTokens[];
-//     parsedTokensPercentage: number;
-//     rawTextByLine: string[];
-//     rawTextPercentage: number;
-// };
-
 type CurrentLineState = {
     parsedTokens: ParsedTokens;
     rawString: string;
@@ -32,24 +25,9 @@ export const syntaxParsingCache = createCache<[code: string, language: LanguageN
     config: { immutable: true },
     debugLabel: "syntaxParsingCache",
     getKey: ([code, language]) => `${code}-${language}`,
-
     load: async ([code, language]) => {
         const languageExtension = await getLanguageExtension(language);
         const rv: ParsedTokens[] = codeToTokens(code, languageExtension);
-
-        // code = normilizeCodeLines(code);
-
-        // const state = EditorState.create({ doc: code, extensions: [languageExtension], });
-
-        // const tree = ensureSyntaxTree(state!, DEFAULT_MAX_CHARACTERS, DEFAULT_MAX_TIME);
-        // if (!tree) {
-        //     return [];
-        // }
-
-        // const rv: ParsedTokens[] = [];
-        // const characterIndex = prepareParsedTokens(code, tree, rv);
-        // consumeEndingWhitespace(code, characterIndex, rv);
-
         return rv;
     },
 });

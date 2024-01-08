@@ -1,5 +1,5 @@
 import { Suspense, useMemo } from "react";
-import { LanguageName, ParsedTokens, escapeHtmlEntities, parsedTokensToHtml, syntaxParsingCache } from "./suspense";
+import { LanguageName, ParsedTokens, escapeHtmlEntities, lineTokensToHtml, syntaxParsingCache } from "./suspense";
 import styles from "./code.module.css";
 
 type CodeProps = {
@@ -11,7 +11,7 @@ type CodeProps = {
 
 export function Code({ className = "", code, language = "jsx", showLineNumbers = false, }: CodeProps) {
     return (
-        <Suspense fallback={<Fallback className={className} code={code} showLineNumbers={showLineNumbers} />} >
+        <Suspense fallback={<Fallback code={code} showLineNumbers={showLineNumbers} className={className} />} >
             <Parser
                 code={code}
                 showLineNumbers={showLineNumbers}
@@ -56,10 +56,9 @@ function TokenRenderer({ tokens, showLineNumbers, className }: { tokens: ParsedT
     const html = useMemo<string>(() => {
         return tokens
             .map((lineTokens, index) => {
-                const html = parsedTokensToHtml(lineTokens);
+                const html = lineTokensToHtml(lineTokens);
                 return showLineNumbers ? `<span class="${styles.LineNumber}">${index + 1}</span> ${html}` : html;
-            })
-            .join("<br/>");
+            }).join("<br/>");
     }, [tokens, showLineNumbers]);
 
     const maxLineNumberLength = `${tokens.length + 1}`.length;

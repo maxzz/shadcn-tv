@@ -1,6 +1,6 @@
 import { LanguageName, ParsedTokens } from "./types";
 import { createCache } from "suspense";
-import { getLanguageExtension } from "./import-cache";
+import { getLanguageExtension } from "./cache-imports";
 import { codeToTokens } from "./code-to-tokens";
 
 export const syntaxParsingCache = createCache<[code: string, language: LanguageName], ParsedTokens[]>({

@@ -1,7 +1,7 @@
 import { ParsedToken } from "./types";
 
-export function parsedTokensToHtml(tokens: ParsedToken[]): string {
-    return tokens
+export function lineTokensToHtml(lineTokens: ParsedToken[]): string {
+    return lineTokens
         .map((token) => {
             const className = token.type ? `tok-${token.type}` : "";
             const escapedValue = escapeHtmlEntities(token.value);

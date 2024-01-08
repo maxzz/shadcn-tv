@@ -103,7 +103,6 @@ export const syntaxParsingCache = createCache<[code: string, language: LanguageN
 
                 if (nextIndex >= 0) {
                     rv.push(parsedLineTokens);
-
                     parsedLineTokens = [];
                 }
                 else if (nextIndex === -1) {
@@ -143,14 +142,14 @@ function normilizeCodeLines(code: string): string {
     return code;
 }
 
-function processSection(currentLineState: CurrentLineState, parsedTokens: ParsedTokens[], section: string, tokenClassName: string) {
+function processSection(currentLineState: CurrentLineState, rv: ParsedTokens[], lineSection: string, tokenClassName: string) {
     const tokenType = tokenClassName?.substring(4) ?? null; // Remove "tok-" prefix;
 
     let index = 0;
-    let nextIndex = section.indexOf("\n");
+    let nextIndex = lineSection.indexOf("\n");
 
     while (true) {
-        const substring = section.substring(index, nextIndex >= 0 ? nextIndex : undefined);
+        const substring = lineSection.substring(index, nextIndex >= 0 ? nextIndex : undefined);
 
         const token: ParsedToken = {
             columnIndex: currentLineState.rawString.length,
@@ -166,14 +165,14 @@ function processSection(currentLineState: CurrentLineState, parsedTokens: Parsed
         }
 
         if (nextIndex >= 0) {
-            parsedTokens.push(currentLineState.parsedTokens);
+            rv.push(currentLineState.parsedTokens);
 
             currentLineState.parsedTokens = [];
             currentLineState.rawString = "";
         }
 
         index = nextIndex + 1;
-        nextIndex = section.indexOf("\n", index);
+        nextIndex = lineSection.indexOf("\n", index);
     }
 }
 
@@ -188,10 +187,7 @@ export function parsedTokensToHtml(tokens: ParsedToken[]): string {
 }
 
 export function escapeHtmlEntities(rawString: string): string {
-    return rawString.replace(
-        /[\u00A0-\u9999<>\&]/g,
-        (substring) => "&#" + substring.charCodeAt(0) + ";"
-    );
+    return rawString.replace(/[\u00A0-\u9999<>\&]/g, (substring) => "&#" + substring.charCodeAt(0) + ";");
 }
 
 async function getLanguageExtension(language: LanguageName): Promise<Extension> {

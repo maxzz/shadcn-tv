@@ -1,7 +1,7 @@
 import { Suspense, useMemo } from "react";
 
 import {
-    Language,
+    LanguageName,
     ParsedTokens,
     escapeHtmlEntities,
     parsedTokensToHtml,
@@ -13,7 +13,7 @@ import styles from "./code.module.css";
 type CodeProps = {
     className?: string;
     code: string;
-    language: Language;
+    language: LanguageName;
     showLineNumbers?: boolean;
 };
 
@@ -57,7 +57,7 @@ function Fallback({ className, code, showLineNumbers, }: { className: string; co
     );
 }
 
-function Parser({ className, code, language, showLineNumbers, }: { className: string; code: string; language: Language; showLineNumbers: boolean; }) {
+function Parser({ className, code, language, showLineNumbers, }: { className: string; code: string; language: LanguageName; showLineNumbers: boolean; }) {
     const tokens = syntaxParsingCache.read(code, language);
     return (
         <TokenRenderer className={className} tokens={tokens} showLineNumbers={showLineNumbers} />

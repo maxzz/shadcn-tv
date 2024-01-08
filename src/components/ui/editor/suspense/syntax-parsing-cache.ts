@@ -4,7 +4,7 @@ import { classHighlighter, highlightTree } from "@lezer/highlight";
 import { createCache } from "suspense";
 import { importCache } from "./import-cache";
 
-export type Language =
+export type LanguageName =
     | "css"
     | "html"
     | "javascript"
@@ -36,7 +36,7 @@ type CurrentLineState = {
 export const DEFAULT_MAX_CHARACTERS = 500_000;
 export const DEFAULT_MAX_TIME = 5_000;
 
-export const syntaxParsingCache = createCache<[code: string, language: Language], ParsedTokens[]>({
+export const syntaxParsingCache = createCache<[code: string, language: LanguageName], ParsedTokens[]>({
     config: { immutable: true },
     debugLabel: "syntaxParsingCache",
     getKey: ([code, language]) => `${code}-${language}`,
@@ -44,21 +44,7 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
     load: async ([code, language]) => {
         const languageExtension = await getLanguageExtension(language);
 
-        // The logic below to trim code sections only works with "\n"
-        code = code.replace(/\r\n?|\n|\u2028|\u2029/g, "\n");
-
-        if (code.length > DEFAULT_MAX_CHARACTERS) {
-            let index = DEFAULT_MAX_CHARACTERS - 1;
-            while (index > 0 && code.charAt(index) !== "\n") {
-                index--;
-            }
-            if (index === 0) {
-                while (index < code.length && code.charAt(index) !== "\n") {
-                    index++;
-                }
-            }
-            code = code.slice(0, index + 1);
-        }
+        code = normilizeCodeLines(code);
 
         const state = EditorState.create({ doc: code, extensions: [languageExtension], });
 
@@ -100,8 +86,7 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
             rv.push(currentLineState.parsedTokens);
         }
 
-        let parsedCharacterIndex = 0;
-        parsedCharacterIndex += characterIndex + 1;
+        let parsedCharacterIndex = characterIndex + 1;
 
         // Anything that's left should de-opt to plain text.
         if (parsedCharacterIndex < code.length) {
@@ -110,14 +95,10 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
             let parsedLineTokens: ParsedToken[] = [];
 
             while (true) {
-                const line = nextIndex >= 0
-                    ? code.substring(parsedCharacterIndex, nextIndex)
-                    : code.substring(parsedCharacterIndex);
-
                 parsedLineTokens.push({
                     columnIndex: 0,
                     type: null,
-                    value: line,
+                    value: code.substring(parsedCharacterIndex, nextIndex >= 0 ? nextIndex : undefined),
                 });
 
                 if (nextIndex >= 0) {
@@ -142,16 +123,34 @@ export const syntaxParsingCache = createCache<[code: string, language: Language]
     },
 });
 
-function processSection(currentLineState: CurrentLineState, parsedTokens: ParsedTokens[], section: string, className: string) {
-    const tokenType = className?.substring(4) ?? null; // Remove "tok-" prefix;
+function normilizeCodeLines(code: string): string {
+    // The logic below to trim code sections only works with "\n"
+    code = code.replace(/\r\n?|\n|\u2028|\u2029/g, "\n");
+
+    if (code.length > DEFAULT_MAX_CHARACTERS) {
+        let index = DEFAULT_MAX_CHARACTERS - 1;
+        while (index > 0 && code.charAt(index) !== "\n") {
+            index--;
+        }
+        if (index === 0) {
+            while (index < code.length && code.charAt(index) !== "\n") {
+                index++;
+            }
+        }
+        code = code.slice(0, index + 1);
+    }
+
+    return code;
+}
+
+function processSection(currentLineState: CurrentLineState, parsedTokens: ParsedTokens[], section: string, tokenClassName: string) {
+    const tokenType = tokenClassName?.substring(4) ?? null; // Remove "tok-" prefix;
 
     let index = 0;
     let nextIndex = section.indexOf("\n");
 
     while (true) {
-        const substring = nextIndex >= 0
-            ? section.substring(index, nextIndex)
-            : section.substring(index);
+        const substring = section.substring(index, nextIndex >= 0 ? nextIndex : undefined);
 
         const token: ParsedToken = {
             columnIndex: currentLineState.rawString.length,
@@ -195,7 +194,7 @@ export function escapeHtmlEntities(rawString: string): string {
     );
 }
 
-async function getLanguageExtension(language: Language): Promise<Extension> {
+async function getLanguageExtension(language: LanguageName): Promise<Extension> {
     switch (language) {
         case "css":
             const { cssLanguage } = await importCache.readAsync("@codemirror/lang-css");

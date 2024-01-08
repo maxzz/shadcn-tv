@@ -1,5 +1,5 @@
 import { ReactNode, useLayoutEffect } from "react";
-import { Code, Language } from "@/components/ui/editor";
+import { Code, LanguageName } from "@/components/ui/editor";
 
 import styles from "./example.module.css";
 
@@ -7,7 +7,7 @@ type ExampleProps = {
     code: string;
     exampleNode: ReactNode;
     headerNode: ReactNode;
-    language?: Language;
+    language?: LanguageName;
     title: string;
 };
 

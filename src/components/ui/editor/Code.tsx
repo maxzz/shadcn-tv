@@ -1,13 +1,6 @@
 import { Suspense, useMemo } from "react";
-
-import {
-    LanguageName,
-    ParsedTokens,
-    escapeHtmlEntities,
-    parsedTokensToHtml,
-    syntaxParsingCache,
-} from "./suspense/syntax-parsing-cache";
-
+import { LanguageName } from "./suspense/import-cache";
+import { ParsedTokens, escapeHtmlEntities, parsedTokensToHtml, syntaxParsingCache, } from "./suspense/syntax-parsing-cache";
 import styles from "./code.module.css";
 
 type CodeProps = {

@@ -13,12 +13,12 @@ export type ParsedToken = {
 
 export type ParsedTokens = ParsedToken[];
 
-export type ParserData = {
-    parsedTokensByLine: ParsedTokens[];
-    parsedTokensPercentage: number;
-    rawTextByLine: string[];
-    rawTextPercentage: number;
-};
+// export type ParserData = {
+//     parsedTokensByLine: ParsedTokens[];
+//     parsedTokensPercentage: number;
+//     rawTextByLine: string[];
+//     rawTextPercentage: number;
+// };
 
 type CurrentLineState = {
     parsedTokens: ParsedTokens;
@@ -35,23 +35,39 @@ export const syntaxParsingCache = createCache<[code: string, language: LanguageN
 
     load: async ([code, language]) => {
         const languageExtension = await getLanguageExtension(language);
+        const rv: ParsedTokens[] = codeToTokens(code, languageExtension);
 
-        code = normilizeCodeLines(code);
+        // code = normilizeCodeLines(code);
 
-        const state = EditorState.create({ doc: code, extensions: [languageExtension], });
+        // const state = EditorState.create({ doc: code, extensions: [languageExtension], });
 
-        const tree = ensureSyntaxTree(state!, DEFAULT_MAX_CHARACTERS, DEFAULT_MAX_TIME);
-        if (!tree) {
-            return [];
-        }
+        // const tree = ensureSyntaxTree(state!, DEFAULT_MAX_CHARACTERS, DEFAULT_MAX_TIME);
+        // if (!tree) {
+        //     return [];
+        // }
 
-        const rv: ParsedTokens[] = [];
-        const characterIndex = prepareParsedTokens(code, tree, rv);
-        consumeEndingWhitespace(code, characterIndex, rv);
+        // const rv: ParsedTokens[] = [];
+        // const characterIndex = prepareParsedTokens(code, tree, rv);
+        // consumeEndingWhitespace(code, characterIndex, rv);
 
         return rv;
     },
 });
+
+export function codeToTokens(code: string, languageExtension: Extension): ParsedTokens[] {
+    const state = EditorState.create({ doc: code, extensions: [languageExtension] });
+
+    const tree = ensureSyntaxTree(state!, DEFAULT_MAX_CHARACTERS, DEFAULT_MAX_TIME);
+    if (!tree) {
+        return [];
+    }
+
+    const rv: ParsedTokens[] = [];
+    const characterIndex = prepareParsedTokens(code, tree, rv);
+    consumeEndingWhitespace(code, characterIndex, rv);
+
+    return rv;
+}
 
 function normilizeCodeLines(code: string): string {
     // The logic below to trim code sections only works with "\n"

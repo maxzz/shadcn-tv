@@ -23,6 +23,9 @@ dependencies:
   '@codemirror/state':
     specifier: latest
     version: 6.4.0
+  '@lezer/common':
+    specifier: ^1.2.0
+    version: 1.2.0
   '@lezer/highlight':
     specifier: latest
     version: 1.2.0

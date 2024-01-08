@@ -9,6 +9,5 @@
 import "./codemirror-root.css";
 import "./codemirror.css";
 
-export * from "./suspense/import-cache";
-export * from "./suspense/syntax-parsing-cache";
+export * from "./suspense/types";
 export * from "./code";

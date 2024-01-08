@@ -1,14 +1,6 @@
+import { LanguageName } from "./types";
 import { Extension } from "@codemirror/state";
 import { createCache } from "suspense";
-
-export type LanguageName =
-    | "css"
-    | "html"
-    | "javascript"
-    | "jsx"
-    | "markdown"
-    | "tsx"
-    | "typescript";
 
 type Module = any;
 

@@ -1,6 +1,5 @@
 import { ReactNode, useLayoutEffect } from "react";
 import { Code, LanguageName } from "@/components/ui/editor";
-
 import styles from "./example.module.css";
 
 type ExampleProps = {

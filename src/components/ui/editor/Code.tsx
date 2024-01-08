@@ -4,38 +4,33 @@ import { ParsedTokens, escapeHtmlEntities, parsedTokensToHtml, syntaxParsingCach
 import styles from "./code.module.css";
 
 type CodeProps = {
-    className?: string;
     code: string;
-    language: LanguageName;
     showLineNumbers?: boolean;
+    language: LanguageName;
+    className?: string;
 };
 
 export function Code({ className = "", code, language = "jsx", showLineNumbers = false, }: CodeProps) {
     return (
         <Suspense fallback={<Fallback className={className} code={code} showLineNumbers={showLineNumbers} />} >
             <Parser
-                className={className}
                 code={code}
-                language={language}
                 showLineNumbers={showLineNumbers}
+                language={language}
+                className={className}
             />
         </Suspense>
     );
 }
 
-function Fallback({ className, code, showLineNumbers, }: { className: string; code: string; showLineNumbers: boolean; }) {
+function Fallback({ code, showLineNumbers, className }: { code: string; showLineNumbers: boolean; className: string; }) {
 
     const htmlLines = useMemo<string[]>(() => {
         return code
             .split("\n")
             .map((line, index) => {
                 const escaped = escapeHtmlEntities(line);
-
-                if (showLineNumbers) {
-                    return `<span class="${styles.LineNumber}">${index + 1}</span> ${escaped}`;
-                }
-
-                return escaped;
+                return showLineNumbers ? `<span class="${styles.LineNumber}">${index + 1}</span> ${escaped}` : escaped;
             });
     }, [code, showLineNumbers]);
 
@@ -50,29 +45,25 @@ function Fallback({ className, code, showLineNumbers, }: { className: string; co
     );
 }
 
-function Parser({ className, code, language, showLineNumbers, }: { className: string; code: string; language: LanguageName; showLineNumbers: boolean; }) {
+function Parser({ code, showLineNumbers, language, className }: { code: string; showLineNumbers: boolean; language: LanguageName; className: string; }) {
     const tokens = syntaxParsingCache.read(code, language);
     return (
-        <TokenRenderer className={className} tokens={tokens} showLineNumbers={showLineNumbers} />
+        <TokenRenderer tokens={tokens} showLineNumbers={showLineNumbers} className={className} />
     );
 }
 
-function TokenRenderer({ className, showLineNumbers, tokens, }: { className: string; showLineNumbers: boolean; tokens: ParsedTokens[]; }) {
-    const maxLineNumberLength = `${tokens.length + 1}`.length;
+function TokenRenderer({ tokens, showLineNumbers, className }: { tokens: ParsedTokens[]; showLineNumbers: boolean; className: string; }) {
 
     const html = useMemo<string>(() => {
         return tokens
             .map((lineTokens, index) => {
                 const html = parsedTokensToHtml(lineTokens);
-
-                if (showLineNumbers) {
-                    return `<span class="${styles.LineNumber}">${index + 1}</span> ${html}`;
-                }
-
-                return html;
+                return showLineNumbers ? `<span class="${styles.LineNumber}">${index + 1}</span> ${html}` : html;
             })
             .join("<br/>");
-    }, [showLineNumbers, tokens]);
+    }, [tokens, showLineNumbers]);
+
+    const maxLineNumberLength = `${tokens.length + 1}`.length;
 
     return (
         <code

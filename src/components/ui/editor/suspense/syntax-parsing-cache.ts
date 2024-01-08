@@ -47,78 +47,11 @@ export const syntaxParsingCache = createCache<[code: string, language: LanguageN
 
         const rv: ParsedTokens[] = [];
         const characterIndex = prepareParsedTokens(code, tree, rv);
-        consumeEndignWitespace(code, characterIndex, rv);
-        /*
-        let parsedCharacterIndex = characterIndex + 1;
-
-        // Anything that's left should de-opt to plain text.
-        if (parsedCharacterIndex < code.length) {
-            let nextIndex = code.indexOf("\n", parsedCharacterIndex);
-
-            let parsedLineTokens: ParsedToken[] = [];
-
-            while (true) {
-                parsedLineTokens.push({
-                    columnIndex: 0,
-                    type: null,
-                    value: code.substring(parsedCharacterIndex, nextIndex >= 0 ? nextIndex : undefined),
-                });
-
-                if (nextIndex >= 0) {
-                    rv.push(parsedLineTokens);
-                    parsedLineTokens = [];
-                }
-                else if (nextIndex === -1) {
-                    break;
-                }
-
-                parsedCharacterIndex = nextIndex + 1;
-                nextIndex = code.indexOf("\n", parsedCharacterIndex);
-            }
-
-            if (parsedLineTokens.length) {
-                rv.push(parsedLineTokens);
-            }
-        }
-        */
+        consumeEndingWhitespace(code, characterIndex, rv);
 
         return rv;
     },
 });
-
-function consumeEndignWitespace(code: string, lastProcessedIndex: number, rv: ParsedTokens[]) {
-    let parsedCharacterIndex = lastProcessedIndex + 1;
-
-    // Anything that's left should de-opt to plain text.
-    if (parsedCharacterIndex < code.length) {
-        let nextIndex = code.indexOf("\n", parsedCharacterIndex);
-
-        let parsedLineTokens: ParsedToken[] = [];
-
-        while (true) {
-            parsedLineTokens.push({
-                columnIndex: 0,
-                type: null,
-                value: code.substring(parsedCharacterIndex, nextIndex >= 0 ? nextIndex : undefined),
-            });
-
-            if (nextIndex >= 0) {
-                rv.push(parsedLineTokens);
-                parsedLineTokens = [];
-            }
-            else if (nextIndex === -1) {
-                break;
-            }
-
-            parsedCharacterIndex = nextIndex + 1;
-            nextIndex = code.indexOf("\n", parsedCharacterIndex);
-        }
-
-        if (parsedLineTokens.length) {
-            rv.push(parsedLineTokens);
-        }
-    }
-}
 
 function normilizeCodeLines(code: string): string {
     // The logic below to trim code sections only works with "\n"
@@ -214,6 +147,40 @@ function processSection(currentLineState: CurrentLineState, rv: ParsedTokens[], 
 
         index = nextIndex + 1;
         nextIndex = lineSection.indexOf("\n", index);
+    }
+}
+
+function consumeEndingWhitespace(code: string, lastProcessedIndex: number, rv: ParsedTokens[]) {
+    let parsedCharacterIndex = lastProcessedIndex + 1;
+
+    // Anything that's left should de-opt to plain text.
+    if (parsedCharacterIndex < code.length) {
+        let nextIndex = code.indexOf("\n", parsedCharacterIndex);
+
+        let parsedLineTokens: ParsedToken[] = [];
+
+        while (true) {
+            parsedLineTokens.push({
+                columnIndex: 0,
+                type: null,
+                value: code.substring(parsedCharacterIndex, nextIndex >= 0 ? nextIndex : undefined),
+            });
+
+            if (nextIndex >= 0) {
+                rv.push(parsedLineTokens);
+                parsedLineTokens = [];
+            }
+            else if (nextIndex === -1) {
+                break;
+            }
+
+            parsedCharacterIndex = nextIndex + 1;
+            nextIndex = code.indexOf("\n", parsedCharacterIndex);
+        }
+
+        if (parsedLineTokens.length) {
+            rv.push(parsedLineTokens);
+        }
     }
 }
 

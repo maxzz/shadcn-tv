@@ -35,21 +35,44 @@
   --color-background-code: #050a15;
   --color-code: #dcadff;
 
-  --token-comment-color: #666;
-  --token-definition-color: #fefefe;
-  --token-local-color: #fefefe;
-  --token-keyword-color: #ff7aad;
+  --token-comment-color: #2f9d00;
+  --token-definition-color: #267f99;
+  --token-local-color: #555555;
+  --token-keyword-color: #0000ff;
   --token-meta-color: #8237bb;
-  --token-number-color: #ffdc7a;
-  --token-operator-color: #fefefe;
-  --token-propertyName-color: #ff98eb;
-  --token-punctuation-color: #dcadff;
-  --token-string-color: #7ac1ff;
-  --token-string2-color: #7ac1ff;
-  --token-typeName-color: #c67bff;
-  --token-variableName-color: #c67bff;
-  --token-variableName2-color: #c67bff;
+  --token-number-color: #098658;
+  --token-operator-color: #0274ff;
+  --token-propertyName-color: #2286ff;
+  --token-punctuation-color: #319331;
+  --token-string-color: #a31515;
+  --token-string2-color: #a31515;
+  --token-typeName-color: #384d89;
+  --token-variableName-color: #0070c1;
+  --token-variableName2-color: #0070c1;
 }
+
+.dark {
+    --color-panel-background: #192230;
+
+    --color-background-code: #050a15;
+    --color-code: #dcadff;
+
+    --token-comment-color: #666;
+    --token-definition-color: #777893;
+    --token-local-color: #fefefe;
+    --token-keyword-color: #7a90ff;
+    --token-meta-color: #8237bb;
+    --token-number-color: #ffdc7a;
+    --token-operator-color: #fefefe;
+    --token-propertyName-color: #ff98eb;
+    --token-punctuation-color: #dcadff;
+    --token-string-color: #7ac1ff;
+    --token-string2-color: #7ac1ff;
+    --token-typeName-color: #c67bff;
+    --token-variableName-color: #c67bff;
+    --token-variableName2-color: #c67bff;
+}
+
 /* 
 :root,
 html,

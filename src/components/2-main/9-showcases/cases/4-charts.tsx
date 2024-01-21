@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { CardsMetric, ChartsOverview, Sparkline } from "../../2-demo/demo-charts";
-import { nivoLineData } from "../../2-demo/demo-charts/nivo/line-data";
+import { nivoLineData1 } from "../../2-demo/demo-charts/nivo/line-data1";
+import { nivoLineData2 } from "../../2-demo/demo-charts/nivo/line-data2";
 
 export function ChartsInTabs() {
     return (
@@ -20,7 +21,7 @@ export function ChartsInTabs() {
             </TabsContent>
 
             <TabsContent value="charts3">
-                <Sparkline data={nivoLineData} />
+                <Sparkline data={nivoLineData1} />
             </TabsContent>
 
         </Tabs>

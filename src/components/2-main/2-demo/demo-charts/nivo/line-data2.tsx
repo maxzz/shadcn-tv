@@ -1,4 +1,4 @@
-export const nivoLineData = [
+export const nivoLineData2 = [
     {
         "id": "japan",
         "color": "hsl(167, 70%, 50%)",

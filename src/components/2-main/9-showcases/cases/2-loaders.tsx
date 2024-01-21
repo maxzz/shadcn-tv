@@ -1,6 +1,6 @@
 import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { LoadersTest, SkeletonDemo } from "../../2-demo/2-demo-loaders";
+import { LoadersTest, SkeletonDemo, Spinner } from "../../2-demo/2-demo-loaders";
 import { PaginationDemo } from "../../2-demo/demo-pagination";
 
 export function LoadersInTab() {
@@ -31,6 +31,7 @@ export function LoadersInTab() {
                 <div className="my-8 flex items-center justify-center gap-8">
                     <SpinnerSvg className="w-8 h-8 stroke-[5] stroke-sky-500" />
                     <SpinnerDiv className="w-8 h-8" />
+                    <Spinner className="w-8 h-8" />
                 </div>
             </TabsContent>
 

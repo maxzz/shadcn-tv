@@ -1,8 +1,8 @@
 .wrapper {
     display: block;
     position: relative;
-    color: white;
-    cursor: pointer;
+    /* color: white; */
+    /* cursor: pointer; */
     overflow: hidden;
 }
 

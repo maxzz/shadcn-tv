@@ -4,12 +4,13 @@
 // https://github.com/emilkowalski/ui-snippets/blob/master/components/SnippetsGrid/SnippetsGrid.js
 // https://github.com/emilkowalski/ui-snippets/blob/master/components/SnippetsGrid/SnippetsGridItem.js
 
+import { HTMLAttributes } from "react";
 import { classNames } from "@/utils";
 import styles from "./tree-dots.module.css";
 
-export function ThreeDotsLoader() {
+export function ThreeDotsLoader({ className }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("text-sky-700", styles.wrapper)}>
+        <div className={classNames(styles.wrapper, className)}>
             <span></span>
             <span></span>
             <span></span>

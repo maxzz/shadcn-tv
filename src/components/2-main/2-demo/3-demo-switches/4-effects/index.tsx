@@ -8,9 +8,9 @@ import styles from "./flickup.module.css";
 
 export function Flickup() {
     return (
-        <div className={styles["exampleBtn"]}>
-            <span className={styles["main-text"]}>Hover over me 1</span>
-            <span className={styles["hover-text"]}>Hover over me 2</span>
+        <div className={styles.wrapper}>
+            <span className={styles.mainText}>Hover over me 1</span>
+            <span className={styles.hoverText}>Hover over me 2</span>
         </div>
     );
 }

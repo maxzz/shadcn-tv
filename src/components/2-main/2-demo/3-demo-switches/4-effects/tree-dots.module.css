@@ -1,11 +1,13 @@
 .wrapper span {
+    display: inline-block;
+    margin: 0 3px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: white;
-    animation: flashing 1.4s infinite linear;
-    margin: 0 4px;
-    display: inline-block;
+    /* background-color: white; */
+    background-color: currentColor;
+
+    animation: flashing 2.4s infinite linear;
 }
 
 .wrapper span:nth-child(2) {

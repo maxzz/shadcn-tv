@@ -13,6 +13,9 @@ function manualChunks(id: string) { //https://rollupjs.org/configuration-options
     if (id.includes("@codemirror")) {
         return "codemirror";
     }
+    if (id.includes("@nivo")) {
+        return "nivo";
+    }
     // if (id.includes("node_modules")) {
     //     return "vendor";
     // }

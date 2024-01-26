@@ -1,4 +1,4 @@
-import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg } from "@/components/ui/loaders";
+import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg, SpinnerEmoji } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { LoadersTest, SkeletonDemo, Spinner9 } from "../../2-demo/2-demo-loaders";
 import { PaginationDemo } from "../../2-demo/demo-pagination";
@@ -32,6 +32,7 @@ export function LoadersInTab() {
                     <SpinnerSvg className="w-8 h-8 stroke-[5] stroke-sky-500" />
                     <SpinnerDiv className="w-8 h-8" />
                     <Spinner9 className="w-8 h-8 text-sky-500" />
+                    <SpinnerEmoji className="text-4xl text-sky-500" />
                 </div>
             </TabsContent>
 

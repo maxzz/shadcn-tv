@@ -2,6 +2,7 @@ export * from './ploaders/p-loader1'; // https://codepen.io/jkantner/pen/YzdpEVO
 export * from './ploaders/p-loader2';
 export * from './ploaders/p-loader3';
 export * from './dots-ring';
+export * from './spinner-emoji';
 export * from './spinner-radial';
 export * from './spinner-svg';
 export * from './spinner-div';

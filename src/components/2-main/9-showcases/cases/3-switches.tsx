@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { DemoSwitchStyled, Flickup, GradientColorPickerExample, NeonSwitch } from "../../2-demo/3-demo-switches";
+import { ThreeDotsLoader } from "../../2-demo/3-demo-switches/4-effects/tree-dots";
 
 export function SwitchInTabs() {
     return (
@@ -24,7 +25,10 @@ export function SwitchInTabs() {
             </TabsContent>
 
             <TabsContent value="switch4">
-                <Flickup />
+                <div className="flex items-center justify-between">
+                    <Flickup />
+                    <ThreeDotsLoader />
+                </div>
             </TabsContent>
         </Tabs>
     );

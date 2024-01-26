@@ -5,10 +5,11 @@
 // https://github.com/emilkowalski/ui-snippets/blob/master/components/SnippetsGrid/SnippetsGridItem.js
 
 // import { styled, keyframes } from 'stitches.config.js';
+import styles from "./tree-dots.module.css";
 
 export function ThreeDotsLoader() {
     return (
-        <div>
+        <div className={styles.exampleClass}>
             <span></span>
             <span></span>
             <span></span>

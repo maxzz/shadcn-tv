@@ -8,9 +8,9 @@ import { HTMLAttributes } from "react";
 import { classNames } from "@/utils";
 import styles from "./tree-dots.module.css";
 
-export function ThreeDotsLoader({ className }: HTMLAttributes<HTMLDivElement>) {
+export function ThreeDotsLoader({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames(styles.wrapper, className)}>
+        <div className={classNames(styles.wrapper, className)} {...rest}>
             <span></span>
             <span></span>
             <span></span>

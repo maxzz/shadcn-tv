@@ -4,6 +4,19 @@
 // https://github.com/emilkowalski/ui-snippets/blob/master/components/SnippetsGrid/SnippetsGrid.js
 // https://github.com/emilkowalski/ui-snippets/blob/master/components/SnippetsGrid/SnippetsGridItem.js
 
+import styles from "./flickup.module.css";
+console.log("styles", styles);
+
+export function Flickup() {
+    return (
+        <div className={styles["exampleBtn"]}>
+            <span className={styles["main-text"]}>Hover over me1</span>
+            <span className={styles["hover-text"]}>Hover over me2</span>
+        </div>
+    );
+}
+
+/*
 const Component = () => {
     return (
         <Wrapper>
@@ -123,3 +136,4 @@ const scssStyling = `
   `;
 
 export { cssStyling, scssStyling, Component };
+*/

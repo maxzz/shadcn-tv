@@ -1,0 +1,32 @@
+.exampleBtn {
+    display: block;
+    position: relative;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.main-text {
+    display: block;
+    transition: transform 500ms;
+}
+
+.hover-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms;
+}
+
+.exampleBtn:hover .main-text {
+    transform: translateY(-100%);
+    transition: transform 250ms;
+}
+
+.exampleBtn:hover .hover-text {
+    transform: translateY(0%);
+    transition: transform 250ms;
+}

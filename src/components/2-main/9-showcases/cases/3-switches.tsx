@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { DemoSwitchStyled, GradientColorPickerExample, NeonSwitch } from "../../2-demo/3-demo-switches";
+import { DemoSwitchStyled, Flickup, GradientColorPickerExample, NeonSwitch } from "../../2-demo/3-demo-switches";
 
 export function SwitchInTabs() {
     return (
@@ -8,6 +8,7 @@ export function SwitchInTabs() {
                 <TabsTrigger value="switch1">Neon switch</TabsTrigger>
                 <TabsTrigger value="switch2">Styled switch</TabsTrigger>
                 <TabsTrigger value="switch3">Gradient color picker</TabsTrigger>
+                <TabsTrigger value="switch4">Effects</TabsTrigger>
             </TabsList>
 
             <TabsContent value="switch1">
@@ -20,6 +21,10 @@ export function SwitchInTabs() {
 
             <TabsContent value="switch3">
                 <GradientColorPickerExample />
+            </TabsContent>
+
+            <TabsContent value="switch4">
+                <Flickup />
             </TabsContent>
         </Tabs>
     );

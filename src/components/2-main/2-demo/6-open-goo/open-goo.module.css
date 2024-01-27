@@ -27,6 +27,20 @@
     transition-duration: var(--duration);
     transition-timing-function: var(--easing);
 } */
+/* .wrapper * {
+    /* position: relative; * /
+    transition: inherit;
+    transition-property: transform;
+    transition-duration: var(--duration);
+    transition-timing-function: var(--easing);
+} */
+.transit {
+    /* position: relative; */
+    transition: inherit;
+    transition-property: transform;
+    transition-duration: var(--duration);
+    transition-timing-function: var(--easing);
+}
 
 /* html,
 body {

@@ -52,13 +52,16 @@ body {
 }
 
 #app {
-    padding: 10vmin;
-    font-size: 3vmin;
+    /* padding: 2vmin; */
+    padding: 12px;
+
+    font-size: 2vmin;
 
     color: #FFF;
 
     display: grid;
-    grid-gap: 16vmin;
+    /* grid-gap: 16vmin; */
+    grid-gap: 32px;
     grid-template-rows: 2fr 1fr;
     grid-template-columns: 1fr;
 }
@@ -68,23 +71,27 @@ body {
 
     grid-column: 1;
     grid-row: 1/span 2;
-    grid-template: inherit;
     display: grid;
+    grid-template: inherit;
     z-index: -1;
 }
 
 .bg-content,
 .bg-description {
-    border-radius: 5vmin;
+    /* border-radius: 5vmin; */
+    border-radius: 12px;
     background: var(--color-primary);
 }
 
 .drip {
     position: absolute;
-    width: 16vmin;
-    height: 10vmin;
+    /* width: 16vmin;
+    height: 10vmin; */
+    width: 32px;
+    height: 24px;
     background: var(--color-primary);
-    border-radius: 10vmin;
+    /* border-radius: 10vmin; */
+    border-radius: 10px;
 
     &:nth-child(1) {
         left: 2%;
@@ -123,14 +130,17 @@ body {
 
 .bg-content,
 .content {
-    width: 40vmin;
-    height: 40vmin;
+    /* width: 40vmin;
+    height: 40vmin; */
+    width: 100px;
+    height: 100px;
 }
 
 .content,
 .description {
     padding: 1em;
     text-align: center;
+
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -161,7 +171,8 @@ body {
 }
 
 .description {
-    width: 40vmin;
+    /* width: 40vmin; */
+    width: 40px;
     grid-row: 2;
     grid-column: 1;
     z-index: 2;
@@ -169,11 +180,15 @@ body {
 
 .avatar {
     margin-bottom: 3vmin;
-    width: 15vmin;
-    height: 15vmin;
-    font-size: 7vmin;
+    /* width: 15vmin;
+    height: 15vmin; */
+    width: 30px;
+    height: 30px;
+    /* font-size: 7vmin; */
+    font-size: 1rem;
 
-    border-radius: 5vmin;
+    /* border-radius: 5vmin; */
+    border-radius: 12px;
     background-color: #fff;
 
     display: flex;
@@ -183,14 +198,19 @@ body {
 
 .button {
     position: absolute;
-    bottom: -5vmin;
-    width: 10vmin;
-    height: 10vmin;
+    /* bottom: -5vmin; */
+    bottom: -12px;
+    /* width: 10vmin;
+    height: 10vmin; */
+    width: 40px;
+    height: 40px;
 
-    border-radius: 3vmin;
+    /* border-radius: 3vmin; */
+    border-radius: 12px;
     color: black;
     background-color: #fff;
-    box-shadow: 0 2vmin 2vmin rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 2vmin 2vmin rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 
     transition: transform calc(var(--duration) / 2) var(--easing);
     will-change: transform;
@@ -209,10 +229,13 @@ body {
 .button:before {
     content: "";
     position: absolute;
-    width: 2vmin;
-    height: 2vmin;
+    /* width: 2vmin;
+    height: 2vmin; */
+    width: 12px;
+    height: 12px;
 
-    border: 0.5vmin solid transparent;
+    /* border: 0.5vmin solid transparent; */
+    border: 6px solid transparent;
     border-bottom-color: black;
     border-right-color: black;
 

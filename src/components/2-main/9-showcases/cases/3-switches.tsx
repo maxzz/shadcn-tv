@@ -1,6 +1,6 @@
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { DemoSwitchStyled, Flickup, GradientColorPickerExample, NeonSwitch, ThreeDotsLoader } from "../../2-demo/3-demo-switches";
-import OpenGoo from "../../2-demo/6-open-goo/open-goo";
+import { OpenGoo } from "../../2-demo/6-open-goo/open-goo";
 
 export function SwitchInTabs() {
     return (

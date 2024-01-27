@@ -1,11 +1,13 @@
 // https://codepen.io/ste-vg/pen/dENPjO 'Modal Mitosis 🦠 | CSS-Only Gooey Content Toggle | @keyframers 2.5.0'
 
 import styles from "./open-goo.module.css";
+console.log("styles", styles);
 
-export default function OpenGoo() {
+
+export function OpenGoo() {
     return (
-        <div className="wrapper">
-            <svg className="goo-filter" viewBox="0 0 1 1">
+        <div className={styles["wrapper"]}>
+            <svg className={styles["goo-filter"]} viewBox="0 0 1 1">
                 <filter id="goo">
                     <feGaussianBlur in="SourceGraphic" stdDeviation={10} result="blur" />
                     <feColorMatrix
@@ -19,33 +21,37 @@ export default function OpenGoo() {
             </svg>
             <div id="app">
                 <input type="checkbox" id="toggle" name="toggle" />
-                <div className="background">
-                    <div className="bg-content">
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
+                
+                <div className={styles["background"]}>
+                    <div className={styles["bg-content"]}>
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
                     </div>
-                    <div className="bg-description">
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
-                        <div className="drip" />
+                    <div className={styles["bg-description"]}>
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
+                        <div className={styles["drip"]} />
                     </div>
                 </div>
-                <div className="content">
-                    <div className="avatar">🕶</div>
+
+                <div className={styles["content"]}>
+                    <div className={styles["avatar"]}>🕶</div>
                     <header>Ocularia Solaria</header>
-                    <label className="button" htmlFor="toggle" />
+                    <label className={styles["button"]} htmlFor="toggle" />
                 </div>
-                <div className="description">
+
+                <div className={styles["description"]}>
                     <header>Sunglasses!</header>
                     <p>Cool.</p>
                 </div>
+
             </div>
         </div>
     );

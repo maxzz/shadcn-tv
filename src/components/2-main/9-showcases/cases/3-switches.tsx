@@ -1,5 +1,6 @@
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { DemoSwitchStyled, Flickup, GradientColorPickerExample, NeonSwitch, ThreeDotsLoader } from "../../2-demo/3-demo-switches";
+import OpenGoo from "../../2-demo/6-open-goo/open-goo";
 
 export function SwitchInTabs() {
     return (
@@ -9,6 +10,7 @@ export function SwitchInTabs() {
                 <TabsTrigger value="switch2">Styled switch</TabsTrigger>
                 <TabsTrigger value="switch3">Gradient color picker</TabsTrigger>
                 <TabsTrigger value="switch4">Effects</TabsTrigger>
+                <TabsTrigger value="switch5">Goo</TabsTrigger>
             </TabsList>
 
             <TabsContent value="switch1">
@@ -34,6 +36,11 @@ export function SwitchInTabs() {
                     <ThreeDotsLoader className="text-sky-800" />
                 </div>
             </TabsContent>
+
+            <TabsContent value="switch5">
+                <OpenGoo />
+            </TabsContent>
+
         </Tabs>
     );
 }

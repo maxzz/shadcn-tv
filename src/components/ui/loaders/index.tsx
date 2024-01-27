@@ -6,3 +6,4 @@ export * from './spinner-emoji';
 export * from './spinner-radial';
 export * from './spinner-svg';
 export * from './spinner-div';
+export * from './spinner7';

@@ -1,3 +1,5 @@
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans"); */
+
 /* :root  */
 .wrapper {
     --color-primary: #6B04FF;
@@ -32,7 +34,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -61,7 +63,7 @@ body {
 
 .background {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1/span 2;
     display: grid;
     grid-template: inherit;
     z-index: -1;
@@ -80,42 +82,39 @@ body {
     width: 16vmin;
     background: var(--color-primary);
     border-radius: 10vmin;
-
-    &:nth-child(1) {
-        left: 2%;
-    }
-
-    &:nth-child(2) {
-        left: 35%;
-        width: 15vmin;
-    }
-
-    &:nth-child(3) {
-        right: 10%;
-        width: 12vmin;
-    }
-
-    &:nth-child(4) {
-        left: 20%;
-    }
-
-    &:nth-child(5) {
-        left: 55%;
-        width: 15vmin;
-    }
-
-    &:nth-child(6) {
-        right: 4%;
-        width: 5vmin;
-    }
-
-
-    .bg-content & {
-        bottom: 0;
-    }
-
 }
 
+.drip:nth-child(1) {
+    left: 2%;
+}
+
+.drip:nth-child(2) {
+    left: 35%;
+    width: 15vmin;
+}
+
+.drip:nth-child(3) {
+    right: 10%;
+    width: 12vmin;
+}
+
+.drip:nth-child(4) {
+    left: 20%;
+}
+
+.drip:nth-child(5) {
+    left: 55%;
+    width: 15vmin;
+}
+
+.drip:nth-child(6) {
+    right: 4%;
+    width: 5vmin;
+}
+
+.bg-content .drip {
+    bottom: 0;
+}
 
 .bg-content,
 .content {
@@ -131,15 +130,17 @@ body {
     align-items: center;
     text-align: center;
     padding: 1em;
+}
 
-    header {
-        font-size: 1.2em;
-    }
+.content header,
+.description header {
+    font-size: 1.2em;
+}
 
-    p {
-        color: rgba(white, 0.8);
-        margin: .5em;
-    }
+.content p,
+.description p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0.5em;
 }
 
 .pronunciation {
@@ -186,34 +187,32 @@ body {
     z-index: 10;
     background-color: #fff;
     color: black;
-    box-shadow: 0 2vmin 2vmin rgba(black, 0.2);
+    box-shadow: 0 2vmin 2vmin rgba(0, 0, 0, 0.2);
     transition: transform calc(var(--duration) / 2) var(--easing);
     will-change: transform;
+}
 
-    &:hover {
-        transform: scale(0.9);
-    }
+.button:hover {
+    transform: scale(0.9);
+}
 
-    &:before {
-        content: '';
-        position: absolute;
-        height: 2vmin;
-        width: 2vmin;
-        border: .5vmin solid transparent;
-        border-bottom-color: black;
-        border-right-color: black;
-        transform: rotate(45deg);
-        transition-property: transform;
-    }
+.button:before {
+    content: "";
+    position: absolute;
+    height: 2vmin;
+    width: 2vmin;
+    border: 0.5vmin solid transparent;
+    border-bottom-color: black;
+    border-right-color: black;
+    transform: rotate(45deg);
+    transition-property: transform;
 }
 
 /* ---------------------------------- */
-
 .bg-description {
     transform: translateY(-140%);
     transition-property: transform;
 }
-
 
 .description {
     opacity: 0;
@@ -221,63 +220,89 @@ body {
     transition-property: opacity, transform;
 }
 
-#toggle:checked~ {
+#toggle:checked~.description {
+    opacity: 1;
+    transform: translateY(0%);
+}
 
-    .description {
-        opacity: 1;
-        transform: translateY(0%);
+#toggle:checked~* .button:before {
+    transform: rotate(-135deg);
+}
+
+#toggle:checked~* .bg-description {
+    transform: translateY(0);
+}
+
+#toggle:checked~* .bg-description .drip {
+    -webkit-animation: up-down var(--lag-duration) var(--drip-easing) both;
+    animation: up-down var(--lag-duration) var(--drip-easing) both;
+    -webkit-animation-delay: var(--lag-delay);
+    animation-delay: var(--lag-delay);
+}
+
+@-webkit-keyframes up-down {
+
+    0%,
+    100% {
+        transform: none;
     }
 
-    * .button:before {
-        transform: rotate(-135deg);
+    20% {
+        transform: scaleX(0.01) translateY(-100%);
+    }
+}
+
+@keyframes up-down {
+
+    0%,
+    100% {
+        transform: none;
     }
 
-    * .bg-description {
-        transform: translateY(0);
+    20% {
+        transform: scaleX(0.01) translateY(-100%);
+    }
+}
 
-        .drip {
-            animation: up-down var(--lag-duration) var(--drip-easing) both;
-            animation-delay: var(--lag-delay);
+#toggle:checked~* .bg-content .drip {
+    -webkit-animation: down-up var(--lag-duration) var(--drip-easing) both;
+    animation: down-up var(--lag-duration) var(--drip-easing) both;
+    -webkit-animation-delay: var(--lag-delay);
+    animation-delay: var(--lag-delay);
+}
 
-            @keyframes up-down {
+@-webkit-keyframes down-up {
 
-                0%,
-                100% {
-                    transform: none;
-                }
-
-                20% {
-                    transform: scaleX(0.01) translateY(-100%);
-                }
-            }
-        }
+    0%,
+    10%,
+    100% {
+        transform: none;
     }
 
-    * .bg-content {
-        .drip {
-            animation: down-up var(--lag-duration) var(--drip-easing) both;
-            animation-delay: var(--lag-delay);
+    40% {
+        transform: scaleX(0.01) translateY(100%);
+    }
+}
 
-            @keyframes down-up {
+@keyframes down-up {
 
-                0%,
-                10%,
-                100% {
-                    transform: none;
-                }
-
-                40% {
-                    transform: scaleX(.01) translateY(100%);
-                }
-            }
-        }
+    0%,
+    10%,
+    100% {
+        transform: none;
     }
 
-    * .drip:nth-child(2) {
-        animation-duration: calc(var(--lag-duration) * 1.1);
+    40% {
+        transform: scaleX(0.01) translateY(100%);
     }
+}
 
-    * .drip:nth-child(4) {
-        animation-duration: calc(var(--lag-duration) * 0.9);
-    }
+#toggle:checked~* .drip:nth-child(2) {
+    -webkit-animation-duration: calc(var(--lag-duration) * 1.1);
+    animation-duration: calc(var(--lag-duration) * 1.1);
+}
+
+#toggle:checked~* .drip:nth-child(4) {
+    -webkit-animation-duration: calc(var(--lag-duration) * 0.9);
+    animation-duration: calc(var(--lag-duration) * 0.9);
 }

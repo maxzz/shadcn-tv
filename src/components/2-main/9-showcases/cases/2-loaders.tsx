@@ -2,6 +2,7 @@ import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg, SpinnerEmoji, Sp
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { LoadersTest, SkeletonDemo, Spinner9 } from "../../2-demo/2-demo-loaders";
 import { PaginationDemo } from "../../2-demo/demo-pagination";
+import { FlipClock } from "../../2-demo/6-demo-flip-clock";
 
 export function LoadersInTab() {
     return (
@@ -12,8 +13,9 @@ export function LoadersInTab() {
                 <TabsTrigger value="loaders3">Radial</TabsTrigger>
                 <TabsTrigger value="loaders4">Spinner</TabsTrigger>
                 <TabsTrigger value="loaders5">Spinner7</TabsTrigger>
-                <TabsTrigger value="loaders6">Skeleton</TabsTrigger>
-                <TabsTrigger value="loaders7">Pagination</TabsTrigger>
+                <TabsTrigger value="loaders6">Clock</TabsTrigger>
+                <TabsTrigger value="loaders7">Skeleton</TabsTrigger>
+                <TabsTrigger value="loaders8">Pagination</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -43,11 +45,17 @@ export function LoadersInTab() {
                 </div>
             </TabsContent>
 
-            <TabsContent value="loaders6" className="my-8">
-                <SkeletonDemo />
+            <TabsContent value="loaders6">
+                <div className="my-8 flex items-center justify-center">
+                    <FlipClock />
+                </div>
             </TabsContent>
 
             <TabsContent value="loaders7" className="my-8">
+                <SkeletonDemo />
+            </TabsContent>
+
+            <TabsContent value="loaders8" className="my-8">
                 <PaginationDemo />
             </TabsContent>
         </Tabs>

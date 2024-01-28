@@ -1,8 +1,7 @@
 // https://codepen.io/ste-vg/pen/dENPjO 'Modal Mitosis 🦠 | CSS-Only Gooey Content Toggle | @keyframers 2.5.0'
 
 import styles from "./open-goo.module.css";
-console.log("styles", styles);
-
+// console.log("styles", styles);
 
 export function OpenGoo() {
     return (

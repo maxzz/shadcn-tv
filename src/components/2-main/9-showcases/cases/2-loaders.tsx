@@ -1,7 +1,6 @@
 import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg, SpinnerEmoji, Spinner7 } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { LoadersTest, SkeletonDemo, Spinner9 } from "../../2-demo/02-demo-loaders";
-import { PaginationDemo } from "../../2-demo/demo-pagination";
 import { FlipClock } from "../../2-demo/71-demo-flip-clock";
 
 export function LoadersInTab() {
@@ -15,7 +14,6 @@ export function LoadersInTab() {
                 <TabsTrigger value="loaders5">Spinner7</TabsTrigger>
                 <TabsTrigger value="loaders6">Clock</TabsTrigger>
                 <TabsTrigger value="loaders7">Skeleton</TabsTrigger>
-                <TabsTrigger value="loaders8">Pagination</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -53,10 +51,6 @@ export function LoadersInTab() {
 
             <TabsContent value="loaders7" className="my-8">
                 <SkeletonDemo />
-            </TabsContent>
-
-            <TabsContent value="loaders8" className="my-8">
-                <PaginationDemo />
             </TabsContent>
         </Tabs>
     );

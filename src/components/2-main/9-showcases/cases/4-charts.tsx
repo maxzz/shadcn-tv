@@ -5,7 +5,7 @@ import { nivoLineData2 } from "../../2-demo/demo-charts/nivo/line-data2";
 
 export function ChartsInTabs() {
     return (
-        <Tabs defaultValue="charts2">
+        <Tabs defaultValue="charts1">
             <TabsList>
                 <TabsTrigger value="charts1">Overview</TabsTrigger>
                 <TabsTrigger value="charts2">Metric</TabsTrigger>

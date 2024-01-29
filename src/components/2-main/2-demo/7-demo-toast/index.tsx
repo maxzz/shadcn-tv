@@ -5,7 +5,7 @@
 import { Button } from '@/components/ui/shadcn';
 import { toast } from '../../../ui/shadcn/radix-toast/use-radix-toast';
 
-export default function OrgToastDemo() {
+export default function RadixToastDemo() {
     return (
         <div>
             <Button variant="outline"

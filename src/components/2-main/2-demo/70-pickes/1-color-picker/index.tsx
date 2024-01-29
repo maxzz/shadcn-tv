@@ -8,12 +8,21 @@ export function SolidColorPickerDemo() {
     return (
         <div>
             <div className="flex flex-col gap-2">
-                <SolidColorPicker color={color2} onColorChange={(color2) => {
-                    setColor2(color2.hsla);
-                }} />
-                <SolidColorPicker color={color3} onColorChange={(color3) => {
-                    setColor3(color3.hsla);
-                }} />
+
+                <SolidColorPicker
+                    color={color2}
+                    onColorChange={(color2) => {
+                        setColor2(color2.hsla);
+                    }}
+                />
+                
+                <SolidColorPicker
+                    color={color3}
+                    onColorChange={(color3) => {
+                        setColor3(color3.hsla);
+                    }}
+                />
+                
             </div>
         </div>
     );

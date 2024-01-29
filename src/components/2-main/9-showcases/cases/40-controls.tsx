@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { CarouselDemo, PaginationDemo } from "../../2-demo/70-demo-controls";
 import { ChartsInTabs } from "../../2-demo/70-demo-controls/4-charts";
-import { SwitchInTabs } from "./3-switches";
+import { SwitchInTabs } from "./41-switches";
 import { SkeletonDemo } from "../../2-demo/02-demo-loaders/4-demo-skeleton";
 
 export function ControlsInTabs() {

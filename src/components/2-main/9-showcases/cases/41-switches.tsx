@@ -1,5 +1,5 @@
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { DemoSwitchStyled, Flickup, GradientColorPickerExample, NeonSwitch, ThreeDotsLoader } from "../../2-demo/03-demo-switches";
+import { DemoSwitchStyled, Flickup, GradientColorPickerDemo, NeonSwitch, ThreeDotsLoader } from "../../2-demo/03-demo-switches";
 import { OpenGoo } from "../../2-demo/72-demo-open-goo/open-goo";
 
 export function SwitchInTabs() {
@@ -22,7 +22,7 @@ export function SwitchInTabs() {
             </TabsContent>
 
             <TabsContent value="switch3">
-                <GradientColorPickerExample />
+                <GradientColorPickerDemo />
             </TabsContent>
 
             <TabsContent value="switch4">

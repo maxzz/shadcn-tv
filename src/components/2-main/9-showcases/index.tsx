@@ -4,7 +4,6 @@ import { LoadersInTab } from "./cases/2-loaders";
 import { SwitchInTabs } from "./cases/3-switches";
 import { DemoTreeWithOptions } from "../2-demo/04-demo-tree";
 import { ResizableDemo } from "../2-demo/50-demo-resizable";
-import { ChartsInTabs } from "./cases/4-charts";
 import { ToastsInTabs } from "./cases/5-toasts";
 import { ControlsInTabs } from "./cases/5-tabs-controls";
 
@@ -17,11 +16,10 @@ export const showcasesData: Showcase[] = [
     { id: '30', name: "Switches", component: <SwitchInTabs /> },
     { id: '41', name: "Tree", component: <DemoTreeWithOptions /> },
     { id: '51', name: "Resizable", component: <ResizableDemo /> },
-    { id: '52', name: "Charts", component: <ChartsInTabs /> },
-    { id: '53', name: "Controls", component: <ControlsInTabs /> },
-    { id: '54', name: "Toasts and Drawer", component: <ToastsInTabs /> },
+    { id: '52', name: "Carousel, Pagination, Charts", component: <ControlsInTabs /> },
+    { id: '53', name: "Toasts and Drawer", component: <ToastsInTabs /> },
     
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "54";
+export const initialCase = "53";

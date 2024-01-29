@@ -1,5 +1,5 @@
 export function SolidColorPickerDemo() {
-  return (
-    <div>SolidColorPicker</div>
-  )
+    return (
+        <div>SolidColorPicker</div>
+    );
 }

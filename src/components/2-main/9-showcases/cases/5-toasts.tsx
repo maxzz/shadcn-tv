@@ -1,4 +1,4 @@
-import { DrawerDemo, RadixToastDemo, SonnerDemo } from "../../2-demo/7-demo-toasts";
+import { DrawerDemo, RadixToastDemo, SonnerDemo } from "../../2-demo/52-demo-toasts";
 
 export function ToastsInTabs() {
     return (

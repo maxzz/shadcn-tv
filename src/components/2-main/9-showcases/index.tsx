@@ -2,10 +2,10 @@ import { Showcase } from "./cases/types";
 import { TableInTabs } from "./cases/1-tables";
 import { LoadersInTab } from "./cases/2-loaders";
 import { SwitchInTabs } from "./cases/3-switches";
-import { DemoTreeWithOptions } from "../2-demo/4-demo-tree";
-import { ResizableDemo } from "../2-demo/5-demo-resizable";
+import { DemoTreeWithOptions } from "../2-demo/04-demo-tree";
+import { ResizableDemo } from "../2-demo/50-demo-resizable";
 import { ChartsInTabs } from "./cases/4-charts";
-import { CarouselDemo } from "../2-demo/7-demo-carousel";
+import { CarouselDemo } from "../2-demo/70-demo-controls";
 import { ToastsInTabs } from "./cases/5-toasts";
 
 export * from "./cases/types";

@@ -34,7 +34,7 @@ export function SonnerDemo() {
                 // });
             }}
         >
-            Show Toast
+            Sonner toast
         </Button>
     );
 }

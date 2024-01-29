@@ -94,7 +94,7 @@ export function DrawerDemo() {
         <D.Drawer>
             <D.DrawerTrigger asChild>
                 <Button variant="outline">
-                    Open Drawer
+                    Open drawer
                 </Button>
             </D.DrawerTrigger>
 

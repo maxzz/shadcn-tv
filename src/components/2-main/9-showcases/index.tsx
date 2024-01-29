@@ -6,7 +6,6 @@ import { DemoTreeWithOptions } from "../2-demo/4-demo-tree";
 import { ResizableDemo } from "../2-demo/5-demo-resizable";
 import { ChartsInTabs } from "./cases/4-charts";
 import { CarouselDemo } from "../2-demo/7-demo-carousel";
-import { DrawerDemo } from "../2-demo/demo-drawer";
 import { ToastsInTabs } from "./cases/5-toasts";
 
 export * from "./cases/types";
@@ -20,10 +19,9 @@ export const showcasesData: Showcase[] = [
     { id: '51', name: "Resizable", component: <ResizableDemo /> },
     { id: '52', name: "Charts", component: <ChartsInTabs /> },
     { id: '53', name: "Carousel", component: <CarouselDemo /> },
-    { id: '54', name: "Drawer", component: <DrawerDemo /> },
-    { id: '55', name: "Toasts", component: <ToastsInTabs /> },
+    { id: '54', name: "Toasts and Drawer", component: <ToastsInTabs /> },
     
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "55";
+export const initialCase = "54";

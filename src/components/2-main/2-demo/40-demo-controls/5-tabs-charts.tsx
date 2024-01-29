@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { CardsMetric, ChartsOverview, Sparkline } from "./demo-charts";
-import { nivoLineData1 } from "./demo-charts/nivo/line-data1";
-import { nivoLineData2 } from "./demo-charts/nivo/line-data2";
+import { CardsMetric, ChartsOverview, Sparkline } from "./5-demo-charts";
+import { nivoLineData1 } from "./5-demo-charts/nivo/line-data1";
+import { nivoLineData2 } from "./5-demo-charts/nivo/line-data2";
 
 export function ChartsInTabs() {
     return (

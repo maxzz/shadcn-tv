@@ -1,7 +1,7 @@
 import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "@/components/ui/shadcn/toast";
 import { useToast } from "./use-toast";
 
-export function Toaster() {
+export function RadixToaster() {
     const { toasts } = useToast();
     return (
         <ToastProvider>
@@ -24,6 +24,7 @@ export function Toaster() {
                     </Toast>
                 );
             })}
+
             <ToastViewport />
         </ToastProvider>
     );

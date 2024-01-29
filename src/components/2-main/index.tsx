@@ -3,6 +3,7 @@ import { DialogDemoWoTrigger } from './2-demo/demo-dialog-wo-trigger';
 import { ShowcasesView, initialCase, showcasesData } from './9-showcases';
 import { Button, ScrollArea } from '@/components/ui/shadcn';
 import { DemoTreeWithOptions } from './2-demo/4-demo-tree';
+import { RadixToaster } from './2-demo/7-demo-toast/toaster';
 
 function FontInput() {
     return (
@@ -53,6 +54,8 @@ export function Section2_Main() {
             <ScrollArea className="flex-1 p-4 min-w-0 overflow-hidden" data-fixed-width>
                 <ShowcasesView cases={showcasesData} initialCase={initialCase} />
             </ScrollArea>
+
+            <RadixToaster />
 
             <ButtomFixedSection />
         </div>

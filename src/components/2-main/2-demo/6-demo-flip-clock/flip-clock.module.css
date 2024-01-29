@@ -75,7 +75,7 @@ body {
     background: #222;
     padding: 0.23em 0.25em 0.4em;
     border-radius: 0.15em 0.15em 0 0;
-    backface-visiblity: hidden;
+    backface-visibility: hidden;
     transform-style: preserve-3d;
     width: 1.8em;
 }

@@ -1,5 +1,5 @@
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "@/components/ui/shadcn/toast";
-import { useToast } from "./use-toast";
+import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "../toast";
+import { useToast } from "./use-radix-toast";
 
 export function RadixToaster() {
     const { toasts } = useToast();

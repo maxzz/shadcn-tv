@@ -3,11 +3,11 @@ import { SolidColorPicker } from "./color-picker";
 import { color, type HslaColor } from "@uiw/react-color";
 
 export function SolidColorPickerDemo() {
-    const [color2, setColor2] = useState<HslaColor>(color("#217EFF").hsla);
+    const [color2, setColor2] = useState<HslaColor>(color("#2719D5").hsla);
     const [color3, setColor3] = useState<HslaColor>(color("#FFA121").hsla);
     return (
         <div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
 
                 <SolidColorPicker
                     color={color2}
@@ -15,7 +15,7 @@ export function SolidColorPickerDemo() {
                         setColor2(color2.hsla);
                     }}
                 />
-                
+
                 <SolidColorPicker
                     color={color3}
                     onColorChange={(color3) => {

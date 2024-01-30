@@ -1,8 +1,8 @@
-import { type Hsl, type ThemeShadcn } from "../types-theme-config";
-import { hslToVariableValue } from "./hsl-to-variable-value";
+import { type Hsl, type ThemeS5 } from "./types-theme-zod";
+import { hslToVariableValue } from "./utils-hsl2cssvar";
 import { fromPairs, invert, mapKeys, mapValues } from "remeda";
 
-const variables: Record<keyof ThemeShadcn, string> = {
+const variables: Record<keyof ThemeS5, string> = {
     background: "background",
     foreground: "foreground",
     muted: "muted",
@@ -24,7 +24,7 @@ const variables: Record<keyof ThemeShadcn, string> = {
     ring: "ring",
 };
 
-export const themeToStyles = (theme: ThemeShadcn) => {
+export const themeToStyles = (theme: ThemeS5) => {
     const withKeys = mapKeys(theme, (key) => {
         const variable = variables[key];
         return `--${variable}`;
@@ -42,8 +42,8 @@ export const cssToTheme = (styles: string) => {
 
     const invertedVariables = invert(variables);
 
-    const lightThemeEntries: Array<[keyof ThemeShadcn, Hsl]> = [];
-    const darkThemeEntries: Array<[keyof ThemeShadcn, Hsl]> = [];
+    const lightThemeEntries: Array<[keyof ThemeS5, Hsl]> = [];
+    const darkThemeEntries: Array<[keyof ThemeS5, Hsl]> = [];
 
     let errors = 0;
 

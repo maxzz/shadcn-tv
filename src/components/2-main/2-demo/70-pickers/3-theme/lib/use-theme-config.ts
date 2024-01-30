@@ -1,9 +1,9 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-import { type ThemeConfig } from "../types-theme-config";
-import { createThemeConfig } from "../create-theme-config";
+import { type ThemeS52Config } from "./types-theme-zod";
+import { createThemeConfig } from "./utils-create-theme";
 import { useResolvedTheme } from "./use-resolved-theme";
 
-export const defaultConfig: ThemeConfig = {
+export const defaultConfig: ThemeS52Config = {
     light: {
         background: { h: 0, s: 0, l: 100 },
         foreground: { h: 224, s: 71.4, l: 4.1 },
@@ -48,7 +48,7 @@ export const defaultConfig: ThemeConfig = {
     },
 };
 
-export const themeConfigAtom = atom<ThemeConfig>(createThemeConfig());
+export const themeConfigAtom = atom<ThemeS52Config>(createThemeConfig());
 
 export function useThemeConfig() {
     return useAtomValue(themeConfigAtom);

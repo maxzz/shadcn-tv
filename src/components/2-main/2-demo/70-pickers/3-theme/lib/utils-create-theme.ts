@@ -1,4 +1,4 @@
-import { type Hsl } from "./types-theme-config";
+import { type Hsl } from "./types-theme-zod";
 
 import { Colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";
@@ -27,34 +27,12 @@ const faker = {
     },
 };
 
-function colordToHsl(color: Colord): Hsl {
-    const hsla = color.toHsl();
-    return {
-        h: hsla.h,
-        s: hsla.s,
-        l: hsla.l,
-    };
-}
-
 function createPrimaryColor(): Hsl {
     return {
         h: faker.number.int({ min: 0, max: 360 }),
         s: faker.number.int({ min: 0, max: 100 }),
         l: faker.number.int({ min: 10, max: 90 }),
     };
-}
-
-function createContrast(color: Colord) {
-    const isLight = color.isLight();
-    let opposite = color;
-    let i = 0;
-    while (opposite.contrast(color) < 6) {
-        opposite = isLight ? opposite.darken(0.2) : opposite.lighten(0.2);
-        if (i++ > 10) {
-            break;
-        }
-    }
-    return opposite;
 }
 
 function createBackgroundLight(hue: number): Hsl {
@@ -168,6 +146,28 @@ function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shoul
     }
 
     throw new Error("Invalid mode");
+}
+
+function createContrast(color: Colord) {
+    const isLight = color.isLight();
+    let opposite = color;
+    let i = 0;
+    while (opposite.contrast(color) < 6) {
+        opposite = isLight ? opposite.darken(0.2) : opposite.lighten(0.2);
+        if (i++ > 10) {
+            break;
+        }
+    }
+    return opposite;
+}
+
+function colordToHsl(color: Colord): Hsl {
+    const hsla = color.toHsl();
+    return {
+        h: hsla.h,
+        s: hsla.s,
+        l: hsla.l,
+    };
 }
 
 export function createThemeConfig(primaryColor?: Hsl) {

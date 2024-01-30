@@ -13,15 +13,15 @@ import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn
 
 import { useActiveTheme, useSetThemeConfig, } from "./lib/use-theme-config";
 
-import { cssToTheme } from "./lib/theme-to-styles";
-import { createThemeConfig } from "./create-theme-config";
-import { type ThemeShadcn } from "./types-theme-config";
+import { cssToTheme } from "./lib/utils-theme2styles";
+import { createThemeConfig } from "./lib/utils-create-theme";
+import { type ThemeS5 } from "./lib/types-theme-zod";
 
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
 import { SolidColorPicker } from "../1-color-picker/1-color-picker";
 
-import { isMac } from "./lib/is-mac";
+import { isMac } from "./lib/utils-is-mac";
 
 export function Customize() {
     return (
@@ -66,7 +66,7 @@ function Content() {
     );
 }
 
-const changeableThemeValues: Array<{ label: string; themeKey: keyof ThemeShadcn; }> = [
+const changeableThemeValues: Array<{ label: string; themeKey: keyof ThemeS5; }> = [
     {
         label: "Background",
         themeKey: "background",
@@ -145,7 +145,7 @@ const changeableThemeValues: Array<{ label: string; themeKey: keyof ThemeShadcn;
     },
 ];
 
-function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeShadcn; label: string; }) {
+function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeS5; label: string; }) {
     const { theme: appTheme } = useTheme();
 
     const activeTheme = useActiveTheme();
@@ -157,7 +157,7 @@ function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeShadcn; label: 
 
     const color = activeTheme[themeKey];
 
-    function changeThemeValue<TKey extends keyof ThemeShadcn>(key: TKey, value: ThemeShadcn[TKey]) {
+    function changeThemeValue<TKey extends keyof ThemeS5>(key: TKey, value: ThemeS5[TKey]) {
         if (!appTheme) {
             return;
         }

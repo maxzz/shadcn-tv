@@ -8,7 +8,7 @@ const HslSchema = z.object({
 
 export type Hsl = z.infer<typeof HslSchema>;
 
-export const ThemeSchema = z.object({
+export const ThemeS5Schema = z.object({
     background: HslSchema,
     foreground: HslSchema,
     card: HslSchema,
@@ -30,11 +30,11 @@ export const ThemeSchema = z.object({
     ring: HslSchema,
 });
 
-export type ThemeShadcn = z.infer<typeof ThemeSchema>;
+export type ThemeS5 = z.infer<typeof ThemeS5Schema>;
 
-export const ThemeConfigSchema = z.object({
-    light: ThemeSchema,
-    dark: ThemeSchema,
+export const ThemeS52ConfigSchema = z.object({
+    light: ThemeS5Schema,
+    dark: ThemeS5Schema,
 });
 
-export type ThemeConfig = z.infer<typeof ThemeConfigSchema>;
+export type ThemeS52Config = z.infer<typeof ThemeS52ConfigSchema>;

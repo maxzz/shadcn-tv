@@ -38,6 +38,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
         "cmdk": "^0.2.0",
+        "colord": "^2.9.3",
         "date-fns": "^3.1.0",
         "embla-carousel": "8.0.0-rc18",
         "embla-carousel-react": "8.0.0-rc18",
@@ -57,7 +58,8 @@
         "tailwindcss-animate": "^1.0.7",
         "use-resize-observer": "^9.1.0",
         "valtio": "^1.13.0",
-        "vaul": "^0.8.0"
+        "vaul": "^0.8.0",
+        "zod": "^3.22.4"
     },
     "devDependencies": {
         "@types/node": "^20.10.6",

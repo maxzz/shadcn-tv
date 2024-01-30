@@ -77,7 +77,7 @@ function createDestructive() {
 
 const modes = ["complementary", "triadic", "analogous", "slick"] as const;
 
-function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shouldMatch: boolean, isDark?: boolean) {
+function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shouldMatch: boolean, isDark?: boolean): { secondary: Colord; accent: Colord; } {
     switch (mode) {
         case "triadic": {
             const [, secondary, accent] = primary.harmonies(mode);
@@ -87,6 +87,7 @@ function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shoul
                 accent,
             };
         }
+
         case "complementary": {
             const [, secondary] = primary.harmonies(mode);
             if (!secondary) throw new Error("Failed to create harmony");
@@ -95,6 +96,7 @@ function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shoul
                 accent: secondary,
             };
         }
+
         case "analogous": {
             const [secondary, , accent] = primary.harmonies(mode);
             if (!secondary || !accent) throw new Error("Failed to create harmony");
@@ -103,17 +105,12 @@ function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shoul
                 accent,
             };
         }
+
         case "slick": {
             if (isDark) {
                 const baseSaturation = faker.number.int({ min: 0, max: 20 });
                 const baseLightness = faker.number.int({ min: 8, max: 20 });
-
-                const clr = new Colord({
-                    h: primary.hue(),
-                    s: baseSaturation,
-                    l: baseLightness,
-                });
-
+                const clr = new Colord({ h: primary.hue(), s: baseSaturation, l: baseLightness, });
                 return {
                     secondary: clr,
                     accent: shouldMatch
@@ -122,28 +119,25 @@ function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shoul
                             .saturate(faker.number.float({ min: 0.05, max: 0.1 }))
                             .lighten(faker.number.float({ min: 0.05, max: 0.1 })),
                 };
+            } else {
+                const baseSaturation = faker.number.int({ min: 0, max: 20 });
+                const baseLightness = faker.number.int({ min: 80, max: 92 });
+                const clr = new Colord({ h: primary.hue(), s: baseSaturation, l: baseLightness, });
+                return {
+                    secondary: clr,
+                    accent: shouldMatch
+                        ? clr
+                        : clr
+                            .darken(faker.number.float({ min: 0.05, max: 0.1 }))
+                            .saturate(faker.number.float({ min: 0.05, max: 0.1 })),
+                };
             }
-
-            const baseSaturation = faker.number.int({ min: 0, max: 20 });
-            const baseLightness = faker.number.int({ min: 80, max: 92 });
-
-            const clr = new Colord({
-                h: primary.hue(),
-                s: baseSaturation,
-                l: baseLightness,
-            });
-
-            return {
-                secondary: clr,
-                accent: shouldMatch
-                    ? clr
-                    : clr
-                        .darken(faker.number.float({ min: 0.05, max: 0.1 }))
-                        .saturate(faker.number.float({ min: 0.05, max: 0.1 })),
-            };
         }
-        default:
-            throw new Error("Invalid mode");
+
+        default: {
+            const n: never = mode;
+            throw new Error(`Invalid mode ${n}`);
+        }
     }
 }
 

@@ -2,7 +2,7 @@ import { type Hsl, type ThemeS5 } from "./types-theme-zod";
 import { hslToVariableValue } from "./utils-hsl2cssvar";
 import { fromPairs, invert, mapKeys, mapValues } from "remeda";
 
-const variables: Record<keyof ThemeS5, string> = {
+const themeS5variables: Record<keyof ThemeS5, string> = {
     background: "background",
     foreground: "foreground",
     muted: "muted",
@@ -26,7 +26,7 @@ const variables: Record<keyof ThemeS5, string> = {
 
 export const themeToStyles = (theme: ThemeS5) => {
     const withKeys = mapKeys(theme, (key) => {
-        const variable = variables[key];
+        const variable = themeS5variables[key];
         return `--${variable}`;
     });
 
@@ -38,9 +38,9 @@ export const themeToStyles = (theme: ThemeS5) => {
 };
 
 export const cssToTheme = (styles: string) => {
-    const lines = styles.split("\n");
+    const lines = styles.split(/\r?\n/);
 
-    const invertedVariables = invert(variables);
+    const invertedVariables = invert(themeS5variables);
 
     const lightThemeEntries: Array<[keyof ThemeS5, Hsl]> = [];
     const darkThemeEntries: Array<[keyof ThemeS5, Hsl]> = [];
@@ -50,34 +50,33 @@ export const cssToTheme = (styles: string) => {
     let isDark = false;
 
     for (const line of lines) {
-        if (line.includes(".dark")) {
+        if (line.includes('.dark')) {
             isDark = true;
         }
 
-        if (line.includes("}")) {
+        if (line.includes('}')) {
             isDark = false;
         }
 
         const trimmed = line.trim();
 
-        if (trimmed.startsWith("--")) {
-            const [variable, value] = trimmed.split(":");
+        if (trimmed.startsWith('--')) {
+            const [variable, value] = trimmed.split(':');
             if (!variable) {
                 errors++;
                 continue;
             }
 
-            const themeKey = invertedVariables[variable.replace("--", "")];
+            const themeKey = invertedVariables[variable.replace('--', '')];
             if (!themeKey) {
                 continue;
             }
-
             if (!value) {
                 errors++;
                 continue;
             }
 
-            const hsl = value.trim().replace(";", "").replaceAll("%", "").split(" ");
+            const hsl = value.trim().replace(';', '').replaceAll('%', '').split(' ');
             if (hsl.length !== 3) {
                 errors++;
                 continue;

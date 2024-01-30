@@ -11,17 +11,17 @@ import { Button } from "@/components/ui/shadcn/button";
 import { Label } from "@/components/ui/shadcn/label";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn/popover";
 
-import { useActiveTheme, useSetThemeConfig, } from "./lib/use-theme-config";
+import { useActiveTheme, useSetThemeConfig, } from "../lib/use-theme-config";
 
-import { cssToTheme } from "./lib/utils-theme2styles";
-import { createThemeConfig } from "./lib/utils-create-theme";
-import { type ThemeS5 } from "./lib/types-theme-zod";
+import { cssToTheme } from "../lib/utils-theme2styles";
+import { createThemeConfig } from "../lib/utils-create-theme";
+import { type ThemeS5 } from "../lib/types-theme-zod";
 
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
-import { SolidColorPicker } from "../1-color-picker/1-color-picker";
+import { SolidColorPicker } from "../../1-color-picker/1-color-picker";
 
-import { isMac } from "./lib/utils-is-mac";
+import { isMac } from "../lib/utils-is-mac";
 
 export function Customize() {
     return (
@@ -147,6 +147,7 @@ const changeableThemeValues: Array<{ label: string; themeKey: keyof ThemeS5; }> 
 
 function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeS5; label: string; }) {
     const { theme: appTheme } = useTheme();
+    // const appTheme = 'light';
 
     const activeTheme = useActiveTheme();
     const setConfig = useSetThemeConfig();

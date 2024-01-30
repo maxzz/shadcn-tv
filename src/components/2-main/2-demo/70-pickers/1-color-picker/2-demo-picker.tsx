@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SolidColorPicker } from "./color-picker";
+import { SolidColorPicker } from "./1-color-picker";
 import { color, type HslaColor } from "@uiw/react-color";
 
 export function SolidColorPickerDemo() {

@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { GradientColorPickerDemo, SolidColorPickerDemo } from "../../2-demo/70-pickes";
+import { GradientColorPickerDemo, SolidColorPickerDemo } from "../../2-demo/70-pickers";
 
 export function PickersInTabs() {
     return (

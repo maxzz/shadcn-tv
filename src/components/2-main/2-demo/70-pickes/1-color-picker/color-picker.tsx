@@ -6,8 +6,9 @@ import { HTMLAttributes } from "react";
 
 // https://github.com/jln13x/ui.jln.dev/blob/main/src/client/components/color-picker.tsx
 
-export const contentClasses = "mx-1 p-0 w-auto rounded-md overflow-hidden ring-muted-foreground ring-1 ring-offset-1 ring-offset-background isolate z-50";
-export const fixArrowClasses = "![--github-border:none] [&>div]:[--github-background-color:green] [&>div]:[--github-arrow-border-color:red]";
+export const contentClasses = "mx-1 p-0 w-auto rounded-md overflow-hidden ring-muted-foreground/50 ring-1 ring-offset-1 ring-offset-background isolate z-50";
+export const fixBgClasses = "![--github-background-color:hsl(var(--muted))]";
+export const fixArrowClasses = "![--github-border:none] [&>div]:[--github-background-color:transparent] [&>div]:[--github-arrow-border-color:transparent]";
 export const fixPointeClasses = "[&_.w-color-saturation-fill]:!size-4 [&_.w-color-saturation-fill]:!-translate-x-2 [&_.w-color-saturation-fill]:!-translate-y-2";
 
 type SolidColorPickerProps =
@@ -31,7 +32,7 @@ export function SolidColorPicker({ className, color, onColorChange, ...rest }: S
                     color={hsva}
                     onChange={onColorChange}
                     inputType={ChromeInputType.HEXA}
-                    className={`${fixArrowClasses} ${fixPointeClasses}`}
+                    className={`${fixBgClasses} ${fixArrowClasses} ${fixPointeClasses}`}
                 />
             </PopoverContent>
 

@@ -1,64 +1,32 @@
-"use client";
-
 import { Fragment, useCallback, useEffect } from "react";
 
-import { ColorPicker } from "@/client/components/color-picker";
-import * as Icons from "@/client/components/icons";
-import { MenuButton } from "@/client/components/menu/menu-button";
-import { ThemeSwitch } from "@/client/components/theme-switch";
-import { Button } from "@/client/components/ui/button";
-import {
-    Drawer,
-    DrawerContent,
-    DrawerTrigger,
-} from "@/client/components/ui/drawer";
-import { Label } from "@/client/components/ui/label";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/client/components/ui/popover";
-import {
-    useActiveTheme,
-    useSetThemeConfig,
-} from "@/client/components/use-theme-config";
-import { isMac } from "@/client/lib/is-mac";
-import { cssToTheme } from "@/client/lib/theme-to-styles";
-import { createThemeConfig } from "@/shared/create-theme-config";
-import { type Theme } from "@/shared/theme-config";
 
-import { useIsMobile } from "@jlns/hooks";
+//import * as Icons from "@/client/components/icons";
+import { Paintbrush } from "lucide-react";
+
+import { MenuButton } from "./menu-button";
+//import { ThemeSwitch } from "@/client/components/theme-switch";
+
+import { Button } from "@/components/ui/shadcn/button";
+import { Label } from "@/components/ui/shadcn/label";
+import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn/popover";
+
+import { useActiveTheme, useSetThemeConfig, } from "./lib/use-theme-config";
+
+import { cssToTheme } from "./lib/theme-to-styles";
+import { createThemeConfig } from "./create-theme-config";
+import { type Theme } from "./theme-config";
+
 import { useTheme } from "next-themes";
-import { RemoveScroll } from "react-remove-scroll";
 import { toast } from "sonner";
+import { SolidColorPicker } from "../1-color-picker/1-color-picker";
 
 export const Customize = () => {
-    const isMobile = useIsMobile();
-
-    if (isMobile) {
-        return (
-            <Drawer>
-                <DrawerTrigger asChild>
-                    <MenuButton variant="default" className="bg-primary">
-                        <Icons.Paintbrush className="size-4" />
-                        <span className="sr-only">Customize</span>
-                    </MenuButton>
-                </DrawerTrigger>
-
-                <DrawerContent>
-                    <RemoveScroll className="max-h-[80svh] overflow-auto p-4 scrollbar-thin">
-                        <Content />
-                    </RemoveScroll>
-                </DrawerContent>
-            </Drawer>
-        );
-    }
-
     return (
         <Popover>
             <PopoverTrigger asChild>
                 <MenuButton variant="default" className="bg-primary">
-                    <Icons.Paintbrush className="size-4" />
+                    <Paintbrush className="size-4" />
                     <span className="sr-only">Customize</span>
                 </MenuButton>
             </PopoverTrigger>
@@ -76,7 +44,8 @@ const Content = () => {
                 Customize Theme
             </p>
             <div className="flex justify-center py-6">
-                <ThemeSwitch />
+                {/* <ThemeSwitch /> */}
+                ThemeSwitch
             </div>
 
             <div className="flex flex-col gap-3 py-4">
@@ -174,13 +143,7 @@ const changeableThemeValues: Array<{ label: string; themeKey: keyof Theme; }> = 
     },
 ];
 
-const ThemeValue = ({
-    label,
-    themeKey,
-}: {
-    themeKey: keyof Theme;
-    label: string;
-}) => {
+function ThemeValue({ label, themeKey, }: { themeKey: keyof Theme; label: string; }) {
     const { theme: appTheme } = useTheme();
 
     const activeTheme = useActiveTheme();
@@ -192,7 +155,7 @@ const ThemeValue = ({
 
     const changeThemeValue = <TKey extends keyof Theme>(
         key: TKey,
-        value: Theme[TKey],
+        value: Theme[TKey]
     ) => {
         if (!appTheme) return;
 
@@ -209,8 +172,8 @@ const ThemeValue = ({
 
     return (
         <div className="flex items-center gap-2">
-            <ColorPicker
-                color={color}
+            <SolidColorPicker
+                color={{...color, a: 1}}
                 onColorChange={(color) => {
                     const hsl = color.hsl;
                     const h = Number(hsl.h.toFixed(2));
@@ -218,14 +181,13 @@ const ThemeValue = ({
                     const l = Number(hsl.l.toFixed(2));
 
                     changeThemeValue(themeKey, { h, s, l });
-                }}
-            />
+                }} />
             <Label className="flex-shrink-0">{label}</Label>
         </div>
     );
-};
+}
 
-const PasteTheme = () => {
+function PasteTheme() {
     const setThemeConfig = useSetThemeConfig();
 
     const handlePaste = useCallback(
@@ -249,15 +211,15 @@ const PasteTheme = () => {
                 toast.success("Theme pasted successfully! 🎉");
             }
         },
-        [setThemeConfig],
+        [setThemeConfig]
     );
 
     useEffect(() => {
         const handler = (e: ClipboardEvent) => {
             const pastedData = e?.clipboardData?.getData("text");
-
-            if (!pastedData) return;
-
+            if (!pastedData) {
+                return;
+            }
             handlePaste(pastedData);
         };
 
@@ -272,17 +234,19 @@ const PasteTheme = () => {
         <div className="flex flex-col items-center border border-dotted px-2 py-4 text-center">
             <p className="text-sm">Paste existing theme</p>
             <p className="mx-auto flex rounded-pill font-mono text-sm text-muted-foreground">
-                {isMac() ? "⌘" : "Ctrl"} + V
+                Ctrl + V
             </p>
         </div>
     );
-};
+}
 
 const GenerateTheme = () => {
     const theme = useActiveTheme();
     const setThemeConfig = useSetThemeConfig();
 
-    if (!theme) return null;
+    if (!theme) {
+        return null;
+    }
 
     return (
         <div className="border border-dotted px-2 py-4">

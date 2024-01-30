@@ -78,37 +78,54 @@ function createDestructive() {
 const modes = ["complementary", "triadic", "analogous", "slick"] as const;
 
 function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shouldMatch: boolean, isDark?: boolean) {
-    if (mode === "triadic") {
-        const [, secondary, accent] = primary.harmonies(mode);
-        if (!secondary || !accent) throw new Error("Failed to create harmony");
-        return {
-            secondary,
-            accent,
-        };
-    }
+    switch (mode) {
+        case "triadic": {
+            const [, secondary, accent] = primary.harmonies(mode);
+            if (!secondary || !accent) throw new Error("Failed to create harmony");
+            return {
+                secondary,
+                accent,
+            };
+        }
+        case "complementary": {
+            const [, secondary] = primary.harmonies(mode);
+            if (!secondary) throw new Error("Failed to create harmony");
+            return {
+                secondary,
+                accent: secondary,
+            };
+        }
+        case "analogous": {
+            const [secondary, , accent] = primary.harmonies(mode);
+            if (!secondary || !accent) throw new Error("Failed to create harmony");
+            return {
+                secondary,
+                accent,
+            };
+        }
+        case "slick": {
+            if (isDark) {
+                const baseSaturation = faker.number.int({ min: 0, max: 20 });
+                const baseLightness = faker.number.int({ min: 8, max: 20 });
 
-    if (mode === "complementary") {
-        const [, secondary] = primary.harmonies(mode);
-        if (!secondary) throw new Error("Failed to create harmony");
-        return {
-            secondary,
-            accent: secondary,
-        };
-    }
+                const clr = new Colord({
+                    h: primary.hue(),
+                    s: baseSaturation,
+                    l: baseLightness,
+                });
 
-    if (mode === "analogous") {
-        const [secondary, , accent] = primary.harmonies(mode);
-        if (!secondary || !accent) throw new Error("Failed to create harmony");
-        return {
-            secondary,
-            accent,
-        };
-    }
+                return {
+                    secondary: clr,
+                    accent: shouldMatch
+                        ? clr
+                        : clr
+                            .saturate(faker.number.float({ min: 0.05, max: 0.1 }))
+                            .lighten(faker.number.float({ min: 0.05, max: 0.1 })),
+                };
+            }
 
-    if (mode === "slick") {
-        if (isDark) {
             const baseSaturation = faker.number.int({ min: 0, max: 20 });
-            const baseLightness = faker.number.int({ min: 8, max: 20 });
+            const baseLightness = faker.number.int({ min: 80, max: 92 });
 
             const clr = new Colord({
                 h: primary.hue(),
@@ -121,31 +138,13 @@ function createColorHarmony(primary: Colord, mode: (typeof modes)[number], shoul
                 accent: shouldMatch
                     ? clr
                     : clr
-                        .saturate(faker.number.float({ min: 0.05, max: 0.1 }))
-                        .lighten(faker.number.float({ min: 0.05, max: 0.1 })),
+                        .darken(faker.number.float({ min: 0.05, max: 0.1 }))
+                        .saturate(faker.number.float({ min: 0.05, max: 0.1 })),
             };
         }
-
-        const baseSaturation = faker.number.int({ min: 0, max: 20 });
-        const baseLightness = faker.number.int({ min: 80, max: 92 });
-
-        const clr = new Colord({
-            h: primary.hue(),
-            s: baseSaturation,
-            l: baseLightness,
-        });
-
-        return {
-            secondary: clr,
-            accent: shouldMatch
-                ? clr
-                : clr
-                    .darken(faker.number.float({ min: 0.05, max: 0.1 }))
-                    .saturate(faker.number.float({ min: 0.05, max: 0.1 })),
-        };
+        default:
+            throw new Error("Invalid mode");
     }
-
-    throw new Error("Invalid mode");
 }
 
 function createContrast(color: Colord) {

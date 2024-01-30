@@ -15,7 +15,7 @@ import { useActiveTheme, useSetThemeConfig, } from "./lib/use-theme-config";
 
 import { cssToTheme } from "./lib/theme-to-styles";
 import { createThemeConfig } from "./create-theme-config";
-import { type Theme } from "./theme-config";
+import { type ThemeShadcn } from "./types-theme-config";
 
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
@@ -66,7 +66,7 @@ function Content() {
     );
 }
 
-const changeableThemeValues: Array<{ label: string; themeKey: keyof Theme; }> = [
+const changeableThemeValues: Array<{ label: string; themeKey: keyof ThemeShadcn; }> = [
     {
         label: "Background",
         themeKey: "background",
@@ -145,7 +145,7 @@ const changeableThemeValues: Array<{ label: string; themeKey: keyof Theme; }> = 
     },
 ];
 
-function ThemeValue({ label, themeKey, }: { themeKey: keyof Theme; label: string; }) {
+function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeShadcn; label: string; }) {
     const { theme: appTheme } = useTheme();
 
     const activeTheme = useActiveTheme();
@@ -157,7 +157,7 @@ function ThemeValue({ label, themeKey, }: { themeKey: keyof Theme; label: string
 
     const color = activeTheme[themeKey];
 
-    function changeThemeValue<TKey extends keyof Theme>(key: TKey, value: Theme[TKey]) {
+    function changeThemeValue<TKey extends keyof ThemeShadcn>(key: TKey, value: ThemeShadcn[TKey]) {
         if (!appTheme) {
             return;
         }

@@ -30,7 +30,7 @@ export const ThemeSchema = z.object({
     ring: HslSchema,
 });
 
-export type Theme = z.infer<typeof ThemeSchema>;
+export type ThemeShadcn = z.infer<typeof ThemeSchema>;
 
 export const ThemeConfigSchema = z.object({
     light: ThemeSchema,

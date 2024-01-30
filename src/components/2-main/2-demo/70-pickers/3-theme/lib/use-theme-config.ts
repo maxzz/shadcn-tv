@@ -1,5 +1,5 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
-import { type ThemeConfig } from "../theme-config";
+import { type ThemeConfig } from "../types-theme-config";
 import { createThemeConfig } from "../create-theme-config";
 import { useResolvedTheme } from "./use-resolved-theme";
 

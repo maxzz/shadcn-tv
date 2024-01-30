@@ -1,4 +1,4 @@
-import { type Hsl } from "./theme-config";
+import { type Hsl } from "./types-theme-config";
 
 import { Colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";

@@ -4,42 +4,40 @@ import { cssToTheme } from "../lib/utils-theme2styles";
 import { toast } from "sonner";
 import { isMac } from "../lib/utils-is-mac";
 
-export function PasteTheme() {
+export function ButtonPasteTheme() {
     const setThemeConfig = useSetThemeConfigAtom();
 
     const handlePaste = useCallback(
         (text: string) => {
-            const theme = cssToTheme(text);
+            const newTheme = cssToTheme(text);
 
             setThemeConfig((prev) => ({
-                dark: { ...prev.dark, ...theme.dark, },
-                light: { ...prev.light, ...theme.light, },
+                dark: { ...prev.dark, ...newTheme.dark, },
+                light: { ...prev.light, ...newTheme.light, },
             }));
 
-            if (theme.errors > 0) {
+            if (newTheme.errors > 0) {
                 toast.warning("Some values were invalid and were not pasted.");
             } else {
                 toast.success("Theme pasted successfully! 🎉");
             }
-        },
-        [setThemeConfig]
+        }, [setThemeConfig]
     );
 
-    useEffect(() => {
-        const handler = (e: ClipboardEvent) => {
-            const pastedData = e?.clipboardData?.getData("text");
-            if (!pastedData) {
-                return;
+    useEffect(
+        () => {
+            function handler(e: ClipboardEvent) {
+                const pastedData = e?.clipboardData?.getData("text");
+                pastedData && handlePaste(pastedData);
             }
-            handlePaste(pastedData);
-        };
 
-        window.addEventListener("paste", handler);
+            window.addEventListener("paste", handler);
 
-        return () => {
-            window.removeEventListener("paste", handler);
-        };
-    }, [handlePaste]);
+            return () => {
+                window.removeEventListener("paste", handler);
+            };
+        }, [handlePaste]
+    );
 
     return (
         <div className="flex flex-col items-center border border-dotted px-2 py-4 text-center">

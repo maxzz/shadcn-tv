@@ -1,49 +1,41 @@
-import { Fragment } from "react";
-
-//import * as Icons from "@/client/components/icons";
+import { Button } from "@/components/ui/shadcn";
+import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn/popover";
 import { Paintbrush } from "lucide-react";
-
-import { MenuButton } from "./menu-button";
+import { ThemeList } from "./2-theme-list";
+import { ButtonPasteTheme } from "./3-btn-paste-theme";
+import { ButtonGenerateTheme } from "./4-btn-generate-theme";
 //import { ThemeSwitch } from "@/client/components/theme-switch";
 
-import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn/popover";
-
-import { ThemeList } from "./2-theme-list";
-import { PasteTheme } from "./3-paste-theme";
-import { GenerateTheme } from "./4-generate-theme";
-
 function Content() {
-    return (
-        <Fragment>
-            <p className="text-lg font-semibold leading-none tracking-tight">
-                Customize Theme
-            </p>
-            <div className="flex justify-center py-6">
-                {/* <ThemeSwitch /> */}
-                ThemeSwitch
-            </div>
+    return (<>
+        <p className="text-lg font-semibold leading-none tracking-tight">
+            Customize Theme
+        </p>
+        <div className="flex justify-center py-6">
+            {/* <ThemeSwitch /> */}
+            ThemeSwitch
+        </div>
 
-            <ThemeList />
+        <ThemeList />
 
-            <div>
-                <PasteTheme />
-            </div>
+        <div>
+            <ButtonPasteTheme />
+        </div>
 
-            <div className="pt-8">
-                <GenerateTheme />
-            </div>
-        </Fragment>
-    );
+        <div className="pt-8">
+            <ButtonGenerateTheme />
+        </div>
+    </>);
 }
 
 export function CustomizeButton() {
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <MenuButton variant="default" className="bg-primary">
+                <Button variant="outline">
                     <Paintbrush className="size-4" />
                     <span className="sr-only">Customize</span>
-                </MenuButton>
+                </Button>
             </PopoverTrigger>
 
             <PopoverContent className="max-h-[60svh] overflow-auto scrollbar-thin">

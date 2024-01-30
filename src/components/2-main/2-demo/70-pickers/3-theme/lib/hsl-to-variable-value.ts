@@ -1,9 +1,9 @@
 import { type Hsl } from "../theme-config";
 
-export const hslToVariableValue = (hsl: Hsl) => {
+export function hslToVariableValue(hsl: Hsl) {
     return `${hsl.h} ${hsl.s}% ${hsl.l}%`;
-};
+}
 
-export const hslToCssValue = (hsl: Hsl) => {
+export function hslToCssValue(hsl: Hsl) {
     return `hsl(${hslToVariableValue(hsl)})`;
-};
+}

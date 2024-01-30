@@ -21,7 +21,9 @@ import { useTheme } from "next-themes";
 import { toast } from "sonner";
 import { SolidColorPicker } from "../1-color-picker/1-color-picker";
 
-export const Customize = () => {
+import { isMac } from "./lib/is-mac";
+
+export function Customize() {
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -35,9 +37,9 @@ export const Customize = () => {
             </PopoverContent>
         </Popover>
     );
-};
+}
 
-const Content = () => {
+function Content() {
     return (
         <Fragment>
             <p className="text-lg font-semibold leading-none tracking-tight">
@@ -62,7 +64,7 @@ const Content = () => {
             </div>
         </Fragment>
     );
-};
+}
 
 const changeableThemeValues: Array<{ label: string; themeKey: keyof Theme; }> = [
     {
@@ -149,31 +151,24 @@ function ThemeValue({ label, themeKey, }: { themeKey: keyof Theme; label: string
     const activeTheme = useActiveTheme();
     const setConfig = useSetThemeConfig();
 
-    if (!activeTheme) return null;
+    if (!activeTheme) {
+        return null;
+    }
 
     const color = activeTheme[themeKey];
 
-    const changeThemeValue = <TKey extends keyof Theme>(
-        key: TKey,
-        value: Theme[TKey]
-    ) => {
-        if (!appTheme) return;
-
-        const newActiveThemeConfig = {
-            ...activeTheme,
-            [key]: value,
-        };
-
-        setConfig((prev) => ({
-            ...prev,
-            [appTheme]: newActiveThemeConfig,
-        }));
-    };
+    function changeThemeValue<TKey extends keyof Theme>(key: TKey, value: Theme[TKey]) {
+        if (!appTheme) {
+            return;
+        }
+        const newActiveThemeConfig = { ...activeTheme, [key]: value, };
+        setConfig((prev) => ({ ...prev, [appTheme]: newActiveThemeConfig, }));
+    }
 
     return (
         <div className="flex items-center gap-2">
             <SolidColorPicker
-                color={{...color, a: 1}}
+                color={{ ...color, a: 1 }}
                 onColorChange={(color) => {
                     const hsl = color.hsl;
                     const h = Number(hsl.h.toFixed(2));
@@ -195,14 +190,8 @@ function PasteTheme() {
             const theme = cssToTheme(text);
 
             setThemeConfig((prev) => ({
-                dark: {
-                    ...prev.dark,
-                    ...theme.dark,
-                },
-                light: {
-                    ...prev.light,
-                    ...theme.light,
-                },
+                dark: { ...prev.dark, ...theme.dark, },
+                light: { ...prev.light, ...theme.light, },
             }));
 
             if (theme.errors > 0) {
@@ -234,7 +223,7 @@ function PasteTheme() {
         <div className="flex flex-col items-center border border-dotted px-2 py-4 text-center">
             <p className="text-sm">Paste existing theme</p>
             <p className="mx-auto flex rounded-pill font-mono text-sm text-muted-foreground">
-                Ctrl + V
+                {isMac() ? "⌘" : "Ctrl"} + V
             </p>
         </div>
     );

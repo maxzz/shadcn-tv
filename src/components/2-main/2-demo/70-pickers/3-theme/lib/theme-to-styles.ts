@@ -1,6 +1,5 @@
-import { hslToVariableValue } from "./hsl-to-variable-value";
 import { type Hsl, type Theme } from "../theme-config";
-
+import { hslToVariableValue } from "./hsl-to-variable-value";
 import { fromPairs, invert, mapKeys, mapValues } from "remeda";
 
 const variables: Record<keyof Theme, string> = {
@@ -28,7 +27,6 @@ const variables: Record<keyof Theme, string> = {
 export const themeToStyles = (theme: Theme) => {
     const withKeys = mapKeys(theme, (key) => {
         const variable = variables[key];
-
         return `--${variable}`;
     });
 
@@ -64,15 +62,15 @@ export const cssToTheme = (styles: string) => {
 
         if (trimmed.startsWith("--")) {
             const [variable, value] = trimmed.split(":");
-
             if (!variable) {
                 errors++;
                 continue;
             }
 
             const themeKey = invertedVariables[variable.replace("--", "")];
-
-            if (!themeKey) continue;
+            if (!themeKey) {
+                continue;
+            }
 
             if (!value) {
                 errors++;
@@ -80,14 +78,12 @@ export const cssToTheme = (styles: string) => {
             }
 
             const hsl = value.trim().replace(";", "").replaceAll("%", "").split(" ");
-
             if (hsl.length !== 3) {
                 errors++;
                 continue;
             }
 
             const [h, s, l] = hsl;
-
             if (!h || !s || !l) {
                 errors++;
                 continue;

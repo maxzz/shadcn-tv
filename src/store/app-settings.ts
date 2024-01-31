@@ -1,4 +1,4 @@
-import { Theme, themeApply } from "@/utils/theme-apply";
+import { ThemeMode, themeApplyMode } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
 import { TreeState, defaultTreeState } from "./case-tree-state";
 import { ResizablesState, defaultResizablesState } from "./case-resizables";
@@ -6,7 +6,7 @@ import { debounce } from "@/utils";
 import { mergeConfigRecursively } from "@/utils/merge-options";
 
 export type AppSettings = {
-    theme: Theme;
+    theme: ThemeMode;
     treeState: TreeState;
     resisablesState: ResizablesState;
 };
@@ -33,9 +33,9 @@ function initialSettings(): AppSettings {
     return mergeConfigRecursively(defaultSettings, rv);
 }
 
-themeApply(appSettings.theme);
+themeApplyMode(appSettings.theme);
 subscribe(appSettings, () => {
-    themeApply(appSettings.theme);
+    themeApplyMode(appSettings.theme);
 });
 
 const saveDebounced = debounce(() => localStorage.setItem(STORE_KEY, JSON.stringify(appSettings)), 400);

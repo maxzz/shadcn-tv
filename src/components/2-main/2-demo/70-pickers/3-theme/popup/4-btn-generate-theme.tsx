@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/shadcn/button";
-import { useActiveTheme, useSetThemeConfigAtom, } from "../lib/use-theme-atoms";
+import { useActiveTheme, useSetThemeConfigAtom, } from "../lib/atoms-theme";
 import { createThemeConfig } from "../lib/utils-create-theme";
 import { ThemeValue } from "./1-theme-value";
 

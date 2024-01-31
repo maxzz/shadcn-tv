@@ -27,7 +27,13 @@ function Trigger({ background, className, }: { background: string; className?: s
     );
 }
 
-export function GradientPicker({ background, setBackground, className, }: { background: string; setBackground: (background: string) => void; className?: string; }) {
+type GradientPickerProps = {
+    background: string;
+    setBackground: (background: string) => void;
+    className?: string;
+};
+
+export function GradientPicker({ background, setBackground, className, }: GradientPickerProps) {
 
     const defaultTab = useMemo(() => {
         if (background.includes('url')) return 'image';
@@ -53,9 +59,9 @@ export function GradientPicker({ background, setBackground, className, }: { back
                 </Tabs>
 
                 <Input
-                    id="custom"
-                    value={background}
                     className="col-span-2 mt-4 h-8"
+                    // id="custom"
+                    value={background}
                     onChange={(e) => setBackground(e.currentTarget.value)}
                 />
 

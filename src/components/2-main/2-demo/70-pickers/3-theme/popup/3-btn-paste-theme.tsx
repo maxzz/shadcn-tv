@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useSetThemeConfigAtom } from "../lib/use-theme-atoms";
+import { useSetThemeConfigAtom } from "../lib/atoms-theme";
 import { cssToTheme } from "../lib/utils-theme2styles";
 import { toast } from "sonner";
 import { isMac } from "../lib/utils-is-mac";

@@ -4,9 +4,9 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Button } from "./button";
 import { IconDark, IconLight, IconSystem } from "../icons/normal";
 import { ChevronDown, CheckIcon } from 'lucide-react';
-import { Theme } from "@/utils";
+import { ThemeMode } from "@/utils";
 
-function Item({ label, theme, current }: { label: string; theme: Theme; current: Theme; }) {
+function MenuItem({ label, theme, current }: { label: string; theme: ThemeMode; current: ThemeMode; }) {
     return (
         <DropdownMenuItem
             className="grid grid-cols-[16px,1fr] items-center gap-x-2"
@@ -22,9 +22,9 @@ function Item({ label, theme, current }: { label: string; theme: Theme; current:
 }
 
 export function ThemeSwitch() {
-    const { theme } = useSnapshot(appSettings);
-    const isDark = theme === "dark";
-    const isSystem = theme === "system";
+    const { theme: snapTheme } = useSnapshot(appSettings);
+    const isDark = snapTheme === "dark";
+    const isSystem = snapTheme === "system";
     const isLight = !isDark && !isSystem;
     return (
         <div className="focus-within:ring-1 focus-within:ring-ring rounded-md flex items-center">
@@ -53,9 +53,9 @@ export function ThemeSwitch() {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end">
-                    <Item label="Light" theme="light" current={theme} />
-                    <Item label="Dark" theme="dark" current={theme} />
-                    <Item label="System" theme="system" current={theme} />
+                    <MenuItem label="Light" theme="light" current={snapTheme} />
+                    <MenuItem label="Dark" theme="dark" current={snapTheme} />
+                    <MenuItem label="System" theme="system" current={snapTheme} />
                 </DropdownMenuContent>
 
             </DropdownMenu>

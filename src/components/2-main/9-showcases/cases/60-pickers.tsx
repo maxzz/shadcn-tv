@@ -5,8 +5,8 @@ export function PickersInTabs() {
     return (
         <Tabs defaultValue="picker3">
             <TabsList>
-                <TabsTrigger value="picker1">Solid color picker</TabsTrigger>
-                <TabsTrigger value="picker2">Gradient picker</TabsTrigger>
+                <TabsTrigger value="picker1">Color</TabsTrigger>
+                <TabsTrigger value="picker2">Gradient</TabsTrigger>
                 <TabsTrigger value="picker3">Theme</TabsTrigger>
             </TabsList>
 

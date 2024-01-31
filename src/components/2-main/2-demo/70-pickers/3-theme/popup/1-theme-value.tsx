@@ -1,11 +1,12 @@
 import { Label } from "@/components/ui/shadcn/label";
-import { useActiveTheme, useSetThemeConfigAtom, } from "../lib/use-theme-atoms";
+import { useActiveTheme, useSetThemeConfigAtom, useTheme, } from "../lib/atoms-theme";
 import { type ThemeS5 } from "../lib/types-theme-zod";
-import { useTheme } from "next-themes";
+//import { useTheme } from "next-themes";
 import { SolidColorPicker } from "../../1-color-picker/1-color-picker";
 
 export function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeS5; label: string; }) {
-    const { theme: appTheme } = useTheme();
+    const appTheme = useTheme();
+    // const { theme: appTheme } = useTheme();
     // const appTheme = 'light';
 
     const activeTheme = useActiveTheme();

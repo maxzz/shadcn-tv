@@ -1,16 +1,16 @@
-export type Theme = "dark" | "light" | "system";
+export type ThemeMode = "dark" | "light" | "system";
 
-export function themeApply(theme: Theme): void {
+export function themeApplyMode(themeMode: ThemeMode): void {
 
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
 
-    if (theme === "system") {
+    if (themeMode === "system") {
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         root.classList.add(systemTheme);
         return;
     }
 
-    root.classList.add(theme);
+    root.classList.add(themeMode);
 }

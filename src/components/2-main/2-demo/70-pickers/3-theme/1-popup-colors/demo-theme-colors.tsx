@@ -40,7 +40,7 @@ export function ThemeColorsDemo() {
                 </Button>
             </PopoverTrigger>
 
-            <PopoverContent className="w-auto min-w-96 ma1x-h-[720px] bg-muted overflow-auto smallscroll"> {/* scrollbar-thin */} {/* max-h-[500px] overflow-auto smallscroll */}
+            <PopoverContent className="w-auto min-w-96 max-h-[720px] bg-muted overflow-auto smallscroll"> {/* scrollbar-thin */}
                 <Content />
             </PopoverContent>
         </Popover>

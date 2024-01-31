@@ -1,17 +1,12 @@
 import { Label } from "@/components/ui/shadcn/label";
-import { useActiveTheme, useSetThemeConfigAtom, useTheme, } from "../lib/atoms-theme";
 import { type ThemeS5 } from "../lib/types-theme-zod";
-//import { useTheme } from "next-themes";
+import { useActiveTheme, useSetThemeConfigAtom, useTheme, } from "../lib/atoms-theme";
 import { SolidColorPicker } from "../../1-color-picker/1-color-picker";
 
 export function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeS5; label: string; }) {
     const appTheme = useTheme();
-    // const { theme: appTheme } = useTheme();
-    // const appTheme = 'light';
-
-    const activeTheme = useActiveTheme();
     const setConfig = useSetThemeConfigAtom();
-
+    const activeTheme = useActiveTheme();
     if (!activeTheme) {
         return null;
     }
@@ -37,7 +32,9 @@ export function ThemeValue({ label, themeKey, }: { themeKey: keyof ThemeS5; labe
                     const l = Number(hsl.l.toFixed(2));
 
                     changeThemeValue(themeKey, { h, s, l });
-                }} />
+                }}
+                className="size-6"
+            />
             <Label className="flex-shrink-0">{label}</Label>
         </div>
     );

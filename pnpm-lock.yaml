@@ -170,6 +170,9 @@ dependencies:
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.0
+  tailwind-scrollbar:
+    specifier: ^3.0.5
+    version: 3.0.5(tailwindcss@3.4.1)
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.1)
@@ -4375,6 +4378,15 @@ packages:
     resolution: {integrity: sha512-SqqhhaL0T06SW59+JVNfAqKdqLs0497esifRrZ7jOaefP3o64fdFNDMrAQWZFMxTLJPiHVjRLUywT8uFz1xNWQ==}
     dependencies:
       '@babel/runtime': 7.23.8
+    dev: false
+
+  /tailwind-scrollbar@3.0.5(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-0ZwxTivevqq9BY9fRP9zDjHl7Tu+J5giBGbln+0O1R/7nHtBUKnjQcA1aTIhK7Oyjp6Uc/Dj6/dn8Dq58k5Uww==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: 3.4.1
     dev: false
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.4.1):

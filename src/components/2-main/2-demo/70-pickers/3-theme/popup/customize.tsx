@@ -38,7 +38,7 @@ export function CustomizeButton() {
                 </Button>
             </PopoverTrigger>
 
-            <PopoverContent className="max-h-[60svh] overflow-auto scrollbar-thin">
+            <PopoverContent className="w-auto min-w-96 max-h-[500px] overflow-auto scrollbar-thin">
                 <Content />
             </PopoverContent>
         </Popover>

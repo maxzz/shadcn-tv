@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/shadcn";
+import { Button, ScrollArea } from "@/components/ui/shadcn";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn/popover";
 import { Paintbrush } from "lucide-react";
 import { ThemeList } from "./2-theme-list";
@@ -11,12 +11,14 @@ function Content() {
         <p className="text-lg font-semibold leading-none tracking-tight">
             Customize Theme
         </p>
-        <div className="flex justify-center py-6">
-            {/* <ThemeSwitch /> */}
+        {/* <div className="flex justify-center py-6">
+            {/* <ThemeSwitch /> * /}
             ThemeSwitch
-        </div>
+        </div> */}
 
-        <ThemeList />
+        <ScrollArea className="my-4 h-72">
+            <ThemeList />
+        </ScrollArea>
 
         <div>
             <ButtonPasteTheme />
@@ -28,7 +30,7 @@ function Content() {
     </>);
 }
 
-export function CustomizeButton() {
+export function ThemeColorsDemo() {
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -38,7 +40,7 @@ export function CustomizeButton() {
                 </Button>
             </PopoverTrigger>
 
-            <PopoverContent className="w-auto min-w-96 max-h-[500px] overflow-auto smallscroll"> {/* scrollbar-thin */}
+            <PopoverContent className="w-auto min-w-96 ma1x-h-[720px] bg-muted overflow-auto smallscroll"> {/* scrollbar-thin */} {/* max-h-[500px] overflow-auto smallscroll */}
                 <Content />
             </PopoverContent>
         </Popover>

@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger, TooltipProvider } from "@/components/ui/shadcn";
-import { ButtonRandom, CustomizeButton, GradientColorPickerDemo, SolidColorPickerDemo } from "../../2-demo/70-pickers";
+import { ButtonRandom, ThemeColorsDemo, GradientColorPickerDemo, SolidColorPickerDemo } from "../../2-demo/70-pickers";
 
 export function PickersInTabs() {
     return (
@@ -20,8 +20,8 @@ export function PickersInTabs() {
 
             <TabsContent value="picker3">
                 <TooltipProvider delayDuration={100}>
-                    <div className="my-8 flex items-center justify-center">
-                        <CustomizeButton />
+                    <div className="my-8 flex items-center justify-center gap-2">
+                        <ThemeColorsDemo />
                         <ButtonRandom />
                     </div>
                 </TooltipProvider>

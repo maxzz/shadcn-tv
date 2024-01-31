@@ -1,1 +1,1 @@
-export * from "./customize";
+export * from "./demo-theme-colors";

@@ -13,29 +13,27 @@ export const ButtonRandom = ({ className }: { className?: string; }) => {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <Button asChild className={classNames(className)}>
+                <Button asChild variant="outline" className={classNames(className)}>
 
-                    <a
-                        href="/"
+                    <button
                         onClick={async () => {
                             const createThemeConfig = (await import("../lib/utils-create-theme")).createThemeConfig;
-
                             const newTheme = createThemeConfig();
-                            console.log('newTheme', newTheme);
-                            
                             setThemeConfig(newTheme);
                             // setSelectedThemeId(undefined);
                         }}
                         className="flex items-center gap-2"
-                        // scroll={false}
                     >
                         <Dices className="size-4" />
                         Random Theme
-                    </a>
+                    </button>
 
                 </Button>
             </TooltipTrigger>
-            <TooltipContent>Generate Random theme</TooltipContent>
+
+            <TooltipContent>
+                Generate Random theme
+            </TooltipContent>
         </Tooltip>
     );
 };

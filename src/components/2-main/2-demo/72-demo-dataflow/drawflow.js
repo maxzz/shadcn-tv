@@ -415,11 +415,12 @@ export class Drawflow {
             }
 
             const nodeId = nodeUpdate.slice(5);
-            const searchConnection = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections.findIndex(function (item, i) {
+            const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections;
+            const searchConnection = connections.findIndex(function (item, i) {
                 return item.node === nodeUpdateIn && item.output === input_class;
             });
 
-            this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points[numberPointPosition] = { pos_x: pos_x, pos_y: pos_y };
+            connections[searchConnection].points[numberPointPosition] = { pos_x: pos_x, pos_y: pos_y };
 
             const parentSelected = this.ele_selected.parentElement.classList[2].slice(9);
 
@@ -1081,63 +1082,58 @@ export class Drawflow {
         const output_class = this.connection_selected.parentElement.classList[3];
         const input_class = this.connection_selected.parentElement.classList[4];
         this.connection_selected = null;
-        const point = document.createElementNS('http://www.w3.org/2000/svg', "circle");
-        point.classList.add("point");
+
+        const svgDot = document.createElementNS('http://www.w3.org/2000/svg', "circle");
+        svgDot.classList.add("point");
         var pos_x = this.pos_x * (this.precanvas.clientWidth / (this.precanvas.clientWidth * this.zoom)) - (this.precanvas.getBoundingClientRect().x * (this.precanvas.clientWidth / (this.precanvas.clientWidth * this.zoom)));
         var pos_y = this.pos_y * (this.precanvas.clientHeight / (this.precanvas.clientHeight * this.zoom)) - (this.precanvas.getBoundingClientRect().y * (this.precanvas.clientHeight / (this.precanvas.clientHeight * this.zoom)));
-
-        point.setAttributeNS(null, 'cx', pos_x);
-        point.setAttributeNS(null, 'cy', pos_y);
-        point.setAttributeNS(null, 'r', this.reroute_width);
+        svgDot.setAttributeNS(null, 'cx', pos_x);
+        svgDot.setAttributeNS(null, 'cy', pos_y);
+        svgDot.setAttributeNS(null, 'r', this.reroute_width);
 
         let position_add_array_point = 0;
-        
+
         if (this.reroute_fix_curvature) {
             const numberPoints = ele.parentElement.querySelectorAll(".main-path").length;
-            var path = document.createElementNS('http://www.w3.org/2000/svg', "path");
-            path.classList.add("main-path");
-            path.setAttributeNS(null, 'd', '');
 
-            ele.parentElement.insertBefore(path, ele.parentElement.children[numberPoints]);
+            var svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
+            svgPath.classList.add("main-path");
+            svgPath.setAttributeNS(null, 'd', '');
+            ele.parentElement.insertBefore(svgPath, ele.parentElement.children[numberPoints]);
+
             if (numberPoints === 1) {
-                ele.parentElement.appendChild(point);
+                ele.parentElement.appendChild(svgDot);
             } else {
                 const search_point = Array.from(ele.parentElement.children).indexOf(ele);
                 position_add_array_point = search_point;
-                ele.parentElement.insertBefore(point, ele.parentElement.children[search_point + numberPoints + 1]);
+                ele.parentElement.insertBefore(svgDot, ele.parentElement.children[search_point + numberPoints + 1]);
             }
         } else {
-            ele.parentElement.appendChild(point);
+            ele.parentElement.appendChild(svgDot);
         }
 
         const nodeId = nodeUpdate.slice(5);
-        const searchConnection = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections.findIndex(function (item, i) {
-            return item.node === nodeUpdateIn && item.output === input_class;
-        });
+        const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections;
+        const searchConnection = connections.findIndex(
+            function (item, i) {
+                return item.node === nodeUpdateIn && item.output === input_class;
+            }
+        );
 
-        if (this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points === undefined) {
-            this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points = [];
+        const connectionsToUpdate = connections[searchConnection];
+        if (!connectionsToUpdate.points) {
+            connectionsToUpdate.points = [];
         }
 
         if (this.reroute_fix_curvature) {
-            if (position_add_array_point > 0
-                || this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points !== []
-            ) {
-                this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points
-                    .splice(position_add_array_point, 0, { pos_x: pos_x, pos_y: pos_y });
+            if (position_add_array_point > 0 || !connectionsToUpdate.points?.length) {
+                connectionsToUpdate.points.splice(position_add_array_point, 0, { pos_x: pos_x, pos_y: pos_y });
             } else {
-                this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points
-                    .push({ pos_x: pos_x, pos_y: pos_y });
+                connectionsToUpdate.points.push({ pos_x: pos_x, pos_y: pos_y });
             }
-
-            ele.parentElement.querySelectorAll(".main-path").forEach(
-                (item, i) => {
-                    item.classList.remove("selected");
-                }
-            );
+            ele.parentElement.querySelectorAll(".main-path").forEach((item) => item.classList.remove("selected"));
         } else {
-            this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points
-                .push({ pos_x: pos_x, pos_y: pos_y });
+            connectionsToUpdate.points.push({ pos_x: pos_x, pos_y: pos_y });
         }
 
         this.dispatch('addReroute', nodeId);
@@ -1151,10 +1147,10 @@ export class Drawflow {
         const input_class = ele.parentElement.classList[4];
 
         let numberPointPosition = Array.from(ele.parentElement.children).indexOf(ele);
+
         const nodeId = nodeUpdate.slice(5);
-        const searchConnection = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections.findIndex(function (item, i) {
-            return item.node === nodeUpdateIn && item.output === input_class;
-        });
+        const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections;
+        const searchConnection = connections.findIndex((item) => item.node === nodeUpdateIn && item.output === input_class);
 
         if (this.reroute_fix_curvature) {
             const numberMainPath = ele.parentElement.querySelectorAll(".main-path").length;
@@ -1166,7 +1162,7 @@ export class Drawflow {
         } else {
             numberPointPosition--;
         }
-        this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections[searchConnection].points.splice(numberPointPosition, 1);
+        connections[searchConnection].points.splice(numberPointPosition, 1);
 
         ele.remove();
         this.dispatch('removeReroute', nodeId);
@@ -1200,53 +1196,54 @@ export class Drawflow {
         } else {
             var newNodeId = this.nodeId;
         }
-        const parent = document.createElement('div');
-        parent.classList.add("parent-node");
+        const divParent = document.createElement('div');
+        divParent.classList.add("parent-node");
 
-        const node = document.createElement('div');
-        node.innerHTML = "";
-        node.setAttribute("id", "node-" + newNodeId);
-        node.classList.add("drawflow-node");
-        if (classoverride != '') {
-            node.classList.add(...classoverride.split(' '));
+        const divNode = document.createElement('div');
+        divNode.innerHTML = "";
+        divNode.setAttribute("id", "node-" + newNodeId);
+        divNode.classList.add("drawflow-node");
+        if (classoverride) {
+            divNode.classList.add(...classoverride.split(' '));
         }
 
-        const inputs = document.createElement('div');
-        inputs.classList.add("inputs");
+        const divInputs = document.createElement('div');
+        divInputs.classList.add("inputs");
 
-        const outputs = document.createElement('div');
-        outputs.classList.add("outputs");
+        const divOutputs = document.createElement('div');
+        divOutputs.classList.add("outputs");
 
-        const json_inputs = {};
+        const jsonInputs = {};
         for (var x = 0; x < num_in; x++) {
-            const input = document.createElement('div');
-            input.classList.add("input");
-            input.classList.add("input_" + (x + 1));
-            json_inputs["input_" + (x + 1)] = { "connections": [] };
-            inputs.appendChild(input);
+            const elm = document.createElement('div');
+            elm.classList.add("input");
+            elm.classList.add(`input_${x + 1}`);
+            jsonInputs[`input_${x + 1}`] = { "connections": [] };
+            divInputs.appendChild(elm);
         }
 
-        const json_outputs = {};
+        const jsonOutputs = {};
         for (var x = 0; x < num_out; x++) {
-            const output = document.createElement('div');
-            output.classList.add("output");
-            output.classList.add("output_" + (x + 1));
-            json_outputs["output_" + (x + 1)] = { "connections": [] };
-            outputs.appendChild(output);
+            const elm = document.createElement('div');
+            elm.classList.add("output");
+            elm.classList.add(`output_${x + 1}`);
+            jsonOutputs[`output_${x + 1}`] = { "connections": [] };
+            divOutputs.appendChild(elm);
         }
 
-        const content = document.createElement('div');
-        content.classList.add("drawflow_content_node");
+        const divContent = document.createElement('div');
+        divContent.classList.add("drawflow_content_node");
+
         if (typenode === false) {
-            content.innerHTML = html;
+            divContent.innerHTML = html;
         } else if (typenode === true) {
-            content.appendChild(this.noderegister[html].html.cloneNode(true));
+            divContent.appendChild(this.noderegister[html].html.cloneNode(true));
         } else {
             if (parseInt(this.render.version) === 3) {
                 //Vue 3
                 let wrapper = this.render.h(this.noderegister[html].html, this.noderegister[html].props, this.noderegister[html].options);
                 wrapper.appContext = this.parent;
-                this.render.render(wrapper, content);
+                this.render.render(wrapper, divContent);
 
             } else {
                 // Vue 2
@@ -1256,54 +1253,55 @@ export class Drawflow {
                     ...this.noderegister[html].options
                 }).$mount();
                 //
-                content.appendChild(wrapper.$el);
+                divContent.appendChild(wrapper.$el);
             }
         }
 
-        Object.entries(data).forEach(function (key, value) {
-            if (typeof key[1] === "object") {
-                insertObjectkeys(null, key[0], key[0]);
-            } else {
-                var elems = content.querySelectorAll('[df-' + key[0] + ']');
-                for (var i = 0; i < elems.length; i++) {
-                    elems[i].value = key[1];
-                    if (elems[i].isContentEditable) {
-                        elems[i].innerText = key[1];
+        Object.entries(data).forEach(
+            function (key, value) {
+                if (typeof key[1] === "object") {
+                    insertObjectkeys(null, key[0], key[0]);
+                } else {
+                    var elems = divContent.querySelectorAll('[df-' + key[0] + ']');
+                    for (var i = 0; i < elems.length; i++) {
+                        elems[i].value = key[1];
+                        if (elems[i].isContentEditable) {
+                            elems[i].innerText = key[1];
+                        }
                     }
                 }
             }
-        });
+        );
 
         function insertObjectkeys(object, name, completname) {
-            if (object === null) {
-                var object = data[name];
-            } else {
-                var object = object[name];
-            }
-            if (object !== null) {
-                Object.entries(object).forEach(function (key, value) {
-                    if (typeof key[1] === "object") {
-                        insertObjectkeys(object, key[0], completname + '-' + key[0]);
-                    } else {
-                        var elems = content.querySelectorAll('[df-' + completname + '-' + key[0] + ']');
-                        for (var i = 0; i < elems.length; i++) {
-                            elems[i].value = key[1];
-                            if (elems[i].isContentEditable) {
-                                elems[i].innerText = key[1];
+            object = !object ? data[name] : object[name];
+            if (object) {
+                Object.entries(object).forEach(
+                    function (key, value) {
+                        if (typeof key[1] === "object") {
+                            insertObjectkeys(object, key[0], completname + '-' + key[0]);
+                        } else {
+                            var elems = divContent.querySelectorAll('[df-' + completname + '-' + key[0] + ']');
+                            for (var i = 0; i < elems.length; i++) {
+                                elems[i].value = key[1];
+                                if (elems[i].isContentEditable) {
+                                    elems[i].innerText = key[1];
+                                }
                             }
                         }
                     }
-                });
+                );
             }
         }
 
-        node.appendChild(inputs);
-        node.appendChild(content);
-        node.appendChild(outputs);
-        node.style.top = ele_pos_y + "px";
-        node.style.left = ele_pos_x + "px";
-        parent.appendChild(node);
-        this.precanvas.appendChild(parent);
+        divNode.appendChild(divInputs);
+        divNode.appendChild(divContent);
+        divNode.appendChild(divOutputs);
+        divNode.style.top = ele_pos_y + "px";
+        divNode.style.left = ele_pos_x + "px";
+        divParent.appendChild(divNode);
+        this.precanvas.appendChild(divParent);
+
         let json = {
             id: newNodeId,
             name: name,
@@ -1311,12 +1309,13 @@ export class Drawflow {
             class: classoverride,
             html: html,
             typenode: typenode,
-            inputs: json_inputs,
-            outputs: json_outputs,
+            inputs: jsonInputs,
+            outputs: jsonOutputs,
             pos_x: ele_pos_x,
             pos_y: ele_pos_y,
         };
         this.drawflow.drawflow[this.module].data[newNodeId] = json;
+
         this.dispatch('nodeCreated', newNodeId);
         if (!this.useuuid) {
             this.nodeId++;
@@ -1328,12 +1327,12 @@ export class Drawflow {
         const parent = document.createElement('div');
         parent.classList.add("parent-node");
 
-        const node = document.createElement('div');
-        node.innerHTML = "";
-        node.setAttribute("id", "node-" + dataNode.id);
-        node.classList.add("drawflow-node");
-        if (dataNode.class != '') {
-            node.classList.add(...dataNode.class.split(' '));
+        const divNode = document.createElement('div');
+        divNode.innerHTML = "";
+        divNode.setAttribute("id", "node-" + dataNode.id);
+        divNode.classList.add("drawflow-node");
+        if (dataNode.class) {
+            divNode.classList.add(...dataNode.class.split(' '));
         }
 
         const inputs = document.createElement('div');
@@ -1343,36 +1342,37 @@ export class Drawflow {
         outputs.classList.add("outputs");
 
         Object.keys(dataNode.inputs).map(function (input_item, index) {
-            const input = document.createElement('div');
-            input.classList.add("input");
-            input.classList.add(input_item);
-            inputs.appendChild(input);
+            const divInput = document.createElement('div');
+            divInput.classList.add("input");
+            divInput.classList.add(input_item);
+            inputs.appendChild(divInput);
 
             Object.keys(dataNode.inputs[input_item].connections).map(
                 function (output_item, index) {
-                    var connection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
-                    var path = document.createElementNS('http://www.w3.org/2000/svg', "path");
-                    path.classList.add("main-path");
-                    path.setAttributeNS(null, 'd', '');
+                    const svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
+                    const svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
+                    svgPath.classList.add("main-path");
+                    svgPath.setAttributeNS(null, 'd', '');
                     // path.innerHTML = 'a';
-                    connection.classList.add("connection");
-                    connection.classList.add("node_in_node-" + dataNode.id);
-                    connection.classList.add("node_out_node-" + dataNode.inputs[input_item].connections[output_item].node);
-                    connection.classList.add(dataNode.inputs[input_item].connections[output_item].input);
-                    connection.classList.add(input_item);
+                    svgConnection.classList.add(
+                        "connection",
+                        `node_in_node-${dataNode.id}`,
+                        `node_out_node-${dataNode.inputs[input_item].connections[output_item].node}`,
+                        dataNode.inputs[input_item].connections[output_item].input,
+                        input_item,
+                    );
 
-                    connection.appendChild(path);
-                    precanvas.appendChild(connection);
+                    svgConnection.appendChild(svgPath);
+                    precanvas.appendChild(svgConnection);
 
                 }
             );
         });
 
         for (var x = 0; x < Object.keys(dataNode.outputs).length; x++) {
-            const output = document.createElement('div');
-            output.classList.add("output");
-            output.classList.add("output_" + (x + 1));
-            outputs.appendChild(output);
+            const divOutput = document.createElement('div');
+            divOutput.classList.add("output", `output_${x + 1}`);
+            outputs.appendChild(divOutput);
         }
 
         const content = document.createElement('div');
@@ -1442,12 +1442,12 @@ export class Drawflow {
             }
         }
 
-        node.appendChild(inputs);
-        node.appendChild(content);
-        node.appendChild(outputs);
-        node.style.top = dataNode.pos_y + "px";
-        node.style.left = dataNode.pos_x + "px";
-        parent.appendChild(node);
+        divNode.appendChild(inputs);
+        divNode.appendChild(content);
+        divNode.appendChild(outputs);
+        divNode.style.top = dataNode.pos_y + "px";
+        divNode.style.left = dataNode.pos_x + "px";
+        parent.appendChild(divNode);
         this.precanvas.appendChild(parent);
     }
 

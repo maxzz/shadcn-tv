@@ -622,50 +622,28 @@ export class Drawflow {
     }
 
     createCurvature(startX, startY, endX, endY, curvatureValue, type) {
-        // var startX = start_pos_x; //line_x
-        // var startY = start_pos_y; //line_y
-        // var endX = end_pos_x;
-        // var endY = end_pos_y;
-        // var curvature = curvature_value;
-        //type openclose open close other
         switch (type) {
             case 'open': {
-                let hx1, hx2;
-                if (startX >= endX) {
-                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
-                    hx2 = endX - Math.abs(endX - startX) * (curvatureValue * -1);
-                } else {
-                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
-                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
-                }
+                const dir = startX >= endX ? -1 : 1;
+                const hx1 = startX + Math.abs(endX - startX) * curvatureValue;
+                const hx2 = endX - Math.abs(endX - startX) * (curvatureValue * dir);
                 return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
             case 'close': {
-                let hx1, hx2;
-                if (startX >= endX) {
-                    hx1 = startX + Math.abs(endX - startX) * (curvatureValue * -1);
-                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
-                } else {
-                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
-                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
-                }
+                const dir = startX >= endX ? -1 : 1;
+                const hx1 = startX + Math.abs(endX - startX) * (curvatureValue * dir);
+                const hx2 = endX - Math.abs(endX - startX) * curvatureValue;
                 return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
             case 'other': {
-                let hx1, hx2;
-                if (startX >= endX) {
-                    hx1 = startX + Math.abs(endX - startX) * (curvatureValue * -1);
-                    hx2 = endX - Math.abs(endX - startX) * (curvatureValue * -1);
-                } else {
-                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
-                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
-                }
+                const dir = startX >= endX ? -1 : 1;
+                const hx1 = startX + Math.abs(endX - startX) * (curvatureValue * dir);
+                const hx2 = endX - Math.abs(endX - startX) * (curvatureValue * dir);
                 return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
             default: {
                 let hx1 = startX + Math.abs(endX - startX) * curvatureValue;
                 let hx2 = endX - Math.abs(endX - startX) * curvatureValue;
-
                 return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
         }

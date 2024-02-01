@@ -48,7 +48,7 @@ export class Drawflow {
         this.zoom_last_value = 1;
 
         // Mobile
-        this.evCache = new Array();
+        this.evCache = [];
         this.prevDiff = -1;
     }
 
@@ -1075,7 +1075,7 @@ export class Drawflow {
 
     createReroutePoint(ele) {
         this.connection_selected.classList.remove("selected");
-        
+
         const nodeUpdate = this.connection_selected.parentElement.classList[2].slice(9);
         const nodeUpdateIn = this.connection_selected.parentElement.classList[1].slice(13);
         const output_class = this.connection_selected.parentElement.classList[3];
@@ -1189,12 +1189,9 @@ export class Drawflow {
         return nodes;
     }
 
-    addNode(name, num_in, num_out, ele_pos_x, ele_pos_y, classoverride, data, html, typenode = false) {
-        if (this.useuuid) {
-            var newNodeId = this.getUuid();
-        } else {
-            var newNodeId = this.nodeId;
-        }
+    addNode(name, num_in, num_out, ele_pos_x, ele_pos_y, classOverride, data, html, typenode = false) {
+        const newNodeId = this.useuuid ? getUuid() : this.nodeId;
+
         const divParent = document.createElement('div');
         divParent.classList.add("parent-node");
 
@@ -1202,8 +1199,8 @@ export class Drawflow {
         divNode.innerHTML = "";
         divNode.setAttribute("id", "node-" + newNodeId);
         divNode.classList.add("drawflow-node");
-        if (classoverride) {
-            divNode.classList.add(...classoverride.split(' '));
+        if (classOverride) {
+            divNode.classList.add(...classOverride.split(' '));
         }
 
         const divInputs = document.createElement('div');
@@ -1257,15 +1254,15 @@ export class Drawflow {
         }
 
         Object.entries(data).forEach(
-            function (key, value) {
-                if (typeof key[1] === "object") {
-                    insertObjectkeys(null, key[0], key[0]);
+            function ([key, value]) {
+                if (typeof value === "object") {
+                    insertObjectkeys(null, key, key);
                 } else {
-                    var elems = divContent.querySelectorAll('[df-' + key[0] + ']');
+                    const elems = divContent.querySelectorAll(`[df-${key}]`);
                     for (var i = 0; i < elems.length; i++) {
-                        elems[i].value = key[1];
+                        elems[i].value = value;
                         if (elems[i].isContentEditable) {
-                            elems[i].innerText = key[1];
+                            elems[i].innerText = value;
                         }
                     }
                 }
@@ -1276,15 +1273,15 @@ export class Drawflow {
             object = !object ? data[name] : object[name];
             if (object) {
                 Object.entries(object).forEach(
-                    function (key, value) {
-                        if (typeof key[1] === "object") {
-                            insertObjectkeys(object, key[0], completname + '-' + key[0]);
+                    function ([key, value]) {
+                        if (typeof value === "object") {
+                            insertObjectkeys(object, key, `${completname}-${key}`);
                         } else {
-                            var elems = divContent.querySelectorAll('[df-' + completname + '-' + key[0] + ']');
+                            var elems = divContent.querySelectorAll(`[df-${completname}-${key}]`);
                             for (var i = 0; i < elems.length; i++) {
-                                elems[i].value = key[1];
+                                elems[i].value = value;
                                 if (elems[i].isContentEditable) {
-                                    elems[i].innerText = key[1];
+                                    elems[i].innerText = value;
                                 }
                             }
                         }
@@ -1305,7 +1302,7 @@ export class Drawflow {
             id: newNodeId,
             name: name,
             data: data,
-            class: classoverride,
+            class: classOverride,
             html: html,
             typenode: typenode,
             inputs: jsonInputs,
@@ -1340,33 +1337,34 @@ export class Drawflow {
         const outputs = document.createElement('div');
         outputs.classList.add("outputs");
 
-        Object.keys(dataNode.inputs).map(function (input_item, index) {
-            const divInput = document.createElement('div');
-            divInput.classList.add("input");
-            divInput.classList.add(input_item);
-            inputs.appendChild(divInput);
+        Object.keys(dataNode.inputs).map(
+            function (input_item) {
+                const divInput = document.createElement('div');
+                divInput.classList.add("input");
+                divInput.classList.add(input_item);
+                inputs.appendChild(divInput);
 
-            Object.keys(dataNode.inputs[input_item].connections).map(
-                function (output_item, index) {
-                    const svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
-                    const svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
-                    svgPath.classList.add("main-path");
-                    svgPath.setAttributeNS(null, 'd', '');
-                    // path.innerHTML = 'a';
-                    svgConnection.classList.add(
-                        "connection",
-                        `node_in_node-${dataNode.id}`,
-                        `node_out_node-${dataNode.inputs[input_item].connections[output_item].node}`,
-                        dataNode.inputs[input_item].connections[output_item].input,
-                        input_item,
-                    );
+                Object.keys(dataNode.inputs[input_item].connections).map(
+                    function (output_item) {
+                        const svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
+                        const svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
+                        svgPath.classList.add("main-path");
+                        svgPath.setAttributeNS(null, 'd', '');
+                        svgConnection.classList.add(
+                            "connection",
+                            `node_in_node-${dataNode.id}`,
+                            `node_out_node-${dataNode.inputs[input_item].connections[output_item].node}`,
+                            dataNode.inputs[input_item].connections[output_item].input,
+                            input_item,
+                        );
 
-                    svgConnection.appendChild(svgPath);
-                    precanvas.appendChild(svgConnection);
+                        svgConnection.appendChild(svgPath);
+                        precanvas.appendChild(svgConnection);
 
-                }
-            );
-        });
+                    }
+                );
+            }
+        );
 
         for (var x = 0; x < Object.keys(dataNode.outputs).length; x++) {
             const divOutput = document.createElement('div');
@@ -1401,15 +1399,15 @@ export class Drawflow {
         }
 
         Object.entries(dataNode.data).forEach(
-            function (key, value) {
-                if (typeof key[1] === "object") {
-                    insertObjectkeys(null, key[0], key[0]);
+            function ([key, value]) {
+                if (typeof value === "object") {
+                    insertObjectkeys(null, key, key);
                 } else {
-                    var elems = content.querySelectorAll('[df-' + key[0] + ']');
+                    var elems = content.querySelectorAll(`[df-${key}]`);
                     for (var i = 0; i < elems.length; i++) {
-                        elems[i].value = key[1];
+                        elems[i].value = value;
                         if (elems[i].isContentEditable) {
-                            elems[i].innerText = key[1];
+                            elems[i].innerText = value;
                         }
                     }
                 }
@@ -1424,15 +1422,15 @@ export class Drawflow {
             }
             if (object !== null) {
                 Object.entries(object).forEach(
-                    function (key, value) {
-                        if (typeof key[1] === "object") {
-                            insertObjectkeys(object, key[0], completname + '-' + key[0]);
+                    function ([key, value]) {
+                        if (typeof value === "object") {
+                            insertObjectkeys(object, key, `${completname}-${key}`);
                         } else {
-                            var elems = content.querySelectorAll('[df-' + completname + '-' + key[0] + ']');
+                            var elems = content.querySelectorAll(`[df-${completname}-${key}]`);
                             for (var i = 0; i < elems.length; i++) {
-                                elems[i].value = key[1];
+                                elems[i].value = value;
                                 if (elems[i].isContentEditable) {
-                                    elems[i].innerText = key[1];
+                                    elems[i].innerText = value;
                                 }
                             }
                         }
@@ -1456,42 +1454,33 @@ export class Drawflow {
         const container = this.container;
 
         Object.keys(dataNode.outputs).map(
-            function (output_item, index) {
+            function (output_item) {
                 Object.keys(dataNode.outputs[output_item].connections).map(
-                    function (input_item, index) {
-                        const points = dataNode.outputs[output_item].connections[input_item].points;
-                        if (points !== undefined) {
-                            points.forEach(
-                                (item, i) => {
-                                    const input_id = dataNode.outputs[output_item].connections[input_item].node;
-                                    const input_class = dataNode.outputs[output_item].connections[input_item].output;
-                                    const ele = container.querySelector('.connection.node_in_node-' + input_id + '.node_out_node-' + dataNode.id + '.' + output_item + '.' + input_class);
+                    function (input_item) {
+                        const connections = dataNode.outputs[output_item].connections[input_item];
+                        connections?.points?.forEach(
+                            (item, idx) => {
+                                const input_id = connections.node;
+                                const input_class = connections.output;
+                                const elm = container.querySelector(`.connection.node_in_node-${input_id}.node_out_node-${dataNode.id}.${output_item}.${input_class}`);
 
-                                    if (reroute_fix_curvature) {
-                                        if (i === 0) {
-                                            for (var z = 0; z < points.length; z++) {
-                                                var path = document.createElementNS('http://www.w3.org/2000/svg', "path");
-                                                path.classList.add("main-path");
-                                                path.setAttributeNS(null, 'd', '');
-                                                ele.appendChild(path);
-
-                                            }
-                                        }
+                                if (reroute_fix_curvature && idx === 0) {
+                                    for (var z = 0; z < connections.points.length; z++) {
+                                        var svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
+                                        svgPath.classList.add("main-path");
+                                        svgPath.setAttributeNS(null, 'd', '');
+                                        elm.appendChild(svgPath);
                                     }
-
-                                    const point = document.createElementNS('http://www.w3.org/2000/svg', "circle");
-                                    point.classList.add("point");
-                                    var pos_x = item.pos_x;
-                                    var pos_y = item.pos_y;
-
-                                    point.setAttributeNS(null, 'cx', pos_x);
-                                    point.setAttributeNS(null, 'cy', pos_y);
-                                    point.setAttributeNS(null, 'r', reroute_width);
-
-                                    ele.appendChild(point);
                                 }
-                            );
-                        };
+
+                                const svgDot = document.createElementNS('http://www.w3.org/2000/svg', "circle");
+                                svgDot.classList.add("point");
+                                svgDot.setAttributeNS(null, 'cx', item.pos_x);
+                                svgDot.setAttributeNS(null, 'cy', item.pos_y);
+                                svgDot.setAttributeNS(null, 'r', reroute_width);
+                                elm.appendChild(svgDot);
+                            }
+                        );
                     }
                 );
             }
@@ -1993,26 +1982,20 @@ export class Drawflow {
     }
 
     dispatch(event, details) {
-        // Check if this event not exists
-        if (this.events[event] === undefined) {
-            // console.error(`This event: ${event} does not exist`);
-            return false;
-        }
-        this.events[event].listeners.forEach((listener) => listener(details));
+        this.events[event]?.listeners.forEach((listener) => listener(details));
     }
+}
 
-    getUuid() {
-        // http://www.ietf.org/rfc/rfc4122.txt
-        var s = [];
-        var hexDigits = "0123456789abcdef";
-        for (var i = 0; i < 36; i++) {
-            s[i] = hexDigits.substring(Math.floor(Math.random() * 0x10), 1);
-        }
-        s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
-        s[19] = hexDigits.substring((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-        s[8] = s[13] = s[18] = s[23] = "-";
-
-        var uuid = s.join("");
-        return uuid;
+function getUuid() { // http://www.ietf.org/rfc/rfc4122.txt
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substring(Math.floor(Math.random() * 0x10), 1);
     }
+    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substring((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+
+    var uuid = s.join("");
+    return uuid;
 }

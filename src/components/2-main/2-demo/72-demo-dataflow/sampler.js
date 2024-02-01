@@ -139,13 +139,18 @@ function drop(ev) {
 
 }
 
-function addNodeToDrawFlow(name, pos_x, pos_y) {
+function addNodeToDrawFlow(name, x, y) {
     if (editor.editor_mode === 'fixed') {
         return false;
     }
-    pos_x = pos_x * (editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)) - (editor.precanvas.getBoundingClientRect().x * (editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)));
-    pos_y = pos_y * (editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)) - (editor.precanvas.getBoundingClientRect().y * (editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)));
 
+    const elm = editor.canvas;
+    const rect = elm.getBoundingClientRect();
+    const w = elm.clientWidth;
+    const h = elm.clientHeight;
+
+    x = x * (w / (w * editor.zoom)) - (rect.x * (w / (w * editor.zoom)));
+    y = y * (h / (h * editor.zoom)) - (rect.y * (h / (h * editor.zoom)));
 
     switch (name) {
         case 'facebook':
@@ -154,7 +159,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     <div class="title-box"><i class="fab fa-facebook"></i> Facebook Message</div>
                 </div>
                 `;
-            editor.addNode('facebook', 0, 1, pos_x, pos_y, 'facebook', {}, facebook);
+            editor.addNode('facebook', 0, 1, x, y, 'facebook', {}, facebook);
             break;
         case 'slack':
             var slackchat = `
@@ -162,7 +167,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     <div class="title-box"><i class="fab fa-slack"></i> Slack chat message</div>
                 </div>
                 `;
-            editor.addNode('slack', 1, 0, pos_x, pos_y, 'slack', {}, slackchat);
+            editor.addNode('slack', 1, 0, x, y, 'slack', {}, slackchat);
             break;
         case 'github':
             var githubtemplate = `
@@ -174,7 +179,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     </div>
                 </div>
                 `;
-            editor.addNode('github', 0, 1, pos_x, pos_y, 'github', {
+            editor.addNode('github', 0, 1, x, y, 'github', {
                 "name": ''
             }, githubtemplate);
             break;
@@ -194,7 +199,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     </div>
                 </div>
                 `;
-            editor.addNode('telegram', 1, 0, pos_x, pos_y, 'telegram', { "channel": 'channel_3' }, telegrambot);
+            editor.addNode('telegram', 1, 0, x, y, 'telegram', { "channel": 'channel_3' }, telegrambot);
             break;
         case 'aws':
             var aws = `
@@ -208,7 +213,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     </div>
                 </div>
                 `;
-            editor.addNode('aws', 1, 1, pos_x, pos_y, 'aws', { "db": { "dbname": '', "key": '' } }, aws);
+            editor.addNode('aws', 1, 1, x, y, 'aws', { "db": { "dbname": '', "key": '' } }, aws);
             break;
         case 'log':
             var log = `
@@ -216,7 +221,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     <div class="title-box"><i class="fas fa-file-signature"></i> Save log file </div>
                 </div>
                 `;
-            editor.addNode('log', 1, 0, pos_x, pos_y, 'log', {}, log);
+            editor.addNode('log', 1, 0, x, y, 'log', {}, log);
             break;
         case 'google':
             var google = `
@@ -224,7 +229,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     <div class="title-box"><i class="fab fa-google-drive"></i> Google Drive save </div>
                 </div>
                 `;
-            editor.addNode('google', 1, 0, pos_x, pos_y, 'google', {}, google);
+            editor.addNode('google', 1, 0, x, y, 'google', {}, google);
             break;
         case 'email':
             var email = `
@@ -232,7 +237,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     <div class="title-box"><i class="fas fa-at"></i> Send Email </div>
                 </div>
                 `;
-            editor.addNode('email', 1, 0, pos_x, pos_y, 'email', {}, email);
+            editor.addNode('email', 1, 0, x, y, 'email', {}, email);
             break;
 
         case 'template':
@@ -246,7 +251,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                         </div>
                     </div>
                 `;
-            editor.addNode('template', 1, 1, pos_x, pos_y, 'template', { "template": 'Write your template' }, template);
+            editor.addNode('template', 1, 1, x, y, 'template', { "template": 'Write your template' }, template);
             break;
         case 'multiple':
             var multiple = `
@@ -256,7 +261,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     </div>
                 </div>
                 `;
-            editor.addNode('multiple', 3, 4, pos_x, pos_y, 'multiple', {}, multiple);
+            editor.addNode('multiple', 3, 4, x, y, 'multiple', {}, multiple);
             break;
         case 'personalized':
             var personalized = `
@@ -264,7 +269,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     Personalized
                 </div>
                 `;
-            editor.addNode('personalized', 1, 1, pos_x, pos_y, 'personalized', {}, personalized);
+            editor.addNode('personalized', 1, 1, x, y, 'personalized', {}, personalized);
             break;
         case 'dbclick':
             var dbclick = `
@@ -282,7 +287,7 @@ function addNodeToDrawFlow(name, pos_x, pos_y) {
                     </div>
                 </div>
                 `;
-            editor.addNode('dbclick', 1, 1, pos_x, pos_y, 'dbclick', { name: '' }, dbclick);
+            editor.addNode('dbclick', 1, 1, x, y, 'dbclick', { name: '' }, dbclick);
             break;
         default:
     }
@@ -296,10 +301,10 @@ function showpopup(e) {
     //document.getElementById("modalfix").style.display = "block";
 
     //e.target.children[0].style.transform = 'translate('+translate.x+'px, '+translate.y+'px)';
-    transform = editor.precanvas.style.transform;
-    editor.precanvas.style.transform = '';
-    editor.precanvas.style.left = editor.canvas_x + 'px';
-    editor.precanvas.style.top = editor.canvas_y + 'px';
+    transform = editor.canvas.style.transform;
+    editor.canvas.style.transform = '';
+    editor.canvas.style.left = editor.canvas_x + 'px';
+    editor.canvas.style.top = editor.canvas_y + 'px';
     console.log(transform);
 
     //e.target.children[0].style.top  =  -editor.canvas_y - editor.container.offsetTop +'px';
@@ -311,9 +316,9 @@ function closemodal(e) {
     e.target.closest(".drawflow-node").style.zIndex = "2";
     e.target.parentElement.parentElement.style.display = "none";
     //document.getElementById("modalfix").style.display = "none";
-    editor.precanvas.style.transform = transform;
-    editor.precanvas.style.left = '0px';
-    editor.precanvas.style.top = '0px';
+    editor.canvas.style.transform = transform;
+    editor.canvas.style.left = '0px';
+    editor.canvas.style.top = '0px';
     editor.editor_mode = "edit";
 }
 

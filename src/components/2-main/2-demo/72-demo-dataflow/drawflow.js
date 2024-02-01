@@ -438,10 +438,10 @@ export class Drawflow {
 
     dragEnd(e) {
         const isTouch = e.type === "touchend";
-        
+
         const e_pos_x = isTouch ? this.mouse_x : e.clientX;
         const e_pos_y = isTouch ? this.mouse_y : e.clientY;
-        const ele_last = isTouch ? document.elementFromPoint(e_pos_x, e_pos_y) : e.target;
+        const elemLast = isTouch ? document.elementFromPoint(e_pos_x, e_pos_y) : e.target;
 
         if (this.drag) {
             if (this.pos_x_start != e_pos_x || this.pos_y_start != e_pos_y) {
@@ -463,25 +463,21 @@ export class Drawflow {
         }
 
         if (this.connection === true) {
-            if (ele_last.classList[0] === 'input' || (this.force_first_input && (ele_last.closest(".drawflow_content_node") != null || ele_last.classList[0] === 'drawflow-node'))) {
+            if (elemLast.classList[0] === 'input' || (this.force_first_input && (elemLast.closest(".drawflow_content_node") != null || elemLast.classList[0] === 'drawflow-node'))) {
 
-                if (this.force_first_input && (ele_last.closest(".drawflow_content_node") != null || ele_last.classList[0] === 'drawflow-node')) {
-                    const closest = ele_last.closest(".drawflow_content_node");
-                    if (closest) {
-                        var input_id = closest.parentElement.id;
-                    } else {
-                        var input_id = ele_last.id;
-                    }
-                    if (Object.keys(this.getNodeFromId(input_id.slice(5)).inputs).length === 0) {
-                        var input_class = false;
-                    } else {
-                        var input_class = "input_1";
-                    }
+                let input_id;
+                let input_class;
+                if (this.force_first_input && (elemLast.closest(".drawflow_content_node") != null || elemLast.classList[0] === 'drawflow-node')) {
+                    const closest = elemLast.closest(".drawflow_content_node");
+
+                    input_id = closest ? closest.parentElement.id : elemLast.id;
+                    input_class = Object.keys(this.getNodeFromId(input_id.slice(5)).inputs).length === 0 ? false : "input_1";
                 } else {
                     // Fix connection;
-                    var input_id = ele_last.parentElement.parentElement.id;
-                    var input_class = ele_last.classList[1];
+                    input_id = elemLast.parentElement.parentElement.id;
+                    input_class = elemLast.classList[1];
                 }
+
                 var output_id = this.elem_selected.parentElement.parentElement.id;
                 var output_class = this.elem_selected.classList[1];
 
@@ -489,8 +485,8 @@ export class Drawflow {
 
                     if (this.container.querySelectorAll(`.connection.node_in_${input_id}.node_out_${output_id}.${output_class}.${input_class}`).length === 0) {
                         // Conection no exist save connection
-                        this.connection_ele.classList.add("node_in_" + input_id);
-                        this.connection_ele.classList.add("node_out_" + output_id);
+                        this.connection_ele.classList.add(`node_in_${input_id}`);
+                        this.connection_ele.classList.add(`node_out_${output_id}`);
                         this.connection_ele.classList.add(output_class);
                         this.connection_ele.classList.add(input_class);
                         var id_input = input_id.slice(5);
@@ -498,8 +494,10 @@ export class Drawflow {
 
                         this.drawflow.drawflow[this.module].data[id_output].outputs[output_class].connections.push({ "node": id_input, "output": input_class });
                         this.drawflow.drawflow[this.module].data[id_input].inputs[input_class].connections.push({ "node": id_output, "input": output_class });
-                        this.updateConnectionNodes('node-' + id_output);
-                        this.updateConnectionNodes('node-' + id_input);
+
+                        this.updateConnectionNodes(`node-${id_output}`);
+                        this.updateConnectionNodes(`node-${id_input}`);
+
                         this.dispatch('connectionCreated', { output_id: id_output, input_id: id_input, output_class: output_class, input_class: input_class });
                     } else {
                         this.dispatch('connectionCancel', true);
@@ -539,21 +537,26 @@ export class Drawflow {
 
         if (this.canvas.getElementsByClassName("drawflow-delete").length) {
             this.canvas.getElementsByClassName("drawflow-delete")[0].remove();
-        };
+        }
+
         if (this.node_selected || this.connection_selected) {
-            var deletebox = document.createElement('div');
-            deletebox.classList.add("drawflow-delete");
-            deletebox.innerHTML = "x";
+            const divDeleteBox = document.createElement('div');
+            divDeleteBox.classList.add("drawflow-delete");
+            divDeleteBox.innerHTML = "✕";
 
             if (this.node_selected) {
-                this.node_selected.appendChild(deletebox);
+                this.node_selected.appendChild(divDeleteBox);
             }
 
             if (this.connection_selected && (this.connection_selected.parentElement.classList.length > 1)) {
-                deletebox.style.top = e.clientY * (this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom)) - (this.canvas.getBoundingClientRect().y * (this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom))) + "px";
-                deletebox.style.left = e.clientX * (this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom)) - (this.canvas.getBoundingClientRect().x * (this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom))) + "px";
+                const canvas = this.canvas;
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX * (canvas.clientWidth / (canvas.clientWidth * this.zoom)) - (rect.x * (canvas.clientWidth / (canvas.clientWidth * this.zoom)));
+                const y = e.clientY * (canvas.clientHeight / (canvas.clientHeight * this.zoom)) - (rect.y * (canvas.clientHeight / (canvas.clientHeight * this.zoom)));
 
-                this.canvas.appendChild(deletebox);
+                divDeleteBox.style.left = `${x}px`;
+                divDeleteBox.style.top = `${y}px`;
+                this.canvas.appendChild(divDeleteBox);
             }
         }
     }
@@ -618,52 +621,52 @@ export class Drawflow {
         }
     }
 
-    createCurvature(start_pos_x, start_pos_y, end_pos_x, end_pos_y, curvature_value, type) {
-        var line_x = start_pos_x;
-        var line_y = start_pos_y;
-        var x = end_pos_x;
-        var y = end_pos_y;
-        var curvature = curvature_value;
+    createCurvature(startX, startY, endX, endY, curvatureValue, type) {
+        // var startX = start_pos_x; //line_x
+        // var startY = start_pos_y; //line_y
+        // var endX = end_pos_x;
+        // var endY = end_pos_y;
+        // var curvature = curvature_value;
         //type openclose open close other
         switch (type) {
             case 'open': {
                 let hx1, hx2;
-                if (start_pos_x >= end_pos_x) {
-                    hx1 = line_x + Math.abs(x - line_x) * curvature;
-                    hx2 = x - Math.abs(x - line_x) * (curvature * -1);
+                if (startX >= endX) {
+                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
+                    hx2 = endX - Math.abs(endX - startX) * (curvatureValue * -1);
                 } else {
-                    hx1 = line_x + Math.abs(x - line_x) * curvature;
-                    hx2 = x - Math.abs(x - line_x) * curvature;
+                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
+                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
                 }
-                return ` M ${line_x} ${line_y} C ${hx1} ${line_y} ${hx2} ${y} ${x}  ${y}`;
+                return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
             case 'close': {
                 let hx1, hx2;
-                if (start_pos_x >= end_pos_x) {
-                    hx1 = line_x + Math.abs(x - line_x) * (curvature * -1);
-                    hx2 = x - Math.abs(x - line_x) * curvature;
+                if (startX >= endX) {
+                    hx1 = startX + Math.abs(endX - startX) * (curvatureValue * -1);
+                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
                 } else {
-                    hx1 = line_x + Math.abs(x - line_x) * curvature;
-                    hx2 = x - Math.abs(x - line_x) * curvature;
+                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
+                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
                 }
-                return ` M ${line_x} ${line_y} C ${hx1} ${line_y} ${hx2} ${y} ${x}  ${y}`;
+                return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
             case 'other': {
                 let hx1, hx2;
-                if (start_pos_x >= end_pos_x) {
-                    hx1 = line_x + Math.abs(x - line_x) * (curvature * -1);
-                    hx2 = x - Math.abs(x - line_x) * (curvature * -1);
+                if (startX >= endX) {
+                    hx1 = startX + Math.abs(endX - startX) * (curvatureValue * -1);
+                    hx2 = endX - Math.abs(endX - startX) * (curvatureValue * -1);
                 } else {
-                    hx1 = line_x + Math.abs(x - line_x) * curvature;
-                    hx2 = x - Math.abs(x - line_x) * curvature;
+                    hx1 = startX + Math.abs(endX - startX) * curvatureValue;
+                    hx2 = endX - Math.abs(endX - startX) * curvatureValue;
                 }
-                return ` M ${line_x} ${line_y} C ${hx1} ${line_y} ${hx2} ${y} ${x}  ${y}`;
+                return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
             default: {
-                let hx1 = line_x + Math.abs(x - line_x) * curvature;
-                let hx2 = x - Math.abs(x - line_x) * curvature;
+                let hx1 = startX + Math.abs(endX - startX) * curvatureValue;
+                let hx2 = endX - Math.abs(endX - startX) * curvatureValue;
 
-                return ` M ${line_x} ${line_y} C ${hx1} ${line_y} ${hx2} ${y} ${x}  ${y}`;
+                return ` M ${startX} ${startY} C ${hx1} ${startY} ${hx2} ${endY} ${endX}  ${endY}`;
             }
         }
     }

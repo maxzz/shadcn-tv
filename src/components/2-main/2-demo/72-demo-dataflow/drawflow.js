@@ -710,8 +710,8 @@ export class Drawflow {
     }
 
     addConnection(id_output, id_input, output_class, input_class) {
-        var nodeOneModule = this.getModuleFromNodeId(id_output);
-        var nodeTwoModule = this.getModuleFromNodeId(id_input);
+        var nodeOneModule = this.getModuleNameFromNodeId(id_output);
+        var nodeTwoModule = this.getModuleNameFromNodeId(id_input);
 
         if (nodeOneModule === nodeTwoModule) {
             var dataNode = this.getNodeFromId(id_output);
@@ -1173,7 +1173,7 @@ export class Drawflow {
     }
 
     getNodeFromId(id) {
-        var moduleName = this.getModuleFromNodeId(id);
+        var moduleName = this.getModuleNameFromNodeId(id);
         return JSON.parse(JSON.stringify(this.drawflow.drawflow[moduleName].data[id]));
     }
     getNodesFromName(name) {
@@ -1511,7 +1511,7 @@ export class Drawflow {
     }
 
     updateNodeDataFromId(id, data) {
-        var moduleName = this.getModuleFromNodeId(id);
+        var moduleName = this.getModuleNameFromNodeId(id);
         this.drawflow.drawflow[moduleName].data[id].data = data;
 
         if (this.module === moduleName) {
@@ -1557,7 +1557,7 @@ export class Drawflow {
     }
 
     addNodeInput(id) {
-        var moduleName = this.getModuleFromNodeId(id);
+        var moduleName = this.getModuleNameFromNodeId(id);
         const infoNode = this.getNodeFromId(id);
         const numInputs = Object.keys(infoNode.inputs).length;
         if (this.module === moduleName) {
@@ -1572,7 +1572,7 @@ export class Drawflow {
     }
 
     addNodeOutput(id) {
-        var moduleName = this.getModuleFromNodeId(id);
+        var moduleName = this.getModuleNameFromNodeId(id);
         const infoNode = this.getNodeFromId(id);
         const numOutputs = Object.keys(infoNode.outputs).length;
         if (this.module === moduleName) {
@@ -1587,7 +1587,7 @@ export class Drawflow {
     }
 
     removeNodeInput(id, input_class) {
-        var moduleName = this.getModuleFromNodeId(id);
+        var moduleName = this.getModuleNameFromNodeId(id);
         const infoNode = this.getNodeFromId(id);
         if (this.module === moduleName) {
             this.container.querySelector(`#node-${id} .inputs .input.${input_class}`).remove();
@@ -1666,7 +1666,7 @@ export class Drawflow {
     }
 
     removeNodeOutput(id, output_class) {
-        var moduleName = this.getModuleFromNodeId(id);
+        var moduleName = this.getModuleNameFromNodeId(id);
         const infoNode = this.getNodeFromId(id);
 
         if (this.module === moduleName) {
@@ -1748,7 +1748,7 @@ export class Drawflow {
 
     removeNodeId(id) {
         this.removeConnectionNodeId(id);
-        var moduleName = this.getModuleFromNodeId(id.slice(5));
+        var moduleName = this.getModuleNameFromNodeId(id.slice(5));
 
         if (this.module === moduleName) {
             this.container.querySelector(`#${id}`).remove();
@@ -1781,52 +1781,47 @@ export class Drawflow {
             (item) => item.node === idOutput && item.input === classOutput
         );
         module.data[idInput].inputs[classInput].connections.splice(index_in, 1);
-        
+
         this.dispatch('connectionRemoved', { output_id: idOutput, input_id: idInput, output_class: classOutput, input_class: classInput, });
         this.connection_selected = null;
     }
 
-    removeSingleConnection(id_output, id_input, output_class, input_class) {
-        var nodeOneModule = this.getModuleFromNodeId(id_output);
-        var nodeTwoModule = this.getModuleFromNodeId(id_input);
-        if (nodeOneModule === nodeTwoModule) {
-            // Check nodes in same module.
+    removeSingleConnection(idOutput, idInput, classOutput, classInput) {
+        var nodeOneModule = this.getModuleNameFromNodeId(idOutput);
+        var nodeTwoModule = this.getModuleNameFromNodeId(idInput);
 
-            // Check connection exist
-            var exists = this.drawflow.drawflow[nodeOneModule].data[id_output].outputs[output_class].connections.findIndex(
-                function (item, i) {
-                    return item.node == id_input && item.output === input_class;
-                }
-            );
-            if (exists > -1) {
-                if (this.module === nodeOneModule) {
-                    // In same module with view.
-                    this.container.querySelector(`.connection.node_in_node-${id_input}.node_out_node-${id_output}.${output_class}.${input_class}`).remove();
-                }
-
-                var index_out = this.drawflow.drawflow[nodeOneModule].data[id_output].outputs[output_class].connections.findIndex(
-                    function (item, i) {
-                        return item.node == id_input && item.output === input_class;
-                    }
-                );
-                this.drawflow.drawflow[nodeOneModule].data[id_output].outputs[output_class].connections.splice(index_out, 1);
-
-                var index_in = this.drawflow.drawflow[nodeOneModule].data[id_input].inputs[input_class].connections.findIndex(
-                    function (item, i) {
-                        return item.node == id_output && item.input === output_class;
-                    }
-                );
-                this.drawflow.drawflow[nodeOneModule].data[id_input].inputs[input_class].connections.splice(index_in, 1);
-
-                this.dispatch('connectionRemoved', { output_id: id_output, input_id: id_input, output_class: output_class, input_class: input_class });
-                return true;
-
-            } else {
-                return false;
-            }
-        } else {
+        // Check nodes in same module.
+        if (nodeOneModule !== nodeTwoModule) {
             return false;
         }
+        
+        const module = this.drawflow.drawflow[nodeOneModule];
+
+        // Check connection exist
+        var exists = module.data[idOutput].outputs[classOutput].connections.findIndex(
+            (item) => item.node == idInput && item.output === classInput
+        );
+        if (exists <= -1) {
+            return false;
+        }
+
+        if (this.module === nodeOneModule) {
+            // In same module with view.
+            this.container.querySelector(`.connection.node_in_node-${idInput}.node_out_node-${idOutput}.${classOutput}.${classInput}`).remove();
+        }
+
+        var outIndex = module.data[idOutput].outputs[classOutput].connections.findIndex(
+            (item) => item.node == idInput && item.output === classInput
+        );
+        module.data[idOutput].outputs[classOutput].connections.splice(outIndex, 1);
+
+        var inIndex = module.data[idInput].inputs[classInput].connections.findIndex(
+            (item) => item.node == idOutput && item.input === classOutput
+        );
+        module.data[idInput].inputs[classInput].connections.splice(inIndex, 1);
+
+        this.dispatch('connectionRemoved', { output_id: idOutput, input_id: idInput, output_class: classOutput, input_class: classInput });
+        return true;
     }
 
     removeConnectionNodeId(id) {
@@ -1881,21 +1876,21 @@ export class Drawflow {
         }
     }
 
-    getModuleFromNodeId(id) {
-        var nameModule;
+    getModuleNameFromNodeId(id) {
+        let rv;
         const editor = this.drawflow.drawflow;
-        Object.keys(editor).map(
-            function (moduleName, index) {
-                Object.keys(editor[moduleName].data).map(
-                    function (node, index2) {
+        Object.keys(editor).forEach(
+            (moduleName) => {
+                Object.keys(editor[moduleName].data).forEach( //TODO: tm: use find
+                    (node) => {
                         if (node == id) {
-                            nameModule = moduleName;
+                            rv = moduleName;
                         }
                     }
                 );
             }
         );
-        return nameModule;
+        return rv;
     }
 
     addModule(name) {

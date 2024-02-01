@@ -350,32 +350,34 @@ export class Drawflow {
     }
 
     position(event) {
-        const e_pos_x = event.type === "touchmove" ? event.touches[0].clientX : event.clientX;
-        const e_pos_y = event.type === "touchmove" ? event.touches[0].clientY : event.clientY;
+        const isTouch = event.type === "touchmove";
+
+        const e_pos_x = isTouch ? event.touches[0].clientX : event.clientX;
+        const e_pos_y = isTouch ? event.touches[0].clientY : event.clientY;
 
         if (this.connection) {
             this.updateConnection(e_pos_x, e_pos_y);
         }
 
         if (this.editor_selected) {
-            var x = this.canvas_x + (-(this.pos_x - e_pos_x));
-            var y = this.canvas_y + (-(this.pos_y - e_pos_y));
+            const x = this.canvas_x + (-(this.pos_x - e_pos_x));
+            const y = this.canvas_y + (-(this.pos_y - e_pos_y));
             this.dispatch('translate', { x: x, y: y });
             this.canvas.style.transform = `translate(${x}px, ${y}px) scale(${this.zoom})`;
         }
 
         if (this.drag) {
             event.preventDefault();
-            
-            var x = (this.pos_x - e_pos_x) * this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom);
-            var y = (this.pos_y - e_pos_y) * this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom);
+
+            const x = (this.pos_x - e_pos_x) * this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom);
+            const y = (this.pos_y - e_pos_y) * this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom);
             this.pos_x = e_pos_x;
             this.pos_y = e_pos_y;
 
             const elmSelected = this.elem_selected;
 
-            elmSelected.style.top = `${elmSelected.offsetTop - y}px`;
             elmSelected.style.left = `${elmSelected.offsetLeft - x}px`;
+            elmSelected.style.top = `${elmSelected.offsetTop - y}px`;
 
             this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_x = (elmSelected.offsetLeft - x);
             this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_y = (elmSelected.offsetTop - y);
@@ -384,22 +386,24 @@ export class Drawflow {
         }
 
         if (this.drag_point) {
-            var x = (this.pos_x - e_pos_x) * this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom);
-            var y = (this.pos_y - e_pos_y) * this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom);
-            
+            const canvas = this.canvas;
+
+            // const x = (this.pos_x - e_pos_x) * canvas.clientWidth / (canvas.clientWidth * this.zoom);
+            // const y = (this.pos_y - e_pos_y) * canvas.clientHeight / (canvas.clientHeight * this.zoom);
+
             this.pos_x = e_pos_x;
             this.pos_y = e_pos_y;
 
-            var pos_x = this.pos_x * (this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom)) - (this.canvas.getBoundingClientRect().x * (this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom)));
-            var pos_y = this.pos_y * (this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom)) - (this.canvas.getBoundingClientRect().y * (this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom)));
+            const x = this.pos_x * (canvas.clientWidth / (canvas.clientWidth * this.zoom)) - (canvas.getBoundingClientRect().x * (canvas.clientWidth / (canvas.clientWidth * this.zoom)));
+            const y = this.pos_y * (canvas.clientHeight / (canvas.clientHeight * this.zoom)) - (canvas.getBoundingClientRect().y * (canvas.clientHeight / (canvas.clientHeight * this.zoom)));
 
-            this.elem_selected.setAttributeNS(null, 'cx', pos_x);
-            this.elem_selected.setAttributeNS(null, 'cy', pos_y);
+            this.elem_selected.setAttributeNS(null, 'cx', x);
+            this.elem_selected.setAttributeNS(null, 'cy', y);
 
             const nodeUpdate = this.elem_selected.parentElement.classList[2].slice(9);
             const nodeUpdateIn = this.elem_selected.parentElement.classList[1].slice(13);
-            const output_class = this.elem_selected.parentElement.classList[3];
-            const input_class = this.elem_selected.parentElement.classList[4];
+            const classOutput = this.elem_selected.parentElement.classList[3];
+            const classInput = this.elem_selected.parentElement.classList[4];
 
             let numberPointPosition = Array.from(this.elem_selected.parentElement.children).indexOf(this.elem_selected) - 1;
 
@@ -412,19 +416,19 @@ export class Drawflow {
             }
 
             const nodeId = nodeUpdate.slice(5);
-            const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[output_class].connections;
+            const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[classOutput].connections;
             const searchConnection = connections.findIndex(function (item, i) {
-                return item.node === nodeUpdateIn && item.output === input_class;
+                return item.node === nodeUpdateIn && item.output === classInput;
             });
 
-            connections[searchConnection].points[numberPointPosition] = { pos_x: pos_x, pos_y: pos_y };
+            connections[searchConnection].points[numberPointPosition] = { pos_x: x, pos_y: y };
 
             const parentSelected = this.elem_selected.parentElement.classList[2].slice(9);
 
             this.updateConnectionNodes(parentSelected);
         }
 
-        if (event.type === "touchmove") {
+        if (isTouch) {
             this.mouse_x = e_pos_x;
             this.mouse_y = e_pos_y;
         }
@@ -433,15 +437,11 @@ export class Drawflow {
     }
 
     dragEnd(e) {
-        if (e.type === "touchend") {
-            var e_pos_x = this.mouse_x;
-            var e_pos_y = this.mouse_y;
-            var ele_last = document.elementFromPoint(e_pos_x, e_pos_y);
-        } else {
-            var e_pos_x = e.clientX;
-            var e_pos_y = e.clientY;
-            var ele_last = e.target;
-        }
+        const isTouch = e.type === "touchend";
+        
+        const e_pos_x = isTouch ? this.mouse_x : e.clientX;
+        const e_pos_y = isTouch ? this.mouse_y : e.clientY;
+        const ele_last = isTouch ? document.elementFromPoint(e_pos_x, e_pos_y) : e.target;
 
         if (this.drag) {
             if (this.pos_x_start != e_pos_x || this.pos_y_start != e_pos_y) {
@@ -466,8 +466,9 @@ export class Drawflow {
             if (ele_last.classList[0] === 'input' || (this.force_first_input && (ele_last.closest(".drawflow_content_node") != null || ele_last.classList[0] === 'drawflow-node'))) {
 
                 if (this.force_first_input && (ele_last.closest(".drawflow_content_node") != null || ele_last.classList[0] === 'drawflow-node')) {
-                    if (ele_last.closest(".drawflow_content_node") != null) {
-                        var input_id = ele_last.closest(".drawflow_content_node").parentElement.id;
+                    const closest = ele_last.closest(".drawflow_content_node");
+                    if (closest) {
+                        var input_id = closest.parentElement.id;
                     } else {
                         var input_id = ele_last.id;
                     }

@@ -106,7 +106,7 @@ export class Drawflow {
 
         if (this.evCache.length == 2) {
             // Calculate the distance between the two pointers
-            var curDiff = Math.abs(this.evCache[0].clientX - this.evCache[1].clientX);
+            const curDiff = Math.abs(this.evCache[0].clientX - this.evCache[1].clientX);
 
             if (this.prevDiff > 100) {
                 if (curDiff > this.prevDiff) {
@@ -129,6 +129,7 @@ export class Drawflow {
             this.prevDiff = -1;
         }
     }
+
     remove_event(event) {
         // Remove this event from the target's cache
         for (var i = 0; i < this.evCache.length; i++) {
@@ -161,7 +162,7 @@ export class Drawflow {
         let nextNumber = 1;
         Object.keys(editor).map(
             function (moduleName) {
-                Object.keys(editor[moduleName].data).map(
+                Object.keys(editor[moduleName].data).map( //TODO: use find instead of map
                     function (id) {
                         if (parseInt(id) >= nextNumber) {
                             nextNumber = parseInt(id) + 1;
@@ -348,46 +349,44 @@ export class Drawflow {
         this.dispatch('clickEnd', event);
     }
 
-    position(e) {
-        if (e.type === "touchmove") {
-            var e_pos_x = e.touches[0].clientX;
-            var e_pos_y = e.touches[0].clientY;
-        } else {
-            var e_pos_x = e.clientX;
-            var e_pos_y = e.clientY;
-        }
+    position(event) {
+        const e_pos_x = event.type === "touchmove" ? event.touches[0].clientX : event.clientX;
+        const e_pos_y = event.type === "touchmove" ? event.touches[0].clientY : event.clientY;
 
         if (this.connection) {
             this.updateConnection(e_pos_x, e_pos_y);
         }
 
         if (this.editor_selected) {
-            x = this.canvas_x + (-(this.pos_x - e_pos_x));
-            y = this.canvas_y + (-(this.pos_y - e_pos_y));
+            var x = this.canvas_x + (-(this.pos_x - e_pos_x));
+            var y = this.canvas_y + (-(this.pos_y - e_pos_y));
             this.dispatch('translate', { x: x, y: y });
-            this.canvas.style.transform = "translate(" + x + "px, " + y + "px) scale(" + this.zoom + ")";
+            this.canvas.style.transform = `translate(${x}px, ${y}px) scale(${this.zoom})`;
         }
 
         if (this.drag) {
-            e.preventDefault();
+            event.preventDefault();
+            
             var x = (this.pos_x - e_pos_x) * this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom);
             var y = (this.pos_y - e_pos_y) * this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom);
             this.pos_x = e_pos_x;
             this.pos_y = e_pos_y;
 
-            this.elem_selected.style.top = (this.elem_selected.offsetTop - y) + "px";
-            this.elem_selected.style.left = (this.elem_selected.offsetLeft - x) + "px";
+            const elmSelected = this.elem_selected;
 
-            this.drawflow.drawflow[this.module].data[this.elem_selected.id.slice(5)].pos_x = (this.elem_selected.offsetLeft - x);
-            this.drawflow.drawflow[this.module].data[this.elem_selected.id.slice(5)].pos_y = (this.elem_selected.offsetTop - y);
+            elmSelected.style.top = `${elmSelected.offsetTop - y}px`;
+            elmSelected.style.left = `${elmSelected.offsetLeft - x}px`;
+
+            this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_x = (elmSelected.offsetLeft - x);
+            this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_y = (elmSelected.offsetTop - y);
 
             this.updateConnectionNodes(this.elem_selected.id);
         }
 
         if (this.drag_point) {
-
             var x = (this.pos_x - e_pos_x) * this.canvas.clientWidth / (this.canvas.clientWidth * this.zoom);
             var y = (this.pos_y - e_pos_y) * this.canvas.clientHeight / (this.canvas.clientHeight * this.zoom);
+            
             this.pos_x = e_pos_x;
             this.pos_y = e_pos_y;
 
@@ -425,10 +424,11 @@ export class Drawflow {
             this.updateConnectionNodes(parentSelected);
         }
 
-        if (e.type === "touchmove") {
+        if (event.type === "touchmove") {
             this.mouse_x = e_pos_x;
             this.mouse_y = e_pos_y;
         }
+
         this.dispatch('mouseMove', { x: e_pos_x, y: e_pos_y });
     }
 
@@ -1794,7 +1794,7 @@ export class Drawflow {
         if (nodeOneModule !== nodeTwoModule) {
             return false;
         }
-        
+
         const module = this.drawflow.drawflow[nodeOneModule];
 
         // Check connection exist
@@ -1837,7 +1837,7 @@ export class Drawflow {
             const outputId = listclass[2].slice(14);
             const inputClass = listclass[4];
             const outputClass = listclass[3];
-    
+
             const index_in = module.data[inputId].inputs[inputClass].connections.findIndex(
                 (item) => item.node === outputId && item.input === outputClass
             );
@@ -1901,6 +1901,7 @@ export class Drawflow {
 
     changeModule(name) {
         this.dispatch('moduleChanged', name);
+
         this.module = name;
         this.canvas.innerHTML = "";
         this.canvas_x = 0;
@@ -1942,9 +1943,7 @@ export class Drawflow {
         this.clear();
         this.drawflow = JSON.parse(JSON.stringify(data));
         this.load();
-        if (notifi) {
-            this.dispatch('import', 'import');
-        }
+        notifi && this.dispatch('import', 'import');
     }
 
     /* Events */
@@ -1954,13 +1953,15 @@ export class Drawflow {
             console.error(`The listener callback must be a function, the given type is ${typeof callback}`);
             return false;
         }
+
         // Check if the event is not a string
         if (typeof event !== 'string') {
             console.error(`The event name must be a string, the given type is ${typeof event}`);
             return false;
         }
+
         // Check if this event not exists
-        if (this.events[event] === undefined) {
+        if (!this.events[event]) {
             this.events[event] = {
                 listeners: []
             };

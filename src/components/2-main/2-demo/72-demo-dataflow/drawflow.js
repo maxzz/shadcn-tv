@@ -1825,54 +1825,55 @@ export class Drawflow {
     }
 
     removeConnectionNodeId(id) {
-        const idSearchIn = 'node_in_' + id;
-        const idSearchOut = 'node_out_' + id;
+        const idSearchIn = `node_in_${id}`;
+        const idSearchOut = `node_out_${id}`;
+
+        const module = this.drawflow.drawflow[this.module];
 
         const elemsOut = this.container.querySelectorAll(`.${idSearchOut}`);
         for (var i = elemsOut.length - 1; i >= 0; i--) {
-            var listclass = elemsOut[i].classList;
-
-            var index_in = this.drawflow.drawflow[this.module].data[listclass[1].slice(13)].inputs[listclass[4]].connections.findIndex(
-                function (item, i) {
-                    return item.node === listclass[2].slice(14) && item.input === listclass[3];
-                }
+            const listclass = elemsOut[i].classList;
+            const inputId = listclass[1].slice(13);
+            const outputId = listclass[2].slice(14);
+            const inputClass = listclass[4];
+            const outputClass = listclass[3];
+    
+            const index_in = module.data[inputId].inputs[inputClass].connections.findIndex(
+                (item) => item.node === outputId && item.input === outputClass
             );
-            this.drawflow.drawflow[this.module].data[listclass[1].slice(13)].inputs[listclass[4]].connections.splice(index_in, 1);
+            module.data[inputId].inputs[inputClass].connections.splice(index_in, 1);
 
-            var index_out = this.drawflow.drawflow[this.module].data[listclass[2].slice(14)].outputs[listclass[3]].connections.findIndex(
-                function (item, i) {
-                    return item.node === listclass[1].slice(13) && item.output === listclass[4];
-                }
+            const index_out = module.data[outputId].outputs[outputClass].connections.findIndex(
+                (item) => item.node === inputId && item.output === inputClass
             );
-            this.drawflow.drawflow[this.module].data[listclass[2].slice(14)].outputs[listclass[3]].connections.splice(index_out, 1);
+            module.data[outputId].outputs[outputClass].connections.splice(index_out, 1);
 
             elemsOut[i].remove();
 
-            this.dispatch('connectionRemoved', { output_id: listclass[2].slice(14), input_id: listclass[1].slice(13), output_class: listclass[3], input_class: listclass[4] });
+            this.dispatch('connectionRemoved', { output_id: outputId, input_id: inputId, output_class: outputClass, input_class: inputClass });
         }
 
         const elemsIn = this.container.querySelectorAll(`.${idSearchIn}`);
         for (var i = elemsIn.length - 1; i >= 0; i--) {
+            const listclass = elemsIn[i].classList;
+            const inputId = listclass[1].slice(13);
+            const outputId = listclass[2].slice(14);
+            const inputClass = listclass[4];
+            const outputClass = listclass[3];
 
-            var listclass = elemsIn[i].classList;
-
-            var index_out = this.drawflow.drawflow[this.module].data[listclass[2].slice(14)].outputs[listclass[3]].connections.findIndex(
-                function (item, i) {
-                    return item.node === listclass[1].slice(13) && item.output === listclass[4];
-                }
+            const indexOut = module.data[outputId].outputs[outputClass].connections.findIndex(
+                (item) => item.node === inputId && item.output === inputClass
             );
-            this.drawflow.drawflow[this.module].data[listclass[2].slice(14)].outputs[listclass[3]].connections.splice(index_out, 1);
+            module.data[outputId].outputs[outputClass].connections.splice(indexOut, 1);
 
-            var index_in = this.drawflow.drawflow[this.module].data[listclass[1].slice(13)].inputs[listclass[4]].connections.findIndex(
-                function (item, i) {
-                    return item.node === listclass[2].slice(14) && item.input === listclass[3];
-                }
+            const indexIn = module.data[inputId].inputs[inputClass].connections.findIndex(
+                (item) => item.node === outputId && item.input === outputClass
             );
-            this.drawflow.drawflow[this.module].data[listclass[1].slice(13)].inputs[listclass[4]].connections.splice(index_in, 1);
+            module.data[inputId].inputs[inputClass].connections.splice(indexIn, 1);
 
             elemsIn[i].remove();
 
-            this.dispatch('connectionRemoved', { output_id: listclass[2].slice(14), input_id: listclass[1].slice(13), output_class: listclass[3], input_class: listclass[4] });
+            this.dispatch('connectionRemoved', { output_id: outputId, input_id: inputId, output_class: outputClass, input_class: inputClass });
         }
     }
 

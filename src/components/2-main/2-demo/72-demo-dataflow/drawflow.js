@@ -729,6 +729,22 @@ export class Drawflow {
         }
     }
 
+    getStartEnd(elmA, elmB, canvas) {
+        const precanvasWitdhZoom = canvas.clientWidth / (canvas.clientWidth * this.zoom) || 0;
+        const precanvasHeightZoom = canvas.clientHeight / (canvas.clientHeight * this.zoom) || 0;
+        
+        const rect = this.canvas.getBoundingClientRect();
+        const rectElmA = elmA.getBoundingClientRect();
+        const rectElmB = elmB.getBoundingClientRect();
+
+        const endX = elmA.offsetWidth / 2 + (rectElmA.x - rect.x) * precanvasWitdhZoom;
+        const endY = elmA.offsetHeight / 2 + (rectElmA.y - rect.y) * precanvasHeightZoom;
+        
+        const begX = elmB.offsetWidth / 2 + (rectElmB.x - rect.x) * precanvasWitdhZoom;
+        const begY = elmB.offsetHeight / 2 + (rectElmB.y - rect.y) * precanvasHeightZoom;
+        return [begX, begY, endX, endY];
+    }
+
     updateConnectionNodes(id) {
         const idSearch = `node_in_${id}`;
         const idSearchOut = `node_out_${id}`;

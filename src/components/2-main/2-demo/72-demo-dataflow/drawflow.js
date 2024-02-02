@@ -160,10 +160,10 @@ export class Drawflow {
 
         const editor = this.drawflow.drawflow;
         let nextNumber = 1;
-        Object.keys(editor).map(
-            function (moduleName) {
-                Object.keys(editor[moduleName].data).map( //TODO: use find instead of map
-                    function (id) {
+        Object.keys(editor).forEach(
+            (moduleName) => {
+                Object.forEach(editor[moduleName].data).map( //tm: use find instead of map
+                    (id) => {
                         if (parseInt(id) >= nextNumber) {
                             nextNumber = parseInt(id) + 1;
                         }
@@ -417,9 +417,7 @@ export class Drawflow {
 
             const nodeId = nodeUpdate.slice(5);
             const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[classOutput].connections;
-            const searchConnection = connections.findIndex(function (item, i) {
-                return item.node === nodeUpdateIn && item.output === classInput;
-            });
+            const searchConnection = connections.findIndex((item) => item.node === nodeUpdateIn && item.output === classInput);
 
             connections[searchConnection].points[numberPointPosition] = { pos_x: x, pos_y: y };
 
@@ -478,8 +476,8 @@ export class Drawflow {
                     input_class = elemLast.classList[1];
                 }
 
-                var output_id = this.elem_selected.parentElement.parentElement.id;
-                var output_class = this.elem_selected.classList[1];
+                const output_id = this.elem_selected.parentElement.parentElement.id;
+                const output_class = this.elem_selected.classList[1];
 
                 if (output_id !== input_id && input_class !== false) {
 
@@ -489,8 +487,8 @@ export class Drawflow {
                         this.connection_ele.classList.add(`node_out_${output_id}`);
                         this.connection_ele.classList.add(output_class);
                         this.connection_ele.classList.add(input_class);
-                        var id_input = input_id.slice(5);
-                        var id_output = output_id.slice(5);
+                        const id_input = input_id.slice(5);
+                        const id_output = output_id.slice(5);
 
                         this.drawflow.drawflow[this.module].data[id_output].outputs[output_class].connections.push({ "node": id_input, "output": input_class });
                         this.drawflow.drawflow[this.module].data[id_input].inputs[input_class].connections.push({ "node": id_output, "input": output_class });
@@ -650,18 +648,18 @@ export class Drawflow {
     }
 
     drawConnection(ele) {
-        var svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
+        const svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
         this.connection_ele = svgConnection;
 
-        var svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
+        const svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
         svgPath.classList.add('main-path');
         svgPath.setAttributeNS(null, 'd', '');
         svgConnection.classList.add("connection");
         svgConnection.appendChild(svgPath);
         this.canvas.appendChild(svgConnection);
 
-        var outputId = ele.parentElement.parentElement.id.slice(5);
-        var outputClass = ele.classList[1];
+        const outputId = ele.parentElement.parentElement.id.slice(5);
+        const outputClass = ele.classList[1];
         this.dispatch('connectionStart', { output_id: outputId, output_class: outputClass });
     }
 
@@ -674,23 +672,21 @@ export class Drawflow {
         let precanvasWitdhZoom = canvas.clientWidth / (canvas.clientWidth * zoom) || 0;
         let precanvasHeightZoom = canvas.clientHeight / (canvas.clientHeight * zoom) || 0;
 
-        var path = this.connection_ele.children[0];
+        const svgPath = this.connection_ele.children[0];
 
-        var startX = this.elem_selected.offsetWidth / 2 + (rectElm.x - rect.x) * precanvasWitdhZoom;
-        var startY = this.elem_selected.offsetHeight / 2 + (rectElm.y - rect.y) * precanvasHeightZoom;
+        const startX = this.elem_selected.offsetWidth / 2 + (rectElm.x - rect.x) * precanvasWitdhZoom;
+        const startY = this.elem_selected.offsetHeight / 2 + (rectElm.y - rect.y) * precanvasHeightZoom;
+        const endX = eX * (canvas.clientWidth / (canvas.clientWidth * this.zoom)) - (rect.x * (canvas.clientWidth / (canvas.clientWidth * this.zoom)));
+        const endY = eY * (canvas.clientHeight / (canvas.clientHeight * this.zoom)) - (rect.y * (canvas.clientHeight / (canvas.clientHeight * this.zoom)));
 
-        var endX = eX * (canvas.clientWidth / (canvas.clientWidth * this.zoom)) - (rect.x * (canvas.clientWidth / (canvas.clientWidth * this.zoom)));
-        var endY = eY * (canvas.clientHeight / (canvas.clientHeight * this.zoom)) - (rect.y * (canvas.clientHeight / (canvas.clientHeight * this.zoom)));
-
-        var curvature = this.curvature;
-        var lineCurve = this.createCurvature(startX, startY, endX, endY, curvature, 'openclose');
-        path.setAttributeNS(null, 'd', lineCurve);
-
+        const curvature = this.curvature;
+        const lineCurve = this.createCurvature(startX, startY, endX, endY, curvature, 'openclose');
+        svgPath.setAttributeNS(null, 'd', lineCurve);
     }
 
     addConnection(idOutput, idInput, classOutput, classInput) {
-        var nodeOneModule = this.getModuleNameFromNodeId(idOutput);
-        var nodeTwoModule = this.getModuleNameFromNodeId(idInput);
+        const nodeOneModule = this.getModuleNameFromNodeId(idOutput);
+        const nodeTwoModule = this.getModuleNameFromNodeId(idInput);
         if (nodeOneModule !== nodeTwoModule) {
             return;
         }
@@ -712,11 +708,11 @@ export class Drawflow {
 
             if (this.module === nodeOneModule) {
                 //Draw connection
-                var svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
+                const svgPath = document.createElementNS('http://www.w3.org/2000/svg', "path");
                 svgPath.classList.add("main-path");
                 svgPath.setAttributeNS(null, 'd', '');
 
-                var svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
+                const svgConnection = document.createElementNS('http://www.w3.org/2000/svg', "svg");
                 svgConnection.classList.add("connection");
                 svgConnection.classList.add(`node_in_node-${idInput}`);
                 svgConnection.classList.add(`node_out_node-${idOutput}`);
@@ -754,7 +750,7 @@ export class Drawflow {
 
         const elemsOut = container.querySelectorAll(`.${idSearchOut}`);
         Object.keys(elemsOut).forEach(
-            function (key) {
+            (key) => {
                 if (elemsOut[key].querySelector('.point') === null) {
                     const canvasRect = canvas.getBoundingClientRect();
 
@@ -764,10 +760,10 @@ export class Drawflow {
                     const elemtsearchId = container.querySelector(`#${id_search}`);
 
                     const elemtsearch = elemtsearchId.querySelectorAll('.' + elemsOut[key].classList[4])[0];
+                    const elemtsearchOut = elemtsearchId_out.querySelectorAll('.' + elemsOut[key].classList[3])[0];
+
                     const eX = elemtsearch.offsetWidth / 2 + (elemtsearch.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
                     const eY = elemtsearch.offsetHeight / 2 + (elemtsearch.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-
-                    const elemtsearchOut = elemtsearchId_out.querySelectorAll('.' + elemsOut[key].classList[3])[0];
                     const line_x = elemtsearchOut.offsetWidth / 2 + (elemtsearchOut.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
                     const line_y = elemtsearchOut.offsetHeight / 2 + (elemtsearchOut.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
 
@@ -879,7 +875,7 @@ export class Drawflow {
 
         const elemsIn = container.querySelectorAll(`.${idSearch}`);
         Object.keys(elemsIn).forEach(
-            function (item) {
+            (item) => {
                 if (elemsIn[item].querySelector('.point') === null) {
                     const canvasRect = canvas.getBoundingClientRect();
 
@@ -887,11 +883,11 @@ export class Drawflow {
                     const elemtsearchId = container.querySelector(`#${id_search}`);
                     const elemtsearch = elemtsearchId.querySelectorAll('.' + elemsIn[item].classList[3])[0];
 
-                    const line_x = elemtsearch.offsetWidth / 2 + (elemtsearch.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
-                    const line_y = elemtsearch.offsetHeight / 2 + (elemtsearch.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-
                     let elemtsearchId_in = container.querySelector(`#${id}`);
                     elemtsearchId_in = elemtsearchId_in.querySelectorAll('.' + elemsIn[item].classList[4])[0];
+
+                    const line_x = elemtsearch.offsetWidth / 2 + (elemtsearch.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
+                    const line_y = elemtsearch.offsetHeight / 2 + (elemtsearch.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
                     const x = elemtsearchId_in.offsetWidth / 2 + (elemtsearchId_in.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
                     const y = elemtsearchId_in.offsetHeight / 2 + (elemtsearchId_in.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
 
@@ -909,10 +905,10 @@ export class Drawflow {
                                 const elemtsearchId_out1 = container.querySelector(`#${id}`);
 
                                 const elemtsearch1 = pointElm;
+                                const elemtsearchIn = elemtsearchId_out1.querySelectorAll('.' + pointElm.parentElement.classList[4])[0];
+
                                 const line_x1 = (elemtsearch1.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom + rerouteWidth;
                                 const line_y1 = (elemtsearch1.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom + rerouteWidth;
-
-                                const elemtsearchIn = elemtsearchId_out1.querySelectorAll('.' + pointElm.parentElement.classList[4])[0];
                                 const eX1 = elemtsearchIn.offsetWidth / 2 + (elemtsearchIn.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
                                 const eY1 = elemtsearchIn.offsetHeight / 2 + (elemtsearchIn.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
 

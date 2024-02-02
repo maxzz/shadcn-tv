@@ -729,19 +729,20 @@ export class Drawflow {
         }
     }
 
-    getStartEnd(elmA, elmB, canvas) {
-        const precanvasWitdhZoom = canvas.clientWidth / (canvas.clientWidth * this.zoom) || 0;
-        const precanvasHeightZoom = canvas.clientHeight / (canvas.clientHeight * this.zoom) || 0;
+    getStartEnd(elmA, elmB, addHalf) {
+        const precanvasWitdhZoom = canvas.clientWidth / (this.canvas.clientWidth * this.zoom) || 0;
+        const precanvasHeightZoom = canvas.clientHeight / (this.canvas.clientHeight * this.zoom) || 0;
         
         const rect = this.canvas.getBoundingClientRect();
         const rectElmA = elmA.getBoundingClientRect();
         const rectElmB = elmB.getBoundingClientRect();
 
-        const endX = elmA.offsetWidth / 2 + (rectElmA.x - rect.x) * precanvasWitdhZoom;
-        const endY = elmA.offsetHeight / 2 + (rectElmA.y - rect.y) * precanvasHeightZoom;
-        
-        const begX = elmB.offsetWidth / 2 + (rectElmB.x - rect.x) * precanvasWitdhZoom;
-        const begY = elmB.offsetHeight / 2 + (rectElmB.y - rect.y) * precanvasHeightZoom;
+        const endX = (addHalf ? elmA.offsetWidth / 2 : 0) + (rectElmA.x - rect.x) * precanvasWitdhZoom;
+        const endY = (addHalf ? elmA.offsetHeight / 2 : 0) + (rectElmA.y - rect.y) * precanvasHeightZoom;
+
+        const begX = (addHalf ? elmB.offsetWidth / 2 : 0) + (rectElmB.x - rect.x) * precanvasWitdhZoom;
+        const begY = (addHalf ? elmB.offsetHeight / 2 : 0) + (rectElmB.y - rect.y) * precanvasHeightZoom;
+
         return [begX, begY, endX, endY];
     }
 
@@ -778,12 +779,7 @@ export class Drawflow {
                     const elemtsearch = elemtsearchId.querySelectorAll('.' + elemsOut[key].classList[4])[0];
                     const elemtsearchOut = elemtsearchId_out.querySelectorAll('.' + elemsOut[key].classList[3])[0];
 
-                    const eX = elemtsearch.offsetWidth / 2 + (elemtsearch.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
-                    const eY = elemtsearch.offsetHeight / 2 + (elemtsearch.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-                    const line_x = elemtsearchOut.offsetWidth / 2 + (elemtsearchOut.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
-                    const line_y = elemtsearchOut.offsetHeight / 2 + (elemtsearchOut.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-
-                    const lineCurve = createCurvature(line_x, line_y, eX, eY, curvature, 'openclose');
+                    const lineCurve = createCurvature(...this.getStartEnd(elemtsearch, elemtsearchOut, true), curvature, 'openclose');
                     elemsOut[key].children[0].setAttributeNS(null, 'd', lineCurve);
                 } else {
                     const points = elemsOut[key].querySelectorAll('.point');

@@ -872,12 +872,8 @@ export class Drawflow {
                     let elemtsearchId_in = container.querySelector(`#${id}`);
                     elemtsearchId_in = elemtsearchId_in.querySelectorAll('.' + elemsIn[item].classList[4])[0];
 
-                    const line_x = elemtsearch.offsetWidth / 2 + (elemtsearch.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
-                    const line_y = elemtsearch.offsetHeight / 2 + (elemtsearch.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-                    const x = elemtsearchId_in.offsetWidth / 2 + (elemtsearchId_in.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
-                    const y = elemtsearchId_in.offsetHeight / 2 + (elemtsearchId_in.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-
-                    const lineCurve = createCurvature(line_x, line_y, x, y, curvature, 'openclose');
+                    const [begX, begY, endX, endY] = this.getStartEnd({ elmA: elemtsearchId_in, elmB: elemtsearch, addHalfA: true, addHalfB: false, rerouteWidthBeg: 0, rerouteWidthEnd: 0 });
+                    const lineCurve = createCurvature(begX, begY, endX, endY, curvature, 'openclose');
                     elemsIn[item].children[0].setAttributeNS(null, 'd', lineCurve);
                 } else {
                     const points = elemsIn[item].querySelectorAll('.point');

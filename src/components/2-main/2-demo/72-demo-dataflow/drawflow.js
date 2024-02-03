@@ -945,14 +945,8 @@ export class Drawflow {
 
                                 const elemtsearch = points[idx + 1];
 
-                                //const [begX, begY, endX, endY] = this.getStartEnd({ elmA: , elmB: , addHalfA: true, addHalfB: false, rerouteWidthBeg: rerouteWidth, rerouteWidthEnd: rerouteWidth });
-
-                                const eX = (elemtsearch.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom + rerouteWidth;
-                                const eY = (elemtsearch.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom + rerouteWidth;
-                                const line_x = (elemtsearchId_out.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom + rerouteWidth;
-                                const line_y = (elemtsearchId_out.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom + rerouteWidth;
-
-                                const lineCurveSearch = createCurvature(line_x, line_y, eX, eY, reroute_curvature, 'other');
+                                const [begX, begY, endX, endY] = this.getStartEnd({ elmA: elemtsearch, elmB: elemtsearchId_out, addHalfA: false, addHalfB: false, rerouteWidthBeg: rerouteWidth, rerouteWidthEnd: rerouteWidth });
+                                const lineCurveSearch = createCurvature(begX, begY, endX, endY, reroute_curvature, 'other');
                                 lineCurveStr += lineCurveSearch;
                                 reoute_fix.push(lineCurveSearch);
                             }

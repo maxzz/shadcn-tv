@@ -379,7 +379,7 @@ export class Drawflow {
             elmSelected.style.left = `${elmSelected.offsetLeft - x}px`;
             elmSelected.style.top = `${elmSelected.offsetTop - y}px`;
 
-            this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_x = (elmSelected.offsetLeft - x);
+            this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_x = (elmSelected.offsetLeft - x); // elmSelected.id: "node-7"
             this.drawflow.drawflow[this.module].data[elmSelected.id.slice(5)].pos_y = (elmSelected.offsetTop - y);
 
             this.updateConnectionNodes(this.elem_selected.id);
@@ -400,10 +400,11 @@ export class Drawflow {
             this.elem_selected.setAttributeNS(null, 'cx', x);
             this.elem_selected.setAttributeNS(null, 'cy', y);
 
-            const nodeUpdate = this.elem_selected.parentElement.classList[2].slice(9);
-            const nodeUpdateIn = this.elem_selected.parentElement.classList[1].slice(13);
-            const classOutput = this.elem_selected.parentElement.classList[3];
-            const classInput = this.elem_selected.parentElement.classList[4];
+            // this.elem_selected.parentElement.classList: 0: "connection" 1: "node_in_node-2" 2: "node_out_node-6" 3: "output_1" 4: "input_1"
+            const nodeUpdate = this.elem_selected.parentElement.classList[2].slice(9);      // "node-6"
+            const nodeUpdateIn = this.elem_selected.parentElement.classList[1].slice(13);   // "2"
+            const classOutput = this.elem_selected.parentElement.classList[3];              // "output_1"
+            const classInput = this.elem_selected.parentElement.classList[4];               // "input_1"
 
             let numberPointPosition = Array.from(this.elem_selected.parentElement.children).indexOf(this.elem_selected) - 1;
 
@@ -415,13 +416,13 @@ export class Drawflow {
                 }
             }
 
-            const nodeId = nodeUpdate.slice(5);
+            const nodeId = nodeUpdate.slice(5); // "6"
             const connections = this.drawflow.drawflow[this.module].data[nodeId].outputs[classOutput].connections;
             const searchConnection = connections.findIndex((item) => item.node === nodeUpdateIn && item.output === classInput);
 
             connections[searchConnection].points[numberPointPosition] = { pos_x: x, pos_y: y };
 
-            const parentSelected = this.elem_selected.parentElement.classList[2].slice(9);
+            const parentSelected = this.elem_selected.parentElement.classList[2].slice(9); // "node-6"
 
             this.updateConnectionNodes(parentSelected);
         }
@@ -760,10 +761,6 @@ export class Drawflow {
         const reroute_curvature_start_end = this.reroute_curvature_start_end;
         const reroute_fix_curvature = this.reroute_fix_curvature;
         const rerouteWidth = this.reroute_width;
-
-        const zoom = this.zoom;
-        let precanvasWitdhZoom = canvas.clientWidth / (canvas.clientWidth * zoom) || 0;
-        let precanvasHeightZoom = canvas.clientHeight / (canvas.clientHeight * zoom) || 0;
 
         const elemsOut = container.querySelectorAll(`.${idSearchOut}`);
         Object.keys(elemsOut).forEach(

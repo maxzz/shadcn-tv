@@ -155,6 +155,9 @@ dependencies:
   react-resizable-panels:
     specifier: ^1.0.7
     version: 1.0.8(react-dom@18.2.0)(react@18.2.0)
+  react-xarrows:
+    specifier: ^2.0.2
+    version: 2.0.2(react@18.2.0)
   recharts:
     specifier: ^2.10.3
     version: 2.10.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
@@ -4138,6 +4141,17 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-lifecycles-compat: 3.0.4
+    dev: false
+
+  /react-xarrows@2.0.2(react@18.2.0):
+    resolution: {integrity: sha512-tDlAqaxHNmy0vegW/6NdhoWyXJq1LANX/WUAlHyzoHe9BwFVnJPPDghmDjYeVr7XWFmBrVTUrHsrW7GKYI6HtQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      '@types/prop-types': 15.7.11
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /react@18.2.0:

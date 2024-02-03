@@ -936,14 +936,8 @@ export class Drawflow {
 
                                 const elemtsearchIn = elemtsearchId.querySelectorAll(`.${pointElm.parentElement.classList[4]}`)[0];
 
-                                //const [begX1, begY1, endX1, endY1] = this.getStartEnd({ elmA: , elmB: , addHalfA: true, addHalfB: false, rerouteWidthBeg: rerouteWidth, rerouteWidthEnd: rerouteWidth });
-
-                                const eX = elemtsearchIn.offsetWidth / 2 + (elemtsearchIn.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom;
-                                const eY = elemtsearchIn.offsetHeight / 2 + (elemtsearchIn.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom;
-                                const line_x = (elemtsearchId_out.getBoundingClientRect().x - canvasRect.x) * precanvasWitdhZoom + rerouteWidth;
-                                const line_y = (elemtsearchId_out.getBoundingClientRect().y - canvasRect.y) * precanvasHeightZoom + rerouteWidth;
-
-                                const lineCurveSearch = createCurvature(line_x, line_y, eX, eY, reroute_curvature_start_end, 'close');
+                                const [begX, begY, endX, endY] = this.getStartEnd({ elmA: elemtsearchIn, elmB: elemtsearchId_out, addHalfA: true, addHalfB: false, rerouteWidthBeg: 0, rerouteWidthEnd: rerouteWidth });
+                                const lineCurveSearch = createCurvature(begX, begY, endX, endY, reroute_curvature_start_end, 'close');
                                 lineCurveStr += lineCurveSearch;
                                 reoute_fix.push(lineCurveSearch);
                             } else {

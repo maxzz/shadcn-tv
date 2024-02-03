@@ -1,4 +1,5 @@
 //https://github.com/jerosoler/Drawflow/blob/master/src/drawflow.js
+//https://jerosoler.github.io/Drawflow
 
 export class Drawflow {
     constructor(container, render = null, parent = null) {

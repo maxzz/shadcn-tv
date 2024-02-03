@@ -4,12 +4,12 @@ import Xarrow from "react-xarrows";
 export function XArrowsDemo() {
     const box1Ref = useRef(null);
     return (
-        <div>
-            <div ref={box1Ref} className="px-4 border-muted-foreground border rounded">
+        <div className="relative">
+            <div ref={box1Ref} className="inline-block m-12 p-4 border-muted-foreground border rounded">
                 hey1
             </div>
 
-            <p id="elem2" className="px-4 border-muted-foreground border rounded">
+            <p id="elem2" className="inline-block m-24 p-4 border-muted-foreground border rounded">
                 hey2
             </p>
 

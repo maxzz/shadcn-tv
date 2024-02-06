@@ -1,4 +1,4 @@
-import { HTMLAttributes, forwardRef, useRef } from "react";
+import { HTMLAttributes, RefObject, forwardRef, useRef } from "react";
 import Xarrow, { Xwrapper, cPaths, pathType, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
@@ -101,10 +101,25 @@ function DemoControls() {
     );
 }
 
+function Arrow({ box1Ref, box2Ref}: { box1Ref: RefObject<HTMLDivElement>; box2Ref: RefObject<HTMLDivElement>;}) {
+    const snap = useSnapshot(appSettings.xArrowsState);
+    return (
+        <Xarrow
+            start={box1Ref}
+            end={box2Ref}
+
+            color="hsl(var(--muted-foreground))"
+            strokeWidth={snap.strokeWidth}
+            dashness={{ strokeLen: 8, nonStrokeLen: 3 }}
+            animateDrawing={snap.animate}
+            path={snap.path}
+        />
+    );
+}
+
 export function XArrowsDemo() {
     const box1Ref = useRef(null);
     const box2Ref = useRef(null);
-    const snap = useSnapshot(appSettings.xArrowsState);
     return (
         <div className="h-[240px] relative bg-muted rounded overflow-hidden">
             <DemoControls />
@@ -119,16 +134,7 @@ export function XArrowsDemo() {
                     label={'elem2'}
                     dragOptions={{ defaultPosition: { x: 140, y: 160 } }}
                 />
-                <Xarrow
-                    start={box1Ref}
-                    end={box2Ref}
-
-                    color="hsl(var(--muted-foreground))"
-                    strokeWidth={snap.strokeWidth}
-                    dashness={{ strokeLen: 8, nonStrokeLen: 3 }}
-                    animateDrawing={snap.animate}
-                    path={snap.path}
-                />
+                <Arrow box1Ref={box1Ref} box2Ref={box2Ref} />
             </Xwrapper>
         </div >
     );

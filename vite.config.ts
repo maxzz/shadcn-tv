@@ -21,6 +21,20 @@ function manualChunks(id: string) { //https://rollupjs.org/configuration-options
     // }
 }
 
+/*
+import { createLogger, defineConfig } from 'vite';
+
+const logger = createLogger();
+const loggerInfo = logger.info;
+
+logger.info = (msg, options) => {
+    if (msg.includes('Could not Fast Refresh')) {
+        return;
+    }
+    loggerInfo(msg, options);
+};
+*/
+
 // https://vitejs.dev/config/
 export default defineConfig({
     base: '',
@@ -32,6 +46,7 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
         },
     },
+    //customLogger: logger,
     build: {
         // chunkSizeWarningLimit: 600,
         target: "esnext",

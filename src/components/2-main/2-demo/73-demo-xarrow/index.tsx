@@ -1,6 +1,6 @@
 import { HTMLAttributes, forwardRef, useRef } from "react";
 import Xarrow, { Xwrapper, useXarrow } from "react-xarrows";
-import Draggable from 'react-draggable';
+import Draggable, { DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
 
 const boxClasses = "inline-block m-12 p-4 border-muted-foreground border rounded select-none cursor-default";
@@ -23,31 +23,41 @@ const boxClasses = "inline-block m-12 p-4 border-muted-foreground border rounded
 //     );
 // }
 
-const DraggableBox = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ id }: HTMLAttributes<HTMLDivElement>, ref) => {
-    const updateXarrow = useXarrow();
-    const boxRef = useRef(null);
-    return (
-        <Draggable
-            onDrag={updateXarrow}
-            onStop={updateXarrow}
-            nodeRef={boxRef}
-        >
-            <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
-                {id}
-            </div>
-        </Draggable>
-    );
-}
+const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: Partial<DraggableProps>; } & HTMLAttributes<HTMLDivElement>>(
+    ({ label, dragOptions }, ref) => {
+        const updateXarrow = useXarrow();
+        const boxRef = useRef(null);
+        return (
+            <Draggable
+                onDrag={updateXarrow}
+                onStop={updateXarrow}
+                nodeRef={boxRef}
+                {...dragOptions}
+            >
+                <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
+                    {label}
+                </div>
+            </Draggable>
+        );
+    }
 );
 
 export function XArrowsDemo() {
     const box1Ref = useRef(null);
     const box2Ref = useRef(null);
     return (
-        <div>
+        <div className="overflow-hidden">
             <Xwrapper>
-                <DraggableBox ref={box1Ref} id={'elem1'} />
-                <DraggableBox ref={box2Ref} id={'elem2'} />
+                <DraggableBox
+                    ref={box1Ref}
+                    label={'elem1'}
+                    // dragOptions={{ position: { x: -44, y: -40 } }}
+                />
+                <DraggableBox
+                    ref={box2Ref}
+                    label={'elem2'}
+                    // dragOptions={{ position: { x: 10, y: 30 } }}
+                />
                 <Xarrow
                     start={box1Ref}
                     end={box2Ref}

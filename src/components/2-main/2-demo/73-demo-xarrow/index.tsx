@@ -51,42 +51,24 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
     }
 );
 
-function XArrowsDemoControls() {
+function DemoControls() {
     const snap = useSnapshot(appSettings.xArrowsState);
     return (
         <div className="absolute right-2 top-1 w-40 text-xs text-muted-foreground flex flex-col gap-2">
             <div className="pt-2 flex items-center gap-2">
-                <div className="text-nowrap">Path style</div>
-
-                <Select value="dark" onValueChange={(v) => { }}>
-                    <SelectTrigger className="h-8">
+                <div className="text-nowrap">
+                    Path style
+                </div>
+                <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth">
+                    <SelectTrigger className="h-8 text-xs">
                         <SelectValue placeholder="Theme" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="light">Light</SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="system">System</SelectItem>
+                        <SelectItem className="text-xs" value="grid">grid</SelectItem>
+                        <SelectItem className="text-xs" value="smooth">smooth</SelectItem>
+                        <SelectItem className="text-xs" value="straight">straight</SelectItem>
                     </SelectContent>
                 </Select>
-
-                {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-              </Select>                 */}
-
-                {/* <Select
-                    value={snap.path}
-                    onValueChange={(value: pathType) => appSettings.xArrowsState.path = value}
-                    options={Object.keys(cPaths)}
-                /> */}
             </div>
 
             <div className="flex items-center gap-2">
@@ -125,7 +107,7 @@ export function XArrowsDemo() {
     const snap = useSnapshot(appSettings.xArrowsState);
     return (
         <div className="h-[240px] relative bg-muted rounded overflow-hidden">
-            <XArrowsDemoControls />
+            <DemoControls />
             <Xwrapper>
                 <DraggableBox
                     ref={box1Ref}
@@ -145,7 +127,7 @@ export function XArrowsDemo() {
                     strokeWidth={snap.strokeWidth}
                     dashness={{ strokeLen: 8, nonStrokeLen: 3 }}
                     animateDrawing={snap.animate}
-                    path="grid"
+                    path={snap.path}
                 />
             </Xwrapper>
         </div >

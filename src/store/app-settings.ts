@@ -1,20 +1,23 @@
 import { ThemeMode, themeApplyMode } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
+import { mergeConfigRecursively } from "@/utils/merge-options";
+import { debounce } from "@/utils";
 import { TreeState, defaultTreeState } from "./case-tree-state";
 import { ResizablesState, defaultResizablesState } from "./case-resizables";
-import { debounce } from "@/utils";
-import { mergeConfigRecursively } from "@/utils/merge-options";
+import { XArrowsState, defaultXArrowsState } from "./case-xarrows";
 
 export type AppSettings = {
     theme: ThemeMode;
     treeState: TreeState;
     resisablesState: ResizablesState;
+    xArrowsState: XArrowsState;
 };
 
 const defaultSettings: AppSettings = {
     theme: 'light',
     treeState: defaultTreeState,
     resisablesState: defaultResizablesState,
+    xArrowsState: defaultXArrowsState,
 };
 
 const STORE_KEY = "shadcn-tv-app-settings";

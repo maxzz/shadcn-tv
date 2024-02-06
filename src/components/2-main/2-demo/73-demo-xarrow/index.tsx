@@ -1,7 +1,10 @@
 import { HTMLAttributes, forwardRef, useRef } from "react";
-import Xarrow, { Xwrapper, useXarrow } from "react-xarrows";
+import Xarrow, { Xwrapper, cPaths, pathType, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
+import { Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 
 const boxClasses = "inline-block m-2 p-4 bg-muted-foreground/20 border-muted-foreground border rounded select-none cursor-default";
 
@@ -48,12 +51,81 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
     }
 );
 
+function XArrowsDemoControls() {
+    const snap = useSnapshot(appSettings.xArrowsState);
+    return (
+        <div className="absolute right-2 top-1 text-xs text-muted-foreground flex flex-col gap-2">
+            <div className="mb-2 border-border border-b-2">
+                You can drag items within the designated area
+            </div>
+
+            <div className="flex items-center gap-4">
+                <div className="text-nowrap">stroke width</div>
+                <Slider
+                    min={1}
+                    max={10}
+                    step={1}
+                    value={[snap.strokeWidth]}
+                    className="[&>.track]:h-px"
+                    onValueChange={(value) => appSettings.xArrowsState.strokeWidth = value[0]} />
+                <div className="">{snap.strokeWidth}</div>
+            </div>
+
+            <div className="flex items-center gap-2">
+                <Checkbox checked={snap.animate} onCheckedChange={(value) => appSettings.xArrowsState.animate = !!value} />
+                animate on initial draw
+            </div>
+
+            <div className="flex items-center gap-2">
+                {/* <DropdownMenu
+                    value={snap.path}
+                    onValueChange={(value: pathType) => appSettings.xArrowsState.path = value}
+                    options={Object.keys(cPaths)}
+                /> */}
+
+                <Select value="dark" onValueChange={(v)=>{}}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="light">Light</SelectItem>
+                        <SelectItem value="dark">Dark</SelectItem>
+                        <SelectItem value="system">System</SelectItem>
+                    </SelectContent>
+                </Select>
+
+                {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="m@example.com">m@example.com</SelectItem>
+                  <SelectItem value="m@google.com">m@google.com</SelectItem>
+                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                </SelectContent>
+              </Select>                 */}
+
+                {/* <Select
+                    value={snap.path}
+                    onValueChange={(value: pathType) => appSettings.xArrowsState.path = value}
+                    options={Object.keys(cPaths)}
+                /> */}
+
+                animate on initial draw
+            </div>
+        </div>
+    );
+}
+
 export function XArrowsDemo() {
     const box1Ref = useRef(null);
     const box2Ref = useRef(null);
+    const snap = useSnapshot(appSettings.xArrowsState);
     return (
         <div className="h-[240px] relative bg-muted rounded overflow-hidden">
-            <div className="absolute right-2 top-1 text-xs text-muted-foreground">You can drag items within the designated area.</div>
+            <XArrowsDemoControls />
             <Xwrapper>
                 <DraggableBox
                     ref={box1Ref}
@@ -70,9 +142,10 @@ export function XArrowsDemo() {
                     end={box2Ref}
 
                     color="hsl(var(--muted-foreground))"
-                    strokeWidth={2}
-                    dashness={{ strokeLen: 8, nonStrokeLen: 3}}
-                    animateDrawing={true}
+                    strokeWidth={snap.strokeWidth}
+                    dashness={{ strokeLen: 8, nonStrokeLen: 3 }}
+                    animateDrawing={snap.animate}
+                    path="grid"
                 />
             </Xwrapper>
         </div >

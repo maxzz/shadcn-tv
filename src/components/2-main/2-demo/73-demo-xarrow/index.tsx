@@ -1,6 +1,6 @@
 import { HTMLAttributes, forwardRef, useRef } from "react";
 import Xarrow, { Xwrapper, useXarrow } from "react-xarrows";
-import Draggable, { DraggableProps } from 'react-draggable';
+import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
 
 const boxClasses = "inline-block m-12 p-4 border-muted-foreground border rounded select-none cursor-default";
@@ -27,10 +27,15 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
     ({ label, dragOptions }, ref) => {
         const updateXarrow = useXarrow();
         const boxRef = useRef(null);
+        function onStop(e: DraggableEvent, data: DraggableData): void {
+            const { x, y } = data;
+            console.log(`translate(${x}px, ${y}px)`);
+            updateXarrow();
+        }
         return (
             <Draggable
                 onDrag={updateXarrow}
-                onStop={updateXarrow}
+                onStop={onStop}
                 nodeRef={boxRef}
                 {...dragOptions}
             >

@@ -59,7 +59,7 @@ function DemoControls() {
                 <div className="text-nowrap">
                     Path style
                 </div>
-                <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth">
+                <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth"> {/* TODO: path=straight initially has Nan warning in console */}
                     <SelectTrigger className="h-8 text-xs">
                         <SelectValue placeholder="Theme" />
                     </SelectTrigger>

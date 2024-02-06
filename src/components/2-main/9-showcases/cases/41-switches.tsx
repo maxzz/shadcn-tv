@@ -8,9 +8,8 @@ export function SwitchInTabs() {
             <TabsList>
                 <TabsTrigger value="switch1">Neon switch</TabsTrigger>
                 <TabsTrigger value="switch2">Styled switch</TabsTrigger>
-                <TabsTrigger value="switch3">Gradient color picker</TabsTrigger>
-                <TabsTrigger value="switch4">Effects</TabsTrigger>
-                <TabsTrigger value="switch5">Goo</TabsTrigger>
+                <TabsTrigger value="switch3">Effects</TabsTrigger>
+                <TabsTrigger value="switch4">Goo</TabsTrigger>
             </TabsList>
 
             <TabsContent value="switch1">
@@ -22,10 +21,6 @@ export function SwitchInTabs() {
             </TabsContent>
 
             <TabsContent value="switch3">
-                <GradientColorPickerDemo />
-            </TabsContent>
-
-            <TabsContent value="switch4">
                 <div className="py-4 flex items-center justify-between">
                     <Button variant={"outline"}>
                         <Flickup className="cursor-pointer" />
@@ -37,7 +32,7 @@ export function SwitchInTabs() {
                 </div>
             </TabsContent>
 
-            <TabsContent value="switch5">
+            <TabsContent value="switch4">
                 <OpenGoo />
             </TabsContent>
 

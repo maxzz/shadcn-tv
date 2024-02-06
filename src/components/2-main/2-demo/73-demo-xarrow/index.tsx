@@ -54,37 +54,12 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
 function XArrowsDemoControls() {
     const snap = useSnapshot(appSettings.xArrowsState);
     return (
-        <div className="absolute right-2 top-1 text-xs text-muted-foreground flex flex-col gap-2">
-            <div className="mb-2 border-border border-b-2">
-                You can drag items within the designated area
-            </div>
+        <div className="absolute right-2 top-1 w-40 text-xs text-muted-foreground flex flex-col gap-2">
+            <div className="pt-2 flex items-center gap-2">
+                <div className="text-nowrap">Path style</div>
 
-            <div className="flex items-center gap-4">
-                <div className="text-nowrap">stroke width</div>
-                <Slider
-                    min={1}
-                    max={10}
-                    step={1}
-                    value={[snap.strokeWidth]}
-                    className="[&>.track]:h-px"
-                    onValueChange={(value) => appSettings.xArrowsState.strokeWidth = value[0]} />
-                <div className="">{snap.strokeWidth}</div>
-            </div>
-
-            <div className="flex items-center gap-2">
-                <Checkbox checked={snap.animate} onCheckedChange={(value) => appSettings.xArrowsState.animate = !!value} />
-                animate on initial draw
-            </div>
-
-            <div className="flex items-center gap-2">
-                {/* <DropdownMenu
-                    value={snap.path}
-                    onValueChange={(value: pathType) => appSettings.xArrowsState.path = value}
-                    options={Object.keys(cPaths)}
-                /> */}
-
-                <Select value="dark" onValueChange={(v)=>{}}>
-                    <SelectTrigger className="w-[180px]">
+                <Select value="dark" onValueChange={(v) => { }}>
+                    <SelectTrigger className="h-8">
                         <SelectValue placeholder="Theme" />
                     </SelectTrigger>
                     <SelectContent>
@@ -112,9 +87,34 @@ function XArrowsDemoControls() {
                     onValueChange={(value: pathType) => appSettings.xArrowsState.path = value}
                     options={Object.keys(cPaths)}
                 /> */}
-
-                animate on initial draw
             </div>
+
+            <div className="flex items-center gap-2">
+                <div className="text-nowrap">
+                    Stroke width
+                </div>
+                <Slider
+                    min={1}
+                    max={10}
+                    step={1}
+                    value={[snap.strokeWidth]}
+                    className="[&>.track]:h-px"
+                    onValueChange={(value) => appSettings.xArrowsState.strokeWidth = value[0]}
+                />
+                <div className="text-[.65rem]">
+                    {snap.strokeWidth}
+                </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+                <Checkbox checked={snap.animate} onCheckedChange={(value) => appSettings.xArrowsState.animate = !!value} />
+                Animate on initial draw
+            </div>
+
+            <div className="mt-2">
+                You can drag items within the designated area
+            </div>
+
         </div>
     );
 }

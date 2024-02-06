@@ -3,7 +3,7 @@ import Xarrow, { Xwrapper, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
 
-const boxClasses = "inline-block m-12 p-4 border-muted-foreground border rounded select-none cursor-default";
+const boxClasses = "inline-block m-2 p-4 border-muted-foreground border rounded select-none cursor-default";
 
 // function XArrowsDemo1() {
 //     const box1Ref = useRef(null);
@@ -37,6 +37,7 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
                 onDrag={updateXarrow}
                 onStop={onStop}
                 nodeRef={boxRef}
+                bounds="parent"
                 {...dragOptions}
             >
                 <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
@@ -51,7 +52,7 @@ export function XArrowsDemo() {
     const box1Ref = useRef(null);
     const box2Ref = useRef(null);
     return (
-        <div className="overflow-hidden">
+        <div className="h-96 relative bg-muted overflow-hidden">
             <Xwrapper>
                 <DraggableBox
                     ref={box1Ref}

@@ -51,12 +51,12 @@ export function XArrowsDemo() {
                 <DraggableBox
                     ref={box1Ref}
                     label={'elem1'}
-                    // dragOptions={{ position: { x: -44, y: -40 } }}
+                    dragOptions={{ defaultPosition: { x: -44, y: -40 } }}
                 />
                 <DraggableBox
                     ref={box2Ref}
                     label={'elem2'}
-                    // dragOptions={{ position: { x: 10, y: 30 } }}
+                    dragOptions={{ defaultPosition: { x: 10, y: 30 } }}
                 />
                 <Xarrow
                     start={box1Ref}

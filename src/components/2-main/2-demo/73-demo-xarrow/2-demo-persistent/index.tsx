@@ -2,8 +2,8 @@ import { HTMLAttributes, forwardRef, useRef } from "react";
 import { Xwrapper, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils";
-import { DemoControls } from "./1-controls";
-import { Arrow } from "./2-arrow";
+import { DemoControls } from "../3-controls";
+import { Arrow } from "../4-arrow";
 
 const boxClasses = "inline-block m-2 p-4 bg-muted-foreground/20 border-muted-foreground border rounded select-none cursor-default";
 

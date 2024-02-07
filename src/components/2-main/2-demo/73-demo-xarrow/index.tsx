@@ -3,6 +3,7 @@ import Xarrow, { Xwrapper, cPaths, pathType, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
 import { Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
+import useMeasure from "react-use-measure";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
 
@@ -30,11 +31,17 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
     ({ label, dragOptions }, ref) => {
         const updateXarrow = useXarrow();
         const boxRef = useRef(null);
+        const [boudsRef, bounds] = useMeasure({debounce: 200});
+
         function onStop(e: DraggableEvent, data: DraggableData): void {
             const { x, y } = data;
             console.log(`${label} uses translate(${x}px, ${y}px)`);
             updateXarrow();
         }
+
+        const { left, top, width, height } = bounds;
+        label === "elem2" && console.log('bounds', left, top, width, height);
+
         return (
             <Draggable
                 onDrag={updateXarrow}
@@ -45,6 +52,7 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
             >
                 <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
                     {label}
+                    {/* {JSON.stringify(bounds)} */}
                 </div>
             </Draggable>
         );
@@ -101,7 +109,7 @@ function DemoControls() {
     );
 }
 
-function Arrow({ box1Ref, box2Ref}: { box1Ref: RefObject<HTMLDivElement>; box2Ref: RefObject<HTMLDivElement>;}) {
+function Arrow({ box1Ref, box2Ref }: { box1Ref: RefObject<HTMLDivElement>; box2Ref: RefObject<HTMLDivElement>; }) {
     const snap = useSnapshot(appSettings.xArrowsState);
     return (
         <Xarrow
@@ -139,3 +147,4 @@ export function XArrowsDemo() {
         </div >
     );
 }
+

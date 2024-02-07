@@ -54,6 +54,7 @@
         "react-hook-form": "^7.49.2",
         "react-hot-toast": "^2.4.1",
         "react-resizable-panels": "^1.0.7",
+        "react-use-measure": "^2.1.1",
         "react-xarrows": "^2.0.2",
         "recharts": "^2.10.3",
         "remeda": "^1.39.0",

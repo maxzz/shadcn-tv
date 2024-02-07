@@ -1,10 +1,9 @@
-import { HTMLAttributes, RefObject, forwardRef, useEffect, useRef } from "react";
+import { HTMLAttributes, RefObject, forwardRef, useRef } from "react";
+import { useSnapshot } from "valtio";
+import { Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
 import Xarrow, { Xwrapper, cPaths, pathType, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
-import { mergeRefs } from "@/utils/merge-refs";
-import { Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
-import useMeasure from "react-use-measure";
-import { useSnapshot } from "valtio";
+import { mergeRefs } from "@/utils";
 import { appSettings } from "@/store";
 
 const boxClasses = "inline-block m-2 p-4 bg-muted-foreground/20 border-muted-foreground border rounded select-none cursor-default";
@@ -31,20 +30,12 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
     ({ label, dragOptions }, ref) => {
         const updateXarrow = useXarrow();
         const boxRef = useRef(null);
-        const [boudsRef, bounds] = useMeasure({debounce: 200});
 
         function onStop(e: DraggableEvent, data: DraggableData): void {
             const { x, y } = data;
             console.log(`${label} uses translate(${x}px, ${y}px)`);
             updateXarrow();
         }
-
-        const { left, top, width, height } = bounds;
-        //label === "elem2" && console.log('bounds', left, top, width, height);
-
-        useEffect(() => {
-            console.log('bounds', left, top, width, height);
-        }, [bounds]);
 
         return (
             <Draggable
@@ -54,9 +45,8 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
                 bounds="parent"
                 {...dragOptions}
             >
-                <div ref={mergeRefs([ref, boxRef, boudsRef])} className={boxClasses}>
+                <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
                     {label}
-                    {/* {JSON.stringify(bounds)} */}
                 </div>
             </Draggable>
         );

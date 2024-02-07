@@ -1,4 +1,4 @@
-import { HTMLAttributes, RefObject, forwardRef, useRef } from "react";
+import { HTMLAttributes, RefObject, forwardRef, useEffect, useRef } from "react";
 import Xarrow, { Xwrapper, cPaths, pathType, useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils/merge-refs";
@@ -40,7 +40,11 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
         }
 
         const { left, top, width, height } = bounds;
-        label === "elem2" && console.log('bounds', left, top, width, height);
+        //label === "elem2" && console.log('bounds', left, top, width, height);
+
+        useEffect(() => {
+            console.log('bounds', left, top, width, height);
+        }, [bounds]);
 
         return (
             <Draggable
@@ -50,7 +54,7 @@ const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: P
                 bounds="parent"
                 {...dragOptions}
             >
-                <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
+                <div ref={mergeRefs([ref, boxRef, boudsRef])} className={boxClasses}>
                     {label}
                     {/* {JSON.stringify(bounds)} */}
                 </div>

@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger, TooltipProvider } from "@/components/ui/shadcn";
 import { ButtonRandom, ThemeColorsDemo, GradientColorPickerDemo, SolidColorPickerDemo } from "../../2-demo/70-pickers";
-import { XArrowsDemo } from "../../2-demo/73-demo-xarrow";
+import { XArrowsDemo1Simple } from "../../2-demo/73-demo-xarrow";
 
 export function PickersInTabs() {
     return (
@@ -30,7 +30,7 @@ export function PickersInTabs() {
             </TabsContent>
 
             <TabsContent value="picker4">
-                <XArrowsDemo />
+                <XArrowsDemo1Simple />
             </TabsContent>
         </Tabs>
     );

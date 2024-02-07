@@ -6,3 +6,4 @@ export * from "./base64-to-buffer";
 export * from "./load-file-as-blob";
 export * from "./theme-apply";
 export * from "./merge-refs";
+export * from "./uuid";

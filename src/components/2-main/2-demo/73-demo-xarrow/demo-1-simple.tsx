@@ -1,0 +1,144 @@
+import { HTMLAttributes, RefObject, forwardRef, useRef } from "react";
+import { useSnapshot } from "valtio";
+import { Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
+import Xarrow, { Xwrapper, cPaths, pathType, useXarrow } from "react-xarrows";
+import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
+import { mergeRefs } from "@/utils";
+import { appSettings } from "@/store";
+
+const boxClasses = "inline-block m-2 p-4 bg-muted-foreground/20 border-muted-foreground border rounded select-none cursor-default";
+
+// function XArrowsDemo1() {
+//     const box1Ref = useRef(null);
+//     return (
+//         <div className="relative">
+//             <div ref={box1Ref} className={boxClasses}>
+//                 hey1
+//             </div>
+//             <p id="elem2" className={boxClasses}>
+//                 hey2
+//             </p>
+//             <Xarrow
+//                 start={box1Ref}     // can be react ref
+//                 end="elem2"         // or an id
+//             />
+//         </div>
+//     );
+// }
+
+const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: Partial<DraggableProps>; } & HTMLAttributes<HTMLDivElement>>(
+    ({ label, dragOptions }, ref) => {
+        const updateXarrow = useXarrow();
+        const boxRef = useRef(null);
+
+        function onStop(e: DraggableEvent, data: DraggableData): void {
+            const { x, y } = data;
+            console.log(`${label} uses translate(${x}px, ${y}px)`);
+            updateXarrow();
+        }
+
+        return (
+            <Draggable
+                onDrag={updateXarrow}
+                onStop={onStop}
+                nodeRef={boxRef}
+                bounds="parent"
+                {...dragOptions}
+            >
+                <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
+                    {label}
+                </div>
+            </Draggable>
+        );
+    }
+);
+
+function DemoControls() {
+    const snap = useSnapshot(appSettings.xArrowsState);
+    return (
+        <div className="absolute right-2 top-1 w-40 text-xs text-muted-foreground flex flex-col gap-2">
+            <div className="pt-2 flex items-center gap-2">
+                <div className="text-nowrap">
+                    Path style
+                </div>
+                <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth"> {/* TODO: path=straight initially has Nan warning in console */}
+                    <SelectTrigger className="h-8 text-xs">
+                        <SelectValue placeholder="Theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem className="text-xs" value="grid">grid</SelectItem>
+                        <SelectItem className="text-xs" value="smooth">smooth</SelectItem>
+                        <SelectItem className="text-xs" value="straight">straight</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+
+            <div className="flex items-center gap-2">
+                <div className="text-nowrap">
+                    Stroke width
+                </div>
+                <Slider
+                    min={1}
+                    max={10}
+                    step={1}
+                    value={[snap.strokeWidth]}
+                    className="[&>.track]:h-px"
+                    onValueChange={(value) => appSettings.xArrowsState.strokeWidth = value[0]}
+                />
+                <div className="text-[.65rem]">
+                    {snap.strokeWidth}
+                </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+                <Checkbox checked={snap.animate} onCheckedChange={(value) => appSettings.xArrowsState.animate = !!value} />
+                Animate on initial draw
+            </div>
+
+            <div className="mt-2">
+                You can drag items within the designated area
+            </div>
+
+        </div>
+    );
+}
+
+function Arrow({ box1Ref, box2Ref }: { box1Ref: RefObject<HTMLDivElement>; box2Ref: RefObject<HTMLDivElement>; }) {
+    const snap = useSnapshot(appSettings.xArrowsState);
+    return (
+        <Xarrow
+            start={box1Ref}
+            end={box2Ref}
+
+            color="hsl(var(--muted-foreground))"
+            strokeWidth={snap.strokeWidth}
+            dashness={{ strokeLen: 8, nonStrokeLen: 3 }}
+            animateDrawing={snap.animate}
+            path={snap.path}
+        />
+    );
+}
+
+export function XArrowsDemo1Simple() {
+    const box1Ref = useRef(null);
+    const box2Ref = useRef(null);
+    return (
+        <div className="h-[240px] relative bg-muted rounded overflow-hidden">
+            <DemoControls />
+            <Xwrapper>
+                <DraggableBox
+                    ref={box1Ref}
+                    label={'elem1'}
+                    dragOptions={{ defaultPosition: { x: 0, y: 0 } }}
+                />
+                <DraggableBox
+                    ref={box2Ref}
+                    label={'elem2'}
+                    dragOptions={{ defaultPosition: { x: 140, y: 160 } }}
+                />
+                <Arrow box1Ref={box1Ref} box2Ref={box2Ref} />
+            </Xwrapper>
+        </div >
+    );
+}
+

@@ -16,7 +16,7 @@ import { DraggableBox } from "./box";
 //             </p>
 //             <Xarrow
 //                 start={box1Ref}     // can be react ref
-//                 end="elem2"         // or an id
+//                 end="elem2"         // or an id (but not with react-17)
 //             />
 //         </div>
 //     );

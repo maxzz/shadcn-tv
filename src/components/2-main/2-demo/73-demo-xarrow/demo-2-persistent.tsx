@@ -119,7 +119,7 @@ function Arrow({ box1Ref, box2Ref }: { box1Ref: RefObject<HTMLDivElement>; box2R
     );
 }
 
-export function XArrowsDemo1() {
+export function XArrowsDemo2() {
     const box1Ref = useRef(null);
     const box2Ref = useRef(null);
     return (
@@ -141,4 +141,3 @@ export function XArrowsDemo1() {
         </div >
     );
 }
-

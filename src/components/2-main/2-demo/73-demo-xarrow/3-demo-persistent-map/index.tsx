@@ -1,4 +1,4 @@
-import { MutableRefObject, createRef, useRef } from "react";
+import { MutableRefObject, createRef, useRef, useState } from "react";
 import { Xwrapper } from "react-xarrows";
 import { DemoControls } from "../3-controls";
 import { Arrow } from "../4-arrow";
@@ -11,6 +11,7 @@ export function XArrowsDemo3() {
 
     // const refs = useRef<MutableRefObject<null>[]>([box1Ref, box2Ref]);
 
+    // const [, update] = useState(0);
     const itemsRef = useRef<Map<number, MutableRefObject<HTMLDivElement>>>();
 
     function getMap() {
@@ -44,6 +45,7 @@ export function XArrowsDemo3() {
             ref = createRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
         }
         ref.current = node!;
+        // update((st) => st + 1);
 
         // if (ref) {
         //     ref.current = node!;

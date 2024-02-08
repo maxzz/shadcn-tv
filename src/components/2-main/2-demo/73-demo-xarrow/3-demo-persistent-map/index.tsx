@@ -22,21 +22,48 @@ export function XArrowsDemo3() {
         return itemsRef.current;
     }
 
+    // function setElm(node: HTMLDivElement | null, id: number) {
+    //     console.log('setElm', id, itemsRef.current, {node});
+
+    //     const map = getMap();
+    //     if (node) {
+    //         const newRef = createRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+    //         newRef.current = node;
+    //         map.set(id, newRef);
+    //     } else {
+    //         map.delete(id);
+    //     }
+    // }
+
     function setElm(node: HTMLDivElement | null, id: number) {
-        console.log('setElm', id, itemsRef.current, {node});
+        console.log('setElm', id, itemsRef.current, { node });
 
         const map = getMap();
-        if (node) {
-            const newRef = createRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
-            newRef.current = node;
-            map.set(id, newRef);
-        } else {
-            map.delete(id);
+        let ref = map.get(id);
+        if (!ref) {
+            ref = createRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
         }
+        ref.current = node!;
+
+        // if (ref) {
+        //     ref.current = node!;
+        // } else {
+        //     const newRef = createRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+        //     newRef.current = node!;
+        //     map.set(id, newRef);
+        // }
+
+        // if (node) {
+        //     const newRef = createRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+        //     newRef.current = node;
+        //     map.set(id, newRef);
+        // } else {
+        //     map.delete(id);
+        // }
     }
 
-    const ref1 = getMap().get(1);
-    const ref2 = getMap().get(0);
+    const ref1 = getMap().get(1)!;
+    const ref2 = getMap().get(0)!;
 
     //const itemsRef = useMemo<RefObject<HTMLDivElement>[]>(() => Array(boxes.length).fill(0).map(() => createRef()), [boxes.length]);
 
@@ -57,9 +84,7 @@ export function XArrowsDemo3() {
 
                 {console.log('-------------', ref1, ref2, getMap())}
 
-                {/* {ref1 && ref2 && */}
-                    <Arrow box1Ref={ref1!} box2Ref={ref2!} />
-                {/* } */}
+                <Arrow box1Ref={getMap().get(1)!} box2Ref={getMap().get(0)!} />
             </Xwrapper>
         </div >
     );

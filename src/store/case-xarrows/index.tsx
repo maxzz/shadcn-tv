@@ -22,8 +22,14 @@ export const defaultXArrowsState: XArrowsState = {
     animate: true,
     strokeWidth: 2,
     path: "smooth",
-    boxes: [
-        { id: uuid.asRelativeNumber(), label: "elem1", x: 0, y: 0 },
-        { id: uuid.asRelativeNumber(), label: "elem2", x: 140, y: 160 },
-    ],
+    boxes: [],
 };
+
+export function initXArrowsState(state: XArrowsState) {
+    if (!state.boxes.length) {
+        state.boxes = [
+            { id: uuid.asRelativeNumber(), label: "elem1", x: 0, y: 0 },
+            { id: uuid.asRelativeNumber(), label: "elem2", x: 140, y: 160 },
+        ];
+    }
+}

@@ -4,7 +4,7 @@ import { mergeConfigRecursively } from "@/utils/merge-options";
 import { debounce } from "@/utils";
 import { TreeState, defaultTreeState } from "./case-tree-state";
 import { ResizablesState, defaultResizablesState } from "./case-resizables";
-import { XArrowsState, defaultXArrowsState } from "./case-xarrows";
+import { XArrowsState, defaultXArrowsState, initXArrowsState } from "./case-xarrows";
 
 export type AppSettings = {
     theme: ThemeMode;
@@ -33,7 +33,9 @@ function initialSettings(): AppSettings {
         } catch (error) {
         }
     }
-    return mergeConfigRecursively(defaultSettings, rv);
+    const merged = mergeConfigRecursively(defaultSettings, rv);
+    initXArrowsState(merged.xArrowsState);
+    return merged;
 }
 
 themeApplyMode(appSettings.theme);

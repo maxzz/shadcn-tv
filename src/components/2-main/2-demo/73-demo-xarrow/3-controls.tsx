@@ -1,15 +1,15 @@
 import { useSnapshot } from "valtio";
 import { Button, Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
-import { cPaths } from "react-xarrows";
+import { cPaths, pathType } from "react-xarrows";
 import { appSettings } from "@/store";
 import { uuid } from "@/utils";
 
-type SelectOption = {
+type SelectOption<T extends string | number> = {
     label: string;
-    value: string;
+    value: T;
 };
 
-function SelectWithValues<T extends string>({ value, defaultValue, onValueChange, options }: { value: T, defaultValue: T, onValueChange: (v: T) => void; options: SelectOption[]; }) {
+function SelectWithValues<T extends string>({ value, defaultValue, onValueChange, options }: { value: T, defaultValue: T, onValueChange: (v: T) => void; options: SelectOption<T>[]; }) {
     return (
         <Select value={value} onValueChange={onValueChange} defaultValue={defaultValue}>
             <SelectTrigger className="h-8 text-xs">
@@ -26,7 +26,7 @@ function SelectWithValues<T extends string>({ value, defaultValue, onValueChange
     );
 }
 
-/* TODO: path=straight initially has Nan warning in console */
+const pathOptions: SelectOption<pathType>[] = cPaths.map((path) => ({ label: path, value: path }));
 
 export function DemoControls() {
     const snap = useSnapshot(appSettings.xArrowsState);
@@ -41,12 +41,20 @@ export function DemoControls() {
                     defaultValue={cPaths[0]}
                     value={snap.path}
                     onValueChange={(v) => appSettings.xArrowsState.path = v}
+                    options={pathOptions}
+                />
+
+                {/* <SelectWithValues
+                    defaultValue={cPaths[0]}
+                    value={snap.path}
+                    onValueChange={(v) => appSettings.xArrowsState.path = v}
                     options={[
                         { label: "grid", value: "grid" },
                         { label: "smooth", value: "smooth" },
                         { label: "straight", value: "straight" },
                     ]}
                 />
+                */}
 
                 {/* <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth">
                     <SelectTrigger className="h-8 text-xs">
@@ -59,6 +67,7 @@ export function DemoControls() {
                     </SelectContent>
                 </Select> */}
 
+                { /* TODO: path=straight initially has Nan warning in console */ }
             </div>
 
             <div className="flex items-center gap-2">

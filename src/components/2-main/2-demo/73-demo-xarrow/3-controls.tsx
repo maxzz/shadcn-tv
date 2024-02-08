@@ -1,6 +1,6 @@
 import { useSnapshot } from "valtio";
 import { Button, Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
-import { cPaths, pathType } from "react-xarrows";
+import { cPaths } from "react-xarrows";
 import { appSettings } from "@/store";
 import { uuid } from "@/utils";
 
@@ -37,9 +37,9 @@ export function DemoControls() {
                     Path style
                 </div>
 
-                <SelectWithValues<pathType>
+                <SelectWithValues
+                    defaultValue={cPaths[0]}
                     value={snap.path}
-                    defaultValue="smooth"
                     onValueChange={(v) => appSettings.xArrowsState.path = v}
                     options={[
                         { label: "grid", value: "grid" },

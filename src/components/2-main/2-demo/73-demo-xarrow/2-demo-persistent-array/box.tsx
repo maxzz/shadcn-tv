@@ -2,11 +2,13 @@ import { HTMLAttributes, forwardRef, useRef } from "react";
 import { useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils";
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 
 const boxClasses = "inline-block m-2 p-4 bg-muted-foreground/20 border-muted-foreground border rounded select-none cursor-default";
 
-export const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOptions?: Partial<DraggableProps>; } & HTMLAttributes<HTMLDivElement>>(
-    ({ label, dragOptions }, ref) => {
+export const DraggableBox = forwardRef<HTMLDivElement, { label: string; boxId: number; dragOptions?: Partial<DraggableProps>; } & HTMLAttributes<HTMLDivElement>>(
+    ({ label, boxId, dragOptions }, ref) => {
         const updateXarrow = useXarrow();
         const boxRef = useRef(null);
 
@@ -16,6 +18,8 @@ export const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOpti
             updateXarrow();
         }
 
+        //const boxes = useSnapshot(appSettings.xArrowsState).boxes;
+
         return (
             <Draggable
                 onDrag={updateXarrow}
@@ -24,7 +28,18 @@ export const DraggableBox = forwardRef<HTMLDivElement, { label: string; dragOpti
                 bounds="parent"
                 {...dragOptions}
             >
-                <div ref={mergeRefs([ref, boxRef])} className={boxClasses}>
+                <div
+                    ref={mergeRefs([ref, boxRef])}
+                    className={boxClasses}
+                    onClick={(event) => {
+                        if (event.ctrlKey) {
+                            const idx = appSettings.xArrowsState.boxes.findIndex((box) => box.id === boxId);
+                            if (idx > -1) {
+                                appSettings.xArrowsState.boxes.splice(idx, 1);
+                            }
+                        }
+                    }}
+                >
                     {label}
                 </div>
             </Draggable>

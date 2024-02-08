@@ -19,6 +19,7 @@ export function XArrowsDemo2() {
                         <DraggableBox
                             ref={itemsRef[idx]}
                             label={box.label}
+                            boxId={box.id}
                             dragOptions={{ defaultPosition: { x: boxes[idx].x, y: boxes[idx].y } }}
                             key={box.id}
                         />

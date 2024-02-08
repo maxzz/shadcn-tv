@@ -26,7 +26,8 @@ export function XArrowsDemo2() {
                     ))
                 }
 
-                <Arrow box1Ref={itemsRef[1]} box2Ref={itemsRef[0]} />
+                {itemsRef[1] && itemsRef[0] && <Arrow box1Ref={itemsRef[1]} box2Ref={itemsRef[0]} />}
+                {/* <Arrow box1Ref={itemsRef[1]} box2Ref={itemsRef[0]} /> */}
             </Xwrapper>
         </div >
     );

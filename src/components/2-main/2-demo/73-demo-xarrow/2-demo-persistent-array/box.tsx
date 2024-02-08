@@ -1,9 +1,8 @@
 import { HTMLAttributes, forwardRef, useRef } from "react";
+import { appSettings } from "@/store";
 import { useXarrow } from "react-xarrows";
 import Draggable, { DraggableData, DraggableEvent, DraggableProps } from 'react-draggable';
 import { mergeRefs } from "@/utils";
-import { useSnapshot } from "valtio";
-import { appSettings } from "@/store";
 
 const boxClasses = "inline-block m-2 p-4 bg-muted-foreground/20 border-muted-foreground border rounded select-none cursor-default";
 
@@ -17,9 +16,7 @@ export const DraggableBox = forwardRef<HTMLDivElement, { label: string; boxId: n
             console.log(`${label} uses translate(${x}px, ${y}px)`);
             updateXarrow();
         }
-
-        //const boxes = useSnapshot(appSettings.xArrowsState).boxes;
-
+        
         return (
             <Draggable
                 onDrag={updateXarrow}

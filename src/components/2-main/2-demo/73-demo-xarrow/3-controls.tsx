@@ -4,6 +4,30 @@ import { cPaths, pathType } from "react-xarrows";
 import { appSettings } from "@/store";
 import { uuid } from "@/utils";
 
+type SelectOption = {
+    label: string;
+    value: string;
+};
+
+function SelectWithValues({ value, defaultValue, onValueChange, options }: { value: string, defaultValue: string, onValueChange: (v: string) => void; options: SelectOption[]; }) {
+    return (
+        <Select value={value} onValueChange={onValueChange} defaultValue={defaultValue}>
+            <SelectTrigger className="h-8 text-xs">
+                <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+                {options.map((option) => (
+                    <SelectItem className="text-xs" value={option.value} key={option.value}>
+                        {option.label}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
+}
+
+/* TODO: path=straight initially has Nan warning in console */
+
 export function DemoControls() {
     const snap = useSnapshot(appSettings.xArrowsState);
     return (
@@ -12,7 +36,19 @@ export function DemoControls() {
                 <div className="text-nowrap">
                     Path style
                 </div>
-                <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth"> {/* TODO: path=straight initially has Nan warning in console */}
+                
+                <SelectWithValues
+                    value={snap.path}
+                    defaultValue="smooth"
+                    onValueChange={(v) => appSettings.xArrowsState.path = v as pathType}
+                    options={[
+                        { label: "grid", value: "grid" },
+                        { label: "smooth", value: "smooth" },
+                        { label: "straight", value: "straight" },
+                    ]}
+                />
+
+                {/* <Select value={snap.path} onValueChange={(v: pathType) => appSettings.xArrowsState.path = v} defaultValue="smooth">
                     <SelectTrigger className="h-8 text-xs">
                         <SelectValue placeholder="Theme" />
                     </SelectTrigger>
@@ -21,7 +57,8 @@ export function DemoControls() {
                         <SelectItem className="text-xs" value="smooth">smooth</SelectItem>
                         <SelectItem className="text-xs" value="straight">straight</SelectItem>
                     </SelectContent>
-                </Select>
+                </Select> */}
+
             </div>
 
             <div className="flex items-center gap-2">

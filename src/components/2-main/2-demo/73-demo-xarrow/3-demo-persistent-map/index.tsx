@@ -1,11 +1,10 @@
-import { MutableRefObject, RefObject, createRef, useMemo, useRef } from "react";
+import { MutableRefObject, createRef, useRef } from "react";
 import { Xwrapper } from "react-xarrows";
 import { DemoControls } from "../3-controls";
 import { Arrow } from "../4-arrow";
 import { DraggableBox } from "./box";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
-import { get } from "http";
 
 export function XArrowsDemo3() {
     const { boxes } = useSnapshot(appSettings.xArrowsState);
@@ -56,11 +55,11 @@ export function XArrowsDemo3() {
                     ))
                 }
 
-                {console.log('-------------', getMap())}
+                {console.log('-------------', ref1, ref2, getMap())}
 
-                {ref1 && ref2 &&
-                    <Arrow box1Ref={ref1} box2Ref={ref2} />
-                }
+                {/* {ref1 && ref2 && */}
+                    <Arrow box1Ref={ref1!} box2Ref={ref2!} />
+                {/* } */}
             </Xwrapper>
         </div >
     );

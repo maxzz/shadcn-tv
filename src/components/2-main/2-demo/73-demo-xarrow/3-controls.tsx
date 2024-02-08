@@ -9,7 +9,7 @@ type SelectOption = {
     value: string;
 };
 
-function SelectWithValues({ value, defaultValue, onValueChange, options }: { value: string, defaultValue: string, onValueChange: (v: string) => void; options: SelectOption[]; }) {
+function SelectWithValues<T extends string>({ value, defaultValue, onValueChange, options }: { value: T, defaultValue: T, onValueChange: (v: T) => void; options: SelectOption[]; }) {
     return (
         <Select value={value} onValueChange={onValueChange} defaultValue={defaultValue}>
             <SelectTrigger className="h-8 text-xs">
@@ -36,11 +36,11 @@ export function DemoControls() {
                 <div className="text-nowrap">
                     Path style
                 </div>
-                
-                <SelectWithValues
+
+                <SelectWithValues<pathType>
                     value={snap.path}
                     defaultValue="smooth"
-                    onValueChange={(v) => appSettings.xArrowsState.path = v as pathType}
+                    onValueChange={(v) => appSettings.xArrowsState.path = v}
                     options={[
                         { label: "grid", value: "grid" },
                         { label: "smooth", value: "smooth" },

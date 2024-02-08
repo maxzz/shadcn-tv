@@ -5,6 +5,7 @@ import { Arrow } from "../4-arrow";
 import { DraggableBox } from "./box";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
+import { get } from "http";
 
 export function XArrowsDemo3() {
     const { boxes } = useSnapshot(appSettings.xArrowsState);
@@ -35,6 +36,9 @@ export function XArrowsDemo3() {
         }
     }
 
+    const ref1 = getMap().get(1);
+    const ref2 = getMap().get(0);
+
     //const itemsRef = useMemo<RefObject<HTMLDivElement>[]>(() => Array(boxes.length).fill(0).map(() => createRef()), [boxes.length]);
 
     return (
@@ -54,8 +58,8 @@ export function XArrowsDemo3() {
 
                 {console.log('-------------', getMap())}
 
-                {getMap().get(1) && getMap().get(0) &&
-                    <Arrow box1Ref={getMap().get(1)!} box2Ref={getMap().get(0)!} />
+                {ref1 && ref2 &&
+                    <Arrow box1Ref={ref1} box2Ref={ref2} />
                 }
             </Xwrapper>
         </div >

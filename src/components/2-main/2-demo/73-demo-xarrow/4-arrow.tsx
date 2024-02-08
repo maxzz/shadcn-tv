@@ -5,8 +5,6 @@ import { appSettings } from "@/store";
 
 export function Arrow({ box1Ref, box2Ref }: { box1Ref: RefObject<HTMLDivElement>; box2Ref: RefObject<HTMLDivElement>; }) {
     const snap = useSnapshot(appSettings.xArrowsState);
-    console.log('Arrow', { box1Ref, box2Ref });
-    
     return (
         <Xarrow
             start={box1Ref}

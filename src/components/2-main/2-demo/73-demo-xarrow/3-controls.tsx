@@ -1,7 +1,8 @@
 import { useSnapshot } from "valtio";
-import { Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
+import { Button, Checkbox, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Slider } from "@/components/ui/shadcn";
 import { cPaths, pathType } from "react-xarrows";
 import { appSettings } from "@/store";
+import { uuid } from "@/utils";
 
 export function DemoControls() {
     const snap = useSnapshot(appSettings.xArrowsState);
@@ -49,6 +50,14 @@ export function DemoControls() {
                 You can drag items within the designated area
             </div>
 
+            <div className="">
+                <Button
+                    variant="outline"
+                    onClick={() => appSettings.xArrowsState.boxes.push({ label: `elem${snap.boxes.length + 1}`, x: 0, y: 0, id: uuid.asRelativeNumber() })}
+                >
+                    Add item
+                </Button>
+            </div>
         </div>
     );
 }

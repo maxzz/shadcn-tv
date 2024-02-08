@@ -1,10 +1,10 @@
 import { RefObject, createRef, useMemo } from "react";
-import { Xwrapper } from "react-xarrows";
-import { DemoControls } from "../3-controls";
-import { Arrow } from "../4-arrow";
-import { DraggableBox } from "./box";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
+import { Xwrapper } from "react-xarrows";
+import { DraggableBox } from "./box";
+import { Arrow } from "../4-arrow";
+import { DemoControls } from "../3-controls";
 
 export function XArrowsDemo2() {
     const { boxes } = useSnapshot(appSettings.xArrowsState);

@@ -28,3 +28,5 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     }
 );
 Textarea.displayName = "Textarea";
+
+export const fixTextareaResizeClasses = "smallscroll resizer [&::-webkit-resizer]:rounded [&::-webkit-resizer]:[backgroundSize:80%_80%]";

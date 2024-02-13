@@ -29,26 +29,26 @@ export function ThemeSwitch() {
     return (
         <div className="focus-within:ring-1 focus-within:ring-ring rounded-md flex items-center">
             <Button
-                variant={'ghost'}
-                size={'sm'}
+                variant="ghost"
+                size="xs"
                 tabIndex={-1}
                 className="py-0 border-y border-l border-input rounded-r-none"
                 onClick={() => appSettings.theme = appSettings.theme === 'dark' ? 'light' : 'dark'}
             >
-                {isSystem && <IconSystem className={"w-4 h-4"} />}
-                {isLight && <IconLight className={"w-4 h-4"} />}
-                {isDark && <IconDark className={"w-4 h-4 p-0.5"} />}
+                {isSystem && <IconSystem className="size-4" />}
+                {isLight && <IconLight className="size-4" />}
+                {isDark && <IconDark className="size-4 p-0.5" />}
             </Button>
 
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button
-                        variant={'ghost'}
-                        size={'sm'}
+                        variant="ghost"
+                        size="xs"
                         className="px-1 py-0 border border-input rounded-l-none focus-visible:ring-0"
                         onClick={() => appSettings.theme = 'system'}
                     >
-                        <ChevronDown className="w-3 h-3" />
+                        <ChevronDown className="size-3" />
                     </Button>
                 </DropdownMenuTrigger>
 

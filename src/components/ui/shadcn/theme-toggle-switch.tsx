@@ -8,11 +8,8 @@ import { ThemeMode } from "@/utils";
 
 function MenuItem({ label, theme, current }: { label: string; theme: ThemeMode; current: ThemeMode; }) {
     return (
-        <DropdownMenuItem
-            className="grid grid-cols-[16px,1fr] items-center gap-x-2"
-            onClick={() => appSettings.theme = theme}
-        >
-            {current === theme && <CheckIcon className="w-4 h-4" />}
+        <DropdownMenuItem className="grid grid-cols-[16px,1fr] items-center gap-x-2" onClick={() => appSettings.theme = theme}>
+            {current === theme && <CheckIcon className="size-4" />}
 
             <div className="col-start-2">
                 {label}
@@ -42,12 +39,7 @@ export function ThemeSwitch() {
 
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="xs"
-                        className="px-1 py-0 border border-input rounded-l-none focus-visible:ring-0"
-                        onClick={() => appSettings.theme = 'system'}
-                    >
+                    <Button variant="ghost" size="xs" className="px-1 py-0 border border-input rounded-l-none focus-visible:ring-0">
                         <ChevronDown className="size-3" />
                     </Button>
                 </DropdownMenuTrigger>

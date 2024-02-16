@@ -132,3 +132,5 @@ export const shadcnPlugin = plugin(
         }
     }
 );
+
+export default shadcnPlugin;

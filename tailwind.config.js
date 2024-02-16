@@ -21,7 +21,8 @@ export default {
     },
     plugins: [
         require("./tailwind/tailwindcss-animate"), // This is local copy to resolve conflict with delay, duration, and ease. It adds suffix -ani. Also use !important to override shadcn's.
-        require("./tailwind/tailwind-plugin-shadcn").shadcnPlugin,
+        require('./tailwind/tailwind-plugin-shadcn.mts'),
+        require('./tailwind/tailwind-plugin-shadcn-feedback.mts'),
         require("./tailwind/tailwind-plugin-overflow-overlay"),
         require("tailwind-scrollbar"),
     ],

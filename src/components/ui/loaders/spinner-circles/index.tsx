@@ -15,6 +15,12 @@ function Circle({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
     return (
         <svg viewBox="0 0 120 120" {...rest}>
             <g className={`${css["g-circles"]} ${className}`}>
+                
+                {Array.from({ length: 12 }).map((_, i) => (
+                    <g key={i} className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                ))}
+
+                {/* 
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
@@ -27,6 +33,7 @@ function Circle({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                */}
             </g>
         </svg>
     );

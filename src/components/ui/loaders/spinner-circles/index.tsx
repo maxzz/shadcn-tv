@@ -3,7 +3,7 @@ import css from "./circles.module.css"; // https://codepen.io/yoksel/pen/KKqeyj 
 
 function CircleDef() {
     return (
-        <svg viewBox="0 0 120 120">
+        <svg viewBox="0 0 120 120" style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
             <symbol id="symbol--circle">
                 <circle r={10} cx={20} cy={20} />
             </symbol>
@@ -34,14 +34,15 @@ function Circle({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
 
 const c1 = "rgba(255,_255,_255,_0)";
 const c2 = "rgba(255,_255,_255,_0.05)";
-const rombGradientClasses = `[background:linear-gradient(45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%),_linear-gradient(-45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%)]`;
+const g1 = `linear-gradient(45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%)`;
+const g2 = `linear-gradient(-45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%)`;
 
-const rombClasses = `${rombGradientClasses} [background-size:_1em_1em] [background-color:#000]`;
+const rombClasses = `[background:${g1},_${g2}] [background-size:_1em_1em]`;
 
 export function SpinnerCircles() {
     return (
         <div className={`p-4 text-green-950 flex items-center justify-center ${rombClasses}`}>
-            <div className="relative w-64 flex items-center gap-4">
+            <div className="relative w-96 flex items-center gap-4">
 
                 <CircleDef />
                 <Circle className={css["g-circles--v1"]} />

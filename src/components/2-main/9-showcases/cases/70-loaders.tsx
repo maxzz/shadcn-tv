@@ -5,15 +5,15 @@ import { FlipClock } from "../../2-demo/71-demo-flip-clock";
 
 export function LoadersInTab() {
     return (
-        <Tabs defaultValue="loaders7">
+        <Tabs defaultValue="loaders6">
             <TabsList>
                 <TabsTrigger value="loaders1">Loaders</TabsTrigger>
                 <TabsTrigger value="loaders2">Circle loader</TabsTrigger>
                 <TabsTrigger value="loaders3">Radial</TabsTrigger>
                 <TabsTrigger value="loaders4">Spinner</TabsTrigger>
                 <TabsTrigger value="loaders5">Spinner7</TabsTrigger>
-                <TabsTrigger value="loaders6">Clock</TabsTrigger>
-                <TabsTrigger value="loaders7">Circles</TabsTrigger>
+                <TabsTrigger value="loaders6">Circles</TabsTrigger>
+                <TabsTrigger value="loaders7">Clock</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -45,13 +45,13 @@ export function LoadersInTab() {
 
             <TabsContent value="loaders6">
                 <div className="my-8 flex items-center justify-center">
-                    <FlipClock />
+                    <SpinnerCircles />
                 </div>
             </TabsContent>
 
             <TabsContent value="loaders7">
                 <div className="my-8 flex items-center justify-center">
-                    <SpinnerCircles />
+                    <FlipClock />
                 </div>
             </TabsContent>
 

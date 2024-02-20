@@ -11,6 +11,11 @@ export function SpinnerCircles() {
                 <Demo3 />
                 <Demo4 />
 
+                <Circle className={css["g-circles--v1"]} />
+                <Circle className={css["g-circles--v2"]} />
+                <Circle className={css["g-circles--v3"]} />
+                <Circle className={css["g-circles--v4"]} />
+
             </div>
         </div>
     );
@@ -26,14 +31,30 @@ function CircleDef() {
     );
 }
 
+function Circle({className}: {className: string}) {
+    return (
+        <svg viewBox="0 0 120 120">
+            <g className={`${css["g-circles"]} ${className}`}>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+            </g>
+        </svg>
+    );
+}
+
 function Demo1() {
     return (
         <svg viewBox="0 0 120 120">
-
-            {/* <symbol id="symbol--circle">
-                <circle r={10} cx={20} cy={20} />
-            </symbol> */}
-
             <g className={`${css["g-circles"]} ${css["g-circles--v1"]}`}>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>

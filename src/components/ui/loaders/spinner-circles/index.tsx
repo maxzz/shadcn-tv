@@ -1,26 +1,5 @@
 import css from "./circles.module.css"; // https://codepen.io/yoksel/pen/KKqeyj 'Thinking about SVG-preloaders'
 
-export function SpinnerCircles() {
-    return (
-        <div className="p-4 text-green-950 flex items-center justify-center">
-            <div className="relative w-64 flex items-center gap-4">
-
-                <CircleDef />
-                <Demo1 />
-                <Demo2 />
-                <Demo3 />
-                <Demo4 />
-
-                <Circle className={css["g-circles--v1"]} />
-                <Circle className={css["g-circles--v2"]} />
-                <Circle className={css["g-circles--v3"]} />
-                <Circle className={css["g-circles--v4"]} />
-
-            </div>
-        </div>
-    );
-}
-
 function CircleDef() {
     return (
         <svg viewBox="0 0 120 120">
@@ -31,7 +10,7 @@ function CircleDef() {
     );
 }
 
-function Circle({className}: {className: string}) {
+function Circle({ className }: { className: string; }) {
     return (
         <svg viewBox="0 0 120 120">
             <g className={`${css["g-circles"]} ${className}`}>
@@ -52,86 +31,18 @@ function Circle({className}: {className: string}) {
     );
 }
 
-function Demo1() {
+export function SpinnerCircles() {
     return (
-        <svg viewBox="0 0 120 120">
-            <g className={`${css["g-circles"]} ${css["g-circles--v1"]}`}>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-            </g>
-        </svg>
-    );
-}
+        <div className="p-4 text-green-950 flex items-center justify-center">
+            <div className="relative w-64 flex items-center gap-4">
 
-function Demo2() {
-    return (
-        <svg viewBox="0 0 120 120">
-            <g className={`${css["g-circles"]} ${css["g-circles--v2"]}`}>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-            </g>
-        </svg>
-    );
-}
+                <CircleDef />
+                <Circle className={css["g-circles--v1"]} />
+                <Circle className={css["g-circles--v2"]} />
+                <Circle className={css["g-circles--v3"]} />
+                <Circle className={css["g-circles--v4"]} />
 
-function Demo3() {
-    return (
-        <svg viewBox="0 0 120 120">
-            <g className={`${css["g-circles"]} ${css["g-circles--v3"]}`}>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-            </g>
-        </svg>
-    );
-}
-
-function Demo4() {
-    return (
-        <svg viewBox="0 0 120 120">
-            <g className={`${css["g-circles"]} ${css["g-circles--v4"]}`}>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
-            </g>
-        </svg>
+            </div>
+        </div>
     );
 }

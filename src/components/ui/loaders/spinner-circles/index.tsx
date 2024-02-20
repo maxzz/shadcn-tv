@@ -1,3 +1,4 @@
+import { HTMLAttributes } from "react";
 import css from "./circles.module.css"; // https://codepen.io/yoksel/pen/KKqeyj 'Thinking about SVG-preloaders'
 
 function CircleDef() {
@@ -10,9 +11,9 @@ function CircleDef() {
     );
 }
 
-function Circle({ className }: { className: string; }) {
+function Circle({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 120 120">
+        <svg viewBox="0 0 120 120" {...rest}>
             <g className={`${css["g-circles"]} ${className}`}>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
                 <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>

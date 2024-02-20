@@ -22,4 +22,4 @@ export const showcasesData: Showcase[] = [
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "60";
+export const initialCase = "70";

@@ -7,3 +7,4 @@ export * from './spinner-radial';
 export * from './spinner-svg';
 export * from './spinner-div';
 export * from './spinner7';
+export * from './spinner-circles';

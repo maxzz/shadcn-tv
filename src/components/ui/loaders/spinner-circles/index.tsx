@@ -32,11 +32,11 @@ function Circle({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
     );
 }
 
-const rombClasses = "\
-[background:linear-gradient(45deg,_rgba(255,_255,_255,_0)_48%,_rgba(255,_255,_255,_0.05)_50%,_rgba(255,_255,_255,_0)_52%),_linear-gradient(-45deg,_rgba(255,_255,_255,_0)_48%,_rgba(255,_255,_255,_0.05)_50%,_rgba(255,_255,_255,_0)_52%)] \
-[background-size:_1em_1em] \
-[background-color:#000] \
-";
+const c1 = "rgba(255,_255,_255,_0)";
+const c2 = "rgba(255,_255,_255,_0.05)";
+const rombGradientClasses = `[background:linear-gradient(45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%),_linear-gradient(-45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%)]`;
+
+const rombClasses = `${rombGradientClasses} [background-size:_1em_1em] [background-color:#000]`;
 
 export function SpinnerCircles() {
     return (

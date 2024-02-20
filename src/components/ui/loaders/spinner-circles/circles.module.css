@@ -105,11 +105,15 @@ svg {
     transform: rotate(-360deg) translate(5px, 5px) scale(0.9);
 }
 
+/* 1 --------------- */
+
 .g-circles--v1 .g--circle {
     fill-opacity: 0;
     -webkit-animation-name: opacity;
     animation-name: opacity;
 }
+
+/* 2 --------------- */
 
 .g-circles--v2 .g--circle {
     fill-opacity: 0;
@@ -185,11 +189,15 @@ svg {
     animation-delay: -1.2s;
 }
 
+/* 3 --------------- */
+
 .g-circles--v3 .g--circle {
     fill-opacity: 1;
     -webkit-animation-name: opacity, colors;
     animation-name: opacity, colors;
 }
+
+/* 4 --------------- */
 
 .g-circles--v4 .g--circle {
     fill-opacity: 1;
@@ -262,6 +270,8 @@ svg {
     -webkit-animation-delay: -1.2s;
     animation-delay: -1.2s;
 }
+
+/* --------------- */
 
 @-webkit-keyframes opacity {
     3% {

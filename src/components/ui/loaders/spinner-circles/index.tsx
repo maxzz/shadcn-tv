@@ -19,46 +19,23 @@ function Demo1() {
     return (
         <svg viewBox="0 0 120 120">
 
-            <symbol id="s--circle">
+            <symbol id="symbol--circle">
                 <circle r={10} cx={20} cy={20} />
             </symbol>
+
             <g className={`${css["g-circles"]} ${css["g-circles--v1"]}`}>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
             </g>
         </svg>
     );
@@ -68,42 +45,18 @@ function Demo2() {
     return (
         <svg viewBox="0 0 120 120">
             <g className={`${css["g-circles"]} ${css["g-circles--v2"]}`}>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
             </g>
         </svg>
     );
@@ -113,42 +66,18 @@ function Demo3() {
     return (
         <svg viewBox="0 0 120 120">
             <g className={`${css["g-circles"]} ${css["g-circles--v3"]}`}>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
             </g>
         </svg>
     );
@@ -158,42 +87,18 @@ function Demo4() {
     return (
         <svg viewBox="0 0 120 120">
             <g className={`${css["g-circles"]} ${css["g-circles--v4"]}`}>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
-                <g className={css["g--circle"]}>
-                    <use xlinkHref="#s--circle" className={css["u--circle"]} />
-                </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
+                <g className={css["g--circle"]}> <use xlinkHref="#symbol--circle" className={css["u--circle"]} /> </g>
             </g>
         </svg>
     );

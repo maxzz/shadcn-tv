@@ -1,11 +1,13 @@
 /* Look, no Sass */
 
 .particle {
+    --dot-size: 3px; /* 1vmin */
+
     /* Starting values */
     --angle: (5 * var(--index));
     --radius: 30;
-    --x: calc(sin(var(--angle)) * var(--radius) * 1vmin);
-    --y: calc(cos(var(--angle)) * var(--radius) * 1vmin);
+    --x: calc(sin(var(--angle)) * var(--radius) * var(--dot-size));
+    --y: calc(cos(var(--angle)) * var(--radius) * var(--dot-size));
 
     /* Ending values */
     /* 
@@ -14,8 +16,8 @@
     Bonusly, performance seems much better 
     */
     --angle2: calc(var(--index) * 1turn / var(--total));
-    --x2: calc(sin(var(--angle2)) * var(--radius) * 1vmin);
-    --y2: calc(cos(var(--angle2)) * var(--radius) * 1vmin);
+    --x2: calc(sin(var(--angle2)) * var(--radius) * var(--dot-size));
+    --y2: calc(cos(var(--angle2)) * var(--radius) * var(--dot-size));
 
     --size: 5;
     --speed: 3s;
@@ -35,8 +37,8 @@
     background: currentColor;
     color: oklch(75% 0.3 calc(sin(var(--hue-angle) * var(--index)) * var(--hue-range) + var(--hue-start)));
     position: absolute;
-    width: calc(var(--size) * 0.1vmin);
-    height: calc(var(--size) * 0.1vmin);
+    width: calc(var(--size) * 0.1 * var(--dot-size));
+    height: calc(var(--size) * 0.1 * var(--dot-size));
     contain: strict;
     /* Does this help or is translate3d already doing it*/
 }

@@ -9,7 +9,7 @@ function Circles({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
         <>
         <div className={css["center"]} style={{'--total': totalSpheres}} {...rest}>
             {Array.from({ length: totalSpheres }).map((_, idx) => (
-                <div className={css["particle"]} style={{'--index': idx}}>
+                <div className={css["particle"]} style={{'--index': idx}} key={idx}>
                 </div>
             ))}
         </div>
@@ -20,7 +20,7 @@ function Circles({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
 export function SpinnerSpherees() {
     return (
         <div className={`p-4 text-green-950 flex items-center justify-center`}>
-            <div className="relative w-96 h-[500px] flex items-center justify-center content-center gap-4">
+            <div className="relative w-96 h-[200px] flex items-center justify-center content-center gap-4">
 
                 <Circles />
 

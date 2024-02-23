@@ -7,7 +7,7 @@ function Circles({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     var i = totalSpheres;
     return (
         <>
-        <div className={css["center"]} style={{'--total': totalSpheres}} {...rest}>
+        <div className={css["center"]} style={{'--total': totalSpheres, '--dot-size': '4px'}} {...rest}>
             {Array.from({ length: totalSpheres }).map((_, idx) => (
                 <div className={css["particle"]} style={{'--index': idx}} key={idx}>
                 </div>

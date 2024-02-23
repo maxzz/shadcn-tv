@@ -1,7 +1,7 @@
 /* Look, no Sass */
 
 .particle {
-    --dot-size: 3px; /* 1vmin */
+    /*--dot-size: 3px; /* 1vmin */
 
     /* Starting values */
     --angle: (5 * var(--index));

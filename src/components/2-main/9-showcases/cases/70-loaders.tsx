@@ -1,11 +1,11 @@
-import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg, SpinnerEmoji, Spinner7, SpinnerCircles } from "@/components/ui/loaders";
+import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg, SpinnerEmoji, Spinner7, SpinnerCircles, SpinnerSpherees } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { LoadersTest, Spinner9 } from "../../2-demo/60-demo-loaders";
 import { FlipClock } from "../../2-demo/71-demo-flip-clock";
 
 export function LoadersInTab() {
     return (
-        <Tabs defaultValue="loaders6">
+        <Tabs defaultValue="loaders7">
             <TabsList>
                 <TabsTrigger value="loaders1">Loaders</TabsTrigger>
                 <TabsTrigger value="loaders2">Circle loader</TabsTrigger>
@@ -13,7 +13,8 @@ export function LoadersInTab() {
                 <TabsTrigger value="loaders4">Spinner</TabsTrigger>
                 <TabsTrigger value="loaders5">Spinner7</TabsTrigger>
                 <TabsTrigger value="loaders6">Circles</TabsTrigger>
-                <TabsTrigger value="loaders7">Clock</TabsTrigger>
+                <TabsTrigger value="loaders7">Spheres</TabsTrigger>
+                <TabsTrigger value="loaders8">Clock</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -50,6 +51,12 @@ export function LoadersInTab() {
             </TabsContent>
 
             <TabsContent value="loaders7">
+                <div className="my-8 flex items-center justify-center">
+                    <SpinnerSpherees />
+                </div>
+            </TabsContent>
+
+            <TabsContent value="loaders8">
                 <div className="my-8 flex items-center justify-center">
                     <FlipClock />
                 </div>

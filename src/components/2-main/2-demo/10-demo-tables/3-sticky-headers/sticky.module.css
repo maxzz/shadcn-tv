@@ -19,6 +19,10 @@
     color: #bdbddb;
 }
 
+
+
+/* -------------------------- 1 -------------------------- */
+
 /* sticky-header-row */
 /* 
 .sticky-header-row .container {
@@ -33,6 +37,10 @@
     border-bottom-color: var(--sticky-cell-border-color);
 }
 
+
+
+/* -------------------------- 2 -------------------------- */
+
 /* sticky-first-column */
 /* 
 .sticky-first-column .container {
@@ -46,6 +54,10 @@
     left: 0;
     border-right-color: var(--sticky-cell-border-color);
 }
+
+
+
+/* -------------------------- 3 -------------------------- */
 
 /* sticky-header-and-first-column */
 /* 
@@ -74,6 +86,10 @@
     border-right-color: var(--sticky-cell-border-color);
     border-bottom-color: var(--sticky-cell-border-color);
 }
+
+
+
+/* -------------------------- s -------------------------- */
 
 /* Scrollbar */
 .container::-webkit-scrollbar {

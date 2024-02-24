@@ -7,7 +7,7 @@ function Table1() { // NOTE: there should be a space inside tr children
     return (
         <>
             <section className={`${styles["sticky-header-row"]}`}>
-                <h2>Sticky Header</h2>
+                <h2 className="py-2">Sticky Header</h2>
                 <div className={`${styles["container"]} w-fit h-52 overflow-auto`}>
                     <table>
                         <thead>
@@ -50,8 +50,8 @@ function Table2() {
     return (
         <>
             <section className={`${styles["sticky-first-column"]}`}>
-                <h2>Sticky First Column</h2>
-                <div className={`${styles["container"]} w-60 h-60 overflow-auto`}>
+                <h2 className="py-2">Sticky First Column</h2>
+                <div className={`${styles["container"]} w-64 h-60 overflow-auto`}>
                     <table>
                         <thead>
                             <tr>
@@ -88,8 +88,8 @@ function Table3() {
     return (
         <>
             <section className={`${styles["sticky-header-and-first-column"]}`}>
-                <h2>Sticky Header and First Column</h2>
-                <div className={`${styles["container"]} w-60 h-60 overflow-auto`}>
+                <h2 className="py-2">Sticky Header and First Column</h2>
+                <div className={`${styles["container"]} w-64 h-60 overflow-auto`}>
                     <table>
                         <thead>
                             <tr>

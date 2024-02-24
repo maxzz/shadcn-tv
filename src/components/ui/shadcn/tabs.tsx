@@ -13,11 +13,11 @@ bg-muted \
 rounded-lg \
 inline-flex items-center justify-center";
 
-const TabsListWrapClasses = "h-auto justify-normal flex-wrap";
+export const TabsListWrapClasses = "h-auto justify-normal flex-wrap";
 
-const TabsList = forwardRef<ElementRef<typeof Prim.List>, ComponentPropsWithoutRef<typeof Prim.List> & {multiline?: boolean}>(
-    ({ className, multiline, ...rest }, ref) => (
-        <Prim.List ref={ref} className={cn(TabsListClasses, multiline && TabsListWrapClasses, className)} {...rest} />
+const TabsList = forwardRef<ElementRef<typeof Prim.List>, ComponentPropsWithoutRef<typeof Prim.List>>(
+    ({ className, ...rest }, ref) => (
+        <Prim.List ref={ref} className={cn(TabsListClasses, className)} {...rest} />
     )
 );
 TabsList.displayName = Prim.List.displayName;

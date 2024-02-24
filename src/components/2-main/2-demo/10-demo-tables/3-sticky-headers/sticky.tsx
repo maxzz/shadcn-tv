@@ -5,7 +5,7 @@ function Table1() {
         <>
             <section className={`${styles["sticky-header-row"]}`}>
                 <h2>Sticky Header</h2>
-                <div className={`${styles["container"]}`}>
+                <div className={`${styles["container"]} w-fit h-52 overflow-auto`}>
                     <table>
                         <thead>
                             <tr>
@@ -100,7 +100,7 @@ function Table2() {
         <>
             <section className={`${styles["sticky-first-column"]}`}>
                 <h2>Sticky First Column</h2>
-                <div className={`${styles["container"]}`}>
+                <div className={`${styles["container"]} w-60 overflow-auto`}>
                     <table>
                         <thead>
                             <tr>
@@ -160,7 +160,7 @@ function Table3() {
         <>
             <section className={`${styles["sticky-header-and-first-column"]}`}>
                 <h2>Sticky Header and First Column</h2>
-                <div className={`${styles["container"]}`}>
+                <div className={`${styles["container"]} w-60 h-60 overflow-auto`}>
                     <table>
                         <thead>
                             <tr>

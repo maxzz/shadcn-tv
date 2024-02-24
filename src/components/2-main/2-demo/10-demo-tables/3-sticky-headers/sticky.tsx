@@ -1,4 +1,4 @@
-import styles from "./2-with-css.module.css";
+import styles from "./sticky.module.css";
 
 function Table1() {
     return (

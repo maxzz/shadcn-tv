@@ -5,8 +5,8 @@ import { FlipClock } from "../../2-demo/71-demo-flip-clock";
 
 export function LoadersInTab() {
     return (
-        <Tabs defaultValue="loaders7">
-            <TabsList>
+        <Tabs defaultValue="loaders8">
+            <TabsList multiline={true}>
                 <TabsTrigger value="loaders1">Loaders</TabsTrigger>
                 <TabsTrigger value="loaders2">Circle loader</TabsTrigger>
                 <TabsTrigger value="loaders3">Radial</TabsTrigger>

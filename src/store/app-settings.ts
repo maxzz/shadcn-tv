@@ -2,12 +2,14 @@ import { ThemeMode, themeApplyMode } from "@/utils/theme-apply";
 import { proxy, subscribe } from "valtio";
 import { mergeConfigRecursively } from "@/utils/merge-options";
 import { debounce } from "@/utils";
-import { TreeState, defaultTreeState } from "./case-tree-state";
-import { ResizablesState, defaultResizablesState } from "./case-resizables";
-import { XArrowsState, defaultXArrowsState, initXArrowsState } from "./case-xarrows";
+import { TreeState, defaultTreeState } from "./20-tree-state";
+import { ResizablesState, defaultResizablesState } from "./30-resizables";
+import { XArrowsState, defaultXArrowsState, initXArrowsState } from "./40-xarrows";
+import { DemosState, defaultDemosState } from "./10-demos";
 
 export type AppSettings = {
     theme: ThemeMode;
+    demosState: DemosState;
     treeState: TreeState;
     resisablesState: ResizablesState;
     xArrowsState: XArrowsState;
@@ -15,6 +17,7 @@ export type AppSettings = {
 
 const defaultSettings: AppSettings = {
     theme: 'light',
+    demosState: defaultDemosState,
     treeState: defaultTreeState,
     resisablesState: defaultResizablesState,
     xArrowsState: defaultXArrowsState,

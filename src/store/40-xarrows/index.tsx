@@ -1,6 +1,6 @@
-import { uuid } from "@/utils";
 import type { ControlPosition } from "react-draggable";
 import { pathType } from "react-xarrows";
+import { uuid } from "@/utils";
 
 export type DraggableBoxPos = {
     id: number;

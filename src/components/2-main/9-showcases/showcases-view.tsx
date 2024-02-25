@@ -1,17 +1,25 @@
-import * as A from "@/components/ui/shadcn/accordion";
+import { useSnapshot } from 'valtio';
+import { appSettings } from '@/store';
+import * as Prim from "@/components/ui/shadcn/accordion";
 import { Showcase } from ".";
 
-export function ShowcasesView({ cases, initialCase }: { cases: Showcase[]; initialCase: string | undefined }) {
+export function ShowcasesView({ cases }: { cases: Showcase[]; }) {
+    const { activeDemoAccordion } = useSnapshot(appSettings).demosState;
     return (
-        <A.Accordion className="w-full" type="single" collapsible defaultValue={initialCase}>
-
+        <Prim.Accordion
+            className="w-full"
+            type="single"
+            collapsible
+            value={activeDemoAccordion}
+            onValueChange={(v) => appSettings.demosState.activeDemoAccordion = v}
+        >
             {cases.map((c) => (
-                <A.AccordionItem className="border-b-0" value={c.id} key={c.id}>
-                    <A.AccordionTrigger>{c.name}</A.AccordionTrigger>
-                    <A.AccordionContent className="pt-4 border-t border-b" >{c.component}</A.AccordionContent>
-                </A.AccordionItem>
+                <Prim.AccordionItem className="border-b-0" value={c.id} key={c.id}>
+                    <Prim.AccordionTrigger>{c.name}</Prim.AccordionTrigger>
+                    <Prim.AccordionContent className="pt-4 border-t border-b" >{c.component}</Prim.AccordionContent>
+                </Prim.AccordionItem>
             ))}
 
-        </A.Accordion>
+        </Prim.Accordion>
     );
 }

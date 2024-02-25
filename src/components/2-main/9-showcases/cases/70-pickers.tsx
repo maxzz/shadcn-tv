@@ -4,7 +4,7 @@ import { XArrowsDemo1, XArrowsDemo2 } from "../../2-demo/70-pickers";
 
 export function PickersInTabs() {
     return (
-        <Tabs defaultValue="picker4">
+        <Tabs defaultValue="picker5">
             <TabsList>
                 <TabsTrigger value="picker1">Color</TabsTrigger>
                 <TabsTrigger value="picker2">Gradient</TabsTrigger>

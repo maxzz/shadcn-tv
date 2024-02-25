@@ -18,8 +18,4 @@ export const showcasesData: Showcase[] = [
     { id: '50', name: "Toasts, Drawer", component: <ToastsInTabs /> },
     { id: '60', name: "Loaders", component: <LoadersInTab /> },
     { id: '70', name: "Pickers: Color, Theme, Flow, Time", component: <PickersInTabs /> },
-    
-    // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
-
-export const initialCase = "60";

@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger, TooltipProvider } from "@/components/ui/shadcn";
-import { ButtonRandom, ThemeColorsDemo, GradientColorPickerDemo, SolidColorPickerDemo } from "../../2-demo/70-pickers";
-import { XArrowsDemo1, XArrowsDemo2 } from "../../2-demo/73-demo-xarrow";
+import { ButtonRandom, ThemeColorsDemo, GradientColorPickerDemo, SolidColorPickerDemo, FlipClock } from "../../2-demo/70-pickers";
+import { XArrowsDemo1, XArrowsDemo2 } from "../../2-demo/70-pickers";
 
 export function PickersInTabs() {
     return (
@@ -10,6 +10,7 @@ export function PickersInTabs() {
                 <TabsTrigger value="picker2">Gradient</TabsTrigger>
                 <TabsTrigger value="picker3">Theme</TabsTrigger>
                 <TabsTrigger value="picker4">Data flow</TabsTrigger>
+                <TabsTrigger value="picker5">Clock</TabsTrigger>
             </TabsList>
 
             <TabsContent value="picker1">
@@ -30,9 +31,16 @@ export function PickersInTabs() {
             </TabsContent>
 
             <TabsContent value="picker4">
-                {/* <XArrowsDemo1 /> */}
-                <XArrowsDemo2 />
+                <XArrowsDemo1 />
+                {/* <XArrowsDemo2 /> */}
             </TabsContent>
+
+            <TabsContent value="picker5">
+                <div className="my-8 flex items-center justify-center">
+                    <FlipClock />
+                </div>
+            </TabsContent>
+
         </Tabs>
     );
 }

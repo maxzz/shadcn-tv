@@ -1,26 +1,33 @@
 .wrap {
-	display: flex;
-	gap: .5rem;
 	max-width: 550px;
 	height: 500px;
+
+    display: flex;
+	gap: .5rem;
 	overflow-y: hidden;
 }
 
 .strip {
+	position: relative;
+	padding: 0 .25rem;	
+
+	height: 0;
+    opacity: 0;
+
+	flex: 20%;
+
+	text-align: center;
+	border: 1px solid white;
+	border-radius: 3px;
+
+	transition: flex .3s ease-in-out;
+
+	cursor: pointer;
+	overflow: hidden;
+
 	display: grid;
 	grid-template-rows: 10% 60% 15% 15%;
 	place-items: center;
-	overflow: hidden;
-	cursor: pointer;
-	flex: 20%;
-	height: 0;
-	padding: 0 .25rem;	
-	border: 1px solid white;
-	border-radius: 3px;
-	text-align: center;
-	opacity: 0;
-	transition: flex .3s ease-in-out;
-	position: relative;
 }
 .strip > * {
 	margin: auto;
@@ -38,21 +45,26 @@
 
 .crown {
 	justify-self: center;
+
+	padding-bottom: 1rem;
+
 	width: 50px;
 	font-size: 1.75rem;
 	font-weight: 100;
-	padding-bottom: 1rem;
 	border-bottom: .2vmin solid #000;
 }
 
 .h1 {
+	align-self: center;
+
 	font-size: 2rem;
 	font-weight: 200;
 	line-height: 1;
-	text-orientation: sideways;
+    
+    transform: rotate(-180deg);
 	writing-mode: vertical-rl;
-	transform: rotate(-180deg);
-	align-self: center;
+	text-orientation: sideways;
+	
 	transition: transform .2s ease-in-out;
 }
 .strip:hover .h1 {
@@ -60,8 +72,8 @@
   z-index: 10;
 }
 .h2 {
-	font-size: 1.25rem;
 	padding: .5rem 0;
+	font-size: 1.25rem;
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
 }
@@ -71,14 +83,16 @@
 
 .review {
 	position: absolute;
+	padding: 0 2rem;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	background: ivory;
 	width: 95%;
 	height: 97%;
-	padding: 0 2rem;
+	transform: translate(-50%, -50%);
+
 	color: #000;
+	background: ivory;
+
 	opacity: 0;
 }
 .strip:hover .review {
@@ -87,8 +101,8 @@
 }
 .review p {
 	margin-top: 5rem;
-	text-align: left;
 	font-size: 1rem;
+	text-align: left;
 }
 
 /* 

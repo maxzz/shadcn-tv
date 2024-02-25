@@ -37,7 +37,7 @@ const itemClass = ["one", "two", "three", "four", "five"];
 
 export function RotaingBooksDemo() {
     return (
-        <div className={css["wrap"]}>
+        <div className={`${css["wrap"]} font-serif font-thin text-background`}>
             {
                 books.map((book, idx) => (
                     <div key={idx} className={`${css["strip"]} ${css[itemClass[idx]]}`} style={{ opacity: 1, height: "100%" }}>

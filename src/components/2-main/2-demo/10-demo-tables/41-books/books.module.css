@@ -1,0 +1,106 @@
+.wrap {
+	display: flex;
+	gap: .5rem;
+	max-width: 550px;
+	height: 500px;
+	overflow-y: hidden;
+}
+
+.strip {
+	display: grid;
+	grid-template-rows: 10% 60% 15% 15%;
+	place-items: center;
+	overflow: hidden;
+	cursor: pointer;
+	flex: 20%;
+	height: 0;
+	padding: 0 .25rem;	
+	border: 1px solid white;
+	border-radius: 3px;
+	text-align: center;
+	opacity: 0;
+	transition: flex .3s ease-in-out;
+	position: relative;
+}
+.strip > * {
+	margin: auto;
+}
+.strip:hover {
+	transition: all .5s ease;
+	flex: 100%;
+}
+
+.one {background: khaki;}
+.two {background: lightcoral;}
+.three {background: peru;}
+.four {background: wheat;}
+.five {background: tan;}
+
+.crown {
+	justify-self: center;
+	width: 50px;
+	font-size: 1.75rem;
+	font-weight: 100;
+	padding-bottom: 1rem;
+	border-bottom: .2vmin solid #000;
+}
+
+h1 {
+	font-size: 2rem;
+	font-weight: 200;
+	line-height: 1;
+	text-orientation: sideways;
+	writing-mode: vertical-rl;
+	transform: rotate(-180deg);
+	align-self: center;
+	transition: transform .2s ease-in-out;
+}
+.strip:hover h1 {
+  transform: rotate(-90deg) translateX(10rem);
+  z-index: 10;
+}
+h2 {
+	font-size: 1.25rem;
+	padding: .5rem 0;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+h3 {
+	font-size: 1.5vmin;
+}
+
+.review {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: ivory;
+	width: 95%;
+	height: 97%;
+	padding: 0 2rem;
+	color: #000;
+	opacity: 0;
+}
+.strip:hover .review {
+	transition: .5s ease-in-out;
+	opacity: 1;
+}
+.review p {
+	margin-top: 5rem;
+	text-align: left;
+	font-size: 1rem;
+}
+
+
+body {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+    font-family: 'EB Garamond', serif;
+	background: #1a1a1a;
+}
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}

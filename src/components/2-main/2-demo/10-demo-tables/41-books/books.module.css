@@ -46,18 +46,21 @@
 .crown {
 	justify-self: center;
 
+	padding-top: 0.5rem;
 	padding-bottom: 1rem;
 
-	width: 50px;
-	font-size: 1.75rem;
+    width: 50px;
+	font-size: 1.4rem;
+    line-height: normal;
 	font-weight: 100;
-	border-bottom: .2vmin solid #000;
+
+    border-bottom: .2vmin solid #000;
 }
 
 .h1 {
 	align-self: center;
 
-	font-size: 2rem;
+	font-size: 1.4rem;
 	font-weight: 200;
 	line-height: 1;
     
@@ -73,12 +76,13 @@
 }
 .h2 {
 	padding: .5rem 0;
-	font-size: 1.25rem;
+	font-size: 1rem;
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
 }
 .h3 {
-	font-size: 1.5vmin;
+	/* font-size: 1.5vmin; */
+	font-size: .5rem;
 }
 
 .review {
@@ -101,7 +105,7 @@
 }
 .review p {
 	margin-top: 5rem;
-	font-size: 1rem;
+	font-size: 0.75rem;
 	text-align: left;
 }
 

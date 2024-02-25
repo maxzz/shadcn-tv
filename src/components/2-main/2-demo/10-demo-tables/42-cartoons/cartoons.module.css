@@ -16,12 +16,13 @@ body {
 
 .container {
 	position: relative;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	gap: 1em;
 	width: 800px;
 	height: 500px;
 	transition: all 400ms;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	gap: 1em;
 }
 
 .container:hover .box {
@@ -30,9 +31,11 @@ body {
 
 .box {
 	position: relative;
-	background: var(--img) center center;
-	background-size: cover;
 	transition: all 400ms;
+
+	background-size: cover;
+	background: var(--img) center center;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -72,20 +75,25 @@ body {
 
 .box::after {
 	content: attr(data-text);
+
 	position: absolute;
-	bottom: 20px;
-	background: #000;
-	color: #fff;
 	padding: 10px 10px 10px 14px;
+	bottom: 20px;
+	transform: translateY(60px);
+	transition: all 400ms;
+
+	color: #fff;
+	background: #000;
+    
 	letter-spacing: 4px;
 	text-transform: uppercase;
-	transform: translateY(60px);
-	opacity: 0;
-	transition: all 400ms;
+	
+    opacity: 0;
 }
 
 .box:hover::after {
 	transform: translateY(0);
-	opacity: 1;
 	transition-delay: 400ms;
+
+    opacity: 1;
 }

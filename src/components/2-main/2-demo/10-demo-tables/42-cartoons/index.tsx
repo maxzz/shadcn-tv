@@ -2,7 +2,7 @@ import css from "./cartoons.module.css"; // https://codepen.io/pleasedonotdistur
 
 export function CartoonsDemo() {
     return (
-        <div className={css["container"]}>
+        <div className={`${css["container"]} py-8`}>
             <div className={`${css["box"]} ${css["box-1"]}`} style={{ "--img": "url(https://i.postimg.cc/sgBkfbtx/img-1.jpg)" }} data-text="Renji"></div>
             <div className={`${css["box"]} ${css["box-2"]}`} style={{ "--img": "url(https://i.postimg.cc/3RZ6bhDS/img-2.jpg)" }} data-text="Sora"></div>
             <div className={`${css["box"]} ${css["box-3"]}`} style={{ "--img": "url(https://i.postimg.cc/DZhHg0m4/img-3.jpg)" }} data-text="Kaito"></div>

@@ -1,5 +1,7 @@
 import { HTMLAttributes } from 'react';
-import { LoaderP11, LoaderP12, LoaderP13 } from '@/components/ui/loaders';
+import { LoaderP11 } from './p-loader1';
+import { LoaderP12 } from './p-loader2';
+import { LoaderP13 } from './p-loader3';
 import { classNames } from '@/utils';
 
 export function LoadersTest({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {

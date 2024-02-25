@@ -4,8 +4,8 @@ import { DemoTreeWithOptions } from "../2-demo/20-demo-tree";
 import { ResizableDemo } from "../2-demo/30-demo-resizable";
 import { ControlsInTabs } from "./cases/40-controls";
 import { ToastsInTabs } from "./cases/50-toasts";
-import { PickersInTabs } from "./cases/60-pickers";
-import { LoadersInTab } from "./cases/70-loaders";
+import { PickersInTabs } from "./cases/70-pickers";
+import { LoadersInTab } from "./cases/60-loaders";
 
 export * from "./cases/types";
 export * from "./showcases-view";
@@ -16,10 +16,10 @@ export const showcasesData: Showcase[] = [
     { id: '30', name: "Resizable", component: <ResizableDemo /> },
     { id: '40', name: "Switches, Carousel, Pagination, Skeleton, Charts", component: <ControlsInTabs /> },
     { id: '50', name: "Toasts, Drawer", component: <ToastsInTabs /> },
-    { id: '70', name: "Loaders", component: <LoadersInTab /> },
-    { id: '60', name: "Pickers", component: <PickersInTabs /> },
+    { id: '60', name: "Loaders", component: <LoadersInTab /> },
+    { id: '70', name: "Pickers", component: <PickersInTabs /> },
     
     // { id: '63', name: "Splitter", component: <DemoSplitter /> },
 ];
 
-export const initialCase = "10";
+export const initialCase = "60";

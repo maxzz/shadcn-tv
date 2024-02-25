@@ -1,6 +1,5 @@
-import { LoaderDotsRing, SpinnerRadial, SpinnerDiv, SpinnerSvg, SpinnerEmoji, Spinner7, SpinnerCircles, SpinnerSpherees } from "@/components/ui/loaders";
 import { Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { LoadersTest, Spinner9 } from "../../2-demo/60-demo-loaders";
+import { LoaderDotsRing, LoadersTest, Spinner7, Spinner9, SpinnerCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg } from "../../2-demo/60-demo-loaders";
 import { FlipClock } from "../../2-demo/71-demo-flip-clock";
 
 export function LoadersInTab() {

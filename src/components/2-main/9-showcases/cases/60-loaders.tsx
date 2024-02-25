@@ -1,9 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { LoaderDotsRing, LoadersTest, Spinner7, Spinner9, SpinnerCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg } from "../../2-demo/60-demo-loaders";
+import { BubblesDemo, LoaderDotsRing, LoadersTest, Spinner7, Spinner9, SpinnerCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg } from "../../2-demo/60-demo-loaders";
 
 export function LoadersInTab() {
     return (
-        <Tabs defaultValue="loaders1">
+        <Tabs defaultValue="loaders8">
             <TabsList className={TabsListWrapClasses}>
                 <TabsTrigger value="loaders1">Loaders</TabsTrigger>
                 <TabsTrigger value="loaders2">Circle loader</TabsTrigger>
@@ -12,6 +12,7 @@ export function LoadersInTab() {
                 <TabsTrigger value="loaders5">Spinner7</TabsTrigger>
                 <TabsTrigger value="loaders6">Circles</TabsTrigger>
                 <TabsTrigger value="loaders7">Spheres</TabsTrigger>
+                <TabsTrigger value="loaders8">Bubbles</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -50,6 +51,12 @@ export function LoadersInTab() {
             <TabsContent value="loaders7">
                 <div className="my-8 flex items-center justify-center">
                     <SpinnerSpherees />
+                </div>
+            </TabsContent>
+
+            <TabsContent value="loaders8">
+                <div className="my-8 flex items-center justify-center">
+                    <BubblesDemo />
                 </div>
             </TabsContent>
 

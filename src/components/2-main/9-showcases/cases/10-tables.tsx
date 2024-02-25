@@ -5,10 +5,10 @@ export function TableInTabs() {
     return (
         <Tabs defaultValue="table4">
             <TabsList>
-                <TabsTrigger value="table1">Simple table</TabsTrigger>
-                <TabsTrigger value="table2">Data table</TabsTrigger>
-                <TabsTrigger value="table3">Sticky headers table</TabsTrigger>
-                <TabsTrigger value="table4">Skew table</TabsTrigger>
+                <TabsTrigger value="table1">Simple</TabsTrigger>
+                <TabsTrigger value="table2">Data</TabsTrigger>
+                <TabsTrigger value="table3">Sticky headers</TabsTrigger>
+                <TabsTrigger value="table4">Skew</TabsTrigger>
             </TabsList>
 
             <TabsContent value="table1">

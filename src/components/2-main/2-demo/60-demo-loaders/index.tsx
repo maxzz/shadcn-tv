@@ -8,4 +8,4 @@ export * from "./44-spinner-emoji";
 export * from "./50-spinner7";
 export * from "./60-spinner-circles";
 export * from "./70-spinner-sphere";
-export * from "./43-spinner9";
+export * from "./80-bubbles";

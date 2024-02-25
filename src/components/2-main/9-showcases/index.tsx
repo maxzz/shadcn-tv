@@ -8,7 +8,7 @@ import { PickersInTabs } from "./cases/70-pickers";
 import { LoadersInTab } from "./cases/60-loaders";
 
 export * from "./cases/types";
-export * from "./showcases-view";
+export * from "./view";
 
 export const showcasesData: Showcase[] = [
     { id: '10', name: "Tables", component: <TableInTabs /> },

@@ -33,17 +33,19 @@ const books = [
     }
 ];
 
-export function RotaingTable() {
+const itemClass = ["one", "two", "three", "four", "five"];
+
+export function RotaingBooksDemo() {
     return (
-        <div className="wrap">
+        <div className={css["wrap"]}>
             {
                 books.map((book, idx) => (
-                    <div key={idx} className={`strip ${idx + 1}`}>
-                        <p className="crown">♔</p>
-                        <h1>{book.title}</h1>
-                        <h2>{book.author}</h2>
-                        <h3>{book.publisher}</h3>
-                        <div className="review">
+                    <div key={idx} className={`${css["strip"]} ${css[itemClass[idx]]}`} style={{ opacity: 1, height: "100%" }}>
+                        <p className={css["crown"]}>♔</p>
+                        <div className={css["h1"]}>{book.title}</div>
+                        <div className={css["h2"]}>{book.author}</div>
+                        <div className={css["h3"]}>{book.publisher}</div>
+                        <div className={css["review"]}>
                             <p>{book.review}</p>
                         </div>
                     </div>
@@ -52,3 +54,25 @@ export function RotaingTable() {
         </div>
     );
 }
+
+/*
+gsap.to(".strip", {
+    height: "100%",
+    opacity: 1,
+    duration: 1.5,
+    delay: .5,
+    ease: "expo.out",
+    stagger: {
+        ease: "none",
+        amount: 1.5,
+    }
+})
+gsap.from("h1, h2, h3, h4", {
+    opacity: 0,
+    duration: 1,
+    delay: 1,
+    stagger: {
+        amount: 1.5,
+    }
+});
+*/

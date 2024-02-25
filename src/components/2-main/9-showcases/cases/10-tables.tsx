@@ -1,14 +1,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { SimpleTableDemo, DataTableDemo, TablesWithStyckyHeaderModules, SkewTable } from "../../2-demo/10-demo-tables";
+import { SimpleTableDemo, DataTableDemo, TablesWithStyckyHeaderModules, SkewTable, RotaingBooksDemo } from "../../2-demo/10-demo-tables";
 
 export function TableInTabs() {
     return (
-        <Tabs defaultValue="table4">
+        <Tabs defaultValue="table5">
             <TabsList>
                 <TabsTrigger value="table1">Simple</TabsTrigger>
                 <TabsTrigger value="table2">Data</TabsTrigger>
                 <TabsTrigger value="table3">Sticky headers</TabsTrigger>
                 <TabsTrigger value="table4">Skew</TabsTrigger>
+                <TabsTrigger value="table5">Books</TabsTrigger>
             </TabsList>
 
             <TabsContent value="table1">
@@ -25,6 +26,10 @@ export function TableInTabs() {
 
             <TabsContent value="table4">
                 <SkewTable />
+            </TabsContent>
+
+            <TabsContent value="table5">
+                <RotaingBooksDemo />
             </TabsContent>
         </Tabs>
     );

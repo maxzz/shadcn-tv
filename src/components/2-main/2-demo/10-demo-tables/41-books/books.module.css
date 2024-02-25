@@ -45,7 +45,7 @@
 	border-bottom: .2vmin solid #000;
 }
 
-h1 {
+.h1 {
 	font-size: 2rem;
 	font-weight: 200;
 	line-height: 1;
@@ -55,17 +55,17 @@ h1 {
 	align-self: center;
 	transition: transform .2s ease-in-out;
 }
-.strip:hover h1 {
+.strip:hover .h1 {
   transform: rotate(-90deg) translateX(10rem);
   z-index: 10;
 }
-h2 {
+.h2 {
 	font-size: 1.25rem;
 	padding: .5rem 0;
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
 }
-h3 {
+.h3 {
 	font-size: 1.5vmin;
 }
 

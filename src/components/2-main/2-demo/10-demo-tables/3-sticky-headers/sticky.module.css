@@ -1,13 +1,17 @@
+/* -------------------------- c -------------------------- */
+/* common: should be under some class name otherwise tags won't be affected */
+
 .container table {
+    --border-color: #545d9e;
+
     border-spacing: 0;
-    --sticky-cell-border-color: #545d9e;
 }
 
 .container th,
 .container td {
-    border: 1px solid #2e3252;
     padding: 8px;
     text-align: left;
+    border: 1px solid #2e3252;
 }
 
 .container th {
@@ -15,76 +19,52 @@
 }
 
 .container td {
-    background-color: #212335;
     color: #bdbddb;
+    background-color: #212335;
 }
-
-
 
 /* -------------------------- 1 -------------------------- */
-
 /* sticky-header-row */
-/* 
-.sticky-header-row .container {
-    width: fit-content;
-    height: 300px;
-    overflow: auto;
-}
- */
+
 .sticky-header-row th[scope="col"] {
     position: sticky;
     top: 0;
-    border-bottom-color: var(--sticky-cell-border-color);
+    border-bottom-color: var(--border-color);
 }
-
-
 
 /* -------------------------- 2 -------------------------- */
-
 /* sticky-first-column */
-/* 
-.sticky-first-column .container {
-    width: 300px;
-    overflow: auto;
-}
- */
+
 .sticky-first-column th[scope="col"]:first-child,
 .sticky-first-column th[scope="row"] {
     position: sticky;
     left: 0;
-    border-right-color: var(--sticky-cell-border-color);
+    border-right-color: var(--border-color);
 }
-
-
 
 /* -------------------------- 3 -------------------------- */
-
 /* sticky-header-and-first-column */
-/* 
-.sticky-header-and-first-column .container {
-    width: 400px;
-    height: 400px;
-    overflow: auto;
-}
- */
+
 /* sticky header */
 .sticky-header-and-first-column th[scope="col"] {
     position: sticky;
     top: 0;
-    border-bottom-color: var(--sticky-cell-border-color);
+    border-bottom-color: var(--border-color);
 }
+
 /* sticky first column */
 .sticky-header-and-first-column th[scope="row"] {
     position: sticky;
     left: 0;
-    border-right-color: var(--sticky-cell-border-color);
+    border-right-color: var(--border-color);
 }
+
 /* stick first column header to top, left and give z-index to always render it on top */
 .sticky-header-and-first-column th[scope="col"]:first-child {
     left: 0;
     z-index: 1;
-    border-right-color: var(--sticky-cell-border-color);
-    border-bottom-color: var(--sticky-cell-border-color);
+    border-right-color: var(--border-color);
+    border-bottom-color: var(--border-color);
 }
 
 

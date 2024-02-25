@@ -1,33 +1,23 @@
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/shadcn";
-import { Input } from "@/components/ui/shadcn";
-import { Label } from "@/components/ui/shadcn";
-import { Button } from "@/components/ui/shadcn";
+import { Button, Input, Label } from "@/components/ui/shadcn";
+import * as D from "@/components/ui/shadcn";
 
 export function DialogDemo() {
     return (
-        <Dialog>
-            <DialogTrigger asChild>
+        <D.Dialog>
+            <D.DialogTrigger asChild>
                 <Button variant="outline">Edit Profile</Button>
-            </DialogTrigger>
+            </D.DialogTrigger>
 
-            <DialogContent className="sm:max-w-[425px]">
+            <D.DialogContent className="sm:max-w-[425px]">
 
-                <DialogHeader>
-                    <DialogTitle>
+                <D.DialogHeader>
+                    <D.DialogTitle>
                         Edit profile
-                    </DialogTitle>
-                    <DialogDescription>
+                    </D.DialogTitle>
+                    <D.DialogDescription>
                         Make changes to your profile here. Click save when you're done.
-                    </DialogDescription>
-                </DialogHeader>
+                    </D.DialogDescription>
+                </D.DialogHeader>
 
                 <div className="grid gap-4 py-4">
 
@@ -47,13 +37,13 @@ export function DialogDemo() {
 
                 </div>
 
-                <DialogFooter>
+                <D.DialogFooter>
                     <Button type="submit">
                         Save changes
                     </Button>
-                </DialogFooter>
+                </D.DialogFooter>
 
-            </DialogContent>
-        </Dialog>
+            </D.DialogContent>
+        </D.Dialog>
     );
 }

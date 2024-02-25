@@ -1,5 +1,5 @@
-import { DemoTreeWithOptions } from '../2-demo/20-demo-tree';
-import { sectionBackgroundClasses } from './02-general/10-convert-form';
+import { DemoTreeWithOptions } from '../../2-demo/20-demo-tree';
+import { sectionBackgroundClasses } from '../1-top/01-convert-form';
 
 export function ButtomFixedSection() {
     return (

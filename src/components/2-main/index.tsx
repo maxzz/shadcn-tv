@@ -1,7 +1,6 @@
 import { ShowcasesView, showcasesData } from './9-showcases';
 import { ScrollArea } from '@/components/ui/shadcn';
-import { ButtomFixedSection } from './1-top-bottom-rows/70-bottom-fixed-section';
-import { ConvertForm } from './1-top-bottom-rows/02-general/10-convert-form';
+import { ButtomFixedSection, ConvertForm } from './1-top-bottom-rows';
 
 export function Section2_Main() {
     return (

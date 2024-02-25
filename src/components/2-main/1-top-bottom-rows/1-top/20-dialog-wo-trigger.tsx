@@ -1,35 +1,26 @@
 import { useState } from "react";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    // DialogTrigger,
-} from "@/components/ui/shadcn";
-import { Input } from "@/components/ui/shadcn";
-import { Label } from "@/components/ui/shadcn";
-import { Button } from "@/components/ui/shadcn";
+import { Button, Input, Label } from "@/components/ui/shadcn";
+import * as D from "@/components/ui/shadcn";
 
 export function DialogDemoWoTrigger() {
     const [isOpen, setIsOpen] = useState(false);
     return (<>
         <Button variant="outline" onClick={() => setIsOpen(true)}>Demo dialog</Button>
 
-        <Dialog open={isOpen} onOpenChange={() => setIsOpen(false)}>
-            {/* <DialogTrigger asChild> <Button variant="outline">Demo dialog</Button> </DialogTrigger> */}
+        <D.Dialog open={isOpen} onOpenChange={() => setIsOpen(false)}>
+            {/* <D.DialogTrigger asChild> <Button variant="outline">Demo dialog</Button> </D.DialogTrigger> */}
 
-            <DialogContent className="sm:max-w-[425px]">
+            <D.DialogContent className="sm:max-w-[425px]">
 
-                <DialogHeader>
-                    <DialogTitle>
+                <D.DialogHeader>
+                    <D.DialogTitle>
                         Demo dialog
-                    </DialogTitle>
-                    <DialogDescription>
+                    </D.DialogTitle>
+                    
+                    <D.DialogDescription>
                         Make changes to your profile here. Click save when you're done.
-                    </DialogDescription>
-                </DialogHeader>
+                    </D.DialogDescription>
+                </D.DialogHeader>
 
                 <div className="grid gap-4 py-4">
 
@@ -49,13 +40,13 @@ export function DialogDemoWoTrigger() {
 
                 </div>
 
-                <DialogFooter>
+                <D.DialogFooter>
                     <Button type="submit" onClick={() => setIsOpen(false)}>
                         Save changes
                     </Button>
-                </DialogFooter>
+                </D.DialogFooter>
 
-            </DialogContent>
-        </Dialog>
+            </D.DialogContent>
+        </D.Dialog>
     </>);
 }

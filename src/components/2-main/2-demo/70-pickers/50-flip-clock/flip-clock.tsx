@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, HTMLAttributes } from "react";
 import css from "./flip-clock.module.css";
 import { Button } from "@/components/ui/shadcn";
+import { classNames } from "@/utils";
 
 export function FlipClock() {
     const [count, setCount] = useState(0);
@@ -36,29 +37,45 @@ export function FlipClock() {
             </div> */}
 
             <div className={css["flip-clock"]} data-date="2017-02-11">
-                <span className={css["flip-clock__piece"]} style={{}}>
-                    <Tracker newNumber={count} />
+                <Tracker newNumber={time.days} />
+                <Tracker newNumber={time.hours} className={css["flip"]} />
+                <Tracker newNumber={time.minutes} className={css["flip"]} />
+                <Tracker newNumber={time.seconds} className={css["flip"]} />
+
+                {/* <span className={css["flip-clock__piece"]} style={{}}>
+                    <Two newNumber={count} />
                     <span className={css["flip-clock__slot"]}>Days</span>
                 </span>
                 <span className={`${css["flip-clock__piece"]} ${css["flip"]}`} style={{}}>
-                    <Tracker newNumber={7} />
+                    <Two newNumber={7} />
                     <span className={css["flip-clock__slot"]}>Hours</span>
                 </span>
                 <span className={`${css["flip-clock__piece"]} ${css["flip"]}`} style={{}}>
-                    <Tracker newNumber={46} />
+                    <Two newNumber={46} />
                     <span className={css["flip-clock__slot"]}>Minutes</span>
                 </span>
                 <span className={`${css["flip-clock__piece"]} ${css["flip"]}`} style={{}}>
-                    <Tracker newNumber={20} />
+                    <Two newNumber={20} />
                     <span className={css["flip-clock__slot"]}>Seconds</span>
-                </span>
+                </span> */}
             </div>
 
         </div>
     );
 }
 
-function Tracker({ newNumber }: { newNumber: number; }) {
+const trackers = ["Days", "Hours", "Minutes", "Seconds"];
+
+function Tracker({ newNumber, className, ...rest }: { newNumber: number; } & HTMLAttributes<HTMLSpanElement>) {
+    return (
+        <span className={classNames(css["flip-clock__piece"], className)} style={{}} {...rest}>
+            <Two newNumber={newNumber} />
+            <span className={css["flip-clock__slot"]}>Days</span>
+        </span>
+    );
+}
+
+function Two({ newNumber }: { newNumber: number; }) {
 
     const [currentNumber, setCurrentNumber] = useState(newNumber);
     const [previousNumber, setPreviousNumber] = useState(newNumber);

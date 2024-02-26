@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/shadcn";
 
 export function FlipClock() {
     const [count, setCount] = useState(0);
-    const [isActivated, setIsActivated] = useState(false);
+    const [isActivated, setIsActivated] = useState(true);
 
     const currentTime = Date.now();
     const time = {
@@ -22,6 +22,7 @@ export function FlipClock() {
         const interval = setInterval(() => {
             setCount((count) => count + 1);
         }, 1000);
+
         return () => clearInterval(interval);
     }, [isActivated]);
 
@@ -36,19 +37,19 @@ export function FlipClock() {
 
             <div className={css["flip-clock"]} data-date="2017-02-11">
                 <span className={css["flip-clock__piece"]} style={{}}>
-                    <Tracker front={count} back={count + 1} />
+                    <Tracker newNumber={count} />
                     <span className={css["flip-clock__slot"]}>Days</span>
                 </span>
                 <span className={`${css["flip-clock__piece"]} ${css["flip"]}`} style={{}}>
-                    <Tracker front={7} back={7} />
+                    <Tracker newNumber={7} />
                     <span className={css["flip-clock__slot"]}>Hours</span>
                 </span>
                 <span className={`${css["flip-clock__piece"]} ${css["flip"]}`} style={{}}>
-                    <Tracker front={46} back={0} />
+                    <Tracker newNumber={46} />
                     <span className={css["flip-clock__slot"]}>Minutes</span>
                 </span>
                 <span className={`${css["flip-clock__piece"]} ${css["flip"]}`} style={{}}>
-                    <Tracker front={20} back={21} />
+                    <Tracker newNumber={20} />
                     <span className={css["flip-clock__slot"]}>Seconds</span>
                 </span>
             </div>
@@ -57,11 +58,24 @@ export function FlipClock() {
     );
 }
 
-function Tracker({ front, back }: { front: number, back: number; }) {
+function Tracker({ newNumber }: { newNumber: number; }) {
+
+    const [currentNumber, setCurrentNumber] = useState(newNumber);
+    const [previousNumber, setPreviousNumber] = useState(newNumber);
+
+    useEffect(() => {
+        if (currentNumber === newNumber) {
+            return;
+        }
+
+        setPreviousNumber(currentNumber);
+        setCurrentNumber(newNumber);
+    }, [newNumber]);
+
     return <span className={`${css["flip-clock__card"]} ${css["flip-card"]}`}>
-        <b className={css["flip-card__top"]}>{front}</b>
-        <b className={css["flip-card__bottom"]} data-value={front} />
-        <b className={css["flip-card__back"]} data-value={back} />
-        <b className={css["flip-card__back-bottom"]} data-value={back} />
+        <b className={css["flip-card__top"]}>{currentNumber}</b>
+        <b className={css["flip-card__bottom"]} data-value={currentNumber} />
+        <b className={css["flip-card__back"]} data-value={previousNumber} />
+        <b className={css["flip-card__back-bottom"]} data-value={previousNumber} />
     </span>;
 }

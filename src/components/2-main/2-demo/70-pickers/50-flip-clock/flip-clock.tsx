@@ -1,7 +1,7 @@
-import { useState, useEffect, HTMLAttributes, useRef } from "react";
-import css from "./flip-clock.module.css";
+import { useState, useEffect, HTMLAttributes, useRef, useMemo } from "react";
 import { Button } from "@/components/ui/shadcn";
 import { classNames } from "@/utils";
+import css from "./flip-clock.module.css";
 
 function Tracker({ newNumber, label, className, ...rest }: { newNumber: number; label: string; } & HTMLAttributes<HTMLSpanElement>) {
     const ref = useRef<HTMLSpanElement>(null);
@@ -42,31 +42,26 @@ function Two({ currentNumber, previousNumber }: { currentNumber: number; previou
 }
 
 const trackers = ["Days", "Hours", "Minutes", "Seconds"];
-function getTimeArray(currentTime: number): number[] {
+
+function getTimeArray(time: number): number[] {
     return [
-        Math.floor(currentTime / (1000 * 60 * 60 * 24)),    // days
-        Math.floor((currentTime / (1000 * 60 * 60)) % 24),  // hours
-        Math.floor((currentTime / 1000 / 60) % 60),         // minutes
-        Math.floor((currentTime / 1000) % 60)               // seconds
+        Math.floor(time / (1000 * 60 * 60 * 24)),    // days
+        Math.floor((time / (1000 * 60 * 60)) % 24),  // hours
+        Math.floor((time / 1000 / 60) % 60),         // minutes
+        Math.floor((time / 1000) % 60),              // seconds
     ];
 }
 
 export function FlipClock() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(() => Date.now());
     const [isActivated, setIsActivated] = useState(true);
-
-    const currentTime = Date.now();
-    const time = getTimeArray(currentTime);
+    const timeArr = useMemo(() => getTimeArray(count), [count]);
 
     useEffect(() => {
         if (!isActivated) {
             return;
         }
-
-        const interval = setInterval(() => {
-            setCount((count) => count + 1);
-        }, 1000);
-
+        const interval = setInterval(() => setCount((count) => count + 1000), 1000);
         return () => clearInterval(interval);
     }, [isActivated]);
 
@@ -80,10 +75,10 @@ export function FlipClock() {
             </div> */}
 
             <div className={css["flip-clock"]} data-date="2017-02-11">
-                <Tracker label={trackers[0]} newNumber={time[0]} />
-                <Tracker label={trackers[1]} newNumber={time[1]} />
-                <Tracker label={trackers[2]} newNumber={time[2]} />
-                <Tracker label={trackers[3]} newNumber={time[3]} />
+                <Tracker label={trackers[0]} newNumber={timeArr[0]} />
+                <Tracker label={trackers[1]} newNumber={timeArr[1]} />
+                <Tracker label={trackers[2]} newNumber={timeArr[2]} />
+                <Tracker label={trackers[3]} newNumber={timeArr[3]} />
             </div>
 
         </div>

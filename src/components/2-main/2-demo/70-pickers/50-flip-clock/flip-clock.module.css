@@ -11,9 +11,9 @@ body {
 } */
 
 .flip-clock {
-    text-align: center;
     perspective: 600px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .flip-clock *,
@@ -34,15 +34,9 @@ body {
 }
 
 .flip-clock__slot {
+    display: block;
     font-size: 1rem;
     line-height: 1.5;
-    display: block;
-    /*
-    //position: relative;
-    //top: -1.6em;
-    z-index: 10;
-    //color: #FFF;
-  */
 }
 
 .flip-card {
@@ -64,31 +58,36 @@ body {
 }
 
 /*////////////////////////////////////////*/
+
 .flip-card__top,
 .flip-card__bottom,
 .flip-card__back-bottom,
 .flip-card__back::before,
 .flip-card__back::after {
     display: block;
-    height: 0.72em;
-    color: #ccc;
-    background: #222;
     padding: 0.23em 0.25em 0.4em;
-    border-radius: 0.15em 0.15em 0 0;
+    width: 1.8em;
+    height: 0.72em;
+
     backface-visibility: hidden;
     transform-style: preserve-3d;
-    width: 1.8em;
+
+    color: #ccc;
+    background: #222;
+    border-radius: 0.15em 0.15em 0 0;
 }
 
 .flip-card__bottom,
 .flip-card__back-bottom {
-    color: #FFF;
     position: absolute;
-    top: 50%;
     left: 0;
-    border-top: solid 1px #000;
+    top: 50%;
+    
+    color: #FFF;
     background: #393939;
+    border-top: solid 1px #000;
     border-radius: 0 0 0.15em 0.15em;
+    
     pointer-events: none;
     overflow: hidden;
     z-index: 2;
@@ -112,9 +111,10 @@ body {
 
 .flip-card__back {
     position: absolute;
+    left: 0%;
     top: 0;
     height: 100%;
-    left: 0%;
+
     pointer-events: none;
 }
 
@@ -126,36 +126,15 @@ body {
 
 .flip .flip-card__back::before {
     z-index: 1;
-    -webkit-animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35);
-    animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35);
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
     transform-origin: center bottom;
+    animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35);
+    animation-fill-mode: both;
 }
 
 .flip .flip-card__bottom {
     transform-origin: center top;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation: flipBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1);
     animation: flipBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1);
-}
-
-@-webkit-keyframes flipTop {
-    0% {
-        transform: rotateX(0deg);
-        z-index: 2;
-    }
-
-    0%,
-    99% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: rotateX(-90deg);
-        opacity: 0;
-    }
+    animation-fill-mode: both;
 }
 
 @keyframes flipTop {
@@ -172,26 +151,6 @@ body {
     100% {
         transform: rotateX(-90deg);
         opacity: 0;
-    }
-}
-
-@-webkit-keyframes flipBottom {
-
-    0%,
-    50% {
-        z-index: -1;
-        transform: rotateX(90deg);
-        opacity: 0;
-    }
-
-    51% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 1;
-        transform: rotateX(0deg);
-        z-index: 5;
     }
 }
 

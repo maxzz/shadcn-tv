@@ -52,8 +52,8 @@ function getTimeArray(time: number): number[] {
     ];
 }
 
-export function FlipClock() {
-    const [count, setCount] = useState(() => Date.now());
+export function FlipClock({initialTime, add = false}: {initialTime: number; add?: boolean;}) {
+    const [count, setCount] = useState(initialTime);
     const [isActivated, setIsActivated] = useState(true);
     const timeArr = useMemo(() => getTimeArray(count), [count]);
 
@@ -61,7 +61,7 @@ export function FlipClock() {
         if (!isActivated) {
             return;
         }
-        const interval = setInterval(() => setCount((count) => count + 1000), 1000);
+        const interval = setInterval(() => setCount((count) => count + (add ? 1: -1) * 1000), 1000);
         return () => clearInterval(interval);
     }, [isActivated]);
 

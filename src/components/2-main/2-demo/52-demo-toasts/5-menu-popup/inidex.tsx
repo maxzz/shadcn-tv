@@ -1,6 +1,6 @@
-import { Button } from '../../../ui/shadcn';
-import { IconMenuHamburger } from '../../../ui/icons/normal';
-import { DropdownMenu, MenuItemType } from '../../../ui/ui-dropdown-menu';
+import { Button } from '../../../../ui/shadcn';
+import { IconMenuHamburger } from '../../../../ui/icons/normal';
+import { DropdownMenu, MenuItemType } from '../../../../ui/ui-dropdown-menu';
 
 const topMenuItems: readonly MenuItemType[] = [
     {
@@ -12,9 +12,9 @@ const topMenuItems: readonly MenuItemType[] = [
     },
 ] as const;
 
-const containerClasses = "w-20";
+const containerClasses = "w-40";
 
-export function FontInputTitleBar() {
+export function MenuDropdownDemo() {
     function onCommand(id: string) {
         switch (id as (typeof topMenuItems)[number]['id']) {
             case "new-file":
@@ -27,20 +27,17 @@ export function FontInputTitleBar() {
     }
     return (
         <div className="py-1 select-none flex items-center justify-between">
-            <div className="self-end">
-                Demo app
-            </div>
-
             <div className="">
                 <DropdownMenu
                     trigger={
-                        <Button variant={'outline'} size={'sm'} className="px-2" >
-                            <IconMenuHamburger className="w-4 h-4" />
+                        <Button variant="outline" className="px-2 flex items-center gap-1" >
+                            <IconMenuHamburger className="size-4 mt-0.5" />
+                            Dropdown
                         </Button>
                     }
                     items={topMenuItems}
                     containerClasses={containerClasses}
-                    menuContentProps={{ sideOffset: 1 }}
+                    menuContentProps={{ sideOffset: 4, align: "start" }}
                     onCommand={onCommand}
                 />
             </div>

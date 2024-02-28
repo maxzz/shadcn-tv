@@ -1,6 +1,6 @@
 # About
 
-Shardcn-tv is a clone of shardcn manually installed components. 
+***shadcn-tv** is a clone of shadcn manually installed components.*
 
 The main difference is that component styles are formatted to make customization easier.
 For example, instead of having a long line with many Tailwind classes, it is much easier to make changes if they are on separate lines.
@@ -16,4 +16,4 @@ All formatted shardcn components are located in the ```src/comComponents/ui/shad
 * add twMerge
 * add tailwind-plugin-shadcn.ts
   
-![](src/assets/previews/2024-01-09_15-12-21.png)
+![](src/assets/previews/2024-02-27_16-52-51.png)

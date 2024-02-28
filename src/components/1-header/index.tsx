@@ -9,14 +9,11 @@ export function Section0_Header() {
                     <IconAppLogo className="w-7 h-7 stroke-none fill-slate-600 -rotate-90" />
                 </div>
 
-                <div className="text-2xl font-extralight tracking-tighter text-slate-600">
-                    use cases for 
-                </div>
                 <div className="text-2xl font-extralight tracking-tighter text-blue-600">
-                    shadcn
+                    shradcn
                 </div>
                 <div className="text-2xl font-extralight tracking-tighter text-slate-600">
-                    components
+                    components showroom
                 </div>
             </div>
 

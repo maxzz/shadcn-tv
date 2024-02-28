@@ -1,5 +1,6 @@
 import { DrawerDemo, MenubarDemo, RadixToastDemo, SonnerDemo } from "../../2-demo/52-demo-toasts";
 import { MenuDropdownDemo } from "../../2-demo/52-demo-toasts/5-menu-popup/inidex";
+import { DialogDemoWoTrigger } from "../../2-demo/52-demo-toasts/6-dialog/20-dialog-wo-trigger";
 
 export function ToastsInTabs() {
     return (
@@ -12,6 +13,7 @@ export function ToastsInTabs() {
             <div className="flex items-center gap-2">
                 <MenubarDemo />
                 <MenuDropdownDemo />
+                <DialogDemoWoTrigger />
             </div>
         </div>
     );

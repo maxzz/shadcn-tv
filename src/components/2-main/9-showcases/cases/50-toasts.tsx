@@ -13,6 +13,8 @@ export function ToastsInTabs() {
             <div className="flex items-center gap-2">
                 <MenubarDemo />
                 <MenuDropdownDemo />
+            </div>
+            <div className="flex items-center gap-2">
                 <DialogDemoWoTrigger />
             </div>
         </div>

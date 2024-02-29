@@ -1,0 +1,109 @@
+/* https://codepen.io/vitor-siqueira/pen/PrrLwr '100 days css Responding Button N° 082' */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600');
+
+/* body,
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #BDCEDB;
+    overflow: hidden;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+} */
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+
+    perspective: 150px;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container input {
+    /* display: none; */
+
+    &:checked~.button {
+        -webkit-transform: rotateX(180deg);
+        transform: rotateX(180deg);
+    
+        box-shadow: 4px -8px 12px 0 rgba(0, 0, 0, 0.1);
+    }
+}
+
+.button {
+    /* position: relative; */
+    position: absolute;
+    display: block;
+    left: 150px;
+    top: 175px;
+    width: 100px;
+    height: 50px;
+
+    font-weight: 600;
+    text-align: center;
+    line-height: 46px;
+    text-transform: uppercase;
+    
+    border-radius: 25px;
+    box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.1);
+
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+
+.button .front,
+.button .back {
+    box-sizing: border-box;
+
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    color: #34495E;
+    background: #fff;
+
+    border: 2px solid #fff;
+    border-radius: 25px;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transform: rotateX(0);
+    transform: rotateX(0);
+
+    z-index: 2;
+}
+
+.button .back {
+    color: #fff;
+    background: #64C760;
+    border: 2px solid #fff;
+
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+
+    z-index: 1;
+}
+
+/* #cb:checked~.button {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+
+    box-shadow: 4px -8px 12px 0 rgba(0, 0, 0, 0.1);
+} */

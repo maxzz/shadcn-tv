@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { BubblesDemo, LoaderDotsRing, LoadersTest, Spinner7, Spinner9, SpinnerCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg } from "../../2-demo/60-demo-loaders";
+import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg } from "../../2-demo/60-demo-loaders";
 
 function SpinnerTabs() {
     return (
@@ -23,13 +23,13 @@ function SpinnerTabs() {
 
             <TabsContent value="loaders2">
                 <div className="my-8 flex items-center justify-center">
-                    <SpinnerCircles />
+                    <RainbowCircles />
                 </div>
             </TabsContent>
 
             <TabsContent value="loaders3">
                 <div className="my-8 flex items-center justify-center">
-                    <LoaderDotsRing />
+                    <DotsRing />
                 </div>
             </TabsContent>
 

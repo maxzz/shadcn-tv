@@ -1,7 +1,7 @@
 import styles from "./dots-ring.module.css";
 // console.log("styles", styles);
 
-export function LoaderDotsRing() {
+export function DotsRing() {
     return (
         <div className={`qw-64 qh-64 ${styles["dots-ring"]}`}>
             <input className={styles.control} type="checkbox" />

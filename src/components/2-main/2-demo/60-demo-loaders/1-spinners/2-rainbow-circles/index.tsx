@@ -46,7 +46,7 @@ const g2 = `linear-gradient(-45deg,_${c1}_48%,_${c2}_50%,_${c1}_52%)`;
 
 const rombClasses = `[background:${g1},_${g2}] [background-size:_1em_1em]`;
 
-export function SpinnerCircles() {
+export function RainbowCircles() {
     return (
         <div className={`p-4 text-green-950 flex items-center justify-center ${rombClasses}`}>
             <div className="relative w-96 flex items-center gap-4">

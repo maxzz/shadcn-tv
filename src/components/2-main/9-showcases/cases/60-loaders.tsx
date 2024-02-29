@@ -3,7 +3,7 @@ import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles,
 
 function SpinnerTabs() {
     return (
-        <Tabs defaultValue="loaders1" orientation="vertical">
+        <Tabs defaultValue="loaders1">
             <TabsList className={TabsListWrapClasses}>
                 <TabsTrigger value="loaders1">Simple</TabsTrigger>
                 <TabsTrigger value="loaders2">Circles</TabsTrigger>
@@ -124,3 +124,6 @@ export function LoadersInTab() {
         </Tabs>
     );
 }
+
+// TODO: orientation="vertical" for Tabs; <TabsList className={`${TabsListWrapClasses} flex flex-col`}>
+//       G: 'css orientaation vertical tabs'

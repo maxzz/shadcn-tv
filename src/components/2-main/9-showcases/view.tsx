@@ -15,7 +15,7 @@ export function ShowcasesView({ cases }: { cases: Showcase[]; }) {
         >
             {cases.map((c) => (
                 <Prim.AccordionItem className="border-b-0" value={c.id} key={c.id}>
-                    <Prim.AccordionTrigger>{c.name}</Prim.AccordionTrigger>
+                    <Prim.AccordionTrigger className="underline-offset-4">{c.name}</Prim.AccordionTrigger>
                     <Prim.AccordionContent className="pt-4 border-t border-b" >{c.component}</Prim.AccordionContent>
                 </Prim.AccordionItem>
             ))}
@@ -23,3 +23,5 @@ export function ShowcasesView({ cases }: { cases: Showcase[]; }) {
         </Prim.Accordion>
     );
 }
+
+//TODO: Do Prim.AccordionTrigger hover effect better: className="underline-offset-4 _hover:no-underline _hover:bg-muted"

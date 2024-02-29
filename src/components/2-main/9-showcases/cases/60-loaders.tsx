@@ -84,12 +84,14 @@ function EffectsTabs() {
             </TabsList>
 
             <TabsContent value="switch3">
-                <div className="py-4 flex items-center justify-between">
-                    <Button variant={"outline"}>
+                <div className="py-4 flex flex-col items-start gap-2">
+                    <Button variant="outline">
                         <Flickup className="cursor-pointer" />
                     </Button>
 
-                    <Flickup className="cursor-pointer" />
+                    <div className="px-4">
+                        <Flickup className="cursor-pointer" />
+                    </div>
                 </div>
             </TabsContent>
 

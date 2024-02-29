@@ -1,6 +1,6 @@
 /* https://codepen.io/vitor-siqueira/pen/PrrLwr '100 days css Responding Button N° 082' */
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:600');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans:600'); */
 
 /* body,
 html {
@@ -22,26 +22,23 @@ html {
     transform: translate(-50%, -50%);
 
     perspective: 150px;
-    user-select: none;
-
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }
 
 .container input {
-    /* display: none; */
+    display: none;
 
     &:checked~.button {
-        -webkit-transform: rotateX(180deg);
         transform: rotateX(180deg);
-    
-        box-shadow: 4px -8px 12px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 4px -8px 12px 0 #0001;
     }
 }
 
 .button {
-    /* position: relative; */
     position: absolute;
     display: block;
     left: 150px;
@@ -55,9 +52,8 @@ html {
     text-transform: uppercase;
     
     border-radius: 25px;
-    box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 8px 12px 0 #0001;
 
-    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 
     transition: all .5s ease-in-out;
@@ -70,22 +66,16 @@ html {
 
     position: absolute;
     display: block;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
 
     color: #34495E;
     background: #fff;
 
-    border: 2px solid #fff;
+    border: 2px solid #eeeded60;
     border-radius: 25px;
 
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-
-    -webkit-transform: rotateX(0);
     transform: rotateX(0);
+    backface-visibility: hidden;
 
     z-index: 2;
 }
@@ -93,17 +83,9 @@ html {
 .button .back {
     color: #fff;
     background: #64C760;
-    border: 2px solid #fff;
+    border: 2px solid #489146;
 
-    -webkit-transform: rotateX(180deg);
     transform: rotateX(180deg);
 
     z-index: 1;
 }
-
-/* #cb:checked~.button {
-    -webkit-transform: rotateX(180deg);
-    transform: rotateX(180deg);
-
-    box-shadow: 4px -8px 12px 0 rgba(0, 0, 0, 0.1);
-} */

@@ -1,5 +1,5 @@
-import { Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg } from "../../2-demo/60-demo-loaders";
+import { Button, Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
+import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg, Flickup, ThreeDotsLoader, OpenGoo } from "../../2-demo/60-demo-loaders";
 
 function SpinnerTabs() {
     return (
@@ -74,12 +74,40 @@ function StyledTabs() {
     );
 }
 
+function EffectsTabs() {
+    return (
+        <Tabs defaultValue="switch3">
+            <TabsList className={TabsListWrapClasses}>
+                <TabsTrigger value="switch3">Effects</TabsTrigger>
+                <TabsTrigger value="switch4">Goo</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="switch3">
+                <div className="py-4 flex items-center justify-between">
+                    <Button variant={"outline"}>
+                        <Flickup className="cursor-pointer" />
+                    </Button>
+
+                    <Flickup className="cursor-pointer" />
+
+                    <ThreeDotsLoader className="text-sky-800" />
+                </div>
+            </TabsContent>
+
+            <TabsContent value="switch4">
+                <OpenGoo />
+            </TabsContent>
+        </Tabs>
+    );
+}
+
 export function LoadersInTab() {
     return (
         <Tabs defaultValue="loaders1">
             <TabsList className={TabsListWrapClasses}>
                 <TabsTrigger value="loaders1">Spinners</TabsTrigger>
                 <TabsTrigger value="loaders2">Styled</TabsTrigger>
+                <TabsTrigger value="loaders3">Effects</TabsTrigger>
             </TabsList>
 
             <TabsContent value="loaders1">
@@ -88,6 +116,10 @@ export function LoadersInTab() {
 
             <TabsContent value="loaders2">
                 <StyledTabs />
+            </TabsContent>
+
+            <TabsContent value="loaders3">
+                <EffectsTabs />
             </TabsContent>
         </Tabs>
     );

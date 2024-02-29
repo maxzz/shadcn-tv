@@ -18,6 +18,7 @@ function SpinnerTabs() {
                     <SpinnerDiv className="w-8 h-8" />
                     <Spinner9 className="w-8 h-8 text-sky-500" />
                     <SpinnerEmoji className="text-4xl text-sky-500" />
+                    <ThreeDotsLoader className="text-sky-300" />
                 </div>
             </TabsContent>
 
@@ -89,8 +90,6 @@ function EffectsTabs() {
                     </Button>
 
                     <Flickup className="cursor-pointer" />
-
-                    <ThreeDotsLoader className="text-sky-800" />
                 </div>
             </TabsContent>
 

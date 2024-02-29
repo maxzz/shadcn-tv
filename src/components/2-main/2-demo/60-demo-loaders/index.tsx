@@ -2,6 +2,7 @@ export * from "./1-spinners/1-simple/1-spinner-svg";
 export * from "./1-spinners/1-simple/2-spinner-div";
 export * from "./1-spinners/1-simple/3-spinner9";
 export * from "./1-spinners/1-simple/4-spinner-emoji";
+export * from "./1-spinners/1-simple/5-tree-dots";
 export * from "./1-spinners/2-rainbow-circles";
 export * from "./1-spinners/3-dots-ring";
 export * from "./1-spinners/4-commet";

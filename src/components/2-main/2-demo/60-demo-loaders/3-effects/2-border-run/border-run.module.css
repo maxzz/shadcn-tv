@@ -12,36 +12,38 @@
   font-family: 'Lato', sans-serif;
 } */
 
-.container {
+/* .container {
     position: relative;
-    /* position: absolute;
+    position: absolute;
     width: 400px;
-    height: 400px; */
-    /* left: 50%;
+    height: 400px;
+    left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); */
+    transform: translate(-50%, -50%);
 
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
-.center {
+/* .center {
     position: absolute;
     left: 0;
     top: 0;
 
     width: 180px;
     height: 60px;
-}
+} */
 
 .btn {
+    position: relative;
     width: 180px;
     height: 60px;
 
     background: transparent;
     border: 1px solid #91C9FF;
     outline: none;
+
     transition: 1s ease-in-out;
     cursor: pointer;
 }
@@ -55,11 +57,13 @@ svg {
     stroke: #fff;
     stroke-dasharray: 150 480;
     stroke-dashoffset: 150;
+
     transition: 1s ease-in-out;
 }
 
 .btn:hover {
     background: #4F95DA;
+
     transition: 1s ease-in-out;
 }
 

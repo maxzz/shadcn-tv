@@ -6,13 +6,13 @@
 
 import { HTMLAttributes } from "react";
 import { classNames } from "@/utils";
-import styles from "./flickup.module.css";
+import css from "./flickup.module.css";
 
 export function Flickup({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames(styles.wrapper, className)} {...rest}>
-            <span className={styles.mainText}>Hover over me 1</span>
-            <span className={styles.hoverText}>Hover over me 2</span>
+        <div className={classNames(css.wrapper, className)} {...rest}>
+            <span className={css.mainText}>Hover over me 1</span>
+            <span className={css.hoverText}>Hover over me 2</span>
         </div>
     );
 }

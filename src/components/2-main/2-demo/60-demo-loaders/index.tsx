@@ -13,4 +13,5 @@ export * from "./2-styled/2-bubbles";
 export * from "./2-styled/3-sphere";
 
 export * from "./3-effects/1-text-flip";
-export * from "./3-effects/2-open-dlg-goo";
+export * from "./3-effects/2-border-run";
+export * from "./3-effects/9-open-dlg-goo";

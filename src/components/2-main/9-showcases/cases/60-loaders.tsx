@@ -1,5 +1,6 @@
 import { Button, Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
 import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg, Flickup, ThreeDotsLoader, OpenGoo } from "../../2-demo/60-demo-loaders";
+import BorderRun from "../../2-demo/60-demo-loaders/3-effects/2-border-run";
 
 function SpinnerTabs() {
     return (
@@ -85,9 +86,13 @@ function EffectsTabs() {
 
             <TabsContent value="switch3">
                 <div className="py-4 flex flex-col items-start gap-2">
-                    <Button variant="outline">
-                        <Flickup className="cursor-pointer" />
-                    </Button>
+                    <div className="flex">
+                        <Button variant="outline">
+                            <Flickup className="cursor-pointer" />
+                        </Button>
+
+                        <BorderRun />
+                    </div>
 
                     <div className="px-4">
                         <Flickup className="cursor-pointer" />

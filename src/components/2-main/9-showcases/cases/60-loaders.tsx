@@ -82,11 +82,11 @@ export function LoadersInTab() {
                 <TabsTrigger value="loaders2">Styled</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="loaders10">
+            <TabsContent value="loaders1">
                 <SpinnerTabs />
             </TabsContent>
 
-            <TabsContent value="loaders9">
+            <TabsContent value="loaders2">
                 <StyledTabs />
             </TabsContent>
         </Tabs>

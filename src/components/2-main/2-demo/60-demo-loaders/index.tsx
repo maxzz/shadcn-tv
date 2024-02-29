@@ -1,4 +1,4 @@
-export * from "./10-experimental-p-loaders";
+export * from "./2-styled/1-p-loaders";
 export * from "./20-dots-ring";
 export * from "./30-spinner-radial";
 export * from "./41-spinner-svg";
@@ -7,5 +7,5 @@ export * from "./43-spinner9";
 export * from "./44-spinner-emoji";
 export * from "./50-spinner7";
 export * from "./60-spinner-circles";
-export * from "./70-spinner-sphere";
-export * from "./80-bubbles";
+export * from "./2-styled/3-sphere";
+export * from "./2-styled/2-bubbles";

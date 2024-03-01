@@ -1,12 +1,8 @@
-/* https://codepen.io/John_mpf/pen/PowPvMm 'Simple Preloader #2' */
-
-/* body{
-    margin: 0; padding: 0; background: #252A36;
-} */
+/* https://codepen.io/omar-sherif/pen/YLRQbO 'Folding | Preloader' */
 
 .preloader-squares {
     ul {
-        position: absolute;
+        /* position: absolute; */
         /* top: calc(70% - 30%);
         left: calc(75% - 30%);
         margin: 0;
@@ -17,10 +13,10 @@
     }
 
     ul li {
-        list-style: none;
         position: relative;
         width: 50%;
         height: 50%;
+        list-style: none;
 
         float: left;
     }
@@ -29,12 +25,12 @@
         content: '';
         position: absolute;
         /* top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; */
+        left: 0;
+        width: 100%;
+        height: 100%; */
         inset: 0;
-        transform-origin: 100% 100%;
 
+        transform-origin: 100% 100%;
         animation: animate 3.3s linear infinite;
     }
 

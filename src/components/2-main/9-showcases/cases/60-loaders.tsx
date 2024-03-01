@@ -1,5 +1,5 @@
 import { Button, Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg, Flickup, ThreeDotsLoader, OpenGoo, FlipBtn, TwoCircles, BorderRun } from "../../2-demo/60-demo-loaders";
+import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg, Flickup, ThreeDotsLoader, OpenGoo, FlipBtn, TwoCircles, BorderRun, TextBar } from "../../2-demo/60-demo-loaders";
 
 function SpinnerTabs() {
     return (
@@ -19,6 +19,7 @@ function SpinnerTabs() {
                     <Spinner9 className="w-8 h-8 text-sky-500" />
                     <SpinnerEmoji className="text-4xl text-sky-500" />
                     <TwoCircles />
+                    <TextBar />
                     <ThreeDotsLoader className="text-sky-300" />
                 </div>
             </TabsContent>

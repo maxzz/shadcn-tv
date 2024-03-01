@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import css from "./border-run.module.css";
 import { classNames } from "@/utils";
 
-export default function BorderRun({ className, ...rest }: HTMLAttributes<HTMLElement>) {
+export function BorderRun({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
         <button className={classNames(css["btn"], "relative w-[180px] h-[60px]", className)} {...rest}>
 

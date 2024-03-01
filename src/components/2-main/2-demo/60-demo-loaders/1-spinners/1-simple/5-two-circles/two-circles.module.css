@@ -1,0 +1,65 @@
+/* https://codepen.io/vitor-siqueira/pen/oRqgxX '100 days css Loading Circle N° 035' */
+
+/* body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+  overflow: hidden;
+} */
+
+/* .container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* .container svg {
+    width: 160px;
+    height: 160px;
+} */
+
+.bg {
+    fill: none;
+    stroke-width: 4px;
+    stroke: #13547a;
+}
+
+.loader {
+    fill: none;
+    stroke-width: 4px;
+    stroke: white;
+    stroke-dasharray: 288;
+
+    transform-origin: 50% 50%;
+    animation: line 5s linear infinite, spin 3s linear infinite;
+}
+
+@keyframes line {
+    0% {
+        stroke-dashoffset: 1152;
+    }
+
+    100% {
+        stroke-dashoffset: 576;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(-90deg) translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: rotate(270deg) translate3d(0, 0, 0);
+    }
+}

@@ -19,7 +19,7 @@ function SpinnerTabs() {
                     <Spinner9 className="w-8 h-8 text-sky-500" />
                     <SpinnerEmoji className="text-4xl text-sky-500" />
                     <TwoCircles />
-                    <TextBar />
+                    <TextBar className="text-sky-500" />
                     <ThreeDotsLoader className="text-sky-300" />
                 </div>
             </TabsContent>

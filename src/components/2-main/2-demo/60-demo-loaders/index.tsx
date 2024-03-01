@@ -11,6 +11,7 @@ export * from "./1-spinners/4-commet";
 export * from "./1-spinners/5-radial";
 
 export * from "./2-styled/1-p-loaders";
+export * from "./2-styled/1-squares";
 export * from "./2-styled/2-bubbles";
 export * from "./2-styled/3-sphere";
 

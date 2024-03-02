@@ -2,13 +2,11 @@ import { HTMLAttributes } from "react";
 import css from "./goo-bars.module.css"; // https://codepen.io/jh3y/pen/BabVPVd 'Masked SVG Loader'
 import { classNames } from "@/utils";
 
-const totalSpheres = 7;
-
-function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
+function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGElement> & { totalSpheres?: number }) {
     return (
         <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "w-24", className)} {...rest}>
             <defs>
-                <filter id="goo">
+                <filter id="goo-bars-filter">
                     <feGaussianBlur
                         id="SvgjsFeGaussianBlur1000"
                         result="SvgjsFeGaussianBlur1000"
@@ -68,7 +66,7 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
                     )}
                 </mask>
             </defs>
-            <g filter="url(#goo)">
+            <g filter="url(#goo-bars-filter)">
                 <rect x={0} y={0} width="100%" height="100%" fill="url(#g)" mask="url(#mask)" />
             </g>
         </svg>
@@ -78,7 +76,7 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
 export function GooBars() {
     return (
         <div className={``}>
-            <Bars />
+            <Bars totalSpheres={7} />
         </div>
     );
 }

@@ -5,10 +5,10 @@ import { DialogDemoWoTrigger } from "../../2-demo/52-demo-toasts/6-dialog/20-dia
 function VerticalMenu() { // https://codepen.io/Prakash286/pen/dyRXNKG 'Exploring UI Animation #1'
     return (
         <div className="relative text-[.5rem]">
-            <ul className="absolute px-1 w-96 rotate-90 origin-top-left border-border border rounded overflow-hidden flex gap-1">
-                <li className="my-1 px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Apple</li>
-                <li className="my-1 px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Plum</li>
-                <li className="my-1 px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Peach</li>
+            <ul className="absolute px-1 py-1 rotate-90 origin-top-left border-border border rounded overflow-hidden flex gap-1">
+                <li className="px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Apple</li>
+                <li className="px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Plum</li>
+                <li className="px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Peach</li>
             </ul>
         </div>
     );

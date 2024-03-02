@@ -13,18 +13,20 @@ body {
     background: hsl(210 30% 10%);
 } */
 
-:root {
+/* :root {
     --speed: .875s;
-}
+} */
 
 .goo-bars {
     /* svg {
         width: 50vmin;
         overflow: visible !important;
     } */
+
+    /* --speed: .875s; */
         
     g:nth-of-type(1) {
-        --delay: 0.35;
+        --delay: 0.25;
     }
     
     g:nth-of-type(2) {
@@ -48,7 +50,7 @@ body {
     }
     
     g:nth-of-type(7) {
-        --delay: 0.35;
+        --delay: 0.25;
     }
     
     line {

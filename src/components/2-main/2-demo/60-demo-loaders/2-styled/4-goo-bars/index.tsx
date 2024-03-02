@@ -70,7 +70,7 @@ function SingleBar({ idx }: { idx: number; }) {
 
 function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGElement> & { totalSpheres?: number; }) {
     return (
-        <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "", className)} {...rest}>
+        <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "[--speed:.875s]", className)} {...rest}>
             <defs>
                 <GooBarsFilter />
                 <BarGradients />

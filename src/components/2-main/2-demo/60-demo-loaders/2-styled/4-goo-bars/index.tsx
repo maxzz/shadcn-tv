@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import css from "./goo-bars.module.css"; // https://codepen.io/jh3y/pen/BabVPVd 'Masked SVG Loader'
 import { classNames } from "@/utils";
 
-const totalSpheres = 360 * 3;
+const totalSpheres = 7;
 
 function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
     return (
@@ -45,7 +45,29 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
                 </linearGradient>
 
                 <mask id="mask">
-                    <g>
+                    {[...Array(totalSpheres)].map(
+                        (_, i) => {
+                            const x = 50 + i * 100;
+                            const y = 100 + i * 100;
+                            return (
+                                <g key={i}>
+                                    <circle cx={x} cy={y} r={25} fill="white" />
+                                    <line
+                                        x1={x}
+                                        x2={x}
+                                        y1={100}
+                                        y2={250}
+                                        strokeWidth={50}
+                                        stroke="white"
+                                        strokeLinecap="round"
+                                    />
+                                    <circle cx={x} cy={325} r={25} fill="white" />
+                                </g>
+                            );
+                        }
+                    )}
+
+                    {/* <g>
                         <circle cx={50} cy={25} r={25} fill="white" />
                         <line
                             x1={50}
@@ -135,7 +157,7 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
                             strokeLinecap="round"
                         />
                         <circle cx={650} cy={325} r={25} fill="white" />
-                    </g>
+                    </g> */}
                 </mask>
             </defs>
             <g filter="url(#goo)">
@@ -147,7 +169,7 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
 
 export function GooBars() {
     return (
-        <div className={`p-4 text-green-950 flex items-center justify-center`}>
+        <div className={``}>
             <Bars />
         </div>
     );

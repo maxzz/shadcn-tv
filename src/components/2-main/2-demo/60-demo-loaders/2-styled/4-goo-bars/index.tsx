@@ -48,6 +48,26 @@ function BarGradients() {
     );
 }
 
+function SingleBar({ idx }: { idx: number; }) {
+    const x = 50 + idx * 100;
+    const y = 100 + idx * 100;
+    return (
+        <g>
+            <circle cx={x} cy={25} r={25} fill="white" />
+            <line
+                x1={x}
+                x2={x}
+                y1={100}
+                y2={250}
+                strokeWidth={50}
+                stroke="white"
+                strokeLinecap="round"
+            />
+            <circle cx={x} cy={325} r={25} fill="white" />
+        </g>
+    );
+}
+
 function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGElement> & { totalSpheres?: number; }) {
     return (
         <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "", className)} {...rest}>
@@ -58,22 +78,8 @@ function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGEle
                 <mask id="mask">
                     {[...Array(totalSpheres)].map(
                         (_, idx) => {
-                            const x = 50 + idx * 100;
-                            const y = 100 + idx * 100;
                             return (
-                                <g key={idx}>
-                                    <circle cx={x} cy={25} r={25} fill="white" />
-                                    <line
-                                        x1={x}
-                                        x2={x}
-                                        y1={100}
-                                        y2={250}
-                                        strokeWidth={50}
-                                        stroke="white"
-                                        strokeLinecap="round"
-                                    />
-                                    <circle cx={x} cy={325} r={25} fill="white" />
-                                </g>
+                                <SingleBar key={idx} idx={idx} />
                             );
                         }
                     )}

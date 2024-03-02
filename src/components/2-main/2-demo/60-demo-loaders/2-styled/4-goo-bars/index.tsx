@@ -46,12 +46,12 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
 
                 <mask id="mask">
                     {[...Array(totalSpheres)].map(
-                        (_, i) => {
-                            const x = 50 + i * 100;
-                            const y = 100 + i * 100;
+                        (_, idx) => {
+                            const x = 50 + idx * 100;
+                            const y = 100 + idx * 100;
                             return (
-                                <g key={i}>
-                                    <circle cx={x} cy={y} r={25} fill="white" />
+                                <g key={idx}>
+                                    <circle cx={x} cy={25} r={25} fill="white" />
                                     <line
                                         x1={x}
                                         x2={x}
@@ -66,98 +66,6 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
                             );
                         }
                     )}
-
-                    {/* <g>
-                        <circle cx={50} cy={25} r={25} fill="white" />
-                        <line
-                            x1={50}
-                            x2={50}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={50} cy={325} r={25} fill="white" />
-                    </g>
-                    <g>
-                        <circle cx={150} cy={25} r={25} fill="white" />
-                        <line
-                            x1={150}
-                            x2={150}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={150} cy={325} r={25} fill="white" />
-                    </g>
-                    <g>
-                        <circle cx={250} cy={25} r={25} fill="white" />
-                        <line
-                            x1={250}
-                            x2={250}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={250} cy={325} r={25} fill="white" />
-                    </g>
-                    <g>
-                        <circle cx={350} cy={25} r={25} fill="white" />
-                        <line
-                            x1={350}
-                            x2={350}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={350} cy={325} r={25} fill="white" />
-                    </g>
-                    <g>
-                        <circle cx={450} cy={25} r={25} fill="white" />
-                        <line
-                            x1={450}
-                            x2={450}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={450} cy={325} r={25} fill="white" />
-                    </g>
-                    <g>
-                        <circle cx={550} cy={25} r={25} fill="white" />
-                        <line
-                            x1={550}
-                            x2={550}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={550} cy={325} r={25} fill="white" />
-                    </g>
-                    <g>
-                        <circle cx={650} cy={25} r={25} fill="white" />
-                        <line
-                            x1={650}
-                            x2={650}
-                            y1={100}
-                            y2={250}
-                            strokeWidth={50}
-                            stroke="white"
-                            strokeLinecap="round"
-                        />
-                        <circle cx={650} cy={325} r={25} fill="white" />
-                    </g> */}
                 </mask>
             </defs>
             <g filter="url(#goo)">

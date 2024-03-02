@@ -1,26 +1,21 @@
 import css from './sliders.module.css';
-import { DemoA } from './DemoA';
-import { DemoB } from './DemoB';
-import { DemoC } from './DemoC';
-import { DemoD } from './DemoD';
-import { DemoE } from './DemoE';
-import { DemoF } from './DemoF';
-
-// https://codepen.io/Prakash286/pen/wvQozeV 'React Range Sliders'
+import { DemoA } from './1-demo-a';
+import { DemoB } from './2-demo-b';
+import { DemoC } from './3-demo-c';
+import { DemoD } from './4-demo-d';
+import { DemoE } from './5-demo-e';
+import { DemoF } from './6-demo-f';
+import { classNames } from '@/utils';
 
 export function SlidersDemo() {
     return (
-        <div className={css["sliders-demo"]}>
-            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center">
-                <DemoA />
-                <DemoB />
-                <DemoC />
-            </div>
-            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center">
-                <DemoD />
-                <DemoE />
-                <DemoF />
-            </div>
+        <div className={classNames(css["sliders-demo"], "w-full flex justify-center flex-wrap")}>
+            <DemoA />
+            <DemoB />
+            <DemoC />
+            <DemoD />
+            <DemoE />
+            <DemoF />
         </div>
     );
 }

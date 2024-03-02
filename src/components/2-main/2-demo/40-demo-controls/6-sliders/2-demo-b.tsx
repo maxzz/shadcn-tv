@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Card } from './Card';
+import { Card } from './0-card';
 
 function DemoBGraph({ start, diff }: { start: number; diff: number; }) {
     return (

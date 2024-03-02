@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card } from './Card';
+import { Card } from './0-card';
 
 const demoAGraphData = [
     { key: 0, path: "M7 95H5C2.23858 95 0 97.2386 0 100H12C12 97.2386 9.76142 95 7 95Z", },
@@ -23,18 +23,23 @@ const demoAGraphData = [
     { key: 18, path: "M282 100V16C282 12.6863 279.314 10 276 10C272.686 10 270 12.6863 270 16V100H282Z", },
     { key: 19, path: "M297 99V11C297 7.68629 294.314 5 291 5C287.686 5 285 7.68629 285 11V99C285 99.5523 285.448 100 286 100H296C296.552 100 297 99.5523 297 99Z", },
 ];
+
 function DemoAGraph({ value }: { value: number; }) {
     return (
         <svg width="300" height="100" viewBox="0 0 300 100" fill="none">
             <g id="background">
-                {demoAGraphData.map(({ key, path }) => (
-                    <path d={path} fill="#E8EBF9" key={key} />
-                ))}
+                {demoAGraphData.map(
+                    ({ key, path }) => (
+                        <path d={path} fill="#E8EBF9" key={key} />
+                    )
+                )}
             </g>
             <g id="foreground" clipPath="url(#highlight)">
-                {demoAGraphData.map(({ key, path }) => (
-                    <path d={path} fill="#424E82" key={key} />
-                ))}
+                {demoAGraphData.map(
+                    ({ key, path }) => (
+                        <path d={path} fill="#424E82" key={key} />
+                    )
+                )}
             </g>
             <defs>
                 <clipPath id="highlight">
@@ -49,6 +54,7 @@ export function DemoA() {
     const [value, setValue] = useState(37);
     return (
         <Card title="Volume">
+            
             <div className="px-3">
                 <div style={{ width: "300px" }}>
                     <DemoAGraph value={value} />

@@ -1,42 +1,70 @@
 import { ChangeEvent, useState } from 'react';
-import { Card } from './Card';
+import { Card } from './0-card';
 
+function deriveData(index: number, value: number) {
+    const r1 = 130;
 
-export function DemoE() {
-    const [value, setValue] = useState(20);
+    const r2 = 150;
+    const r3 = 140;
+    const delta = Math.PI / 40;
+    const angle = delta * index - Math.PI;
+
+    const ss = Math.sin(angle);
+    const cc = Math.cos(angle);
+
+    const rs = index % 5 === 0 ? r1 : r3;
+
+    const x1 = rs * cc;
+    const y1 = rs * ss;
+    const x2 = r2 * cc;
+    const y2 = r2 * ss;
+
+    const color = Math.ceil(value * (41 / 100)) > index ? "#424E82" : "#E8EBF9";
+    return { x1, y1, x2, y2, color };
+}
+function Tick({ index, value }: { index: number; value: number; }) {
+    const { x1, y1, x2, y2, color } = deriveData(index, value);
+    return (
+        <line
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke={color}
+            strokeWidth="3"
+            strokeLinecap="round" />
+    );
+}
+
+export function DemoF() {
+    const [value, setValue] = useState(32);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(parseInt(event.target.value, 10));
     };
     return (
-        <Card title="Precentage">
-            <div style={{ height: "30px" }}></div>
+        <Card title="Gauge">
             <div style={{ padding: "0px 12px" }}>
                 <div className="relative" style={{ width: "300px" }}>
-                    <svg width="300" height="150" viewBox="0 0 300 150" fill="none">
+                    <svg width="300" height="180" viewBox="0 0 300 180" fill="none">
+                        <rect width="300" height="180" fill="white" />
+
                         <path
-                            d="M12 150C12 131.878 15.5695 113.933 22.5046 97.1897C29.4398 80.4467 39.6048 65.2337 52.4193 52.4193C65.2338 39.6048 80.4468 29.4398 97.1897 22.5046C113.933 15.5695 131.878 12 150 12C168.122 12 186.067 15.5695 202.81 22.5046C219.553 29.4398 234.766 39.6048 247.581 52.4193C260.395 65.2338 270.56 80.4468 277.495 97.1897C284.431 113.933 288 131.878 288 150"
-                            stroke="#E8EBF9"
-                            strokeWidth="22" />
-                        <path
-                            strokeDasharray="434"
-                            strokeDashoffset={`${434 - 4.34 * value}`}
-                            d="M12 150C12 131.878 15.5695 113.933 22.5046 97.1897C29.4398 80.4467 39.6048 65.2337 52.4193 52.4193C65.2338 39.6048 80.4468 29.4398 97.1897 22.5046C113.933 15.5695 131.878 12 150 12C168.122 12 186.067 15.5695 202.81 22.5046C219.553 29.4398 234.766 39.6048 247.581 52.4193C260.395 65.2338 270.56 80.4468 277.495 97.1897C284.431 113.933 288 131.878 288 150"
-                            stroke="#424E82"
-                            strokeWidth="22"
-                            strokeLinecap="round" />
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M152.991 34.67C152.706 30.9785 147.294 30.9785 147.009 34.67L138.696 142.139C136.395 144.776 135 148.225 135 152C135 160.284 141.716 167 150 167C158.284 167 165 160.284 165 152C165 148.225 163.606 144.776 161.304 142.139L152.991 34.67Z"
+                            fill="#424E82"
+                            transform={`rotate(${-90 + 1.8 * value}, 150, 152)`} />
+
+                        <g transform="translate(150, 152)">
+                            <circle r="8" fill="#FFF" />
+                            {Array(41)
+                                .fill(0)
+                                .map((_, i) => (
+                                    <Tick key={i} index={i} value={value} />
+                                ))}
+                        </g>
                     </svg>
-                    <div
-                        className="absolute text-4xl font-bold"
-                        style={{
-                            left: "50%",
-                            top: "75%",
-                            transform: "translate(-50%, -50%)",
-                            color: "#424E82",
-                        }}
-                    >
-                        {value}%
-                    </div>
                 </div>
             </div>
             <div className="relative " style={{ width: "324px", height: "24px" }}>
@@ -100,6 +128,8 @@ export function DemoE() {
             </div>
             <div className="flex items-center justify-between px-3 font-semibold h-8">
                 <div> 0 </div>
+                <div> {value} </div>
+
                 <div> 100 </div>
             </div>
         </Card>

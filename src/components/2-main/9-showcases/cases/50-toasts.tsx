@@ -2,6 +2,18 @@ import { DrawerDemo, MenubarDemo, RadixToastDemo, SonnerDemo } from "../../2-dem
 import { MenuDropdownDemo } from "../../2-demo/52-demo-toasts/5-menu-popup/inidex";
 import { DialogDemoWoTrigger } from "../../2-demo/52-demo-toasts/6-dialog/20-dialog-wo-trigger";
 
+function VerticalMenu() { // https://codepen.io/Prakash286/pen/dyRXNKG 'Exploring UI Animation #1'
+    return (
+        <div className="relative text-[.5rem]">
+            <ul className="absolute px-1 w-96 rotate-90 origin-top-left border-border border rounded overflow-hidden flex gap-1">
+                <li className="my-1 px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Apple</li>
+                <li className="my-1 px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Plum</li>
+                <li className="my-1 px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Peach</li>
+            </ul>
+        </div>
+    );
+}
+
 export function ToastsInTabs() {
     return (
         <div className="flex justify-between">
@@ -19,15 +31,8 @@ export function ToastsInTabs() {
                     <DialogDemoWoTrigger />
                 </div>
             </div>
-
-            {/* https://codepen.io/Prakash286/pen/dyRXNKG 'Exploring UI Animation #1' */}
-            <div className="relative text-[.5rem]">
-                <ul className="absolute w-96 rotate-90 origin-top-left text-foreground bg-sky-800/30 overflow-hidden">
-                    <li className="float-left mx-2">1-menu</li>
-                    <li className="float-left mx-2">2-menu</li>
-                    <li className="float-left mx-2">3-menu</li>
-                </ul>
-            </div>
+            
+            <VerticalMenu />
         </div>
     );
 }

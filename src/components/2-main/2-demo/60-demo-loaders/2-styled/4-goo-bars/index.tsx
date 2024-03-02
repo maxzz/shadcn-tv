@@ -94,8 +94,8 @@ function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGEle
 
 export function GooBars() {
     return (
-        <div className={`bg-sky-600`}>
-            <Bars className="w-32" totalSpheres={7} />
+        <div className={`_bg-sky-600`}>
+            <Bars className="w-24" totalSpheres={7} />
         </div>
     );
 }

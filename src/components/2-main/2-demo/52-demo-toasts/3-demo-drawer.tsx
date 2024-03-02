@@ -5,45 +5,19 @@ import { Bar, BarChart, ResponsiveContainer } from "recharts";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 
 const data = [
-    {
-        goal: 400,
-    },
-    {
-        goal: 300,
-    },
-    {
-        goal: 200,
-    },
-    {
-        goal: 300,
-    },
-    {
-        goal: 200,
-    },
-    {
-        goal: 278,
-    },
-    {
-        goal: 189,
-    },
-    {
-        goal: 239,
-    },
-    {
-        goal: 300,
-    },
-    {
-        goal: 200,
-    },
-    {
-        goal: 278,
-    },
-    {
-        goal: 189,
-    },
-    {
-        goal: 349,
-    },
+    { goal: 400, },
+    { goal: 300, },
+    { goal: 200, },
+    { goal: 300, },
+    { goal: 200, },
+    { goal: 278, },
+    { goal: 189, },
+    { goal: 239, },
+    { goal: 300, },
+    { goal: 200, },
+    { goal: 278, },
+    { goal: 189, },
+    { goal: 349, },
 ];
 
 function DrawerItems() {

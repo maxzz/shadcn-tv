@@ -2,35 +2,41 @@ import { HTMLAttributes } from "react";
 import css from "./goo-bars.module.css"; // https://codepen.io/jh3y/pen/BabVPVd 'Masked SVG Loader'
 import { classNames } from "@/utils";
 
-function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGElement> & { totalSpheres?: number }) {
+function GooBarsFilter() {
     return (
-        <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "w-24", className)} {...rest}>
+        <filter id="goo-bars-filter">
+            <feGaussianBlur
+                id="SvgjsFeGaussianBlur1000"
+                result="SvgjsFeGaussianBlur1000"
+                in="SourceGraphic"
+                stdDeviation={10}
+            ></feGaussianBlur>
+            <feColorMatrix
+                id="SvgjsFeColorMatrix1001"
+                result="SvgjsFeColorMatrix1001"
+                in="SvgjsFeGaussianBlur1000"
+                values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 30 -10"
+                type="matrix"
+            />
+            <feComposite
+                id="SvgjsFeComposite1002"
+                result="SvgjsFeComposite1002"
+                in="SvgjsFeColorMatrix1001"
+                operator="atop"
+            ></feComposite>
+        </filter>
+    );
+}
+
+function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGElement> & { totalSpheres?: number; }) {
+    return (
+        <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "", className)} {...rest}>
             <defs>
-                <filter id="goo-bars-filter">
-                    <feGaussianBlur
-                        id="SvgjsFeGaussianBlur1000"
-                        result="SvgjsFeGaussianBlur1000"
-                        in="SourceGraphic"
-                        stdDeviation={10}
-                    ></feGaussianBlur>
-                    <feColorMatrix
-                        id="SvgjsFeColorMatrix1001"
-                        result="SvgjsFeColorMatrix1001"
-                        in="SvgjsFeGaussianBlur1000"
-                        values="
-                            1 0 0 0 0
-                            0 1 0 0 0
-                            0 0 1 0 0
-                            0 0 0 30 -10"
-                        type="matrix"
-                    />
-                    <feComposite
-                        id="SvgjsFeComposite1002"
-                        result="SvgjsFeComposite1002"
-                        in="SvgjsFeColorMatrix1001"
-                        operator="atop"
-                    ></feComposite>
-                </filter>
+                <GooBarsFilter />
 
                 <linearGradient id="g" x1="100%" x2={0} y1={0} y2="80%" gradientTransform="rotate(10)">
                     <stop offset="10%" stopColor="hsl(10, 90%, 50%)" />
@@ -75,8 +81,8 @@ function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGEle
 
 export function GooBars() {
     return (
-        <div className={``}>
-            <Bars totalSpheres={7} />
+        <div className={`bg-sky-600`}>
+            <Bars className="w-32" totalSpheres={7} />
         </div>
     );
 }

@@ -1,11 +1,12 @@
 import { HTMLAttributes } from "react";
 import css from "./goo-bars.module.css"; // https://codepen.io/jh3y/pen/BabVPVd 'Masked SVG Loader'
+import { classNames } from "@/utils";
 
 const totalSpheres = 360 * 3;
 
 function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 700 350" className={css["goo-bars"]} {...rest}>
+        <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "w-24", className)} {...rest}>
             <defs>
                 <filter id="goo">
                     <feGaussianBlur
@@ -147,11 +148,7 @@ function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
 export function GooBars() {
     return (
         <div className={`p-4 text-green-950 flex items-center justify-center`}>
-            <div className="relative w-96 h-[200px] flex items-center justify-center content-center gap-4">
-
-                <Bars />
-
-            </div>
+            <Bars />
         </div>
     );
 }

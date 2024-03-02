@@ -18,13 +18,10 @@ body {
 }
 
 .goo-bars {
-    svg {
+    /* svg {
         width: 50vmin;
-    }
-
-    svg {
         overflow: visible !important;
-    }
+    } */
         
     g:nth-of-type(1) {
         --delay: 0.35;

@@ -35,10 +35,8 @@ export function DemoD() {
         <Card title="Volume">
             <div className="relative " style={{ width: "324px", height: "324px" }}>
                 <div
-                    className="absolute rounded-full"
+                    className="absolute size-6 rounded-full"
                     style={{
-                        width: "24px",
-                        height: "24px",
                         left: "90px",
                         top: `${12 + value * 3}px `,
                         transform: "translate(-50%, -50%)",

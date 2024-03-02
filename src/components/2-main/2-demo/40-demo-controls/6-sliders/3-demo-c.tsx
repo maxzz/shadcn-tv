@@ -4,10 +4,8 @@ import { Card } from './0-card';
 function Marker({ value }: { value: number; }) {
     return (
         <div
-            className="absolute grid place-items-center"
+            className="absolute size-6 grid place-items-center"
             style={{
-                width: "24px",
-                height: "24px",
                 top: "-40px",
                 left: `${value * 3}px`,
             }}
@@ -90,21 +88,13 @@ export function DemoC() {
                     }}
                 ></div>
                 <div
-                    className="absolute grid place-items-center"
+                    className="absolute size-6 grid place-items-center"
                     style={{
-                        width: "24px",
-                        height: "24px",
                         top: 0,
                         left: `${valueA * 3}px`,
                     }}
                 >
-                    <div
-                        className="bg-white shadow-md rounded-full grid place-items-center"
-                        style={{
-                            width: "20px",
-                            height: "20px",
-                        }}
-                    >
+                    <div className="size-5 bg-white shadow-md rounded-full grid place-items-center">
                         <div
                             className="rounded-full"
                             style={{
@@ -118,21 +108,13 @@ export function DemoC() {
                 <Marker value={valueA} />
                 <Marker value={valueB} />
                 <div
-                    className="absolute grid place-items-center"
+                    className="absolute size-6 grid place-items-center"
                     style={{
-                        width: "24px",
-                        height: "24px",
                         top: 0,
                         left: `${valueB * 3}px`,
                     }}
                 >
-                    <div
-                        className="bg-white shadow-md rounded-full grid place-items-center"
-                        style={{
-                            width: "20px",
-                            height: "20px",
-                        }}
-                    >
+                    <div className="size-5 bg-white shadow-md rounded-full grid place-items-center">
                         <div
                             className="rounded-full"
                             style={{

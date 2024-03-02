@@ -14,6 +14,7 @@ export * from "./2-styled/1-p-loaders";
 export * from "./2-styled/1-squares";
 export * from "./2-styled/2-bubbles";
 export * from "./2-styled/3-sphere";
+export * from "./2-styled/4-goo-bars";
 
 export * from "./3-effects/1-text-flip";
 export * from "./3-effects/2-flip-btn";

@@ -5,7 +5,7 @@ const totalSpheres = 360 * 3;
 
 function Bars({ className, ...rest }: HTMLAttributes<SVGSVGElement>) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350" {...rest}>
+        <svg viewBox="0 0 700 350" className={css["goo-bars"]} {...rest}>
             <defs>
                 <filter id="goo">
                     <feGaussianBlur

@@ -11,6 +11,7 @@ function GooBarsFilter() {
                 in="SourceGraphic"
                 stdDeviation={10}
             ></feGaussianBlur>
+
             <feColorMatrix
                 id="SvgjsFeColorMatrix1001"
                 result="SvgjsFeColorMatrix1001"
@@ -22,6 +23,7 @@ function GooBarsFilter() {
                 0 0 0 30 -10"
                 type="matrix"
             />
+
             <feComposite
                 id="SvgjsFeComposite1002"
                 result="SvgjsFeComposite1002"
@@ -32,21 +34,26 @@ function GooBarsFilter() {
     );
 }
 
+function BarGradients() {
+    return (
+        <linearGradient id="g" x1="100%" x2={0} y1={0} y2="80%" gradientTransform="rotate(10)">
+            <stop offset="10%" stopColor="hsl(10, 90%, 50%)" />
+            <stop offset="22%" stopColor="hsl(35, 90%, 50%)" />
+            <stop offset="38%" stopColor="hsl(45, 90%, 50%)" />
+            <stop offset="50%" stopColor="hsl(180, 90%, 50%)" />
+            <stop offset="70%" stopColor="hsl(210, 90%, 50%)" />
+            <stop offset="84%" stopColor="hsl(280, 90%, 50%)" />
+            <stop offset="100%" stopColor="hsl(320, 90%, 50%)" />
+        </linearGradient>
+    );
+}
+
 function Bars({ className, totalSpheres = 7, ...rest }: HTMLAttributes<SVGSVGElement> & { totalSpheres?: number; }) {
     return (
         <svg viewBox="0 0 700 350" className={classNames(css["goo-bars"], "", className)} {...rest}>
             <defs>
                 <GooBarsFilter />
-
-                <linearGradient id="g" x1="100%" x2={0} y1={0} y2="80%" gradientTransform="rotate(10)">
-                    <stop offset="10%" stopColor="hsl(10, 90%, 50%)" />
-                    <stop offset="22%" stopColor="hsl(35, 90%, 50%)" />
-                    <stop offset="38%" stopColor="hsl(45, 90%, 50%)" />
-                    <stop offset="50%" stopColor="hsl(180, 90%, 50%)" />
-                    <stop offset="70%" stopColor="hsl(210, 90%, 50%)" />
-                    <stop offset="84%" stopColor="hsl(280, 90%, 50%)" />
-                    <stop offset="100%" stopColor="hsl(320, 90%, 50%)" />
-                </linearGradient>
+                <BarGradients />
 
                 <mask id="mask">
                     {[...Array(totalSpheres)].map(

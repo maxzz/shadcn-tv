@@ -14,7 +14,7 @@ export const showcasesData: Showcase[] = [
     { id: '10', name: "Tables", component: <TableInTabs /> },
     { id: '20', name: "Tree", component: <DemoTreeWithOptions /> },
     { id: '30', name: "Resizable", component: <ResizableDemo /> },
-    { id: '40', name: "Switches, Carousel, Pagination, Skeleton, Charts", component: <ControlsInTabs /> },
+    { id: '40', name: "Switches, Carousel, Pagination, Skeleton, Charts, Sliders", component: <ControlsInTabs /> },
     { id: '50', name: "Toasts, Drawer, Menus, Dialog", component: <ToastsInTabs /> },
     { id: '60', name: "Loaders, Effects", component: <LoadersInTab /> },
     { id: '70', name: "Pickers: Color, Theme, Flow, Time", component: <PickersInTabs /> },

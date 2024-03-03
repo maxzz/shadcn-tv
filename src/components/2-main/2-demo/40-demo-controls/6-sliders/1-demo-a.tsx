@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card } from './0-card';
+import { Dot } from './0-2-dot';
 
 const demoAGraphData = [
     { key: 0, path: "M7 95H5C2.23858 95 0 97.2386 0 100H12C12 97.2386 9.76142 95 7 95Z", },
@@ -84,17 +84,8 @@ export function DemoA() {
                 }}
             />
 
-            {/* Circle */}
             <div className="absolute size-6 grid place-items-center top-0" style={{ left: `${value * 3}px`, }}>
-                <div className="size-5 bg-white rounded-full shadow-md grid place-items-center">
-                    <div
-                        className="bg-[#424e82] rounded-full"
-                        style={{
-                            width: "14px",
-                            height: "14px",
-                        }}
-                    />
-                </div>
+                <Dot />
             </div>
 
             <input

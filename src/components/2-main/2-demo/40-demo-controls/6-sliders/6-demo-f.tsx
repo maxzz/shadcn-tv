@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Card } from './0-card';
+import { Card } from './0-1-card';
 
 function deriveData(index: number, value: number) {
     const r1 = 130;

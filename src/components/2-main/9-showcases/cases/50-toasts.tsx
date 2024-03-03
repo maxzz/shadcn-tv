@@ -14,6 +14,18 @@ function VerticalMenu() { // https://codepen.io/Prakash286/pen/dyRXNKG 'Explorin
     );
 }
 
+function VerticalMenu2() { // https://codepen.io/Prakash286/pen/OJoLQav 'Carousel with drag and wheel'
+    return (
+        <div className="relative left-4 top-32 -rotate-90 origin-top-right text-[.5rem]">
+            <div className="absolute px-1 py-1 border-border border rounded overflow-hidden flex gap-1">
+                <div className="px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Apple</div>
+                <div className="px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Plum</div>
+                <div className="px-2 py-1 bg-muted hover:bg-foreground/20 border-border/70 border rounded cursor-pointer">Peach</div>
+            </div>
+        </div>
+    );
+}
+
 export function ToastsInTabs() {
     return (
         <div className="flex justify-between">
@@ -32,6 +44,7 @@ export function ToastsInTabs() {
                 </div>
             </div>
             
+            <VerticalMenu2 />
             <VerticalMenu />
         </div>
     );

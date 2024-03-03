@@ -11,16 +11,24 @@ import { classNames } from '@/utils';
 export function SlidersDemo() {
     return (
         <div className={classNames(css["sliders-demo"], "w-full flex justify-center flex-wrap")}>
-            <Card title="Volume">
+            <Card title="A: Volume">
                 <DemoA />
             </Card>
-            <Card title="Range">
+            <Card title="B: Range">
                 <DemoB />
             </Card>
-            <DemoC />
-            <DemoD />
-            <DemoE />
-            <DemoF />
+            <Card title="C: Price">
+                <DemoC />
+            </Card>
+            <Card title="D: Volume">
+                <DemoD />
+            </Card>
+            <Card title="E: Precentage">
+                <DemoE />
+            </Card>
+            <Card title="F: Gauge">
+                <DemoF />
+            </Card>
         </div>
     );
 }

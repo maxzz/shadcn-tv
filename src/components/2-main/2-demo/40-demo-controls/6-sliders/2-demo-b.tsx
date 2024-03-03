@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Dot } from './0-2-dot';
+import { LineForDot2 } from './0-3-line-for-dot';
 
 function DemoBGraph({ start, diff }: { start: number; diff: number; }) {
     return (
@@ -38,27 +39,8 @@ export function DemoB() {
             </div>
 
             <div className="relative " style={{ width: "324px", height: "24px" }}>
-                <div
-                    className="absolute rounded-full bg-[var(--gauge-empty)]"
-                    style={{
-                        left: "12px",
-                        right: "12px",
-                        height: "8px",
-                        top: "50%",
-                        transform: "translate(0, -50%)",
-                    }}
-                />
 
-                <div
-                    className="absolute rounded-full bg-[var(--gauge-value)]"
-                    style={{
-                        left: `${12 + start}px`,
-                        width: `${diff}px`,
-                        height: "8px",
-                        top: "50%",
-                        transform: "translate(0, -50%)",
-                    }}
-                />
+                <LineForDot2 start={start} diff={diff} />
 
                 <div className="absolute size-6 grid place-items-center top-0" style={{ left: `${valueA * 3}px`, }}>
                     <Dot />

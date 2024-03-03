@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { Dot } from './0-2-dot';
+import { LineForDot2 } from './0-3-line-for-dot';
 
 function Marker({ value }: { value: number; }) {
     return (
@@ -57,29 +58,8 @@ export function DemoC() {
             <div style={{ width: "300px", height: "100px" }} />
         </div>
         <div className="relative " style={{ width: "324px", height: "24px" }}>
-            <div
-                className="absolute rounded-full"
-                style={{
-                    left: "12px",
-                    right: "12px",
-                    height: "8px",
-                    top: "50%",
-                    transform: "translate(0, -50%)",
-                    background: "var(--gauge-empty)",
-                }}
-            />
 
-            <div
-                className="absolute rounded-full"
-                style={{
-                    left: `${12 + start}px`,
-                    width: `${diff}px`,
-                    height: "8px",
-                    top: "50%",
-                    transform: "translate(0, -50%)",
-                    background: "var(--gauge-value)",
-                }}
-            />
+            <LineForDot2 start={start} diff={diff} />
 
             <div className="absolute size-6 grid place-items-center" style={{ top: 0, left: `${valueA * 3}px`, }}>
                 <Dot />

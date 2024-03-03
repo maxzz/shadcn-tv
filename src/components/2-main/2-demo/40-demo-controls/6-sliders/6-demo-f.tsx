@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { Dot } from './0-2-dot';
+import { LineForDot } from './0-3-line-for-dot';
 
 function deriveData(index: number, value: number) {
     const r1 = 130;
@@ -72,28 +73,7 @@ export function DemoF() {
         </div>
 
         <div className="relative " style={{ width: "324px", height: "24px" }}>
-            <div
-                className="absolute rounded-full"
-                style={{
-                    left: "12px",
-                    right: "12px",
-                    height: "8px",
-                    top: "50%",
-                    transform: "translate(0, -50%)",
-                    background: "var(--gauge-empty)",
-                }}
-            />
-            <div
-                className="absolute rounded-full"
-                style={{
-                    left: "12px",
-                    width: `${value * 3}px`,
-                    height: "8px",
-                    top: "50%",
-                    transform: "translate(0, -50%)",
-                    background: "var(--gauge-value)",
-                }}
-            />
+            <LineForDot value={value} />
 
             <div className="absolute size-6 grid place-items-center" style={{ top: 0, left: `${value * 3}px`, }}>
                 <Dot />

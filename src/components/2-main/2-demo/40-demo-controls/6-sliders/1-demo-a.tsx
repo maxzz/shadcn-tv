@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Dot } from './0-2-dot';
+import { LineForDot } from './0-3-line-for-dot';
 
 const demoAGraphData = [
     { key: 0, path: "M7 95H5C2.23858 95 0 97.2386 0 100H12C12 97.2386 9.76142 95 7 95Z", },
@@ -62,27 +63,8 @@ export function DemoA() {
         </div>
 
         <div className="relative" style={{ width: "324px", height: "24px" }}>
-            <div
-                className="absolute bg-[var(--gauge-empty)]  rounded-full"
-                style={{
-                    left: "12px",
-                    top: "50%",
-                    right: "12px",
-                    height: "8px",
-                    transform: "translate(0, -50%)",
-                }}
-            />
-
-            <div
-                className="absolute bg-[var(--gauge-value)]  rounded-full"
-                style={{
-                    left: "12px",
-                    top: "50%",
-                    width: `${value * 3}px`,
-                    height: "8px",
-                    transform: "translate(0, -50%)",
-                }}
-            />
+            
+            <LineForDot value={value} />
 
             <div className="absolute size-6 grid place-items-center top-0" style={{ left: `${value * 3}px`, }}>
                 <Dot />

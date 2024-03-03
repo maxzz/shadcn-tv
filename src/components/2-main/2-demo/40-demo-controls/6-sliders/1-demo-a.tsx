@@ -26,92 +26,93 @@ const demoAGraphData = [
 
 function DemoAGraph({ value }: { value: number; }) {
     return (
-        <svg width="300" height="100" viewBox="0 0 300 100" fill="none">
+        <svg viewBox="0 0 300 100" fill="none">
+            <defs>
+                <clipPath id="highlight">
+                    <rect width={value * 3} height="100" />
+                </clipPath>
+            </defs>
+
             <g id="background">
                 {demoAGraphData.map(
                     ({ key, path }) => (
-                        <path d={path} fill="#E8EBF9" key={key} />
+                        <path d={path} className="fill-[#E8EBF9]" key={key} />
                     )
                 )}
             </g>
+
             <g id="foreground" clipPath="url(#highlight)">
                 {demoAGraphData.map(
                     ({ key, path }) => (
-                        <path d={path} fill="#424E82" key={key} />
+                        <path d={path} className="fill-[#424E82]" key={key} />
                     )
                 )}
             </g>
-            <defs>
-                <clipPath id="highlight">
-                    <rect width={value * 3} height="100" fill="white" />
-                </clipPath>
-            </defs>
         </svg>
     );
 }
 
 export function DemoA() {
     const [value, setValue] = useState(37);
-    return (
-        <Card title="Volume">
+    return (<>
+        <div className="px-3">
+            <div style={{ width: "300px" }}>
+                <DemoAGraph value={value} />
+            </div>
+        </div>
 
-            <div className="px-3">
-                <div style={{ width: "300px" }}>
-                    <DemoAGraph value={value} />
+        <div className="relative" style={{ width: "324px", height: "24px" }}>
+            <div
+                className="absolute bg-[#e8ebf9]  rounded-full"
+                style={{
+                    left: "12px",
+                    top: "50%",
+                    right: "12px",
+                    height: "8px",
+                    transform: "translate(0, -50%)",
+                }}
+            />
+
+            <div
+                className="absolute bg-[#424E82]  rounded-full"
+                style={{
+                    left: "12px",
+                    top: "50%",
+                    width: `${value * 3}px`,
+                    height: "8px",
+                    transform: "translate(0, -50%)",
+                }}
+            />
+
+            {/* Circle */}
+            <div className="absolute size-6 grid place-items-center top-0" style={{ left: `${value * 3}px`, }}>
+                <div className="size-5 bg-white rounded-full shadow-md grid place-items-center">
+                    <div
+                        className="bg-[#424e82] rounded-full"
+                        style={{
+                            width: "14px",
+                            height: "14px",
+                        }}
+                    />
                 </div>
             </div>
 
-            <div className="relative" style={{ width: "324px", height: "24px" }}>
-                <div
-                    className="absolute bg-[#e8ebf9]  rounded-full"
-                    style={{
-                        left: "12px",
-                        right: "12px",
-                        height: "8px",
-                        top: "50%",
-                        transform: "translate(0, -50%)",
-                    }}
-                ></div>
-                <div
-                    className="absolute bg-[#424E82]  rounded-full"
-                    style={{
-                        left: "12px",
-                        width: `${value * 3}px`,
-                        height: "8px",
-                        top: "50%",
-                        transform: "translate(0, -50%)",
-                    }}
-                ></div>
-                <div
-                    className="absolute size-6 grid place-items-center top-0"
-                    style={{
-                        left: `${value * 3}px`,
-                    }}
-                >
-                    <div className="size-5 bg-white rounded-full shadow-md grid place-items-center">
-                        <div
-                            className="bg-[#424e82] rounded-full"
-                            style={{
-                                width: "14px",
-                                height: "14px",
-                            }} />
-                    </div>
-                </div>
-                <input
-                    type="range"
-                    id="demoAInput"
-                    name="demoAInput"
-                    min={0}
-                    max={100}
-                    step={1}
-                    value={value}
-                    onChange={(event) => setValue(parseInt(event.target.value, 10))} />
-            </div>
-            <div className="flex items-center justify-between px-3 font-semibold h-8">
-                <div> 0 </div>
-                <div> {value} </div>
-                <div> 100 </div>
-            </div>
-        </Card>
-    );
+            <input
+                type="range"
+                id="demoAInput"
+                name="demoAInput"
+                min={0}
+                max={100}
+                step={1}
+                value={value}
+                onChange={(event) => setValue(parseInt(event.target.value, 10))}
+            />
+        </div>
+
+        <div className="px-3 h-8 font-semibold flex items-center justify-between">
+            <div> 0 </div>
+            <div> {value} </div>
+            <div> 100 </div>
+        </div>
+    </>);
 }

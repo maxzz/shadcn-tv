@@ -17,7 +17,7 @@ function Marker({ value }: { value: number; }) {
                         left: "50%",
                         top: "50%",
                         transform: "translate(-50%, -50%)",
-                        background: "#424e82",
+                        background: "var(--gauge-value)",
                         width: "50px",
                         height: "30px",
                     }}
@@ -38,7 +38,7 @@ function Marker({ value }: { value: number; }) {
                     <svg className="w-full" viewBox="0 0 22 30" fill="none">
                         <path
                             d="M12.874 26.6557C12.3017 28.5519 9.61685 28.5519 9.04458 26.6557L0.999992 0H20.9186L12.874 26.6557Z"
-                            fill="#424e82" />
+                            fill="var(--gauge-value)" />
                     </svg>
                 </div>
             </div>
@@ -65,7 +65,7 @@ export function DemoC() {
                     height: "8px",
                     top: "50%",
                     transform: "translate(0, -50%)",
-                    background: "#e8ebf9",
+                    background: "var(--gauge-empty)",
                 }}
             />
 
@@ -77,7 +77,7 @@ export function DemoC() {
                     height: "8px",
                     top: "50%",
                     transform: "translate(0, -50%)",
-                    background: "#424E82",
+                    background: "var(--gauge-value)",
                 }}
             />
 

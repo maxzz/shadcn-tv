@@ -12,12 +12,12 @@ function DemoBGraph({ start, diff }: { start: number; diff: number; }) {
             <g id="background">
                 <path
                     d="M300 100H0C0 100 20.121 79.019 30 68C40.127 56.704 49.453 34.101 60 33C69.551 32.003 80 56 90 56C100 56 110.08 40.931 120 33C130.083 24.939 140.16 7.63699 150 7.99999C160.171 8.37499 169.563 28.791 180 37C189.628 44.573 199.889 55.623 210 56C219.894 56.369 230.323 39.006 240 40C250.371 41.066 260.381 55.514 270 65C280.45 75.306 300 100 300 100Z"
-                    fill="#E8EBF9" />
+                    fill="var(--gauge-empty)" />
             </g>
             <g id="foreground" clipPath="url(#highlight2)">
                 <path
                     d="M300 100H0C0 100 20.121 79.019 30 68C40.127 56.704 49.453 34.101 60 33C69.551 32.003 80 56 90 56C100 56 110.08 40.931 120 33C130.083 24.939 140.16 7.63699 150 7.99999C160.171 8.37499 169.563 28.791 180 37C189.628 44.573 199.889 55.623 210 56C219.894 56.369 230.323 39.006 240 40C250.371 41.066 260.381 55.514 270 65C280.45 75.306 300 100 300 100Z"
-                    fill="#424E82" />
+                    fill="var(--gauge-value)" />
             </g>
         </svg>
     );
@@ -39,7 +39,7 @@ export function DemoB() {
 
             <div className="relative " style={{ width: "324px", height: "24px" }}>
                 <div
-                    className="absolute rounded-full bg-[#e8ebf9]"
+                    className="absolute rounded-full bg-[var(--gauge-empty)]"
                     style={{
                         left: "12px",
                         right: "12px",
@@ -50,7 +50,7 @@ export function DemoB() {
                 />
 
                 <div
-                    className="absolute rounded-full bg-[#424E82]"
+                    className="absolute rounded-full bg-[var(--gauge-value)]"
                     style={{
                         left: `${12 + start}px`,
                         width: `${diff}px`,

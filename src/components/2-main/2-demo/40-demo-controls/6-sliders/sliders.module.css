@@ -13,6 +13,9 @@
 
 .sliders-demo {
 
+    --gauge-value: #424e82;
+    --gauge-empty: #e8ebf9;
+
     --thumb-size: 24px;
     --thumb-color: transparent;
 

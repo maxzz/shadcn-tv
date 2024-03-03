@@ -6,7 +6,7 @@ export function Dot() {
                 style={{
                     width: "14px",
                     height: "14px",
-                    background: "#424e82",
+                    background: "var(--gauge-value)",
                 }} />
         </div>
     );

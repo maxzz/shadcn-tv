@@ -36,7 +36,7 @@ function DemoAGraph({ value }: { value: number; }) {
             <g id="background">
                 {demoAGraphData.map(
                     ({ key, path }) => (
-                        <path d={path} className="fill-[#E8EBF9]" key={key} />
+                        <path d={path} className="fill-[var(--gauge-empty)]" key={key} />
                     )
                 )}
             </g>
@@ -44,7 +44,7 @@ function DemoAGraph({ value }: { value: number; }) {
             <g id="foreground" clipPath="url(#highlight)">
                 {demoAGraphData.map(
                     ({ key, path }) => (
-                        <path d={path} className="fill-[#424E82]" key={key} />
+                        <path d={path} className="fill-[var(--gauge-value)]" key={key} />
                     )
                 )}
             </g>
@@ -63,7 +63,7 @@ export function DemoA() {
 
         <div className="relative" style={{ width: "324px", height: "24px" }}>
             <div
-                className="absolute bg-[#e8ebf9]  rounded-full"
+                className="absolute bg-[var(--gauge-empty)]  rounded-full"
                 style={{
                     left: "12px",
                     top: "50%",
@@ -74,7 +74,7 @@ export function DemoA() {
             />
 
             <div
-                className="absolute bg-[#424E82]  rounded-full"
+                className="absolute bg-[var(--gauge-value)]  rounded-full"
                 style={{
                     left: "12px",
                     top: "50%",

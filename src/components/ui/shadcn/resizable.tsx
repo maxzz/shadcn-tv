@@ -66,6 +66,14 @@ export function togglePanels(refA: RefObject<R.ImperativePanelHandle>, refB: Ref
     }
 };
 
+export const toysMiddleClasses = "invisible group-hover:visible transition-all delay-150";
+export const toysArrowClasses = "\
+p-px size-4 \
+invisible group-hover:visible transition-all delay-150 \
+bg-border \
+outline outline-1 outline-muted-foreground/30 \
+rounded-sm";
+
 export function ResizableHandleToys({className, ...rest}: HTMLAttributes<HTMLDivElement>) {
     return (
         <div className={classNames("w-3 h-4 rounded-sm border bg-border flex items-center justify-center z-10", className)} {...rest}>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { FlipClock2 } from "./flip-clock2";
 import { classNames } from "@/utils";
 
@@ -14,7 +14,7 @@ interface TimerCharProps {
 }
 
 const TimerChar: React.FC<TimerCharProps> = (props: TimerCharProps) => {
-    const ref: React.MutableRefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
 
     const colon: boolean = props.char === ":";
 
@@ -26,7 +26,7 @@ const TimerChar: React.FC<TimerCharProps> = (props: TimerCharProps) => {
 
     const number: number = parseInt(props.char);
 
-    function getCharSlider(): JSX.Element[] {
+    function GetCharSlider() {
         let options: JSX.Element[] = [];
 
         for (let i: number = 0; i <= 9; i++) {
@@ -35,7 +35,8 @@ const TimerChar: React.FC<TimerCharProps> = (props: TimerCharProps) => {
             options.push(<span key={i} className={classes}>{i}</span>);
         }
 
-        const height: number = ref.current ? ref.current.offsetHeight : 0, top: string = `${number * height * -1}px`;
+        const height: number = ref.current ? ref.current.offsetHeight : 0;
+        const top: string = `${number * height * -1}px`;
 
         return (
             <div className="timer-char-slider" style={{ top }}>
@@ -45,7 +46,9 @@ const TimerChar: React.FC<TimerCharProps> = (props: TimerCharProps) => {
     }
 
     return (
-        <div ref={ref} className="timer-char number">{getCharSlider()}</div>
+        <div ref={ref} className="timer-char number">
+            <GetCharSlider />
+        </div>
     );
 };
 
@@ -68,17 +71,18 @@ function Timer() {
         }, [date]
     );
 
-    const formatSegment = (segment: number): string => {
+    function formatSegment(segment: number): string {
         return segment < 10 ? `0${segment}` : `${segment}`;
-    };
+    }
 
-    const getHours = (hours: number): string => {
+    function getHours(hours: number) {
         return hours % 12 === 0 ? 12 : hours % 12;
-    };
+    }
 
     const getTime = (): string => {
-        const hours: string = getHours(date.getHours()), minutes: string = date.getMinutes(), seconds: string = date.getSeconds();
-
+        const hours = getHours(date.getHours()); 
+        const minutes = date.getMinutes(); 
+        const seconds = date.getSeconds();
         return `${formatSegment(hours)}:${formatSegment(minutes)}:${formatSegment(seconds)}`;
     };
 

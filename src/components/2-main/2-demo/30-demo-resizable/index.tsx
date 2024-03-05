@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizable";
+import { ResizableHandle, ResizableHandleToys, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizable";
 import { appSettings } from "@/store";
 import { PanelGroupStorage } from "react-resizable-panels";
 
@@ -19,7 +19,9 @@ export function ResizableDemo() {
                 <PanelA />
             </ResizablePanel>
 
-            <ResizableHandle withHandle />
+            <ResizableHandle>
+                <ResizableHandleToys />
+            </ResizableHandle>
 
             <ResizablePanel >
                 <ResizablePanelGroup direction="vertical" autoSaveId="tm-example2" storage={panelsStorage}>

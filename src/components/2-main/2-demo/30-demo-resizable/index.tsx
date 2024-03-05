@@ -19,7 +19,7 @@ export function ResizableDemo() {
                 <PanelA />
             </ResizablePanel>
 
-            <ResizableHandle>
+            <ResizableHandle className="pb-2 items-end">
                 <ResizableHandleToys />
             </ResizableHandle>
 

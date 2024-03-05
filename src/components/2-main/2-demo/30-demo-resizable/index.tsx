@@ -1,6 +1,8 @@
-import { ResizableHandle, ResizableHandleToys, ResizablePanel, ResizablePanelGroup, } from "@/components/ui/shadcn/resizable";
+import { IconChevronLeft } from "@/components/ui/icons/normal";
+import { ResizableHandle, ResizableHandleToys, ResizablePanel, ResizablePanelGroup, togglePanels, toysArrowClasses, toysMiddleClasses, } from "@/components/ui/shadcn/resizable";
 import { appSettings } from "@/store";
-import { PanelGroupStorage } from "react-resizable-panels";
+import { useRef } from "react";
+import { ImperativePanelHandle, PanelGroupStorage } from "react-resizable-panels";
 
 const panelsStorage: PanelGroupStorage = {
     getItem(name: string): string {
@@ -12,18 +14,30 @@ const panelsStorage: PanelGroupStorage = {
 };
 
 export function ResizableDemo() {
+    const refA = useRef<ImperativePanelHandle>(null);
+    const refB = useRef<ImperativePanelHandle>(null);
     return (
         <ResizablePanelGroup direction="horizontal" className="w-full _max-w-md rounded-lg border" autoSaveId="tm-example" storage={panelsStorage}>
 
-            <ResizablePanel defaultSize={25}>
+            <ResizablePanel ref={refA} collapsible defaultSize={25}>
                 <PanelA />
             </ResizablePanel>
 
             <ResizableHandle className="pb-2 items-end">
-                <ResizableHandleToys />
+                <div className="flex items-center gap-1">
+                    <button className={toysArrowClasses} onClick={() => togglePanels(refA, refB, true)}>
+                        <IconChevronLeft />
+                    </button>
+
+                    <ResizableHandleToys className={toysMiddleClasses} />
+
+                    <button className={toysArrowClasses} onClick={() => togglePanels(refA, refB, false)}>
+                        <IconChevronLeft className={`${toysArrowClasses} rotate-180`} />
+                    </button>
+                </div>
             </ResizableHandle>
 
-            <ResizablePanel >
+            <ResizablePanel ref={refB} collapsible>
                 <ResizablePanelGroup direction="vertical" autoSaveId="tm-example2" storage={panelsStorage}>
 
                     <ResizablePanel defaultSize={25}>

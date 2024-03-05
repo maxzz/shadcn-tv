@@ -15,10 +15,14 @@ const ResizablePanelGroup = ({ className, ...rest }: React.ComponentProps<typeof
 
 const ResizablePanel = R.Panel;
 
+//hover:bg-sky-700 transition-colors delay-[.15s] \
+//hover:bg-sky-500 [transition:background-color_.1s_ease_.4s] \
+
 const ResizableHandleClasses = "\
 relative w-px \
 \
 bg-border \
+hover:bg-sky-700 transition-colors delay-[.15s] \
 \
 after:absolute \
 after:left-1/2 \

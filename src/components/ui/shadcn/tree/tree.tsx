@@ -246,7 +246,7 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
     ({ className, children, ...rest }, ref) => (
         <A.Content
             ref={ref}
-            className={cn("text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down transition-all overflow-hidden", className)}
+            className={cn("data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down transition-all overflow-hidden", className)}
             {...rest}
         >
             <div>
@@ -262,7 +262,7 @@ function TreeIconAndText({ item, Icon, classes, hideFolderIcon }: { item: DataIt
         {item.icon && <item.icon className={classes} aria-hidden="true" />}
         {!item.icon && Icon && !hideFolderIcon && <Icon className={classes} aria-hidden="true" />}
 
-        <span className="flex-grow text-sm truncate">
+        <span className="flex-grow truncate">
             {item.name}
         </span>
     </>);

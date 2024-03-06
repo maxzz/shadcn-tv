@@ -43,7 +43,7 @@ export function DemoTreeWithOptions() {
     );
 
     return (
-        <div className="mr-12 p-0.5 w-full h-full">
+        <div className="mr-12 p-0.5 w-full h-full text-xs">
 
             <SimpleSplitPane vertical={false} className="splitpane h-full">
                 <div className="w-full">

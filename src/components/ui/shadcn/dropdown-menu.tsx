@@ -5,6 +5,8 @@ import { popupAnimatonClasses } from "./shared";
 import { CheckIcon, ChevronRightIcon, DotFilledIcon, } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 
+//NOTE: menu text size can be controlled by className="text-xs" on DropdownMenuSubContent and DropdownMenuContent
+
 const DropdownMenu = Prim.Root;
 const DropdownMenuTrigger = Prim.Trigger;
 const DropdownMenuGroup = Prim.Group;
@@ -13,7 +15,7 @@ const DropdownMenuSub = Prim.Sub;
 const DropdownMenuRadioGroup = Prim.RadioGroup;
 
 const DropdownMenuSubTriggerClasses = "\
-px-2 py-1.5 text-sm \
+px-2 py-1.5 \
 \
 focus:bg-accent \
 data-[state=open]:bg-accent \
@@ -31,7 +33,7 @@ const DropdownMenuSubTrigger = forwardRef<ElementRef<typeof Prim.SubTrigger>, Co
 DropdownMenuSubTrigger.displayName = Prim.SubTrigger.displayName;
 
 const DropdownMenuSubContentClasses = `${"\
-p-1 min-w-[8rem] z-50 \
+p-1 min-w-[8rem] text-sm z-50 \
 text-popover-foreground bg-popover \
 border rounded-md shadow-md overflow-hidden \
 "} ${popupAnimatonClasses}`;
@@ -53,7 +55,7 @@ const DropdownMenuContent = forwardRef<ElementRef<typeof Prim.Content>, Componen
 DropdownMenuContent.displayName = Prim.Content.displayName;
 
 const DropdownMenuItemClasses = "\
-relative px-2 py-1.5 text-sm \
+relative px-2 py-1.5 \
 \
 focus:text-accent-foreground \
 focus:bg-accent \
@@ -72,7 +74,7 @@ const DropdownMenuItem = forwardRef<ElementRef<typeof Prim.Item>, ComponentProps
 DropdownMenuItem.displayName = Prim.Item.displayName;
 
 const DropdownMenuCheckboxItemClasses = "\
-relative pl-8 pr-2 py-1.5 text-sm \
+relative pl-8 pr-2 py-1.5 \
 \
 focus:text-accent-foreground \
 focus:bg-accent \
@@ -98,7 +100,7 @@ const DropdownMenuCheckboxItem = forwardRef<ElementRef<typeof Prim.CheckboxItem>
 DropdownMenuCheckboxItem.displayName = Prim.CheckboxItem.displayName;
 
 const DropdownMenuRadioItemClasses = "\
-relative pl-8 pr-2 py-1.5 text-sm \
+relative pl-8 pr-2 py-1.5 \
 \
 focus:text-accent-foreground \
 focus:bg-accent \
@@ -127,7 +129,7 @@ const DropdownMenuLabel = forwardRef<ElementRef<typeof Prim.Label>, ComponentPro
     ({ className, inset, ...props }, ref) => (
         <Prim.Label
             ref={ref}
-            className={cn("px-2 py-1.5 text-sm font-semibold", inset && "pl-8", className)}
+            className={cn("px-2 py-1.5 font-semibold", inset && "pl-8", className)}
             {...props}
         />
     )

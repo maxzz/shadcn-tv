@@ -33,7 +33,7 @@ type TreeProps = Prettify<
 
 type TreeOptions = { arrowFirst?: boolean; hideFolderIcon?: boolean; };
 type TreeState = {
-    selectedId: string | undefined;
+    selectedId: string | number | undefined;
 };
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
@@ -87,8 +87,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
 
         return (
             <div
-                ref={(r) => { refRootCb(r); refRoot.current = r; }}
-                className={cn("_overflow-hidden", className)}
+                ref={(elm) => { refRootCb(elm); refRoot.current = elm; }}
+                className={className}
                 tabIndex={0}
                 onKeyDown={(e) => {
                     const nextId = getNextId(refRoot.current!, e, treeState.selectedId);
@@ -137,7 +137,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
                                 {item.children
                                     ? (
                                         <A.Root type="multiple" defaultValue={expandedItemIds}>
-                                            <A.Item value={item.id} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
+                                            <A.Item value={`${item.id}`} data-tree-id={item.id} data-tree-folder={TypeTreeFolder}>
                                                 <Folder
                                                     item={item}
                                                     Icon={IconForFolder}

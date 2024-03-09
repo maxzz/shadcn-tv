@@ -23,7 +23,7 @@ export function duplicateTree<T extends DataItemNav>(data: T[]): T[] {
     });
 }
 
-export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefined | null, id: string | undefined): T | undefined {
+export function findTreeItemById<T extends DataItemNav>(items: T[] | T | undefined | null, id: string | number | undefined): T | undefined {
     if (id && items) {
         !Array.isArray(items) && (items = [items]);
         for (const item of items) {
@@ -73,7 +73,7 @@ export function collectExpandedItemIds(data: DataItemNav[] | DataItemNav, initia
     }
 }
 
-export function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | undefined): string | undefined {
+export function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>, selectedItemId: string | number | undefined): string | undefined {
     const keys = ["ArrowDown", "ArrowUp", "End", "Home", "Enter"];
     if (!keys.includes(e.key)) {
         return;
@@ -115,4 +115,3 @@ export function getNextId(root: HTMLDivElement, e: KeyboardEvent<HTMLDivElement>
         }
     }
 }
-

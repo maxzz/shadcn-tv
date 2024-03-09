@@ -79,7 +79,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 }
 
                 onSelectChange?.(item);
-            }, [treeState, onSelectChange]
+            }, [data, treeState, onSelectChange]
         );
 
         const refRoot = useRef<HTMLDivElement | null>(null);

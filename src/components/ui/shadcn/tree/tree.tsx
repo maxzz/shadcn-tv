@@ -194,7 +194,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
                 data-tree-id={item.id}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} classes={leafIconClasses} hideFolderIcon={false} />
+                <TreeIconAndText item={item} Icon={Icon} iconClasses={leafIconClasses} hideFolderIcon={false} />
             </div>
         );
     }
@@ -212,7 +212,7 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
                 ref={ref}
                 {...rest}
             >
-                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon={hideFolderIcon} classes={treeItemIconClasses} />
+                <TreeIconAndText item={item} Icon={Icon} hideFolderIcon={hideFolderIcon} iconClasses={treeItemIconClasses} />
             </FolderTrigger>
         );
     }
@@ -257,10 +257,10 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
 );
 FolderContent.displayName = 'Tree.Folder.Content';
 
-function TreeIconAndText({ item, Icon, classes, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; classes: string; } & Pick<TreeOptions, 'hideFolderIcon'>) {
+function TreeIconAndText({ item, Icon, iconClasses, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; iconClasses: string; } & Pick<TreeOptions, 'hideFolderIcon'>) {
     return (<>
-        {item.icon && <item.icon className={classes} aria-hidden="true" />}
-        {!item.icon && Icon && !hideFolderIcon && <Icon className={classes} aria-hidden="true" />}
+        {item.icon && <item.icon className={iconClasses} aria-hidden="true" />}
+        {!item.icon && Icon && !hideFolderIcon && <Icon className={iconClasses} aria-hidden="true" />}
 
         <span className="flex-grow truncate">
             {item.name}

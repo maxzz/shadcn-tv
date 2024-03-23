@@ -114,6 +114,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
         );
     }
 );
+Tree.displayName = 'Tree.Root';
 
 type HandleSelectChange = (event: SyntheticEvent<any>, item: DataItemWState | undefined) => void;
 
@@ -183,6 +184,7 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
         );
     }
 );
+TreeItem.displayName = 'Tree.TreeItem';
 
 const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItemWState, Icon?: TreenIconType; }>(
     ({ className, item, Icon, ...rest }, ref) => {
@@ -258,9 +260,9 @@ const FolderContent = forwardRef<ElementRef<typeof A.Content>, ComponentPropsWit
 FolderContent.displayName = 'Tree.Folder.Content';
 
 function TreeIconAndText({ item, Icon, iconClasses, hideFolderIcon }: { item: DataItem; Icon?: TreenIconType; iconClasses: string; } & Pick<TreeOptions, 'hideFolderIcon'>) {
+    const IconToRender = item.icon || (!hideFolderIcon && Icon);
     return (<>
-        {item.icon && <item.icon className={iconClasses} aria-hidden="true" />}
-        {!item.icon && Icon && !hideFolderIcon && <Icon className={iconClasses} aria-hidden="true" />}
+        {IconToRender && <IconToRender className={iconClasses} aria-hidden="true" />}
 
         <span className="flex-grow truncate">
             {item.name}

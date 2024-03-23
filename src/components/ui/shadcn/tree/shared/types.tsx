@@ -8,7 +8,7 @@ export type DataItemNavigation<T> =
         children?: DataItemNavigation<T>[];
     };
 
-export type TreenIconType = LucideIconType;
+export type TreenIconType = LucideIconType | SVGIconType;
 
 export type DataItemCore = {
     id: string | number;

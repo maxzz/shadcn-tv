@@ -14,8 +14,8 @@ import { cn } from "@/utils";
   * widths that change. We'll wait to see what use-cases consumers come up with there
   * before trying to resolve it.
  */
-const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithoutRef<typeof Prim.Root>>(
-    ({ className, children, ...rest }, ref) => (
+const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithoutRef<typeof Prim.Root> & {horizontal?: boolean}>(
+    ({ className, children, horizontal, ...rest }, ref) => (
         <Prim.Root ref={ref} className={cn("relative overflow-hidden", "[&[data-fixed-width]>div>div]:![display:block]", className)} {...rest}>
 
             <Prim.Viewport className="h-full w-full rounded-[inherit]">
@@ -23,6 +23,7 @@ const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithou
             </Prim.Viewport>
 
             <ScrollBar />
+            {horizontal && <ScrollBar orientation="horizontal" />}
 
             <Prim.Corner />
         </Prim.Root>

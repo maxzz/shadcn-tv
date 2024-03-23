@@ -5,6 +5,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
 
 const Dialog = Prim.Root;
+const DialogClose = Prim.Close;
 const DialogTrigger = Prim.Trigger;
 const DialogPortal = Prim.Portal;
 
@@ -25,7 +26,7 @@ const DialogOverlay = forwardRef<ElementRef<typeof Prim.Overlay>, ComponentProps
 );
 DialogOverlay.displayName = Prim.Overlay.displayName;
 
-const DialogContentClasses = "\
+export const DialogContentClasses = "\
 fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-50 \
 p-6 w-full md:w-full max-w-lg \
 \
@@ -46,7 +47,21 @@ data-[state=closed]:slide-out-to-top-[48%] \
 border sm:rounded-lg shadow-lg \
 duration-200 \
 grid gap-4";
-const DialogContentCloseClasses = "\
+const DialogContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content> & {noClose?: boolean}>(
+    ({ className, children, noClose, ...rest }, ref) => (
+        <DialogPortal>
+            <DialogOverlay />
+
+            <Prim.Content ref={ref} className={cn(DialogContentClasses, className)} {...rest}>
+                {children}
+                {!noClose && <DialogCloseButton />}
+            </Prim.Content>
+        </DialogPortal>
+    )
+);
+DialogContent.displayName = Prim.Content.displayName;
+
+const DialogCloseButtonClasses = "\
 absolute right-4 top-4 \
 opacity-70 transition-opacity\
 \
@@ -63,34 +78,26 @@ ring-offset-background \
 \
 rounded-sm \
 disabled:pointer-events-none";
-const DialogContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content>>(
-    ({ className, children, ...rest }, ref) => (
-        <DialogPortal>
-            <DialogOverlay />
+function DialogCloseButton({ className, ...rest }: HTMLAttributes<HTMLButtonElement>) {
+    return (
+        <Prim.Close className={cn(DialogCloseButtonClasses, className)} {...rest}>
+            <Cross2Icon className="size-4" />
+            <span className="sr-only">Close</span>
+        </Prim.Close>
+    );
+}
 
-            <Prim.Content ref={ref} className={cn(DialogContentClasses, className)} {...rest}>
-                {children}
+function DialogHeader({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <div className={cn("text-center sm:text-left flex flex-col space-y-1.5", className)} {...rest} />
+    );
+}
 
-                <Prim.Close className={DialogContentCloseClasses}>
-                    <Cross2Icon className="h-4 w-4" />
-                    <span className="sr-only">Close</span>
-                </Prim.Close>
-
-            </Prim.Content>
-        </DialogPortal>
-    )
-);
-DialogContent.displayName = Prim.Content.displayName;
-
-const DialogHeader = ({ className, ...rest }: HTMLAttributes<HTMLDivElement>) => (
-    <div className={cn("text-center sm:text-left flex flex-col space-y-1.5", className)} {...rest} />
-);
-DialogHeader.displayName = "DialogHeader";
-
-const DialogFooter = ({ className, ...rest }: HTMLAttributes<HTMLDivElement>) => (
-    <div className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)} {...rest} />
-);
-DialogFooter.displayName = "DialogFooter";
+function DialogFooter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <div className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)} {...rest} />
+    );
+}
 
 const DialogTitle = forwardRef<ElementRef<typeof Prim.Title>, ComponentPropsWithoutRef<typeof Prim.Title>>(
     ({ className, ...rest }, ref) => (
@@ -108,6 +115,8 @@ DialogDescription.displayName = Prim.Description.displayName;
 
 export {
     Dialog,
+    DialogClose,
+    DialogCloseButton,
     DialogPortal,
     DialogOverlay,
     DialogTrigger,

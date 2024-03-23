@@ -7,7 +7,6 @@ export function Drawer({ shouldScaleBackground = true, ...rest }: ComponentProps
         <D.Root shouldScaleBackground={shouldScaleBackground} {...rest} />
     );
 }
-Drawer.displayName = "Drawer";
 
 export const DrawerTrigger = D.Trigger;
 export const DrawerPortal = D.Portal;

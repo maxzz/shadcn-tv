@@ -72,7 +72,7 @@ export function DrawerDemo() {
                 </Button>
             </D.DrawerTrigger>
 
-            <D.DrawerContent>
+            <D.DrawerContent withTopBar>
                 <div className="mx-auto w-full max-w-sm">
                     <D.DrawerHeader>
                         <D.DrawerTitle>Move Goal</D.DrawerTitle>

@@ -5,6 +5,8 @@ import { cn } from "@/utils";
 const TooltipProvider = Prim.Provider;
 const Tooltip = Prim.Root;
 const TooltipTrigger = Prim.Trigger;
+const TooltipArrow = Prim.Arrow;
+const TooltipPortal = Prim.Portal;
 
 const TooltipContentClasses = "\
 z-50 px-3 py-1.5 text-xs \
@@ -33,4 +35,4 @@ const TooltipContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentProp
 );
 TooltipContent.displayName = Prim.Content.displayName;
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+export { Tooltip, TooltipTrigger, TooltipArrow, TooltipPortal, TooltipContent, TooltipProvider };

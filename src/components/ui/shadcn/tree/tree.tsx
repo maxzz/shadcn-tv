@@ -238,7 +238,7 @@ const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWit
             <A.Header>
                 <A.Trigger
                     asChild
-                    className={cn("flex-1 py-1 w-full transition-all outline-none cursor-pointer flex items-center", arrowFirst ? "first:[&[data-state=open]>svg]:rotate-90" : "last:[&[data-state=open]>svg]:rotate-90", className)}
+                    className={cn("flex-1 w-full transition-all outline-none cursor-pointer flex items-center", arrowFirst ? "first:[&[data-state=open]>svg]:rotate-90" : "last:[&[data-state=open]>svg]:rotate-90", className)}
                     ref={ref}
                     {...rest}
                 >
@@ -280,7 +280,7 @@ export type TreeIconAndTextProps = Prettify<
 
 export type TreeIconAndTextType = typeof TreeIconAndText;
 
-function TreeIconAndText({ item, Icon, iconClasses, hideFolderIcon }: TreeIconAndTextProps) {
+export function TreeIconAndText({ item, Icon, iconClasses, hideFolderIcon }: TreeIconAndTextProps) {
     const IconToRender = item.icon || (!hideFolderIcon && Icon);
     return (<>
         {IconToRender && <IconToRender className={iconClasses} aria-hidden="true" />}

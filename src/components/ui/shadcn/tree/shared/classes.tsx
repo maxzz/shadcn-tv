@@ -1,7 +1,7 @@
 // tree folder
 
 export const treeItemBaseClasses = "\
-px-2 \
+px-2 py-1 \
 before:absolute \
 before:left-0 \
 before:w-full \
@@ -22,7 +22,7 @@ export const treeItemIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground
 // tree leaf
 
 export const leafBaseClasses = "\
-px-2 py-1 r1elative \
+px-2 py-1 _relative \
 \
 before:absolute \
 before:left-0 \
@@ -43,4 +43,5 @@ before:opacity-100 \
 before:border-l-2 \
 before:border-l-accent-foreground/50 \
 ";
+
 export const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";

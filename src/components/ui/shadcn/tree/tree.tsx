@@ -17,7 +17,11 @@ export type ItemState = {
 
 export type DataItemWState = DataItemNavigation<DataItemCore & ItemState>;
 
-type TreeOptions = { arrowFirst?: boolean; hideFolderIcon?: boolean; };
+type TreeIconOptions = {
+    arrowFirst?: boolean;
+    hideFolderIcon?: boolean;
+};
+
 type TreeState = {
     selectedId: string | number | undefined;
 };
@@ -35,7 +39,7 @@ type TreeProps = Prettify<
         IconForFolder?: TreenIconType;
         IconForItem?: TreenIconType;
     }
-    & TreeOptions
+    & TreeIconOptions
 >;
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
@@ -130,7 +134,7 @@ type TreeItemProps = Prettify<
         handleSelectChange: HandleSelectChange;
         expandedItemIds: string[];
     }
-    & TreeOptions
+    & TreeIconOptions
 >;
 
 const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLDivElement>>(
@@ -196,7 +200,13 @@ const TreeItem = forwardRef<HTMLDivElement, TreeItemProps & HTMLAttributes<HTMLD
 );
 TreeItem.displayName = 'Tree.TreeItem';
 
-const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item: DataItemWState, Icon?: TreenIconType; IconTextRender: TreeIconAndTextType; }>(
+type LeafFolderProps = {
+    item: DataItemWState;
+    Icon?: TreenIconType;
+    IconTextRender: TreeIconAndTextType;
+};
+
+const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & LeafFolderProps>(
     ({ className, item, IconTextRender, Icon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
         return (
@@ -213,7 +223,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { item:
 );
 Leaf.displayName = 'Tree.Leaf';
 
-const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & { item: DataItemWState, Icon?: TreenIconType; IconTextRender: TreeIconAndTextType; } & TreeOptions>(
+const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> & LeafFolderProps & TreeIconOptions>(
     ({ className, item, IconTextRender, Icon, arrowFirst = true, hideFolderIcon, ...rest }, ref) => {
         const { selected } = useSnapshot(item.state);
         return (
@@ -231,7 +241,7 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
 );
 Folder.displayName = 'Tree.Folder';
 
-const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & Pick<TreeOptions, 'arrowFirst'>>(
+const FolderTrigger = forwardRef<ElementRef<typeof A.Trigger>, ComponentPropsWithoutRef<typeof A.Trigger> & Pick<TreeIconOptions, 'arrowFirst'>>(
     ({ className, children, arrowFirst, ...rest }, ref) => {
         const ArrowIcon = <ChevronRight className={classNames("shrink-0 ml-auto h-4 w-4 text-accent-foreground/50 transition-transform duration-200", arrowFirst && "mr-2")} />;
         return (
@@ -275,7 +285,7 @@ export type TreeIconAndTextProps = Prettify<
         Icon?: TreenIconType;
         iconClasses: string;
     }
-    & Pick<TreeOptions, 'hideFolderIcon'>
+    & Pick<TreeIconOptions, 'hideFolderIcon'>
 >;
 
 export type TreeIconAndTextType = typeof TreeIconAndText;

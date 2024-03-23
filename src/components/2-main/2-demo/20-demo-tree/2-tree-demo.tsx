@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { proxy, useSnapshot } from "valtio";
-import { Tree, DataItemWState, DataItem, duplicateTree, findTreeItemById, walkItems } from "@/components/ui/shadcn/tree";
+import { Tree, DataItemWState, DataItem, duplicateTree, findTreeItemById, walkItems, TreeIconAndTextProps } from "@/components/ui/shadcn/tree";
 import { data } from "./1-tree-data";
 import { AppWindow as IconFile, Folder as IconFolder } from "lucide-react"; // Workflow as IconFile, File as IconFile
 import { inputFocusClasses } from "@/components/ui/shared-styles";
@@ -19,6 +19,17 @@ function addStateToTreeItems(data: DataItem[]): DataItemWState[] {
 
 const dataWithState = addStateToTreeItems(data);
 
+function TreeIconAndText({ item, Icon, iconClasses, hideFolderIcon }: TreeIconAndTextProps) {
+    const IconToRender = item.icon || (!hideFolderIcon && Icon);
+    return (<>
+        {IconToRender && <IconToRender className={iconClasses} aria-hidden="true" />}
+
+        <span className="flex-grow truncate">
+            {item.name}
+        </span>
+    </>);
+}
+
 export function DemoTreeWithOptions() {
     const [content, setContent] = useState(() => {
         const initialItem = findTreeItemById(dataWithState, initialItemId);
@@ -34,6 +45,7 @@ export function DemoTreeWithOptions() {
                 className={`w-full h-full border rounded-l-md ${inputFocusClasses}`}
                 initialSelectedItemId={initialItemId}
                 onSelectChange={(item) => setContent(item?.name ?? "")}
+                IconTextRender={TreeIconAndText}
                 IconForFolder={IconFolder}
                 IconForItem={IconFile}
                 arrowFirst={snapArrowFirst}

@@ -3,7 +3,7 @@ import * as Prim from "@radix-ui/react-switch";
 import { cn } from "@/utils";
 
 const RootClasses = "\
-peer w-[36px] h-[20px] \
+peer w-9 h-5 \
 \
 border-transparent \
 \
@@ -25,7 +25,7 @@ shrink-0 \
 inline-flex items-center";
 
 const ThumbClasses = "\
-block w-4 h-4 \
+block size-4 \
 \
 bg-background \
 \
@@ -37,10 +37,10 @@ pointer-events-none \
 ring-0 \
 rounded-full shadow-lg";
 
-const Switch = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithoutRef<typeof Prim.Root>>(
-    ({ className, ...rest }, ref) => (
+const Switch = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithoutRef<typeof Prim.Root> & {thumbClasses?: string}>(
+    ({ className, thumbClasses, ...rest }, ref) => (
         <Prim.Root ref={ref} className={cn(RootClasses, className)} {...rest}>
-            <Prim.Thumb className={cn(ThumbClasses)} />
+            <Prim.Thumb className={cn(ThumbClasses, thumbClasses)} />
         </Prim.Root>
     )
 );

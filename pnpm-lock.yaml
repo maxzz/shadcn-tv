@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@jlns/hooks':
     specifier: ^0.0.14
-    version: 0.0.14(@hookform/resolvers@3.3.4)(@types/react-dom@18.2.22)(@types/react@18.2.72)(next@14.1.4)(react-dom@18.2.0)(react-hook-form@7.50.1)(react@18.2.0)(typescript@5.4.3)(usehooks-ts@3.0.2)(zod@3.22.4)
+    version: 0.0.14(@hookform/resolvers@3.3.4)(@types/react-dom@18.2.22)(@types/react@18.2.72)(next@14.1.4)(react-dom@18.2.0)(react-hook-form@7.50.1)(react@18.2.0)(typescript@5.4.3)(usehooks-ts@2.16.0)(zod@3.22.4)
   '@jlns/zod':
     specifier: ^0.0.1
     version: 0.0.1(typescript@5.4.3)(zod@3.22.4)
@@ -128,6 +128,9 @@ dependencies:
   embla-carousel-react:
     specifier: 8.0.0
     version: 8.0.0(react@18.2.0)
+  input-otp:
+    specifier: ^1.2.3
+    version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
   jotai:
     specifier: ^2.7.1
     version: 2.7.1(@types/react@18.2.72)(react@18.2.0)
@@ -709,7 +712,7 @@ packages:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: /wrap-ansi@7.0.0
 
-  /@jlns/hooks@0.0.14(@hookform/resolvers@3.3.4)(@types/react-dom@18.2.22)(@types/react@18.2.72)(next@14.1.4)(react-dom@18.2.0)(react-hook-form@7.50.1)(react@18.2.0)(typescript@5.4.3)(usehooks-ts@3.0.2)(zod@3.22.4):
+  /@jlns/hooks@0.0.14(@hookform/resolvers@3.3.4)(@types/react-dom@18.2.22)(@types/react@18.2.72)(next@14.1.4)(react-dom@18.2.0)(react-hook-form@7.50.1)(react@18.2.0)(typescript@5.4.3)(usehooks-ts@2.16.0)(zod@3.22.4):
     resolution: {integrity: sha512-AN/YL5uGcHobH+MBXFnVqppwx7U33UzuQhdCsHxt3tj92pdFuY86LG5YrLiecIlB4d988i+SwQ14W2ClM9FR6Q==}
     peerDependencies:
       '@hookform/resolvers': ^3.3.3
@@ -731,7 +734,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-hook-form: 7.50.1(react@18.2.0)
       typescript: 5.4.3
-      usehooks-ts: 3.0.2(react@18.2.0)
+      usehooks-ts: 2.16.0(react@18.2.0)
       zod: 3.22.4
     dev: false
 
@@ -3884,6 +3887,16 @@ packages:
     dependencies:
       function-bind: 1.1.2
 
+  /input-otp@1.2.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pxYvgnihL9KAdpcShX2+iKctdMRbDs36bIqd8uIsN3e5vv9VjMv2bhO3S5Bl1PjcDPsA/OXZe5R71n8oVtucfQ==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /internal-slot@1.0.7:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==}
     engines: {node: '>= 0.4'}
@@ -5081,8 +5094,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /usehooks-ts@3.0.2(react@18.2.0):
-    resolution: {integrity: sha512-qJScCj8YOxa8RV3Iz2T+2IsydLG0EID5FouTGE7aNFEpFlCXmRrnJiPCESDArKr1FLTaUQSfDQ43UDn7yMLExw==}
+  /usehooks-ts@2.16.0(react@18.2.0):
+    resolution: {integrity: sha512-bez95WqYujxp6hFdM/CpRDiVPirZPxlMzOH2QB8yopoKQMXpscyZoxOjpEdaxvV+CAWUDSM62cWnqHE0E/MZ7w==}
     engines: {node: '>=16.15.0'}
     peerDependencies:
       react: ^16.8.0  || ^17 || ^18

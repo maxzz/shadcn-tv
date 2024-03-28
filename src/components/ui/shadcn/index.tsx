@@ -45,3 +45,5 @@ export * from './radix-toast';
 export * from './pagination';
 export * from './carousel';
 export * from './drawer';
+export * from './input-otp';
+export * from './breadcrumb';

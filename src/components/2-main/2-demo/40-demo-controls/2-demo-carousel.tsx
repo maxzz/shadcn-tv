@@ -12,7 +12,7 @@ function Items() {
         {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
                 <div className="p-1 flex justify-center">
-                    <Card className="w-24 h-24">
+                    <Card className="size-24">
                         <CardContent className="p-6 aspect-square flex items-center justify-center">
                             <span className="text-4xl font-semibold">{index + 1}</span>
                         </CardContent>

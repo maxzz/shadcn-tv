@@ -1,10 +1,10 @@
-import { Button, Tabs, TabsContent, TabsList, TabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
+import { Button, Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
 import { BubblesDemo, DotsRing, LoadersTest, Spinner7, Spinner9, RainbowCircles, SpinnerDiv, SpinnerEmoji, SpinnerRadial, SpinnerSpherees, SpinnerSvg, Flickup, ThreeDotsLoader, OpenGoo, FlipBtn, TwoCircles, BorderRun, TextBar } from "../../2-demo/60-demo-loaders";
 
 function SpinnerTabs() {
     return (
         <Tabs defaultValue="loaders1">
-            <TabsList className={TabsListWrapClasses}>
+            <TabsList className={tabsListWrapClasses}>
                 <TabsTrigger value="loaders1">Simple</TabsTrigger>
                 <TabsTrigger value="loaders2">Circles</TabsTrigger>
                 <TabsTrigger value="loaders3">Dots ring</TabsTrigger>
@@ -52,7 +52,7 @@ function SpinnerTabs() {
 function StyledTabs() {
     return (
         <Tabs defaultValue="loaders1">
-            <TabsList className={TabsListWrapClasses}>
+            <TabsList className={tabsListWrapClasses}>
                 <TabsTrigger value="loaders1">Blocks</TabsTrigger>
                 <TabsTrigger value="loaders2">Bubbles</TabsTrigger>
                 <TabsTrigger value="loaders3">3D spheres</TabsTrigger>
@@ -80,7 +80,7 @@ function StyledTabs() {
 function EffectsTabs() {
     return (
         <Tabs defaultValue="switch3">
-            <TabsList className={TabsListWrapClasses}>
+            <TabsList className={tabsListWrapClasses}>
                 <TabsTrigger value="switch3">Effects</TabsTrigger>
                 <TabsTrigger value="switch4">Goo</TabsTrigger>
             </TabsList>
@@ -113,7 +113,7 @@ function EffectsTabs() {
 export function LoadersInTab() {
     return (
         <Tabs defaultValue="loaders1">
-            <TabsList className={TabsListWrapClasses}>
+            <TabsList className={tabsListWrapClasses}>
                 <TabsTrigger value="loaders1">Spinners</TabsTrigger>
                 <TabsTrigger value="loaders2">Styled</TabsTrigger>
                 <TabsTrigger value="loaders3">Effects</TabsTrigger>

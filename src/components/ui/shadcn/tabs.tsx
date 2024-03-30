@@ -13,7 +13,7 @@ bg-muted \
 rounded-lg \
 inline-flex items-center justify-center";
 
-export const TabsListWrapClasses = "h-auto justify-normal flex-wrap";
+export const tabsListWrapClasses = "h-auto justify-normal flex-wrap";
 
 const TabsList = forwardRef<ElementRef<typeof Prim.List>, ComponentPropsWithoutRef<typeof Prim.List>>(
     ({ className, ...rest }, ref) => (
@@ -22,7 +22,7 @@ const TabsList = forwardRef<ElementRef<typeof Prim.List>, ComponentPropsWithoutR
 );
 TabsList.displayName = Prim.List.displayName;
 
-const TabsTriggerClasses = "\
+const tabsTriggerClasses = "\
 px-3 py-1 text-sm font-medium whitespace-nowrap\
 \
 focus-visible:ring-2 \
@@ -44,12 +44,12 @@ inline-flex items-center justify-center";
 
 const TabsTrigger = forwardRef<ElementRef<typeof Prim.Trigger>, ComponentPropsWithoutRef<typeof Prim.Trigger>>(
     ({ className, ...rest }, ref) => (
-        <Prim.Trigger ref={ref} className={cn(TabsTriggerClasses, className)} {...rest} />
+        <Prim.Trigger ref={ref} className={cn(tabsTriggerClasses, className)} {...rest} />
     )
 );
 TabsTrigger.displayName = Prim.Trigger.displayName;
 
-const TabsContentClasses = "\
+const tabsContentClasses = "\
 mt-2 \
 \
 focus-visible:ring-2 \
@@ -61,7 +61,7 @@ ring-offset-background";
 
 const TabsContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content>>(
     ({ className, ...rest }, ref) => (
-        <Prim.Content ref={ref} className={cn(TabsContentClasses, className)} {...rest} />
+        <Prim.Content ref={ref} className={cn(tabsContentClasses, className)} {...rest} />
     )
 );
 TabsContent.displayName = Prim.Content.displayName;

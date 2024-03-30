@@ -4,7 +4,7 @@ import { cn } from "@/utils";
 
 const Tabs = Prim.Root;
 
-const TabsListClasses = "\
+const tabsListClasses = "\
 p-1 h-9 \
 \
 text-muted-foreground \
@@ -17,7 +17,7 @@ export const tabsListWrapClasses = "h-auto justify-normal flex-wrap";
 
 const TabsList = forwardRef<ElementRef<typeof Prim.List>, ComponentPropsWithoutRef<typeof Prim.List>>(
     ({ className, ...rest }, ref) => (
-        <Prim.List ref={ref} className={cn(TabsListClasses, className)} {...rest} />
+        <Prim.List ref={ref} className={cn(tabsListClasses, className)} {...rest} />
     )
 );
 TabsList.displayName = Prim.List.displayName;

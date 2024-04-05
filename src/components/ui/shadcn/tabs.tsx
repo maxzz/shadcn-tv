@@ -50,7 +50,7 @@ const TabsTrigger = forwardRef<ElementRef<typeof Prim.Trigger>, ComponentPropsWi
 TabsTrigger.displayName = Prim.Trigger.displayName;
 
 const tabsContentClasses = "\
-mt-2 \
+h-full \
 \
 focus-visible:ring-2 \
 focus-visible:ring-ring \

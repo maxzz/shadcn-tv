@@ -23,7 +23,7 @@ const TabsList = forwardRef<ElementRef<typeof Prim.List>, ComponentPropsWithoutR
 TabsList.displayName = Prim.List.displayName;
 
 const tabsTriggerClasses = "\
-px-3 py-1 text-sm font-medium whitespace-nowrap\
+px-3 py-1 text-sm font-medium whitespace-nowrap \
 \
 focus-visible:ring-2 \
 focus-visible:ring-ring \

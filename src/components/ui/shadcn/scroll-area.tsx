@@ -2,6 +2,12 @@ import { forwardRef, ElementRef, ComponentPropsWithoutRef } from "react";
 import * as Prim from "@radix-ui/react-scroll-area";
 import { cn } from "@/utils";
 
+type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
+    horizontal?: boolean;
+    heightFull?: boolean;
+    // fixedWidth?: boolean; // later
+};
+
 /**
  * Additinal attribute ``data-fixed-width`` is used to prevent ScrollArea width from growing.
  * This is done by removing ``display: table`` from Prim.Viewport first utility div.
@@ -14,9 +20,12 @@ import { cn } from "@/utils";
   * widths that change. We'll wait to see what use-cases consumers come up with there
   * before trying to resolve it.
  */
-const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ComponentPropsWithoutRef<typeof Prim.Root> & {horizontal?: boolean}>(
-    ({ className, children, horizontal, ...rest }, ref) => (
-        <Prim.Root ref={ref} className={cn("relative overflow-hidden", "[&[data-fixed-width]>div>div]:![display:block]", className)} {...rest}>
+const fixedWidthClasses = "[&[data-fixed-width]>div>div]:![display:block]";
+const hFullClasses = "[&_[data-radix-scroll-area-viewport]>div]:h-full";
+
+const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ScrollAreaProps>(
+    ({ className, children, horizontal, heightFull, ...rest }, ref) => (
+        <Prim.Root ref={ref} className={cn("relative overflow-hidden", fixedWidthClasses, heightFull && hFullClasses, className)} {...rest}>
 
             <Prim.Viewport className="h-full w-full rounded-[inherit]">
                 {children}

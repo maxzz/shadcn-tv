@@ -53,7 +53,6 @@ const AccordionTrigger = forwardRef<ElementRef<typeof Prim.Trigger>, AccordionTr
 AccordionTrigger.displayName = Prim.Trigger.displayName;
 
 const AccordionContentClasses = "\
-text-sm \
 overflow-hidden \
 data-[state=closed]:animate-accordion-up \
 data-[state=open]:animate-accordion-down";
@@ -61,7 +60,7 @@ data-[state=open]:animate-accordion-down";
 const AccordionContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentPropsWithoutRef<typeof Prim.Content>>(
     ({ className, children, ...rest }, ref) => (
         <Prim.Content ref={ref} className={cn(AccordionContentClasses, className)} {...rest} >
-            <div className="pb-4 pt-0">{children}</div>
+            {children}
         </Prim.Content>
     )
 );

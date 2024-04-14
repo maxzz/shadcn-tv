@@ -19,11 +19,24 @@ export const DrawerOverlay = forwardRef<ElementRef<typeof D.Overlay>, ComponentP
 );
 DrawerOverlay.displayName = D.Overlay.displayName;
 
-export const DrawerContent = forwardRef<ElementRef<typeof D.Content>, ComponentPropsWithoutRef<typeof D.Content> & {withTopBar?: boolean}>(
+type DrawerContentProps = ComponentPropsWithoutRef<typeof D.Content> & {
+    withTopBar?: boolean;
+};
+
+const drawerContentClasses = "\
+fixed inset-x-0 mt-24 bottom-0 h-auto \
+\
+bg-background \
+border rounded-t-[10px] \
+\
+flex flex-col \
+z-50";
+
+export const DrawerContent = forwardRef<ElementRef<typeof D.Content>, DrawerContentProps>(
     ({ className, children, withTopBar, ...rest }, ref) => (
         <DrawerPortal>
             <DrawerOverlay />
-            <D.Content ref={ref} className={cn("fixed mt-24 inset-x-0 bottom-0 h-auto bg-background z-50 border rounded-t-[10px] flex flex-col", className)} {...rest}>
+            <D.Content ref={ref} className={cn(drawerContentClasses, className)} {...rest}>
                 {withTopBar && <div className="mx-auto mt-4 w-[100px] h-2 bg-muted rounded-full" />}
                 {children}
             </D.Content>

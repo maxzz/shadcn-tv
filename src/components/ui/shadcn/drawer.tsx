@@ -20,6 +20,7 @@ export const DrawerOverlay = forwardRef<ElementRef<typeof D.Overlay>, ComponentP
 DrawerOverlay.displayName = D.Overlay.displayName;
 
 type DrawerContentProps = ComponentPropsWithoutRef<typeof D.Content> & {
+    withoutOverlay?: boolean;
     withTopBar?: boolean;
 };
 
@@ -33,9 +34,9 @@ flex flex-col \
 z-50";
 
 export const DrawerContent = forwardRef<ElementRef<typeof D.Content>, DrawerContentProps>(
-    ({ className, children, withTopBar, ...rest }, ref) => (
+    ({ className, children, withoutOverlay, withTopBar, ...rest }, ref) => (
         <DrawerPortal>
-            <DrawerOverlay />
+            {!withoutOverlay && <DrawerOverlay />}
             <D.Content ref={ref} className={cn(drawerContentClasses, className)} {...rest}>
                 {withTopBar && <div className="mx-auto mt-4 w-[100px] h-2 bg-muted rounded-full" />}
                 {children}

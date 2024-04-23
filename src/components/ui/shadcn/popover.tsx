@@ -32,4 +32,15 @@ const PopoverContent = forwardRef<ElementRef<typeof Prim.Content>, ComponentProp
 );
 PopoverContent.displayName = Prim.Content.displayName;
 
-export { Popover, PopoverTrigger, PopoverAnchor, PopoverArrow, PopoverPortal, PopoverContentWoPortal, PopoverContent };
+function PopoverArrorWoBottom({className, ...rest}: ComponentPropsWithoutRef<typeof Prim.Arrow>) {
+    return (
+        <PopoverArrow className={cn("-mt-px fill-popover stroke-popover-foreground stroke-[1.5]", className)} asChild {...rest}>
+            <svg viewBox="0 0 30 10">
+                <polyline points="0,0 15,9 30,0" />
+                <rect x="0" y="-1" width="30" height="2" stroke="none" />
+            </svg>
+        </PopoverArrow>
+    );
+}
+
+export { Popover, PopoverTrigger, PopoverAnchor, PopoverArrow, PopoverArrorWoBottom, PopoverPortal, PopoverContentWoPortal, PopoverContent };

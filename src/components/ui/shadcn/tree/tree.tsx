@@ -38,12 +38,14 @@ type TreeProps = Prettify<
 
         IconForFolder?: TreenIconType;
         IconForItem?: TreenIconType;
+
+        selectAsTrigger?: boolean; // click on selected item will deselect it; and no deselecting on click on empty space.
     }
     & TreeIconOptions
 >;
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconTextRender, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, className, ...rest }, ref) => {
+    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconTextRender, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, selectAsTrigger, className, ...rest }, ref) => {
 
         const [treeState] = useState(() => {
             const uiState = proxy<TreeState>({
@@ -74,20 +76,33 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
             (event: SyntheticEvent<any>, item: DataItemWState | undefined) => {
                 event.stopPropagation();
 
-                if (treeState.selectedId) {
-                    const prevItem = findTreeItemById(data, treeState.selectedId);
-                    prevItem && (prevItem.state.selected = false);
+                if (item) {
+                    if (selectAsTrigger) {
+                        const clickedNewItem = treeState.selectedId !== item.id;
+                        clickedNewItem && clearPrevSelectedState();
+                        item.state.selected = clickedNewItem;
+                        treeState.selectedId = clickedNewItem ? item.id : undefined;
+                    } else {
+                        clearPrevSelectedState();
+                        item.state.selected = !item.state.selected;
+                        treeState.selectedId = item.id;
+                    }
+                } else {
+                    if (!selectAsTrigger) {
+                        clearPrevSelectedState();
+                        treeState.selectedId = undefined;
+                    }
                 }
 
-                if (item) {
-                    item.state.selected = !item.state.selected;
-                    treeState.selectedId = item.id;
-                } else {
-                    treeState.selectedId = undefined;
+                function clearPrevSelectedState() {
+                    if (treeState.selectedId) {
+                        const prevItem = findTreeItemById(data, treeState.selectedId);
+                        prevItem && (prevItem.state.selected = false);
+                    }
                 }
 
                 onSelectChange?.(item);
-            }, [data, treeState, onSelectChange]
+            }, [data, treeState, onSelectChange, selectAsTrigger]
         );
 
         const refRoot = useRef<HTMLDivElement | null>(null);

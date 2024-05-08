@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, SyntheticEvent, forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import { proxy, useSnapshot } from "valtio";
 import * as A from "@radix-ui/react-accordion";
-import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
+import { ScrollArea, ScrollAreaProps } from "@/components/ui/shadcn/scroll-area";
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight } from "lucide-react";
 import { classNames, cn } from "@/utils";
@@ -40,12 +40,15 @@ type TreeProps = Prettify<
         IconForItem?: TreenIconType;
 
         selectAsTrigger?: boolean; // click on selected item will deselect it; and no deselecting on click on empty space.
+
+        scrollAreaProps?: ScrollAreaProps;
     }
     & TreeIconOptions
 >;
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
-    ({ data, initialSelectedItemId, onSelectChange, expandAll, IconTextRender, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, selectAsTrigger, className, ...rest }, ref) => {
+    (props, ref) => {
+        const { data, initialSelectedItemId, onSelectChange, expandAll, IconTextRender, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, selectAsTrigger, scrollAreaProps, className, ...rest } = props;
 
         const [treeState] = useState(() => {
             const uiState = proxy<TreeState>({
@@ -118,7 +121,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                     nextId && handleSelectChange(e, findTreeItemById(data, nextId));
                 }}
             >
-                <ScrollArea className="tree-scroll" style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)}>
+                <ScrollArea className="tree-scroll" style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)} {...scrollAreaProps}>
                     <div className="relative z-0 px-2 py-1" >
                         <TreeItem
                             ref={ref}
@@ -231,7 +234,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & LeafFol
                 data-tree-id={item.id}
                 {...rest}
             >
-                <IconTextRender item={item} Icon={Icon} iconClasses={leafIconClasses} hideFolderIcon={false} />
+                <IconTextRender item={item} Icon={Icon} hideFolderIcon={false} iconClasses={leafIconClasses} />
             </div>
         );
     }

@@ -2,7 +2,7 @@ import { forwardRef, ElementRef, ComponentPropsWithoutRef } from "react";
 import * as Prim from "@radix-ui/react-scroll-area";
 import { cn } from "@/utils";
 
-type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
+export type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
     horizontal?: boolean;
     fixedWidth?: boolean;
     fullHeight?: boolean;

@@ -27,10 +27,15 @@ const imgCheckDa = "data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23e2e8f
 const imgRadioLi = "data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23334155' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e";
 const imgRadioDa = "data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23e2e8f0' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e";
 
-export const checkCheckedLiClasses = `[input[type=checkbox]:checked]:[background-image:url("${imgCheckLi}")]`;
-export const checkCheckedDaClasses = `[input[type=checkbox]:checked]:[background-image:url("${imgCheckDa}")]`;
-export const radioCheckedLiClasses = `[input[type=radio]:checked]:[background-image:url("${imgRadioLi}")]`;
-export const radioCheckedDaClasses = `[input[type=radio]:checked]:[background-image:url("${imgRadioDa}")]`;
+// export const checkCheckedLiClasses = `[input[type=checkbox]:checked]:[background-image:url("${imgCheckLi}")]`;
+// export const checkCheckedDaClasses = `[input[type=checkbox]:checked]:[background-image:url("${imgCheckDa}")]`;
+// export const radioCheckedLiClasses = `[input[type=radio]:checked]:[background-image:url("${imgRadioLi}")]`;
+// export const radioCheckedDaClasses = `[input[type=radio]:checked]:[background-image:url("${imgRadioDa}")]`;
+
+export const checkCheckedLiClasses = `checked:[background-image:url("${imgCheckLi}")]`;
+export const checkCheckedDaClasses = `checked:[background-image:url("${imgCheckDa}")]`;
+export const radioCheckedLiClasses = `checked:[background-image:url("${imgRadioLi}")]`;
+export const radioCheckedDaClasses = `checked:[background-image:url("${imgRadioDa}")]`;
 
 
 

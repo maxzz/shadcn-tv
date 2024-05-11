@@ -6,7 +6,7 @@ export function DialogDemo() {
     return (
         <D.Dialog>
             <D.DialogTrigger asChild>
-                <Button variant="outline">Edit Profile</Button>
+                <Button variant="outline">Demo dialog</Button>
             </D.DialogTrigger>
 
             <D.DialogContent className="sm:max-w-[425px]">

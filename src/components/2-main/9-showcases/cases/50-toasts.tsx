@@ -1,6 +1,6 @@
 import { DrawerDemo, MenubarDemo, RadixToastDemo, SonnerDemo } from "../../2-demo/52-demo-toasts";
 import { MenuDropdownDemo } from "../../2-demo/52-demo-toasts/5-menu-popup/inidex";
-import { DialogDemoWoTrigger } from "../../2-demo/52-demo-toasts/6-dialog/20-dialog-wo-trigger";
+import { DialogDemoWoTrigger } from "../../2-demo/52-demo-toasts/6-dialog/1-dialog-wo-trigger";
 
 function VerticalMenu() { // https://codepen.io/Prakash286/pen/dyRXNKG 'Exploring UI Animation #1'
     return (

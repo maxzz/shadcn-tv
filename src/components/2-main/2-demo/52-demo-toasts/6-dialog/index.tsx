@@ -1,1 +1,1 @@
-export * from "./20-dialog-wo-trigger";
+export * from "./1-dialog-wo-trigger";

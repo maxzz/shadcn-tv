@@ -1,10 +1,13 @@
+import { classNames } from '@/utils';
 import { InputHTMLAttributes } from 'react';
+import { checkCheckedLiClasses, darkRadioClasses } from './21-radio-check-classes';
 
 function RadioButton({ label, ...rest }: { label: string; } & InputHTMLAttributes<HTMLElement>) {
     return (
         <div>
             <label className="h-6 cursor-pointer select-none inline-flex items-center space-x-3">
-                <input type="radio" className="size-4 dark-radio" {...rest} />
+                {/* <input type="radio" className="size-4 dark-radio" {...rest} /> */}
+                <input type="radio" className={classNames("size-4", darkRadioClasses, checkCheckedLiClasses)} {...rest} />
 
                 <div>
                     {label}

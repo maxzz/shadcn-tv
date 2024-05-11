@@ -102,7 +102,7 @@ const SelectLabel = forwardRef<ElementRef<typeof Prim.Label>, ComponentPropsWith
 SelectLabel.displayName = Prim.Label.displayName;
 
 const selectItemClasses = "\
-relative pl-2 pr-8 py-1.5 w-full text-sm \
+relative py-1.5 w-full text-sm \
 \
 focus:text-accent-foreground \
 focus:bg-accent \
@@ -114,17 +114,31 @@ rounded-sm outline-none select-none cursor-default \
 \
 flex items-center";
 
-const SelectItem = forwardRef<ElementRef<typeof Prim.Item>, ComponentPropsWithoutRef<typeof Prim.Item>>(
-    ({ className, children, ...rest }, ref) => (
-        <Prim.Item ref={ref} className={cn(selectItemClasses, className)} {...rest} >
-            <span className="absolute right-2 h-3.5 w-3.5 flex items-center justify-center">
-                <Prim.ItemIndicator>
-                    <CheckIcon className="h-4 w-4" />
-                </Prim.ItemIndicator>
-            </span>
-            <Prim.ItemText>{children}</Prim.ItemText>
-        </Prim.Item>
-    )
+const selectItemLeftClasses = "pl-8 pr-2";
+const selectItemRightClasses = "pl-2 pr-8";
+
+const selectIndiLeftClasses = "left-2";
+const selectIndiRightClasses = "right-2";
+
+type SelectItemProps = ComponentPropsWithoutRef<typeof Prim.Item> & {
+    indicatorFirst?: boolean;
+};
+
+const SelectItem = forwardRef<ElementRef<typeof Prim.Item>, SelectItemProps>(
+    ({ className, children, indicatorFirst, ...rest }, ref) => {
+        const itemClasses = indicatorFirst ? selectItemLeftClasses : selectItemRightClasses;
+        const indiClasses = indicatorFirst ? selectIndiLeftClasses : selectIndiRightClasses;
+        return (
+            <Prim.Item ref={ref} className={cn(selectItemClasses, itemClasses, className)} {...rest} >
+                <span className={cn("absolute size-3.5 flex items-center justify-center", indiClasses)}>
+                    <Prim.ItemIndicator>
+                        <CheckIcon className="size-4" />
+                    </Prim.ItemIndicator>
+                </span>
+                <Prim.ItemText>{children}</Prim.ItemText>
+            </Prim.Item>
+        );
+    }
 );
 SelectItem.displayName = Prim.Item.displayName;
 

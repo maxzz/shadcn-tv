@@ -1,7 +1,15 @@
+import { useState } from "react";
+import { atom, useAtom } from "jotai";
 import * as D from "@/components/ui/shadcn/dialog";
 import { Input, Label } from "@/components/ui/shadcn";
+import { RadioGroup } from "./20-radio-group";
+
+const buttonNames = ["Save changes", "Save and close", "Save and continue"];
 
 export function DialogBody() {
+    const selectAtom = useState(() => atom(0))[0];
+    const [selected, setSelected] = useAtom(selectAtom);
+
     return (<>
         <D.DialogHeader>
             <D.DialogTitle>
@@ -28,6 +36,13 @@ export function DialogBody() {
                 </Label>
                 <Input id="username" className="col-span-3" value="@peduarte" onChange={(e) => { }} />
             </div>
+
+            <RadioGroup
+                items={buttonNames}
+                groupName={`submit-form-${1}`}
+                selected={selected}
+                setSelected={setSelected}
+            />
 
         </div>
     </>);

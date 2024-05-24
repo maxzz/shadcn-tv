@@ -7,6 +7,7 @@ import { cn } from "@/utils";
 const Popover = Prim.Root;
 const PopoverTrigger = Prim.Trigger;
 const PopoverAnchor = Prim.Anchor;
+const PopoverClose = Prim.Close;
 const PopoverArrow = Prim.Arrow;
 const PopoverPortal = Prim.Portal;
 const PopoverContentWoPortal = Prim.Content;
@@ -34,13 +35,13 @@ PopoverContent.displayName = Prim.Content.displayName;
 
 function PopoverArrorWoBottom({className, ...rest}: ComponentPropsWithoutRef<typeof Prim.Arrow>) {
     return (
-        <PopoverArrow className={cn("-mt-px fill-popover stroke-popover-foreground stroke-[1.5]", className)} asChild {...rest}>
+        <Prim.Arrow className={cn("-mt-px fill-popover stroke-popover-foreground stroke-[1.5]", className)} asChild {...rest}>
             <svg viewBox="0 0 30 10">
                 <polyline points="0,0 15,9 30,0" />
                 <rect x="0" y="-1" width="30" height="2" stroke="none" />
             </svg>
-        </PopoverArrow>
+        </Prim.Arrow>
     );
 }
 
-export { Popover, PopoverTrigger, PopoverAnchor, PopoverArrow, PopoverArrorWoBottom, PopoverPortal, PopoverContentWoPortal, PopoverContent };
+export { Popover, PopoverTrigger, PopoverAnchor, PopoverClose, PopoverArrow, PopoverArrorWoBottom, PopoverPortal, PopoverContentWoPortal, PopoverContent };

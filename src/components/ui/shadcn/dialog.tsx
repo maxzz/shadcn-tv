@@ -58,17 +58,20 @@ duration-200 \
 grid gap-4";
 
 type DialogContentProps = ComponentPropsWithoutRef<typeof Prim.Content> & {
-    noClose?: boolean;
+    modal?: boolean;
     container?: DialogPortalProps['container'];
+    noClose?: boolean;
     withScroll?: boolean; // by default DialogContent has no scroll for popups
 };
 
+const preventClose = (e: Event) => e.preventDefault();
+
 const DialogContent = forwardRef<ElementRef<typeof Prim.Content>, DialogContentProps>(
-    ({ className, children, noClose, container, withScroll, ...rest }, ref) => (
+    ({ className, children, noClose, container, withScroll, modal, onPointerDownOutside, ...rest }, ref) => (
         <DialogPortal container={container}>
             {withScroll ? <DialogOverlayWithScroll /> : <DialogOverlay />}
 
-            <Prim.Content ref={ref} className={cn(DialogContentClasses, className)} {...rest}>
+            <Prim.Content ref={ref} className={cn(DialogContentClasses, className)} onPointerDownOutside={modal ? preventClose : onPointerDownOutside} {...rest}>
                 {children}
                 {!noClose && <DialogCloseButton />}
             </Prim.Content>

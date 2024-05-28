@@ -28,6 +28,13 @@ const DialogOverlay = forwardRef<ElementRef<typeof Prim.Overlay>, ComponentProps
 );
 DialogOverlay.displayName = Prim.Overlay.displayName;
 
+const DialogOverlayWithScroll = forwardRef<ElementRef<typeof Prim.Overlay>, ComponentPropsWithoutRef<typeof Prim.Overlay>>(
+    ({ className, ...rest }, ref) => (
+        <div ref={ref} className={cn(dialogOverlayClasses, className)} {...rest} />
+    )
+);
+DialogOverlayWithScroll.displayName = `${Prim.Overlay.displayName}WithScroll`;
+
 export const DialogContentClasses = "\
 fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-50 \
 p-6 w-full md:w-full max-w-lg \
@@ -53,12 +60,13 @@ grid gap-4";
 type DialogContentProps = ComponentPropsWithoutRef<typeof Prim.Content> & {
     noClose?: boolean;
     container?: DialogPortalProps['container'];
+    withScroll?: boolean; // by default DialogContent has no scroll for popups
 };
 
 const DialogContent = forwardRef<ElementRef<typeof Prim.Content>, DialogContentProps>(
-    ({ className, children, noClose, container, ...rest }, ref) => (
+    ({ className, children, noClose, container, withScroll, ...rest }, ref) => (
         <DialogPortal container={container}>
-            <DialogOverlay />
+            {withScroll ? <DialogOverlayWithScroll /> : <DialogOverlay />}
 
             <Prim.Content ref={ref} className={cn(DialogContentClasses, className)} {...rest}>
                 {children}
@@ -128,6 +136,7 @@ export {
     DialogCloseButton,
     DialogPortal,
     DialogOverlay,
+    DialogOverlayWithScroll,
     DialogTrigger,
     DialogContent,
     DialogHeader,

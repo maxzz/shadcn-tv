@@ -71,7 +71,12 @@ const DialogContent = forwardRef<ElementRef<typeof Prim.Content>, DialogContentP
         <DialogPortal container={container}>
             {withScroll ? <DialogOverlayWithScroll /> : <DialogOverlay />}
 
-            <Prim.Content ref={ref} className={cn(DialogContentClasses, className)} onPointerDownOutside={modal ? preventClose : onPointerDownOutside} {...rest}>
+            <Prim.Content
+                ref={ref}
+                className={cn(DialogContentClasses, className)}
+                onPointerDownOutside={modal ? preventClose : onPointerDownOutside}
+                {...rest}
+            >
                 {children}
                 {!noClose && <DialogCloseButton />}
             </Prim.Content>

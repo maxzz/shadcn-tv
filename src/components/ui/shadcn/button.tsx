@@ -14,7 +14,7 @@ disabled:opacity-50 \
 disabled:pointer-events-none \
 \
 transition-colors \
-rounded-md \
+rounded-md select-none \
 inline-flex items-center justify-center";
 
 const buttonVariantsClasses = cva(defaultVariantClasses, {

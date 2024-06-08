@@ -54,6 +54,10 @@ const DropdownMenuContent = forwardRef<ElementRef<typeof Prim.Content>, Componen
 );
 DropdownMenuContent.displayName = Prim.Content.displayName;
 
+export type DropdownMenuItemProps = ComponentPropsWithoutRef<typeof Prim.Item> & {
+    inset?: boolean;
+};
+
 const DropdownMenuItemClasses = "\
 relative px-2 py-1.5 \
 \
@@ -66,7 +70,7 @@ data-[disabled]:pointer-events-none \
 transition-colors \
 rounded-sm outline-none select-none cursor-default \
 flex items-center";
-const DropdownMenuItem = forwardRef<ElementRef<typeof Prim.Item>, ComponentPropsWithoutRef<typeof Prim.Item> & { inset?: boolean; }>(
+const DropdownMenuItem = forwardRef<ElementRef<typeof Prim.Item>, DropdownMenuItemProps>(
     ({ className, inset, ...rest }, ref) => (
         <Prim.Item ref={ref} className={cn(DropdownMenuItemClasses, inset && "pl-8", className)} {...rest} />
     )

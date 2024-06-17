@@ -1,6 +1,6 @@
 import { type Hsl, type ThemeS5 } from "./types-theme-zod";
 import { hslToVariableValue } from "./utils-hsl2cssvar";
-import { fromPairs, invert, mapKeys, mapValues } from "remeda";
+import { fromEntries, invert, mapKeys, mapValues } from "remeda";
 
 const themeS5variables: Record<keyof ThemeS5, string> = {
     background: "background",
@@ -113,8 +113,8 @@ export const cssToTheme = (styles: string) => {
     }
 
     return {
-        light: fromPairs.strict(lightThemeEntries),
-        dark: fromPairs.strict(darkThemeEntries),
+        light: fromEntries(lightThemeEntries),
+        dark: fromEntries(darkThemeEntries),
         errors,
     };
 };

@@ -41,10 +41,10 @@
         "clsx": "^2.1.1",
         "cmdk": "^1.0.0",
         "colord": "^2.9.3",
-        "date-fns": "^3.3.1",
-        "embla-carousel": "8.0.0",
-        "embla-carousel-react": "8.0.0",
-        "input-otp": "^1.2.3",
+        "date-fns": "^3.6.0",
+        "embla-carousel": "8.1.5",
+        "embla-carousel-react": "8.1.5",
+        "input-otp": "^1.2.4",
         "jotai": "^2.7.1",
         "lucide-react": "^0.395.0",
         "next-themes": "^0.3.0",
@@ -66,7 +66,7 @@
         "tailwindcss-animate": "^1.0.7",
         "use-resize-observer": "^9.1.0",
         "valtio": "^1.13.2",
-        "vaul": "^0.9.0",
+        "vaul": "^0.9.1",
         "zod": "^3.22.4"
     },
     "devDependencies": {

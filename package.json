@@ -54,7 +54,7 @@
         "react-draggable": "^4.4.6",
         "react-hook-form": "^7.52.2",
         "react-hot-toast": "^2.4.1",
-        "react-resizable-panels": "^2.0.19",
+        "react-resizable-panels": "^2.1.0",
         "react-use-measure": "^2.1.1",
         "react-xarrows": "^2.0.2",
         "recharts": "^2.12.7",

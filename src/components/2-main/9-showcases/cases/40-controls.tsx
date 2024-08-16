@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { BreadcrumbDemo, CarouselDemo, ChadcnSwitchDemo, DemoSwitchStyled, InputOTPDemo, NeonSwitch, PaginationDemo, SkeletonDemo, SlidersDemo } from "../../2-demo/40-demo-controls";
 import { ChartsInTabs } from "../../2-demo/40-demo-controls/5-tabs-charts";
+import { CalendarDemo } from "../../2-demo/40-demo-controls/7-demo-calendar";
 
 export function SwitchInTabs() {
     return (
@@ -38,6 +39,7 @@ export function ControlsInTabs() {
                 <TabsTrigger value="controls6">Skeleton</TabsTrigger>
                 <TabsTrigger value="controls7">Charts</TabsTrigger>
                 <TabsTrigger value="controls8">Sliders</TabsTrigger>
+                <TabsTrigger value="controls9">Calendar</TabsTrigger>
             </TabsList>
 
             <TabsContent value="controls1">
@@ -70,6 +72,10 @@ export function ControlsInTabs() {
 
             <TabsContent value="controls8">
                 <SlidersDemo />
+            </TabsContent>
+
+            <TabsContent value="controls9">
+                <CalendarDemo />
             </TabsContent>
 
         </Tabs>

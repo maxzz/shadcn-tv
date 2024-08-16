@@ -3,8 +3,6 @@
     "private": true,
     "version": "0.0.1",
     "dependencies": {
-        "@jlns/hooks": "^0.0.14",
-        "@jlns/zod": "^0.0.1",
         "@nivo/legends": "^0.87.0",
         "@nivo/line": "^0.87.0",
         "@radix-ui/react-accordion": "^1.2.0",

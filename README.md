@@ -18,7 +18,7 @@ All formatted shardcn components are located in the ```src/comComponents/ui/shad
   
 ![](src/assets/previews/2024-02-27_16-52-51.png)
 
-### Changes
+### Changes (unused dependencies)
  * removed "@jlns/hooks" from [jln13x](https://github.com/jln13x) for "embla-carousel"
  * removed "@jlns/zod" from [jln13x](https://github.com/jln13x) for "embla-carousel"
  * removed "usehooks-ts" used by "@jlns/hooks"

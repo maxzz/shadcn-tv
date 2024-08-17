@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn
 import { BreadcrumbDemo, CarouselDemo, ChadcnSwitchDemo, DemoSwitchStyled, InputOTPDemo, NeonSwitch, PaginationDemo, SkeletonDemo, SlidersDemo } from "../../2-demo/40-demo-controls";
 import { ChartsInTabs } from "../../2-demo/40-demo-controls/5-tabs-charts";
 import { CalendarDemo } from "../../2-demo/40-demo-controls/7-demo-calendar";
+import { NavigationInTabs } from "../../2-demo/40-demo-controls/4-tabs-navigation";
 
 export function SwitchInTabs() {
     return (
@@ -33,13 +34,12 @@ export function ControlsInTabs() {
             <TabsList>
                 <TabsTrigger value="controls1">Switches</TabsTrigger>
                 <TabsTrigger value="controls2">Carousel</TabsTrigger>
-                <TabsTrigger value="controls3">Pagination</TabsTrigger>
+                <TabsTrigger value="controls3">Navigation</TabsTrigger>
                 <TabsTrigger value="controls4">Input OTP</TabsTrigger>
-                <TabsTrigger value="controls5">Breadcrumb</TabsTrigger>
-                <TabsTrigger value="controls6">Skeleton</TabsTrigger>
-                <TabsTrigger value="controls7">Charts</TabsTrigger>
-                <TabsTrigger value="controls8">Sliders</TabsTrigger>
-                <TabsTrigger value="controls9">Calendar</TabsTrigger>
+                <TabsTrigger value="controls5">Skeleton</TabsTrigger>
+                <TabsTrigger value="controls6">Charts</TabsTrigger>
+                <TabsTrigger value="controls7">Sliders</TabsTrigger>
+                <TabsTrigger value="controls8">Calendar</TabsTrigger>
             </TabsList>
 
             <TabsContent value="controls1">
@@ -51,7 +51,7 @@ export function ControlsInTabs() {
             </TabsContent>
 
             <TabsContent value="controls3">
-                <PaginationDemo />
+                <NavigationInTabs />
             </TabsContent>
 
             <TabsContent value="controls4">
@@ -59,22 +59,18 @@ export function ControlsInTabs() {
             </TabsContent>
 
             <TabsContent value="controls5">
-                <BreadcrumbDemo />
-            </TabsContent>
-
-            <TabsContent value="controls6">
                 <SkeletonDemo />
             </TabsContent>
 
-            <TabsContent value="controls7">
+            <TabsContent value="controls6">
                 <ChartsInTabs />
             </TabsContent>
 
-            <TabsContent value="controls8">
+            <TabsContent value="controls7">
                 <SlidersDemo />
             </TabsContent>
 
-            <TabsContent value="controls9">
+            <TabsContent value="controls8">
                 <CalendarDemo />
             </TabsContent>
 

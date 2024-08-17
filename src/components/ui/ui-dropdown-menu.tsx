@@ -10,14 +10,12 @@ export interface MenuItemType {
     readonly shortcut?: string;
 }
 
-type MenuContentProps = React.ComponentPropsWithoutRef<typeof M.Content>;
-
 interface DropdownMenuProps {
     trigger: ReactNode;
     onCommand: (id: string) => void;
     items: readonly MenuItemType[];
     containerClasses: string;
-    menuContentProps?: MenuContentProps;
+    menuContentProps?: M.DropdownMenuContentProps;
 }
 
 // radix-side-top:animate-slide-up \

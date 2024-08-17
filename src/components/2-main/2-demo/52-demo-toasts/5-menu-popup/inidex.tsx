@@ -6,7 +6,8 @@ const topMenuItems = [
     {
         id: "new-file",
         label: "New File",
-    }, {
+    },
+    {
         id: "open-settings",
         label: "Settings",
     },
@@ -21,12 +22,17 @@ export function MenuDropdownDemo() {
     function onCommand(id: string) {
         const idTyped = id as TopMenuItemId;
         switch (idTyped) {
-            case "new-file":
+            case "new-file": {
                 console.log(idTyped);
                 break;
-            case "open-settings":
+            }
+            case "open-settings": {
                 console.log(idTyped);
                 break;
+            }
+            default: {
+                const _: never = idTyped;
+            }
         }
     }
 

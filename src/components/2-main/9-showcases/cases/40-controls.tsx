@@ -1,10 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { BreadcrumbDemo, CarouselDemo, ChadcnSwitchDemo, DemoSwitchStyled, InputOTPDemo, NeonSwitch, PaginationDemo, SkeletonDemo, SlidersDemo } from "../../2-demo/40-demo-controls";
-import { ChartsInTabs } from "../../2-demo/40-demo-controls/5-tabs-charts";
+import { SubTab_Charts } from "../../2-demo/40-demo-controls/5-tabs-charts";
 import { CalendarDemo } from "../../2-demo/40-demo-controls/7-demo-calendar";
-import { NavigationInTabs } from "../../2-demo/40-demo-controls/4-tabs-navigation";
+import { SubTab_Navigation } from "../../2-demo/40-demo-controls/4-tabs-navigation";
 
-export function SwitchInTabs() {
+export function SubTab_Switches() {
     return (
         <Tabs defaultValue="switch1">
             <TabsList>
@@ -43,7 +43,7 @@ export function ControlsInTabs() {
             </TabsList>
 
             <TabsContent value="controls1">
-                <SwitchInTabs />
+                <SubTab_Switches />
             </TabsContent>
 
             <TabsContent value="controls2">
@@ -51,7 +51,7 @@ export function ControlsInTabs() {
             </TabsContent>
 
             <TabsContent value="controls3">
-                <NavigationInTabs />
+                <SubTab_Navigation />
             </TabsContent>
 
             <TabsContent value="controls4">
@@ -63,7 +63,7 @@ export function ControlsInTabs() {
             </TabsContent>
 
             <TabsContent value="controls6">
-                <ChartsInTabs />
+                <SubTab_Charts />
             </TabsContent>
 
             <TabsContent value="controls7">

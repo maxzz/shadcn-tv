@@ -3,7 +3,7 @@ import { CardsMetric, ChartsOverview, Sparkline } from "./5-demo-charts";
 import { nivoLineData1 } from "./5-demo-charts/nivo/line-data1";
 import { nivoLineData2 } from "./5-demo-charts/nivo/line-data2";
 
-export function ChartsInTabs() {
+export function SubTab_Charts() {
     return (
         <Tabs defaultValue="charts1">
             <TabsList>

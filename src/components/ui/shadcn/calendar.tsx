@@ -43,9 +43,14 @@ function Calendar({ className, classNames, showOutsideDays = true, ...rest }: Ca
             showOutsideDays={showOutsideDays}
             className={cn("p-3", className)}
             classNames={{ ...getClassNames(rest.mode === "range"), ...classNames, }}
+            // components={{
+            //     IconLeft: ({ ...rest }) => <ChevronLeftIcon className="h-4 w-4" />,
+            //     IconRight: ({ ...rest }) => <ChevronRightIcon className="h-4 w-4" />,
+            // }}
             components={{
-                IconLeft: ({ ...rest }) => <ChevronLeftIcon className="h-4 w-4" />,
-                IconRight: ({ ...rest }) => <ChevronRightIcon className="h-4 w-4" />,
+                Chevron: (props) => props.orientation === "left"
+                    ? <ChevronLeftIcon className="h-4 w-4" {...props} />
+                    : <ChevronRightIcon className="h-4 w-4" {...props} />,
             }}
             {...rest}
         />
@@ -54,3 +59,5 @@ function Calendar({ className, classNames, showOutsideDays = true, ...rest }: Ca
 Calendar.displayName = "Calendar";
 
 export { Calendar };
+
+//https://github.com/gpbl/react-day-picker/blob/main/website/docs/upgrading.mdx 'Upgrading to v9'

@@ -1,45 +1,20 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { BreadcrumbDemo, CarouselDemo, ChadcnSwitchDemo, DemoSwitchStyled, InputOTPDemo, NeonSwitch, PaginationDemo, SkeletonDemo, SlidersDemo } from "../../2-demo/40-demo-controls";
+import { SlidersDemo, SubTab_Switches } from "../../2-demo/40-demo-controls";
 import { SubTab_Charts } from "../../2-demo/40-demo-controls/5-tabs-charts";
 import { CalendarDemo } from "../../2-demo/40-demo-controls/7-demo-calendar";
 import { SubTab_Navigation } from "../../2-demo/40-demo-controls/4-tabs-navigation";
-
-export function SubTab_Switches() {
-    return (
-        <Tabs defaultValue="switch1">
-            <TabsList>
-                <TabsTrigger value="switch1">Shadcn</TabsTrigger>
-                <TabsTrigger value="switch2">Neon switch</TabsTrigger>
-                <TabsTrigger value="switch3">Styled switch</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="switch1">
-                <ChadcnSwitchDemo />
-            </TabsContent>
-
-            <TabsContent value="switch2">
-                <NeonSwitch />
-            </TabsContent>
-
-            <TabsContent value="switch3">
-                <DemoSwitchStyled />
-            </TabsContent>
-        </Tabs>
-    );
-}
+import { SubTab_Controls } from "../../2-demo/40-demo-controls/2-tabs-controls";
 
 export function ControlsInTabs() {
     return (
         <Tabs defaultValue="controls6">
             <TabsList>
                 <TabsTrigger value="controls1">Switches</TabsTrigger>
-                <TabsTrigger value="controls2">Carousel</TabsTrigger>
+                <TabsTrigger value="controls2">Controls</TabsTrigger>
                 <TabsTrigger value="controls3">Navigation</TabsTrigger>
-                <TabsTrigger value="controls4">Input OTP</TabsTrigger>
-                <TabsTrigger value="controls5">Skeleton</TabsTrigger>
-                <TabsTrigger value="controls6">Charts</TabsTrigger>
-                <TabsTrigger value="controls7">Sliders</TabsTrigger>
-                <TabsTrigger value="controls8">Calendar</TabsTrigger>
+                <TabsTrigger value="controls4">Charts</TabsTrigger>
+                <TabsTrigger value="controls5">Sliders</TabsTrigger>
+                <TabsTrigger value="controls6">Calendar</TabsTrigger>
             </TabsList>
 
             <TabsContent value="controls1">
@@ -47,7 +22,7 @@ export function ControlsInTabs() {
             </TabsContent>
 
             <TabsContent value="controls2">
-                <CarouselDemo />
+                <SubTab_Controls />
             </TabsContent>
 
             <TabsContent value="controls3">
@@ -55,25 +30,16 @@ export function ControlsInTabs() {
             </TabsContent>
 
             <TabsContent value="controls4">
-                <InputOTPDemo />
-            </TabsContent>
-
-            <TabsContent value="controls5">
-                <SkeletonDemo />
-            </TabsContent>
-
-            <TabsContent value="controls6">
                 <SubTab_Charts />
             </TabsContent>
 
-            <TabsContent value="controls7">
+            <TabsContent value="controls5">
                 <SlidersDemo />
             </TabsContent>
 
-            <TabsContent value="controls8">
+            <TabsContent value="controls6">
                 <CalendarDemo />
             </TabsContent>
-
         </Tabs>
     );
 }

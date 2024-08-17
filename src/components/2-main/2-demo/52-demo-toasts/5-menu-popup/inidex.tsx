@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/shadcn';
 import { DropdownMenu, MenuItemType } from '@/components/ui/ui-dropdown-menu';
 import { IconMenuHamburger } from '@/components/ui/icons/normal';
 
-const topMenuItems: readonly MenuItemType[] = [
+const topMenuItems = [
     {
         id: "new-file",
         label: "New File",
@@ -10,24 +10,29 @@ const topMenuItems: readonly MenuItemType[] = [
         id: "open-settings",
         label: "Settings",
     },
-] as const;
+] as const satisfies readonly MenuItemType[];
+
+type TopMenuItemId = (typeof topMenuItems)[number]['id'];
 
 const containerClasses = "w-40";
 
 export function MenuDropdownDemo() {
+
     function onCommand(id: string) {
-        switch (id as (typeof topMenuItems)[number]['id']) {
+        const idTyped = id as TopMenuItemId;
+        switch (idTyped) {
             case "new-file":
-                console.log(id);
+                console.log(idTyped);
                 break;
             case "open-settings":
-                console.log(id);
+                console.log(idTyped);
                 break;
         }
     }
+
     return (
         <div className="py-1 select-none flex items-center justify-between">
-            <div className="">
+            <div>
                 <DropdownMenu
                     trigger={
                         <Button variant="outline" className="px-2 flex items-center gap-1" >

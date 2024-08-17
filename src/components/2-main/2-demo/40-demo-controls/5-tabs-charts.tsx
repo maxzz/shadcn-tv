@@ -23,7 +23,6 @@ export function ChartsInTabs() {
             <TabsContent value="charts3">
                 <Sparkline data={nivoLineData1} />
             </TabsContent>
-
         </Tabs>
     );
 }

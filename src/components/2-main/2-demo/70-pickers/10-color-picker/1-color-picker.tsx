@@ -6,10 +6,27 @@ import { HTMLAttributes } from "react";
 
 // https://github.com/jln13x/ui.jln.dev/blob/main/src/client/components/color-picker.tsx
 
-export const contentClasses = "mx-1 p-0 w-auto rounded-md overflow-hidden ring-muted-foreground/50 ring-1 ring-offset-1 ring-offset-background isolate z-50";
+export const contentClasses = "\
+mx-1 p-0 w-auto \
+overflow-hidden \
+ring-muted-foreground/50 ring-offset-background ring-offset-1 ring-1 \
+rounded-md \
+isolate z-50 \
+";
+
 export const fixBgClasses = "![--github-background-color:hsla(var(--muted)/.7)]";
-export const fixArrowClasses = "![--github-border:none] [&>div]:[--github-background-color:transparent] [&>div]:[--github-arrow-border-color:transparent]";
-export const fixPointeClasses = "[&_.w-color-saturation-fill]:!size-4 [&_.w-color-saturation-fill]:!-translate-x-2 [&_.w-color-saturation-fill]:!-translate-y-2";
+
+export const fixArrowClasses = "\
+![--github-border:none] \
+[&>div]:[--github-background-color:transparent] \
+[&>div]:[--github-arrow-border-color:transparent] \
+";
+
+export const fixPointeClasses = "\
+[&_.w-color-saturation-fill]:!size-4 \
+[&_.w-color-saturation-fill]:!-translate-x-2 \
+[&_.w-color-saturation-fill]:!-translate-y-2 \
+";
 
 type SolidColorPickerProps =
     & Omit<HTMLAttributes<HTMLButtonElement>, "color">

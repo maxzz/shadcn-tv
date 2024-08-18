@@ -1,121 +1,14 @@
-import { Button, Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { SpinnerSvg, SpinnerDiv, Spinner9, SpinnerEmoji, TwoCircles, TextBar, ThreeDotsLoader, RainbowCircles, DotsRing, Spinner7, SpinnerRadial } from "./1-spinners";
-import { LoadersTest, BubblesDemo, SpinnerSpherees } from "./2-styled";
-import { Flickup, BorderRun, FlipBtn, OpenGoo } from "./3-effects";
-
-function SpinnerTabs() {
-    return (
-        <Tabs defaultValue="loaders1">
-            <TabsList className={tabsListWrapClasses}>
-                <TabsTrigger value="loaders1">Simple</TabsTrigger>
-                <TabsTrigger value="loaders2">Circles</TabsTrigger>
-                <TabsTrigger value="loaders3">Dots ring</TabsTrigger>
-                <TabsTrigger value="loaders4">Commet</TabsTrigger>
-                <TabsTrigger value="loaders5">Radar</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="loaders1">
-                <div className="my-8 flex items-center justify-center gap-8">
-                    <SpinnerSvg className="w-8 h-8 stroke-[5] stroke-sky-500" />
-                    <SpinnerDiv className="w-8 h-8" />
-                    <Spinner9 className="w-8 h-8 text-sky-500" />
-                    <SpinnerEmoji className="text-4xl text-sky-500" />
-                    <TwoCircles />
-                    <TextBar className="text-sky-500" />
-                    <ThreeDotsLoader className="text-sky-300" />
-                </div>
-            </TabsContent>
-
-            <TabsContent value="loaders2">
-                <div className="my-8 flex items-center justify-center">
-                    <RainbowCircles />
-                </div>
-            </TabsContent>
-
-            <TabsContent value="loaders3">
-                <div className="my-8 flex items-center justify-center">
-                    <DotsRing />
-                </div>
-            </TabsContent>
-
-            <TabsContent value="loaders4">
-                <div className="my-8 flex items-center justify-center">
-                    <Spinner7 />
-                </div>
-            </TabsContent>
-
-            <TabsContent value="loaders5">
-                <SpinnerRadial />
-            </TabsContent>
-        </Tabs>
-    );
-}
-
-function StyledTabs() {
-    return (
-        <Tabs defaultValue="loaders1">
-            <TabsList className={tabsListWrapClasses}>
-                <TabsTrigger value="loaders1">Blocks</TabsTrigger>
-                <TabsTrigger value="loaders2">Bubbles</TabsTrigger>
-                <TabsTrigger value="loaders3">3D spheres</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="loaders1">
-                <LoadersTest className="m-auto max-w-sm flex items-center justify-between" />
-            </TabsContent>
-
-            <TabsContent value="loaders2">
-                <div className="my-8 flex items-center justify-center">
-                    <BubblesDemo />
-                </div>
-            </TabsContent>
-
-            <TabsContent value="loaders3">
-                <div className="my-8 flex items-center justify-center">
-                    <SpinnerSpherees />
-                </div>
-            </TabsContent>
-        </Tabs>
-    );
-}
-
-function EffectsTabs() {
-    return (
-        <Tabs defaultValue="switch3">
-            <TabsList className={tabsListWrapClasses}>
-                <TabsTrigger value="switch3">Effects</TabsTrigger>
-                <TabsTrigger value="switch4">Goo</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="switch3">
-                <div className="py-4 flex flex-col items-start gap-2">
-                    <div className="flex items-center gap-2">
-                        <Button variant="outline">
-                            <Flickup className="cursor-pointer" />
-                        </Button>
-
-                        <BorderRun />
-
-                        <FlipBtn />
-                    </div>
-
-                    <div className="px-4">
-                        <Flickup className="cursor-pointer" />
-                    </div>
-                </div>
-            </TabsContent>
-
-            <TabsContent value="switch4">
-                <OpenGoo />
-            </TabsContent>
-        </Tabs>
-    );
-}
+import { Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
+import { classNames } from "@/utils";
+import { SpinnerTabs } from "./1-spinners";
+import { StyledTabs } from "./2-styled";
+import { EffectsTabs } from "./3-effects";
 
 export function Tabs_Loaders() {
     return (
         <Tabs defaultValue="loaders1">
-            <TabsList className={tabsListWrapClasses}>
+
+            <TabsList className={classNames("mb-2", tabsListWrapClasses)}>
                 <TabsTrigger value="loaders1">Spinners</TabsTrigger>
                 <TabsTrigger value="loaders2">Styled</TabsTrigger>
                 <TabsTrigger value="loaders3">Effects</TabsTrigger>

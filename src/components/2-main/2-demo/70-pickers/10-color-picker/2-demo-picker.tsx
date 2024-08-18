@@ -7,7 +7,7 @@ export function SolidColorPickerDemo() {
     const [color3, setColor3] = useState<HslaColor>(color("#FFA121").hsla);
     return (
         <div>
-            <div className="flex flex-col gap-1">
+            <div className="pb-4 flex flex-col gap-1">
 
                 <SolidColorPicker
                     color={color2}

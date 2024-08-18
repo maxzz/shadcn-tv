@@ -1,5 +1,5 @@
 import { proxy, subscribe } from "valtio";
-import { GlyphAttributes } from "./types";
+import { GlyphAttributes } from "../types";
 import * as tests from './test-fonts';
 
 // Source text for the font

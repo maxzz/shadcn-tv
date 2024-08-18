@@ -5,8 +5,8 @@ import { DemoSwitchStyled } from "./3-switch-styled";
 
 export function SubTab_Switches() {
     return (
-        <Tabs defaultValue="switch1">
-            <TabsList>
+        <Tabs defaultValue="switch1" className="mb-4">
+            <TabsList className="mb-4">
                 <TabsTrigger value="switch1">Shadcn</TabsTrigger>
                 <TabsTrigger value="switch2">Neon switch</TabsTrigger>
                 <TabsTrigger value="switch3">Styled switch</TabsTrigger>
@@ -17,10 +17,13 @@ export function SubTab_Switches() {
             </TabsContent>
 
             <TabsContent value="switch2">
-                <NeonSwitch />
+                <div className="min-h-32 grid place-items-center">
+                    <NeonSwitch />
+                </div>
+
             </TabsContent>
 
-            <TabsContent value="switch3">
+            <TabsContent value="switch3" >
                 <DemoSwitchStyled />
             </TabsContent>
         </Tabs>

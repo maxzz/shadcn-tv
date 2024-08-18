@@ -5,7 +5,7 @@ import { classNames } from "@/utils";
 export function ChadcnSwitchDemo() {
     const [checked, setChecked] = useState(false);
     return (
-        <div className="w-full min-h-24 flex items-center justify-center gap-8">
+        <div className="w-full min-h-32 flex items-center justify-center gap-8">
 
             <div className="text-[0.55rem] flex items-center gap-1">
                 0

@@ -2,7 +2,7 @@ import * as P from "@/components/ui/shadcn/pagination";
 
 export function PaginationDemo() {
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full">
+        <div className="py-8">
             <P.Pagination>
                 <P.PaginationContent>
 

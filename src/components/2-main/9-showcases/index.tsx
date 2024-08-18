@@ -5,7 +5,7 @@ import { ResizableDemo } from "../2-demo/30-demo-resizable";
 import { Tabs_Controls } from "../2-demo/40-demo-controls";
 import { Tabs_Toasts } from "../2-demo/52-demo-toasts";
 import { Tabs_Loaders } from "../2-demo/60-demo-loaders";
-import { Tabs_Pickers } from "./cases/70-tabs-pickers";
+import { Tabs_Pickers } from "../2-demo/70-pickers/0-all-tabs";
 
 export * from "./cases/types";
 export * from "./view";

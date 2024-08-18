@@ -1,7 +1,7 @@
 import { useSnapshot } from 'valtio';
 import { appSettings } from '@/store';
 import * as Prim from "@/components/ui/shadcn/accordion";
-import { Showcase } from ".";
+import { type Showcase } from './9-types';
 
 export function ShowcasesView({ cases }: { cases: Showcase[]; }) {
     const { activeDemoAccordion } = useSnapshot(appSettings).demosState;

@@ -1,4 +1,5 @@
 import { HTMLAttributes, SVGAttributes } from 'react';
+//node_modules/.pnpm/@radix-ui+react-icons@1.3.0_react@18.2.0/node_modules/@radix-ui/react-icons/dist/react-icons.esm.js::ChevronDownIcon
 
 export function ChevronDownIcon({ title, ...rest }: SVGAttributes<SVGSVGElement> & HTMLAttributes<SVGSVGElement>) {
     return (
@@ -8,4 +9,3 @@ export function ChevronDownIcon({ title, ...rest }: SVGAttributes<SVGSVGElement>
         </svg>
     );
 }
-//node_modules/.pnpm/@radix-ui+react-icons@1.3.0_react@18.2.0/node_modules/@radix-ui/react-icons/dist/react-icons.esm.js::ChevronDownIcon

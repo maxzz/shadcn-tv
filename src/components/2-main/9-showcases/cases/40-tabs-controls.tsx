@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn
 import { SlidersDemo, SubTab_Switches } from "../../2-demo/40-demo-controls";
 import { SubTab_Charts } from "../../2-demo/40-demo-controls/5-tabs-charts";
 import { SubTab_Navigation } from "../../2-demo/40-demo-controls/4-tabs-navigation";
-import { SubTab_Controls } from "../../2-demo/40-demo-controls/2-tabs-controls";
+import { SubTab_Controls } from "../../2-demo/40-demo-controls";
 
 export function Tabs_Controls() {
     return (

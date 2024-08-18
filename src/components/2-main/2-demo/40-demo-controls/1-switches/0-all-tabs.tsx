@@ -1,5 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { ChadcnSwitchDemo, DemoSwitchStyled, NeonSwitch } from "./1-switches";
+import { ChadcnSwitchDemo } from "./1-chadcn";
+import { NeonSwitch } from "./2-switch-neon";
+import { DemoSwitchStyled } from "./3-switch-styled";
 
 export function SubTab_Switches() {
     return (

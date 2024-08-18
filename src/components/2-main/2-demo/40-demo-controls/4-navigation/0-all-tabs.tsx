@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { BreadcrumbDemo } from "./4-navigation/3-demo-breadcrumb";
-import { PaginationDemo } from "./4-navigation/3-demo-pagination";
+import { BreadcrumbDemo } from "./3-demo-breadcrumb";
+import { PaginationDemo } from "./3-demo-pagination";
 
 export function SubTab_Navigation() {
     return (

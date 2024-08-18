@@ -1,3 +1,1 @@
-export * from "./cards-overview";
-export * from "./cards-metric";
-export * from "./nivo";
+export * from "./0-all-tabs";

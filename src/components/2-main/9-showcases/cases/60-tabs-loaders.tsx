@@ -110,7 +110,7 @@ function EffectsTabs() {
     );
 }
 
-export function LoadersInTab() {
+export function Tabs_Loaders() {
     return (
         <Tabs defaultValue="loaders1">
             <TabsList className={tabsListWrapClasses}>

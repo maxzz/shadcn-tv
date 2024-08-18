@@ -4,7 +4,7 @@ import { SubTab_Charts } from "../../2-demo/40-demo-controls/5-tabs-charts";
 import { SubTab_Navigation } from "../../2-demo/40-demo-controls/4-tabs-navigation";
 import { SubTab_Controls } from "../../2-demo/40-demo-controls/2-tabs-controls";
 
-export function ControlsInTabs() {
+export function Tabs_Controls() {
     return (
         <Tabs defaultValue="controls6">
             <TabsList className="mb-2">

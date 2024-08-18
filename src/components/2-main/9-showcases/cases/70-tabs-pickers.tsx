@@ -2,10 +2,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger, TooltipProvider } from "@/com
 import { ButtonRandom, ThemeColorsDemo, GradientColorPickerDemo, SolidColorPickerDemo, FlipClockDemo, CalendarDemo } from "../../2-demo/70-pickers";
 import { XArrowsDemo1, XArrowsDemo2 } from "../../2-demo/70-pickers";
 
-export function PickersInTabs() {
+export function Tabs_Pickers() {
     return (
         <Tabs defaultValue="picker5">
-            <TabsList>
+            <TabsList className="mb-2">
                 <TabsTrigger value="picker1">Color</TabsTrigger>
                 <TabsTrigger value="picker2">Gradient</TabsTrigger>
                 <TabsTrigger value="picker3">Theme</TabsTrigger>

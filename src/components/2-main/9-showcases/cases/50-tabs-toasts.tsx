@@ -30,7 +30,7 @@ function VerticalMenu2() { // https://codepen.io/Prakash286/pen/OJoLQav 'Carouse
     );
 }
 
-export function ToastsInTabs() {
+export function Tabs_Toasts() {
     return (
         <div className="mb-4 flex justify-between gap-4">
 

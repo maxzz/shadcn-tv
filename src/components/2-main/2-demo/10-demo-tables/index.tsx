@@ -1,6 +1,1 @@
-export * from "./2-data-table";
-export * from "./1-simple-table";
-export * from "./3-sticky-headers";
-export * from "./4-skew-table";
-export * from "./41-books";
-export * from "./42-cartoons";
+export * from "./0-all-tabs";

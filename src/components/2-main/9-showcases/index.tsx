@@ -1,11 +1,12 @@
 import { Showcase } from "./cases/types";
-import { Tabs_Table } from "./cases/10-tabs-tables";
+import { Tabs_Table } from "../2-demo/10-demo-tables";
 import { DemoTreeWithOptions } from "../2-demo/20-demo-tree";
 import { ResizableDemo } from "../2-demo/30-demo-resizable";
 import { Tabs_Controls } from "../2-demo/40-demo-controls";
-import { Tabs_Toasts } from "./cases/50-tabs-toasts";
+
 import { Tabs_Pickers } from "./cases/70-tabs-pickers";
 import { Tabs_Loaders } from "./cases/60-tabs-loaders";
+import { Tabs_Toasts } from "../2-demo/52-demo-toasts";
 
 export * from "./cases/types";
 export * from "./view";

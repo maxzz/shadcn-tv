@@ -1,5 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { SimpleTableDemo, DataTableDemo, TablesWithStyckyHeaderModules, SkewTable, RotaingBooksDemo, CartoonsDemo } from "../../2-demo/10-demo-tables";
+import { SimpleTableDemo } from "./1-simple-table";
+import { DataTableDemo } from "./2-data-table";
+import { TablesWithStyckyHeaderModules } from "./3-sticky-headers";
+import { SkewTable } from "./4-skew-table";
+import { RotaingBooksDemo } from "./41-books";
+import { CartoonsDemo } from "./42-cartoons";
 
 export function Tabs_Table() {
     return (

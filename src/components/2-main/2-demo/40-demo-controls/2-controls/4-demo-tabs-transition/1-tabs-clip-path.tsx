@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { TABS } from "./8-tabs-data";
-import css from "./tabs-transition.module.css";
+import { tabsData } from "./8-tabs-data";
 
 function updateStype(container: HTMLDivElement | null, activeTabElement: HTMLDivElement | null) {
     if (container && activeTabElement) {
@@ -17,8 +16,23 @@ function updateStype(container: HTMLDivElement | null, activeTabElement: HTMLDiv
     }
 }
 
+const wrapperClasses = "relative mx-auto w-fit flex flex-col items-center";
+const listClasses = "relative flex w-full justify-center gap-2";
+const listOverlayClasses = "bg-blue-600";
+const buttonClasses = "p-4 h-8 1h-[34px] rounded-full text-sm 1text-[14px] font-semibold text-foreground flex items-center gap-2";
+const buttonOverlayClasses = "text-white";
+const clipPathContainerClasses = "\
+absolute \
+w-full \
+overflow-hidden \
+[transition:clip-path_0.25s_ease] \
+clip-path-[inset(0_100%_0_0)] \
+[clip-path:inset(0px_75%_0px_0%_round_17px)] \
+z-10 \
+";
+
 function TabsClipPath() {
-    const [activeTab, setActiveTab] = useState(TABS[0].name);
+    const [activeTab, setActiveTab] = useState(tabsData[0].name);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const activeTabElementRef = useRef(null);
@@ -30,39 +44,43 @@ function TabsClipPath() {
     }, [activeTab, activeTabElementRef, containerRef]);
 
     return (
-        <div className={css["wrapper"]}>
+        <div className={wrapperClasses}>
 
-            <ul className={css["list"]}>
-                {TABS.map((tab) => (
-                    <li key={tab.name}>
-                        <button
-                            className={css["button"]}
-                            ref={activeTab === tab.name ? activeTabElementRef : null}
-                            onClick={() => setActiveTab(tab.name)}
-                            data-tab={tab.name}
-                        >
-                            {tab.icon}
-                            {tab.name}
-                        </button>
-                    </li>
-                ))}
-            </ul>
-
-            <div aria-hidden className={css["clip-path-container"]} ref={containerRef}>
-                <ul className={css["list list-overlay"]}>
-                    {TABS.map((tab) => (
+            <ul className={listClasses}>
+                {tabsData.map(
+                    (tab) => (
                         <li key={tab.name}>
                             <button
-                                className={css["button-overlay button"]}
+                                className={buttonClasses}
+                                ref={activeTab === tab.name ? activeTabElementRef : null}
                                 onClick={() => setActiveTab(tab.name)}
-                                data-tab={tab.name}
-                                tabIndex={-1}
+                                // data-tab={tab.name}
                             >
                                 {tab.icon}
                                 {tab.name}
                             </button>
                         </li>
-                    ))}
+                    ))
+                }
+            </ul>
+
+            <div aria-hidden className={clipPathContainerClasses} ref={containerRef}>
+                <ul className={`${listClasses} ${listOverlayClasses}`}>
+                    {tabsData.map(
+                        (tab) => (
+                            <li key={tab.name}>
+                                <button
+                                    className={`${buttonClasses} ${buttonOverlayClasses}`}
+                                    onClick={() => setActiveTab(tab.name)}
+                                    // data-tab={tab.name}
+                                    tabIndex={-1}
+                                >
+                                    {tab.icon}
+                                    {tab.name}
+                                </button>
+                            </li>
+                        ))
+                    }
                 </ul>
             </div>
 
@@ -72,7 +90,7 @@ function TabsClipPath() {
 
 export function TabsTransitionDemo() {
     return (
-        <div className="p-4 min-h-96 flex justify-center">
+        <div className="p-4 flex justify-center">
             <TabsClipPath />
         </div>
     );

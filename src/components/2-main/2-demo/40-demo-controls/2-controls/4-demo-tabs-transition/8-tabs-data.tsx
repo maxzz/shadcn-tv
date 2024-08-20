@@ -1,4 +1,9 @@
-export const TABS = [
+export type TabsDataItem = {
+    name: string;
+    icon: JSX.Element;
+}
+
+export const tabsData: TabsDataItem[] = [
     {
         name: "Payments",
         icon: (

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { TABS } from "./8-tabs-data";
+import css from "./tabs-transition.module.css";
 
 function updateStype(container: HTMLDivElement | null, activeTabElement: HTMLDivElement | null) {
     if (container && activeTabElement) {
@@ -29,13 +30,13 @@ function TabsClipPath() {
     }, [activeTab, activeTabElementRef, containerRef]);
 
     return (
-        <div className="wrapper">
+        <div className={css["wrapper"]}>
 
-            <ul className="list">
+            <ul className={css["list"]}>
                 {TABS.map((tab) => (
                     <li key={tab.name}>
                         <button
-                            className="button"
+                            className={css["button"]}
                             ref={activeTab === tab.name ? activeTabElementRef : null}
                             onClick={() => setActiveTab(tab.name)}
                             data-tab={tab.name}
@@ -47,12 +48,12 @@ function TabsClipPath() {
                 ))}
             </ul>
 
-            <div aria-hidden className="clip-path-container" ref={containerRef}>
-                <ul className="list list-overlay">
+            <div aria-hidden className={css["clip-path-container"]} ref={containerRef}>
+                <ul className={css["list list-overlay"]}>
                     {TABS.map((tab) => (
                         <li key={tab.name}>
                             <button
-                                className="button-overlay button"
+                                className={css["button-overlay button"]}
                                 onClick={() => setActiveTab(tab.name)}
                                 data-tab={tab.name}
                                 tabIndex={-1}
@@ -71,7 +72,7 @@ function TabsClipPath() {
 
 export function TabsTransitionDemo() {
     return (
-        <div className="p-4 flex justify-center">
+        <div className="p-4 min-h-96 flex justify-center">
             <TabsClipPath />
         </div>
     );

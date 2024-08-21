@@ -6,7 +6,7 @@ import { EffectsTabs } from "./3-effects";
 
 export function Tabs_Loaders() {
     return (
-        <Tabs defaultValue="loaders1">
+        <Tabs defaultValue="loaders3">
 
             <TabsList className={classNames("mb-2", tabsListWrapClasses)}>
                 <TabsTrigger value="loaders1">Spinners</TabsTrigger>

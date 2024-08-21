@@ -4,8 +4,8 @@ import css from "./flip-btn.module.css";
 
 export function FlipBtn({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className="relative 1w-24">
-            <div className={classNames(css.container, "w-20 h-12", className)} {...rest}>
+        <div className="relative">
+            <div className={classNames(css.container, "p-0.5 w-32 h-12", className)} {...rest}>
 
                 <input type="checkbox" name="cb" id="cb" />
 

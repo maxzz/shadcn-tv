@@ -5,20 +5,22 @@ import { FlipBtn } from "./3-flip-btn";
 
 export function Effects() {
     return (
-        <div className="py-4 flex flex-col items-start gap-2">
-            <div className="flex items-center gap-2">
-                <Button variant="outline">
+        <div className="py-8 flex gap-2">
+            <div className="flex flex-col items-start gap-2">
+                <div className="flex items-center gap-2">
+                    <Button variant="outline">
+                        <Flickup className="cursor-pointer" />
+                    </Button>
+                </div>
+
+                <div className="px-4">
                     <Flickup className="cursor-pointer" />
-                </Button>
-
-                <BorderRun />
-
-                <FlipBtn />
+                </div>
             </div>
 
-            <div className="px-4">
-                <Flickup className="cursor-pointer" />
-            </div>
+            <BorderRun />
+
+            <FlipBtn />
         </div>
     );
 }

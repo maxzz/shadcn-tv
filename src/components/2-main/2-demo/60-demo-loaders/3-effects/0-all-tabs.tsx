@@ -1,8 +1,6 @@
 import { Button, Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { Flickup } from "./1-text-flip";
-import { BorderRun } from "./2-border-run";
-import { FlipBtn } from "./2-flip-btn";
-import { OpenGoo } from "./9-open-dlg-goo";
+import { Flickup, BorderRun, FlipBtn } from "./1-effects";
+import { OpenGoo } from "./2-goo";
 import { classNames } from "@/utils";
 
 export function EffectsTabs() {

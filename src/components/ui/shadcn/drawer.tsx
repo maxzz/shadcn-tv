@@ -22,6 +22,7 @@ DrawerOverlay.displayName = D.Overlay.displayName;
 type DrawerContentProps = ComponentPropsWithoutRef<typeof D.Content> & {
     withoutOverlay?: boolean;
     withTopBar?: boolean;
+    hiddenTitle?: string; // If headenTitle is not provided, then parent component should provide own Prim.Title (same for aria-describedby)
 };
 
 const drawerContentClasses = "\
@@ -34,10 +35,14 @@ flex flex-col \
 z-50";
 
 export const DrawerContent = forwardRef<ElementRef<typeof D.Content>, DrawerContentProps>(
-    ({ className, children, withoutOverlay, withTopBar, ...rest }, ref) => (
+    ({ className, children, withoutOverlay, withTopBar, hiddenTitle, ...rest }, ref) => (
         <DrawerPortal>
             {!withoutOverlay && <DrawerOverlay />}
             <D.Content ref={ref} className={cn(drawerContentClasses, className)} {...rest}>
+                {hiddenTitle && (
+                    <D.Title className="sr-only">{hiddenTitle}</D.Title>
+                )}
+
                 {withTopBar && <div className="mx-auto mt-4 w-[100px] h-2 bg-muted rounded-full" />}
                 {children}
             </D.Content>

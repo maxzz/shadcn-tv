@@ -26,6 +26,11 @@ export function themeApplyMode(themeMode: ThemeMode): void {
     // root.classList.add(themeMode);
 }
 
+export function isDarkTheme(): boolean {
+    const root = window.document.documentElement;
+    return root.classList.contains("dark");
+}
+
 // export function setAppDarkMode(setDark: boolean) {
 //     document.getElementsByTagName('body')[0].classList[setDark ? 'add' : 'remove']('dark');
 // }

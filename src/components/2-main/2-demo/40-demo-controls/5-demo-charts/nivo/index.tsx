@@ -1,6 +1,6 @@
+import React from "react";
 import { ResponsiveLine, Serie } from "@nivo/line";
 import { LegendProps } from "@nivo/legends";
-import React from "react";
 
 // https://github.com/plouc/nivo
 // https://nivo.rocks/line

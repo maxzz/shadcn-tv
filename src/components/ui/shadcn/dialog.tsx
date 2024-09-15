@@ -63,14 +63,15 @@ type DialogContentProps = ComponentPropsWithoutRef<typeof Prim.Content> & {
     noClose?: boolean;
     withScroll?: boolean; // by default DialogContent has no scroll for popups
     hiddenTitle?: string; // If headenTitle is not provided, then parent component should provide own Prim.Title (same for aria-describedby)
+    overlayClasses?: string;
 };
 
 const preventClose = (e: Event) => e.preventDefault();
 
 const DialogContent = forwardRef<ElementRef<typeof Prim.Content>, DialogContentProps>(
-    ({ className, children, noClose, container, withScroll, modal, onPointerDownOutside, hiddenTitle, ...rest }, ref) => (
+    ({ className, children, noClose, container, withScroll, modal, overlayClasses, onPointerDownOutside, hiddenTitle, ...rest }, ref) => (
         <DialogPortal container={container}>
-            {withScroll ? <DialogOverlayWithScroll /> : <DialogOverlay />}
+            {withScroll ? <DialogOverlayWithScroll className={overlayClasses} /> : <DialogOverlay className={overlayClasses} />}
 
             <Prim.Content
                 ref={ref}

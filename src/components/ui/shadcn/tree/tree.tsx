@@ -232,6 +232,7 @@ const Leaf = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & LeafFol
                 ref={ref}
                 className={cn(leafBaseClasses, className, selected && leafSelectedClasses)}
                 data-tree-id={item.id}
+                {...(selected && { 'data-tree-item-selected': '' })}
                 {...rest}
             >
                 <IconTextRender item={item} Icon={Icon} hideFolderIcon={false} iconClasses={leafIconClasses} />

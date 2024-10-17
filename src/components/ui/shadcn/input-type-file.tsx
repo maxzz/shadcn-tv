@@ -1,7 +1,7 @@
 import { forwardRef, InputHTMLAttributes } from "react";
 
 export type InputFileAsDlgProps = InputHTMLAttributes<HTMLInputElement> & {
-    openAsFolder?: boolean;   // folder mode: open folder
+    openAsFolder?: boolean; // folder mode: open folder
     multiple?: boolean;     // files mode only: open multiple files
 };
 

@@ -15,7 +15,7 @@ import {
 const iconClasses = "h-4 w-4 mr-2";
 const kbdClasses = "pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100";
 
-const ctrlKey = navigator.platform.includes("Mac") ? "⌘" : "Ctrl";
+const ctrlKey = ~navigator.userAgent.indexOf("Mac") ? "⌘" : "Ctrl";
 
 export function CommandDialogDemo() {
     const [open, setOpen] = React.useState(false);
@@ -37,7 +37,7 @@ export function CommandDialogDemo() {
             <p className="text-sm text-muted-foreground hover:bg-info cursor-pointer" onClick={() => setOpen((v) => !v)}>
                 Press{" "}
                 <kbd className={kbdClasses}>
-                    <span className="text-xs">Ctrl+J</span> {/* <span className="text-xs">⌘</span>J */}
+                    <span className="text-xs">{ctrlKey}+J</span>
                 </kbd>
                 or click here to open the command dialog.
             </p>
@@ -70,17 +70,17 @@ export function CommandDialogDemo() {
                     <CommandItem>
                         <PersonIcon className={iconClasses} />
                         <span>Profile</span>
-                        <CommandShortcut>⌘P</CommandShortcut>
+                        <CommandShortcut>{ctrlKey}+P</CommandShortcut>
                     </CommandItem>
                     <CommandItem>
                         <EnvelopeClosedIcon className={iconClasses} />
                         <span>Mail</span>
-                        <CommandShortcut>⌘B</CommandShortcut>
+                        <CommandShortcut>{ctrlKey}+B</CommandShortcut>
                     </CommandItem>
                     <CommandItem>
                         <GearIcon className={iconClasses} />
                         <span>Settings</span>
-                        <CommandShortcut>⌘S</CommandShortcut>
+                        <CommandShortcut>{ctrlKey}+S</CommandShortcut>
                     </CommandItem>
                 </CommandGroup>
 

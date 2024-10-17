@@ -4,6 +4,7 @@ import { InputOTPDemo } from "./1-demo-input-otp";
 import { SkeletonDemo } from "./2-demo-skeleton";
 import { TabsTransitionDemo } from "./4-demo-tabs-transition";
 import { SelectDemo } from "./5-demo-select";
+import { CommandDialogDemo } from "./6-demo-command";
 
 export function SubTab_Controls() {
     return (
@@ -14,6 +15,7 @@ export function SubTab_Controls() {
                 <TabsTrigger value="controls3">Carousel</TabsTrigger>
                 <TabsTrigger value="controls4">Tabs Transition</TabsTrigger>
                 <TabsTrigger value="controls5">Select</TabsTrigger>
+                <TabsTrigger value="controls6">Command</TabsTrigger>
             </TabsList>
 
             <TabsContent value="controls1">
@@ -34,6 +36,10 @@ export function SubTab_Controls() {
 
             <TabsContent value="controls5">
                 <SelectDemo />
+            </TabsContent>
+
+            <TabsContent value="controls6">
+                <CommandDialogDemo />
             </TabsContent>
         </Tabs>
     );

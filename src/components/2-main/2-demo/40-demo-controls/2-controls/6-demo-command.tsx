@@ -46,6 +46,7 @@ export function CommandDialogDemo() {
 
         <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Type a command or search..." />
+            <VisuallyHidden as="h2">Command Palette</VisuallyHidden>
             <DialogTitle className="text-lg font-semibold">Command Palette</DialogTitle>
 
             <CommandList>

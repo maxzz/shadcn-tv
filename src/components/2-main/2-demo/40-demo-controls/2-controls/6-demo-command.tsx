@@ -12,6 +12,7 @@ import {
     CommandShortcut,
 } from "@/components/ui/shadcn/command";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const iconClasses = "h-4 w-4 mr-2";
 const kbdClasses = "pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100";
@@ -46,8 +47,9 @@ export function CommandDialogDemo() {
 
         <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Type a command or search..." />
-            <VisuallyHidden as="h2">Command Palette</VisuallyHidden>
-            <DialogTitle className="text-lg font-semibold">Command Palette</DialogTitle>
+            <VisuallyHidden>
+                <DialogTitle className="text-lg font-semibold">Command Palette</DialogTitle>
+            </VisuallyHidden>
 
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>

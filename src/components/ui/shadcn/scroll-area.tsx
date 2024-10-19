@@ -6,6 +6,7 @@ export type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
     horizontal?: boolean;
     fixedWidth?: boolean;
     fullHeight?: boolean;
+    fixedContent?: boolean; // allows to truncate items to parent width
 };
 
 /**
@@ -20,15 +21,26 @@ export type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
  * widths that change. We'll wait to see what use-cases consumers come up with there
  * before trying to resolve it.
  * 
- * const fixedWidthClasses = "[&[data-fixed-width]>div>div]:![display:block]";
+ * fixedContent - allows to truncate items to parent width.
+ * 
+ * const fixedWidthClasses = "[&[data-fixed-width]_[data-radix-scroll-area-content]]:![display:block]";
  */
-const fixedWidthClasses = "[&>div>div]:![display:block]";
 const hFullClasses = "[&_[data-radix-scroll-area-viewport]>div]:h-full";
+const fixedWidthClasses = "[&_[data-radix-scroll-area-content]]:![display:block]";
+const contentFixedClasses = "[&_[data-radix-scroll-area-content]]:!min-w-0";
 
 const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ScrollAreaProps>(
-    ({ className, children, horizontal, fixedWidth, fullHeight, ...rest }, ref) => (
-        <Prim.Root ref={ref} className={cn("relative overflow-hidden", fixedWidth && fixedWidthClasses, fullHeight && hFullClasses, className)} {...rest}>
-
+    ({ className, children, horizontal, fixedWidth, fullHeight, fixedContent, ...rest }, ref) => (
+        <Prim.Root ref={ref}
+            className={cn(
+                "relative overflow-hidden",
+                fixedWidth && fixedWidthClasses,
+                fullHeight && hFullClasses,
+                fixedContent && contentFixedClasses,
+                className
+            )}
+            {...rest}
+        >
             <Prim.Viewport className="h-full w-full rounded-[inherit]">
                 {children}
             </Prim.Viewport>

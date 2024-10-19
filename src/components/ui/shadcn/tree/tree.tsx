@@ -121,7 +121,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                     nextId && handleSelectChange(e, findTreeItemById(data, nextId));
                 }}
             >
-                <ScrollArea className="tree-scroll" style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)} {...scrollAreaProps}>
+                <ScrollArea style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)} {...scrollAreaProps}>
                     <div className="relative z-0 px-2 py-1" >
                         <TreeItem
                             ref={ref}

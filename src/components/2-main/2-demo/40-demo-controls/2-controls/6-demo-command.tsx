@@ -34,20 +34,26 @@ export function CommandDialogDemo() {
         return () => document.removeEventListener("keydown", down);
     }, []);
 
+    function onItemSelect(value: string) {
+        console.log("Item selected", value);
+    }
+
     return (<>
         <div className="h-full min-h-36 flex items-center justify-center">
-            <p className="text-sm text-muted-foreground hover:bg-info cursor-pointer" onClick={() => setOpen((v) => !v)}>
+            <p className="text-xs text-muted-foreground hover:bg-info cursor-pointer" onClick={() => setOpen((v) => !v)}>
                 Press{" "}
                 <kbd className={kbdClasses}>
-                    <span className="text-xs">{ctrlKey}+J</span>
+                    <span>{ctrlKey}+J</span>
                 </kbd>
-                or click here to open the command dialog.
+                {" "}or click here to open the command dialog.
             </p>
         </div>
 
         <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Type a command or search..." />
-            <VisuallyHidden>
+
+            {/* https://www.radix-ui.com/primitives/docs/components/dialog#title */}
+            <VisuallyHidden asChild>
                 <DialogTitle className="text-lg font-semibold">Command Palette</DialogTitle>
             </VisuallyHidden>
 
@@ -55,15 +61,15 @@ export function CommandDialogDemo() {
                 <CommandEmpty>No results found.</CommandEmpty>
 
                 <CommandGroup heading="Suggestions">
-                    <CommandItem>
+                    <CommandItem onSelect={onItemSelect}>
                         <CalendarIcon className={iconClasses} />
                         <span>Calendar</span>
                     </CommandItem>
-                    <CommandItem>
+                    <CommandItem onSelect={onItemSelect}>
                         <FaceIcon className={iconClasses} />
                         <span>Search Emoji</span>
                     </CommandItem>
-                    <CommandItem>
+                    <CommandItem onSelect={onItemSelect}>
                         <RocketIcon className={iconClasses} />
                         <span>Launch</span>
                     </CommandItem>
@@ -90,6 +96,9 @@ export function CommandDialogDemo() {
                 </CommandGroup>
 
             </CommandList>
+            <div className="p-4 text-xs">
+                123
+            </div>
         </CommandDialog>
     </>);
 }

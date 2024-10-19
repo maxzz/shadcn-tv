@@ -3,10 +3,10 @@ import * as Prim from "@radix-ui/react-scroll-area";
 import { cn } from "@/utils";
 
 export type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
-    horizontal?: boolean;
-    fixedWidth?: boolean;
-    fullHeight?: boolean;
-    fixedContent?: boolean; // allows to truncate items to parent width
+    horizontal?: boolean;           // adds horizontal scrollbar
+    fullHeight?: boolean;           // sets ScrollArea height to 100%
+    fixedWidth?: boolean;           // prevents ScrollArea width from growing; i.e. removes display: table from Prim.Viewport
+    parentContentWidth?: boolean;   // allows to truncate items to parent width
 };
 
 /**
@@ -21,22 +21,20 @@ export type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
  * widths that change. We'll wait to see what use-cases consumers come up with there
  * before trying to resolve it.
  * 
- * fixedContent - allows to truncate items to parent width.
- * 
  * const fixedWidthClasses = "[&[data-fixed-width]_[data-radix-scroll-area-content]]:![display:block]";
  */
-const hFullClasses = "[&_[data-radix-scroll-area-viewport]>div]:h-full";
+const fullHeightClasses = "[&_[data-radix-scroll-area-viewport]>div]:h-full";
 const fixedWidthClasses = "[&_[data-radix-scroll-area-content]]:![display:block]";
-const contentFixedClasses = "[&_[data-radix-scroll-area-content]]:!min-w-0";
+const parentContentWidthClasses = "[&_[data-radix-scroll-area-content]]:!min-w-0";
 
 const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ScrollAreaProps>(
-    ({ className, children, horizontal, fixedWidth, fullHeight, fixedContent, ...rest }, ref) => (
+    ({ className, children, horizontal, fixedWidth, fullHeight, parentContentWidth: parentContentWidth, ...rest }, ref) => (
         <Prim.Root ref={ref}
             className={cn(
                 "relative overflow-hidden",
                 fixedWidth && fixedWidthClasses,
-                fullHeight && hFullClasses,
-                fixedContent && contentFixedClasses,
+                parentContentWidth && parentContentWidthClasses,
+                fullHeight && fullHeightClasses,
                 className
             )}
             {...rest}

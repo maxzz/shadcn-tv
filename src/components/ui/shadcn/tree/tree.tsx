@@ -7,7 +7,7 @@ import { ChevronRight } from "lucide-react";
 import { classNames, cn } from "@/utils";
 import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, DataItem, TreenIconType } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
-import { treeItemBaseClasses, treeItemSelectedClasses, treeItemIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
+import { folderBaseClasses, folderSelectedClasses, folderIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
 
 export type ItemState = {
     state: {
@@ -247,14 +247,14 @@ const Folder = forwardRef<HTMLButtonElement, HTMLAttributes<HTMLButtonElement> &
         const { selected } = useSnapshot(item.state);
         return (
             <FolderTrigger
-                className={cn(treeItemBaseClasses, selected && treeItemSelectedClasses, className)}
+                className={cn(folderBaseClasses, selected && folderSelectedClasses, className)}
                 data-tree-folder-trigger={TypeTreeFolderTrigger}
                 {...(selected && { 'data-tree-item-selected': '' })}
                 arrowFirst={arrowFirst}
                 ref={ref}
                 {...rest}
             >
-                <IconTextRender item={item} Icon={Icon} hideFolderIcon={hideFolderIcon} iconClasses={treeItemIconClasses} />
+                <IconTextRender item={item} Icon={Icon} hideFolderIcon={hideFolderIcon} iconClasses={folderIconClasses} />
             </FolderTrigger>
         );
     }

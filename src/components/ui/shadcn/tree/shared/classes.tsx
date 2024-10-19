@@ -1,6 +1,6 @@
 // tree folder
 
-export const treeItemBaseClasses = "\
+export const folderBaseClasses = "\
 px-2 py-1 \
 before:absolute \
 before:left-0 \
@@ -10,7 +10,7 @@ before:bg-muted/80 before:opacity-0 hover:before:opacity-100 \
 before:-z-10 \
 ";
 
-export const treeItemSelectedClasses = "\
+export const folderSelectedClasses = "\
 text-accent-foreground \
 dark:before:border-0 \
 before:bg-accent \
@@ -19,7 +19,7 @@ before:border-l-2 \
 before:border-l-accent-foreground/50 \
 ";
 
-export const treeItemIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
+export const folderIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
 // tree leaf
 

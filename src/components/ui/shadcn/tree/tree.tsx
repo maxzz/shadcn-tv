@@ -46,7 +46,11 @@ type TreeProps = Prettify<
     & TreeIconOptions
 >;
 
-export const treeActiveClasses = "[--parent-active:0px] focus-within:[--parent-active:1px]"; // so children can be styled when parent is active
+/**
+ * Children can be styled when parent is active:
+ * [outline-width:calc(var(--parent-active)_*_1px)]
+ */
+const treeActiveClasses = "[--parent-active:0] focus-within:[--parent-active:1]";
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {

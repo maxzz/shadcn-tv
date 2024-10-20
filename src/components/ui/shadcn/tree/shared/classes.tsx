@@ -48,6 +48,10 @@ before:bg-accent \
 before:opacity-100 \
 before:border-l-2 \
 before:border-l-accent-foreground/50 \
+\
+outline-primary-400 \
+[outline-width:calc(var(--parent-active)_*_1px)] \
+outline rounded-[3px] \
 ";
 
 export const leafIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";

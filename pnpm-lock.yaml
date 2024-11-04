@@ -45,8 +45,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-icons':
-        specifier: ^1.3.0
-        version: 1.3.0(react@18.3.1)
+        specifier: ^1.3.1
+        version: 1.3.1(react@18.3.1)
       '@radix-ui/react-label':
         specifier: ^2.1.0
         version: 2.1.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -192,8 +192,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       valtio:
-        specifier: ^2.1.0
-        version: 2.1.0(@types/react@18.3.12)(react@18.3.1)
+        specifier: ^2.1.1
+        version: 2.1.1(@types/react@18.3.12)(react@18.3.1)
       vaul:
         specifier: ^1.1.0
         version: 1.1.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -874,10 +874,10 @@ packages:
       '@types/react-dom':
         optional: true
 
-  '@radix-ui/react-icons@1.3.0':
-    resolution: {integrity: sha512-jQxj/0LKgp+j9BiTXz3O3sgs26RNet2iLWmsPyRz2SIcR4q/4SbazXfnYwbAr+vLYKSfc7qxzyGQA1HLlYiuNw==}
+  '@radix-ui/react-icons@1.3.1':
+    resolution: {integrity: sha512-QvYompk0X+8Yjlo/Fv4McrzxohDdM5GgLHyQcPpcsPvlOSXCGFjdbuyGL5dzRbg0GpknAjQJJZzdiRK7iWVuFQ==}
     peerDependencies:
-      react: ^16.x || ^17.x || ^18.x
+      react: ^16.x || ^17.x || ^18.x || ^19.x
 
   '@radix-ui/react-id@1.0.1':
     resolution: {integrity: sha512-tI7sT/kqYp8p96yGWY1OAnLHrqDgzHefRBKQ2YAkBS5ja7QLcZ9Z/uY7bEjPUatf8RomoXM8/1sMj1IJaE5UzQ==}
@@ -2810,8 +2810,8 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  valtio@2.1.0:
-    resolution: {integrity: sha512-UryxkWilm5huamW8vNAvj7KLodPgSN5EVWcetwzcy8pVyc27tQ+RqSRmJ0zx/Cq219O7yqaNl12GcCSujoLDUw==}
+  valtio@2.1.1:
+    resolution: {integrity: sha512-ut7ztzMp3HyDsdAy3xFMKnSAhfwU/jq0WhBehyzXT1URB1ZikhK7XTHQn7JruhLByybvYkh5bFnD4YoKXTlfjw==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -3585,7 +3585,7 @@ snapshots:
       '@types/react': 18.3.12
       '@types/react-dom': 18.3.1
 
-  '@radix-ui/react-icons@1.3.0(react@18.3.1)':
+  '@radix-ui/react-icons@1.3.1(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
@@ -5583,7 +5583,7 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  valtio@2.1.0(@types/react@18.3.12)(react@18.3.1):
+  valtio@2.1.1(@types/react@18.3.12)(react@18.3.1):
     dependencies:
       proxy-compare: 3.0.0
     optionalDependencies:

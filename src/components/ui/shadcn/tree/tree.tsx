@@ -5,9 +5,10 @@ import { ScrollArea, ScrollAreaProps } from "@/components/ui/shadcn/scroll-area"
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight } from "lucide-react";
 import { classNames, cn } from "@/utils";
-import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, DataItem, TreenIconType } from "./shared/types";
+import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, TreenIconType } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { folderBaseClasses, folderSelectedClasses, folderIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
+
 
 export type ItemState = {
     state: {
@@ -26,9 +27,9 @@ type TreeState = {
     selectedId: string | number | undefined;
 };
 
-type TreeProps = Prettify<
+type TreeProps<T extends DataItemWState = DataItemWState> = Prettify<
     & {
-        data: DataItemWState[] | DataItemWState;
+        data: T[] | T;
 
         onSelectChange?: (item: DataItemWState | undefined) => void;
         initialSelectedItemId?: string;
@@ -39,7 +40,8 @@ type TreeProps = Prettify<
         IconForFolder?: TreenIconType;
         IconForItem?: TreenIconType;
 
-        selectAsTrigger?: boolean; // click on selected item will deselect it; and no deselecting on click on empty space.
+        selectAsTrigger?: boolean;  // click on selected item will deselect it; and no deselecting on click on empty space.
+        selectEmptySpace?: boolean; // click on empty space will deselect current item
 
         scrollAreaProps?: ScrollAreaProps;
     }
@@ -54,7 +56,9 @@ const treeActiveClasses = "[--parent-active:0] focus-within:[--parent-active:1]"
 
 export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
-        const { data, initialSelectedItemId, onSelectChange, expandAll, IconTextRender, IconForFolder, IconForItem, arrowFirst, hideFolderIcon, selectAsTrigger, scrollAreaProps, className, ...rest } = props;
+        const {
+            data, initialSelectedItemId, onSelectChange, expandAll, IconTextRender, IconForFolder, IconForItem,
+            arrowFirst, hideFolderIcon, selectAsTrigger, selectEmptySpace, scrollAreaProps, className, ...rest } = props;
 
         const [treeState] = useState(() => {
             const uiState = proxy<TreeState>({
@@ -86,21 +90,26 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 event.stopPropagation();
 
                 if (item) {
+                    const clickedNewItem = treeState.selectedId !== item.id;
+
                     if (selectAsTrigger) {
-                        const clickedNewItem = treeState.selectedId !== item.id;
                         clickedNewItem && clearPrevSelectedState();
                         item.state.selected = clickedNewItem;
                         treeState.selectedId = clickedNewItem ? item.id : undefined;
                     } else {
+                        if (!clickedNewItem) {
+                            return;
+                        }
                         clearPrevSelectedState();
                         item.state.selected = !item.state.selected;
                         treeState.selectedId = item.id;
                     }
                 } else {
-                    if (!selectAsTrigger) {
-                        clearPrevSelectedState();
-                        treeState.selectedId = undefined;
+                    if (!selectEmptySpace) {
+                        return;
                     }
+                    clearPrevSelectedState();
+                    treeState.selectedId = undefined;
                 }
 
                 function clearPrevSelectedState() {

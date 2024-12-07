@@ -44,7 +44,7 @@
         "embla-carousel": "8.3.0",
         "embla-carousel-react": "8.3.0",
         "input-otp": "^1.2.4",
-        "jotai": "^2.10.0",
+        "jotai": "^2.10.3",
         "lucide-react": "^0.468.0",
         "next-themes": "^0.3.0",
         "react": "^18.3.1",
@@ -64,7 +64,7 @@
         "tailwind-scrollbar": "^3.1.0",
         "tailwindcss-animate": "^1.0.7",
         "use-resize-observer": "^9.1.0",
-        "valtio": "^2.1.1",
+        "valtio": "^2.1.2",
         "vaul": "^1.1.1",
         "zod": "^3.23.8"
     },

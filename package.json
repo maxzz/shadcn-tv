@@ -36,7 +36,7 @@
         "@tanstack/react-table": "^8.20.1",
         "@uiw/react-color": "^2.3.2",
         "@uiw/react-color-chrome": "^2.3.2",
-        "class-variance-authority": "^0.7.0",
+        "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "cmdk": "^1.0.0",
         "colord": "^2.9.3",
@@ -60,12 +60,12 @@
         "remeda": "^2.15.2",
         "sonner": "^1.7.0",
         "suspense": "^0.0.53",
-        "tailwind-merge": "^2.5.2",
+        "tailwind-merge": "^2.5.5",
         "tailwind-scrollbar": "^3.1.0",
         "tailwindcss-animate": "^1.0.7",
         "use-resize-observer": "^9.1.0",
         "valtio": "^2.1.1",
-        "vaul": "^1.1.0",
+        "vaul": "^1.1.1",
         "zod": "^3.23.8"
     },
     "devDependencies": {

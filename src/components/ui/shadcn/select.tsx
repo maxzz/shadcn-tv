@@ -30,14 +30,14 @@ border rounded-md shadow-sm \
 whitespace-nowrap \
 [&>span]:line-clamp-1 \
 \
-flex items-center justify-between";
+flex items-center justify-between gap-1";
 
 const SelectTrigger = forwardRef<ElementRef<typeof Prim.Trigger>, ComponentPropsWithoutRef<typeof Prim.Trigger>>(
     ({ className, children, ...rest }, ref) => (
         <Prim.Trigger ref={ref} className={cn(selectTriggerClasses, className)} {...rest}>
             {children}
             <Prim.Icon asChild>
-                <CaretSortIcon className="h-4 w-4 opacity-50" />
+                <CaretSortIcon className="flex-none h-4 w-4 opacity-50" />
             </Prim.Icon>
         </Prim.Trigger>
     )

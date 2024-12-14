@@ -56,7 +56,7 @@
         "react-resizable-panels": "^2.1.7",
         "react-use-measure": "^2.1.1",
         "react-xarrows": "^2.0.2",
-        "recharts": "^2.14.1",
+        "recharts": "^2.15.0",
         "remeda": "^2.17.4",
         "sonner": "^1.7.1",
         "suspense": "^0.0.53",
@@ -69,7 +69,7 @@
         "zod": "^3.24.1"
     },
     "devDependencies": {
-        "@types/node": "^22.10.1",
+        "@types/node": "^22.10.2",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.0",
         "@vitejs/plugin-react": "^4.3.4",

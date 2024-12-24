@@ -5,7 +5,7 @@ import { ScrollArea, ScrollAreaProps } from "@/components/ui/shadcn/scroll-area"
 import useResizeObserver from "use-resize-observer";
 import { ChevronRight } from "lucide-react";
 import { classNames, cn } from "@/utils";
-import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, TreenIconType } from "./shared/types";
+import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger, TreenIconComponent } from "./shared/types";
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { folderBaseClasses, folderSelectedClasses, folderIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
 
@@ -37,8 +37,8 @@ type TreeProps<T extends DataItemWState = DataItemWState> = Prettify<
 
         IconTextRender?: TreeIconAndTextType;
 
-        IconForFolder?: TreenIconType;
-        IconForItem?: TreenIconType;
+        IconForFolder?: TreenIconComponent;
+        IconForItem?: TreenIconComponent;
 
         selectAsTrigger?: boolean;  // click on selected item will deselect it; and no deselecting on click on empty space.
         selectEmptySpace?: boolean; // click on empty space will deselect current item
@@ -235,7 +235,7 @@ TreeItem.displayName = 'Tree.TreeItem';
 
 type LeafFolderProps = {
     item: DataItemWState;
-    Icon?: TreenIconType;
+    Icon?: TreenIconComponent;
     IconTextRender: TreeIconAndTextType;
 };
 
@@ -317,7 +317,7 @@ FolderContent.displayName = 'Tree.Folder.Content';
 export type TreeIconAndTextProps = Prettify<
     & {
         item: DataItemNavigation<DataItemCore>;
-        Icon?: TreenIconType;
+        Icon?: TreenIconComponent;
         iconClasses: string;
     }
     & Pick<TreeIconOptions, 'hideFolderIcon'>

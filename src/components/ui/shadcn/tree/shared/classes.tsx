@@ -1,7 +1,7 @@
-// tree folder
+// tree folder (mr-2 space for scroll bar)
 
 export const folderBaseClasses = "\
-px-2 py-1 \
+mr-2 pl-1 py-1 \
 before:absolute \
 before:left-0 \
 before:w-full \
@@ -21,10 +21,10 @@ before:border-l-accent-foreground/50 \
 
 export const folderIconClasses = "shrink-0 mr-2 w-4 h-4 text-accent-foreground/50";
 
-// tree leaf
+// tree leaf (mr-2 space for scroll bar)
 
 export const leafBaseClasses = "\
-px-2 py-1 relative \
+mr-2 pl-1 py-1 relative \
 \
 before:absolute \
 before:left-0 \

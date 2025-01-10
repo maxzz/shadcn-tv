@@ -9,7 +9,6 @@ import { DataItemNavigation, DataItemCore, TypeTreeFolder, TypeTreeFolderTrigger
 import { collectExpandedItemIds, findTreeItemById, getNextId } from "./shared/utils";
 import { folderBaseClasses, folderSelectedClasses, folderIconClasses, leafBaseClasses, leafSelectedClasses, leafIconClasses } from "./shared/classes";
 
-
 export type ItemState = {
     state: {
         selected: boolean;
@@ -137,7 +136,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps & HTMLAttributes<HTMLDi
                 }}
             >
                 <ScrollArea style={{ width, height }} onClick={(e) => handleSelectChange(e, undefined)} {...scrollAreaProps}>
-                    <div className="relative z-0 px-2 py-1" >
+                    <div className="relative z-0 p-px"> {/* p-px is for space of the outer outline */}
                         <TreeItem
                             ref={ref}
                             data={data}

@@ -24,17 +24,17 @@ export type ScrollAreaProps = ComponentPropsWithoutRef<typeof Prim.Root> & {
  * const fixedWidthClasses = "[&[data-fixed-width]_[data-radix-scroll-area-content]]:![display:block]";
  */
 const fullHeightClasses = "[&_[data-radix-scroll-area-viewport]>div]:h-full";
-const fixedWidthClasses = "[&_[data-radix-scroll-area-content]]:![display:block]";
+const fixedWidthClasses = "[&_[data-radix-scroll-area-viewport]>div]:![display:block]"; // to block: display: table
 const parentContentWidthClasses = "[&_[data-radix-scroll-area-content]]:!min-w-0";
 
 const ScrollArea = forwardRef<ElementRef<typeof Prim.Root>, ScrollAreaProps>(
-    ({ className, children, horizontal, fixedWidth, fullHeight, parentContentWidth: parentContentWidth, ...rest }, ref) => (
+    ({ className, children, horizontal, fixedWidth, fullHeight, parentContentWidth, ...rest }, ref) => (
         <Prim.Root ref={ref}
             className={cn(
                 "relative overflow-hidden",
+                fullHeight && fullHeightClasses,
                 fixedWidth && fixedWidthClasses,
                 parentContentWidth && parentContentWidthClasses,
-                fullHeight && fullHeightClasses,
                 className
             )}
             {...rest}

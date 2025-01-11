@@ -1,4 +1,4 @@
-export const sectionBackgroundClasses = 'bg-muted/30 border-muted-foreground/30 border-t border-b';
+export const sectionBackgroundClasses = "bg-muted/30 border-muted-foreground/30 border-t border-b";
 
 export function QuickAccessArea() {
     return (

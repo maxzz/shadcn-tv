@@ -1,11 +1,11 @@
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { SubTab_Switches } from "./1-switches";
-import { SubTab_Controls } from "./2-controls";
-import { SubTab_Navigation } from "./4-navigation";
-import { SubTab_Charts } from "./5-demo-charts";
-import { SlidersDemo } from "./6-sliders";
+import { SubTab_Switches } from "../../1-switches";
+import { SubTab_Controls } from "../../2-controls";
+import { SubTab_Navigation } from "../../4-navigation";
+import { SubTab_Charts } from "../../5-demo-charts";
+import { SlidersDemo } from "..";
 
 export function Tabs_Controls() {
     const { activeTabs } = useSnapshot(appSettings).demosState;

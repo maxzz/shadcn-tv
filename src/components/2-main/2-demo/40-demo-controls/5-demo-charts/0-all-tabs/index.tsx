@@ -1,9 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { CardsMetric } from "./cards-metric";
-import { ChartsOverview } from "./cards-overview";
-import { Sparkline } from "./nivo";
-import { nivoLineData1 } from "./nivo/line-data1";
-import { nivoLineData2 } from "./nivo/line-data2";
+import { CardsMetric } from "../cards-metric";
+import { ChartsOverview } from "../cards-overview";
+import { Sparkline } from "../nivo";
+import { nivoLineData1 } from "../nivo/line-data1";
+import { nivoLineData2 } from "../nivo/line-data2";
 
 export function SubTab_Charts() {
     return (

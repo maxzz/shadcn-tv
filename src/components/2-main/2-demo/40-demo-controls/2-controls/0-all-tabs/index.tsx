@@ -1,10 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { CarouselDemo } from "./3-demo-carousel";
-import { InputOTPDemo } from "./1-demo-input-otp";
-import { SkeletonDemo } from "./2-demo-skeleton";
-import { TabsTransitionDemo } from "./4-demo-tabs-transition";
-import { SelectDemo } from "./5-demo-select";
-import { CommandDialogDemo } from "./6-demo-command";
+import { CarouselDemo } from "../3-demo-carousel";
+import { InputOTPDemo } from "../1-demo-input-otp";
+import { SkeletonDemo } from "../2-demo-skeleton";
+import { TabsTransitionDemo } from "../4-demo-tabs-transition";
+import { SelectDemo } from "../5-demo-select";
+import { CommandDialogDemo } from "../6-demo-command";
 
 export function SubTab_Controls() {
     return (

@@ -3,9 +3,6 @@ import { forwardRef, HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/utils";
-//https://github.com/shadcn-ui/ui/pull/5986 'feat(components): add new timeline component #5986'
-//https://github.com/shadcn-ui/ui/pull/5986/commits/f7395a3d78eeb4c377dbe1f8fb48e0ea470bdd56
-//https://github.com/shadcn-ui/ui/blob/f7395a3d78eeb4c377dbe1f8fb48e0ea470bdd56/apps/www/registry/default/ui/timeline.tsx
 
 const Timeline = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => <div {...props} ref={ref} />

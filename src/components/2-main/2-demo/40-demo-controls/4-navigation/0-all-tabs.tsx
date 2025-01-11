@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { BreadcrumbDemo } from "./3-demo-breadcrumb";
 import { PaginationDemo } from "./3-demo-pagination";
-import { TimelineDemo2 } from "./5-timeline-2";
+import { Timeline3WithIcon, TimelineDemo2 } from "./5-timeline-2";
 
 export function SubTab_Navigation() {
     return (
@@ -10,6 +10,7 @@ export function SubTab_Navigation() {
                 <TabsTrigger value="nav1">Breadcrumb</TabsTrigger>
                 <TabsTrigger value="nav2">Pagination</TabsTrigger>
                 <TabsTrigger value="nav4">Timeline2</TabsTrigger>
+                <TabsTrigger value="nav5">Timeline3</TabsTrigger>
             </TabsList>
 
             <TabsContent value="nav1">
@@ -22,6 +23,10 @@ export function SubTab_Navigation() {
 
             <TabsContent value="nav4">
                 <TimelineDemo2 />
+            </TabsContent>
+
+            <TabsContent value="nav5">
+                <Timeline3WithIcon />
             </TabsContent>
         </Tabs>
     );

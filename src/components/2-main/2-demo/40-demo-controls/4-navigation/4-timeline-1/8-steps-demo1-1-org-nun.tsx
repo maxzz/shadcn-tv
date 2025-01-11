@@ -7,7 +7,7 @@ export function StepsDemo2() {
         <div className={containerClasses}>
             <div className={container2Classes}>
 
-                <div className="flex justify-between rounded p-8">
+                <div className="p-8 flex justify-between rounded">
                     <Step step={1} currentStep={step} />
                     <Step step={2} currentStep={step} />
                     <Step step={3} currentStep={step} />

@@ -7,7 +7,7 @@ import {
     TimelineDot,
     TimelineItem,
     TimelineItemLabel,
-} from "./3-timeline";
+} from "./1-timeline";
 
 export function TimelineDemo2() {
     return (

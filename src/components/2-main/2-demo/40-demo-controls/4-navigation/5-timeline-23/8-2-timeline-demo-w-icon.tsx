@@ -9,7 +9,7 @@ import {
     TimelineDot,
     TimelineItem,
     TimelineItemLabel,
-} from "./3-timeline";
+} from "./1-timeline";
 
 export function Timeline3WithIcon() {
     return (

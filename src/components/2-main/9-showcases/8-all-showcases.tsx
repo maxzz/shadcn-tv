@@ -3,7 +3,7 @@ import { Tabs_Table } from "../2-demo/10-demo-tables";
 import { DemoTreeWithOptions } from "../2-demo/20-demo-tree";
 import { ResizableDemo } from "../2-demo/30-demo-resizable";
 import { Tabs_Controls } from "../2-demo/40-demo-controls";
-import { Tabs_Toasts } from "../2-demo/52-demo-toasts";
+import { Tabs_Toasts } from "../2-demo/50-demo-toasts";
 import { Tabs_Loaders } from "../2-demo/60-demo-loaders";
 import { Tabs_Pickers } from "../2-demo/70-pickers/0-all-tabs";
 

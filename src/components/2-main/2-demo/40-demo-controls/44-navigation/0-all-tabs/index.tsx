@@ -5,6 +5,7 @@ import { BreadcrumbDemo } from "../3-demo-breadcrumb";
 import { PaginationDemo } from "../3-demo-pagination";
 import { StepsDemo12 } from "../4-timeline-1";
 import { Timeline3WithIcon, TimelineDemo2 } from "../5-timeline-23";
+import { StepIndicator4 } from "../6-timeline-4";
 import { Timeline5WithAI } from "../7-timeline5-steps-ai";
 
 export function SubTab_Navigation() {
@@ -17,7 +18,8 @@ export function SubTab_Navigation() {
                 <TabsTrigger value="nav3">Timeline1</TabsTrigger>
                 <TabsTrigger value="nav4">Timeline2</TabsTrigger>
                 <TabsTrigger value="nav5">Timeline3</TabsTrigger>
-                <TabsTrigger value="nav6">Timeline5</TabsTrigger>
+                <TabsTrigger value="nav6">Timeline4</TabsTrigger>
+                <TabsTrigger value="nav7">Timeline5</TabsTrigger>
             </TabsList>
 
             <TabsContent value="nav1">
@@ -37,10 +39,14 @@ export function SubTab_Navigation() {
             </TabsContent>
 
             <TabsContent value="nav5">
-                <Timeline3WithIcon />
+                <StepIndicator4 />
             </TabsContent>
 
             <TabsContent value="nav6">
+                <Timeline3WithIcon />
+            </TabsContent>
+
+            <TabsContent value="nav7">
                 <Timeline5WithAI />
             </TabsContent>
         </Tabs>

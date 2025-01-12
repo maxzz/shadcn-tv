@@ -1,3 +1,5 @@
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
 import { CarouselDemo } from "../3-demo-carousel";
 import { InputOTPDemo } from "../1-demo-input-otp";
@@ -7,8 +9,9 @@ import { SelectDemo } from "../5-demo-select";
 import { CommandDialogDemo } from "../6-demo-command";
 
 export function SubTab_Controls() {
+    const { activeTabs } = useSnapshot(appSettings).demosState;
     return (
-        <Tabs defaultValue="controls1">
+        <Tabs defaultValue="controls1" value={activeTabs.controls} onValueChange={(v) => appSettings.demosState.activeTabs.controls = v}>
             <TabsList>
                 <TabsTrigger value="controls1">Input OTP</TabsTrigger>
                 <TabsTrigger value="controls2">Sceleton</TabsTrigger>

@@ -10,7 +10,7 @@ import { SlidersDemo } from "../46-sliders";
 export function Tabs_Controls() {
     const { activeTabs } = useSnapshot(appSettings).demosState;
     return (
-        <Tabs defaultValue="controls6" value={activeTabs.controls} onValueChange={(v) => appSettings.demosState.activeTabs.controls = v}>
+        <Tabs defaultValue="controls6" value={activeTabs.topControls} onValueChange={(v) => appSettings.demosState.activeTabs.topControls = v}>
             <TabsList className="mb-2">
                 <TabsTrigger value="controls1">Switches</TabsTrigger>
                 <TabsTrigger value="controls2">Controls</TabsTrigger>

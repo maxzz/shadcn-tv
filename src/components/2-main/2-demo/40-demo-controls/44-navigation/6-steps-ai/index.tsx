@@ -8,7 +8,7 @@ import { classNames } from "@/utils";
  */
 export function StepsDemo5() {
     return (
-        <div className="flex flex-col items-start gap-4 p-16">
+        <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4">
             <NewFunction1 label="Fetching inspiration" isActive={true} status="Completed" />
             <NewFunction2 label="Applying your styles" isActive={true} status="In Progress" />
             <NewFunction3 label="Making modifications" isActive={false} status="Not Started" />
@@ -23,7 +23,7 @@ function NewFunction1({ label, isActive, isLast, status }: { label: ReactNode; i
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
-        <div className="flex items-start gap-4 w-96">
+        <div className="flex items-start gap-4 w-96 debug">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
                     <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
@@ -47,7 +47,7 @@ function NewFunction2({ label, isActive, isLast, status }: { label: ReactNode; i
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
-        <div className="flex items-start gap-4 w-96">
+        <div className="flex items-start gap-4 w-96 debug">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
                     <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
@@ -71,7 +71,7 @@ function NewFunction3({ label, isActive, isLast, status }: { label: ReactNode; i
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
-        <div className="flex items-start gap-4 w-96">
+        <div className="flex items-start gap-4 w-96 debug">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
                     <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
@@ -95,7 +95,7 @@ function NewFunction4({ label, isActive, isLast, status }: { label: ReactNode; i
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
-        <div className="flex items-start gap-4 w-96">
+        <div className="flex items-start gap-4 w-96 debug">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
                     <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>

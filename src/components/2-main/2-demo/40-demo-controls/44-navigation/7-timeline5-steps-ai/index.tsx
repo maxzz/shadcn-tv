@@ -5,6 +5,9 @@ import { classNames } from "@/utils";
  * v0 by Vercel.
  * @see https://v0.dev/t/k3pVcsueP80
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ * Prompt: A multi-step loading screen, where the steps are arranged vertically. Each step has a small circle on the left, followed by a one-line description of the text, and a status indicator on the right. The left-hand circles are connected by a thin line that becomes colored-in once the step is complete. Display the loading indicator with 4 steps, where the first is complete, the second is in-progress, and the third and fourth haven't started.
+ * tm: https://v0.dev/chat/custom-loading-screen-UzCA6zSiGUB
+ * Prompt tm: A multi-step loading screen, where the steps are arranged vertically if there is enough height in the parent container otherwise horizontally. Each step has a small circle on the left, followed by a one-line description of the text, and a status indicator on the right. The left-hand circles are connected by a thin line that becomes colored-in once the step is complete. Display the loading indicator with 4 steps, where the first is complete, the second is in-progress, and the third and fourth haven't started. Make each step as a component customized by params.
  */
 export function Timeline5WithAI() {
     return (

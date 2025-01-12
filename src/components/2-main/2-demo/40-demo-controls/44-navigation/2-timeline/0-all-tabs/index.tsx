@@ -1,10 +1,10 @@
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { StepsDemo12 } from "../4-timeline-1";
-import { Timeline3WithIcon, TimelineDemo2 } from "../5-timeline-23";
-import { StepIndicator4 } from "../6-timeline-4";
-import { Timeline5WithAI } from "../7-timeline5-steps-ai";
+import { StepsDemo12 } from "../1-timeline";
+import { Timeline3WithIcon, TimelineDemo2 } from "../2-timeline-23";
+import { StepIndicator4 } from "../4-timeline";
+import { Timeline5WithAI } from "../5-timeline5-steps-ai";
 
 export function SubTab_Timeline() {
     const { activeTabs } = useSnapshot(appSettings).demosState;

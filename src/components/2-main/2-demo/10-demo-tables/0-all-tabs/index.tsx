@@ -1,14 +1,17 @@
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { SimpleTableDemo } from "./1-simple-table";
-import { DataTableDemo } from "./2-data-table";
-import { TablesWithStyckyHeaderModules } from "./3-sticky-headers";
-import { SkewTable } from "./4-skew-table";
-import { RotaingBooksDemo } from "./41-books";
-import { CartoonsDemo } from "./42-cartoons";
+import { SimpleTableDemo } from "../1-simple-table";
+import { DataTableDemo } from "../2-data-table";
+import { TablesWithStyckyHeaderModules } from "../3-sticky-headers";
+import { SkewTable } from "../4-skew-table";
+import { RotaingBooksDemo } from "../41-books";
+import { CartoonsDemo } from "../42-cartoons";
 
 export function Tabs_Table() {
+    const { activeTabs } = useSnapshot(appSettings).demosState;
     return (
-        <Tabs defaultValue="table6">
+        <Tabs defaultValue="table6" value={activeTabs.table} onValueChange={(v) => appSettings.demosState.activeTabs.table = v}>
             <TabsList className="mb-2">
                 <TabsTrigger value="table1">Simple</TabsTrigger>
                 <TabsTrigger value="table2">Data</TabsTrigger>

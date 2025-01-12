@@ -6,7 +6,7 @@ import { classNames } from "@/utils";
  * @see https://v0.dev/t/k3pVcsueP80
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-export function StepsDemo5() {
+export function Timeline5WithAI() {
     return (
         <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4">
             <NewFunction1 label="Fetching inspiration" isActive={true} status="Completed" />

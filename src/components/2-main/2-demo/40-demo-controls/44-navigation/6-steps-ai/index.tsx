@@ -1,5 +1,5 @@
+import { type ReactNode, type SVGAttributes } from "react";
 import { classNames } from "@/utils";
-import { SVGAttributes } from "react";
 
 /**
  * v0 by Vercel.
@@ -9,92 +9,100 @@ import { SVGAttributes } from "react";
 export function StepsDemo5() {
     return (
         <div className="flex flex-col items-start gap-4 p-16">
-
-            {newFunction1()}
-
-            {newFunction2()}
-
-            {newFunction3()}
-
-            {newFunction4()}
-
+            <NewFunction1 label="Fetching inspiration" isActive={true} />
+            <NewFunction2 label="Applying your styles" isActive={true} />
+            <NewFunction3 label="Making modifications" isActive={false} />
+            <NewFunction4 label="Final touches" isActive={false} isLast={true} />
         </div>
     );
 }
 
-function newFunction1() {
+function NewFunction1({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
+    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
+    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-full bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900">
+                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
                         <CheckIcon className="size-4" />
                     </div>
-                    <div className="absolute inset-0 -mb- rounded-full border-2 border-gray-900 dark:border-gray-50" />
+                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
                 </div>
-                <div className="h-10 w-[2px] bg-gray-900 dark:bg-gray-50 -mb-4" />
+                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
             </div>
             <div className="flex-1">
-                <p className="text-sm font-medium">Fetching inspiration</p>
+                <p className="text-sm font-medium">{label}</p>
             </div>
             <div className="text-sm font-medium text-gray-900 dark:text-gray-50">Completed</div>
         </div>
     );
 }
 
-function newFunction2() {
+function NewFunction2({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
+    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
+    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-full bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900">
+                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
                         <LoaderIcon className="size-4 animate-spin" />
                     </div>
-                    <div className="absolute inset-0 rounded-full border-2 border-gray-900 dark:border-gray-50" />
+                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
                 </div>
-                <div className="h-10 w-[2px] bg-gray-300 dark:bg-gray-50 -mb-4" />
+                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
             </div>
             <div className="flex-1">
-                <p className="text-sm font-medium">Applying your styles</p>
+                <p className="text-sm font-medium">{label}</p>
             </div>
             <div className="text-sm font-medium text-gray-900 dark:text-gray-50">In Progress</div>
         </div>
     );
 }
 
-function newFunction3() {
+function NewFunction3({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
+    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
+    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700">
+                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
                         <span className="text-sm font-medium text-gray-500 dark:text-gray-400">3</span>
                     </div>
-                    <div className="absolute inset-0 rounded-full border-2 border-gray-300 dark:border-gray-700" />
+                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
                 </div>
-                <div className="h-10 w-[2px] bg-gray-300 dark:bg-gray-50 -mb-4" />
+                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
             </div>
             <div className="flex-1">
-                <p className="text-sm font-medium">Making modifications</p>
+                <p className="text-sm font-medium">{label}</p>
             </div>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Not Started</div>
         </div>
     );
 }
 
-function newFunction4() {
+function NewFunction4({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
+    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
+    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700">
+                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
                         <span className="text-sm font-medium text-gray-500 dark:text-gray-400">4</span>
                     </div>
-                    <div className="absolute inset-0 rounded-full border-2 border-gray-300 dark:border-gray-700" />
+                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
                 </div>
+                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
             </div>
             <div className="flex-1">
-                <p className="text-sm font-medium">Final touches</p>
+                <p className="text-sm font-medium">{label}</p>
             </div>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Not Started</div>
         </div>

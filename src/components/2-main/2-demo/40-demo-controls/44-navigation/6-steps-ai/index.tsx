@@ -9,18 +9,19 @@ import { classNames } from "@/utils";
 export function StepsDemo5() {
     return (
         <div className="flex flex-col items-start gap-4 p-16">
-            <NewFunction1 label="Fetching inspiration" isActive={true} />
-            <NewFunction2 label="Applying your styles" isActive={true} />
-            <NewFunction3 label="Making modifications" isActive={false} />
-            <NewFunction4 label="Final touches" isActive={false} isLast={true} />
+            <NewFunction1 label="Fetching inspiration" isActive={true} status="Completed" />
+            <NewFunction2 label="Applying your styles" isActive={true} status="In Progress" />
+            <NewFunction3 label="Making modifications" isActive={false} status="Not Started" />
+            <NewFunction4 label="Final touches" isActive={false} isLast={true} status="Not Started" />
         </div>
     );
 }
 
-function NewFunction1({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+function NewFunction1({ label, isActive, isLast, status }: { label: ReactNode; isActive: boolean; isLast?: boolean; status: ReactNode }) {
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
+    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
@@ -35,15 +36,16 @@ function NewFunction1({ label, isActive, isLast }: { label: ReactNode; isActive:
             <div className="flex-1">
                 <p className="text-sm font-medium">{label}</p>
             </div>
-            <div className="text-sm font-medium text-gray-900 dark:text-gray-50">Completed</div>
+            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
         </div>
     );
 }
 
-function NewFunction2({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+function NewFunction2({ label, isActive, isLast, status }: { label: ReactNode; isActive: boolean; isLast?: boolean; status: ReactNode }) {
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
+    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
@@ -58,15 +60,16 @@ function NewFunction2({ label, isActive, isLast }: { label: ReactNode; isActive:
             <div className="flex-1">
                 <p className="text-sm font-medium">{label}</p>
             </div>
-            <div className="text-sm font-medium text-gray-900 dark:text-gray-50">In Progress</div>
+            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
         </div>
     );
 }
 
-function NewFunction3({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+function NewFunction3({ label, isActive, isLast, status }: { label: ReactNode; isActive: boolean; isLast?: boolean; status: ReactNode }) {
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
+    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
@@ -81,15 +84,16 @@ function NewFunction3({ label, isActive, isLast }: { label: ReactNode; isActive:
             <div className="flex-1">
                 <p className="text-sm font-medium">{label}</p>
             </div>
-            <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Not Started</div>
+            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
         </div>
     );
 }
 
-function NewFunction4({ label, isActive, isLast }: { label: ReactNode; isActive: boolean; isLast?: boolean; }) {
+function NewFunction4({ label, isActive, isLast, status }: { label: ReactNode; isActive: boolean; isLast?: boolean; status: ReactNode }) {
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
+    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
@@ -104,7 +108,7 @@ function NewFunction4({ label, isActive, isLast }: { label: ReactNode; isActive:
             <div className="flex-1">
                 <p className="text-sm font-medium">{label}</p>
             </div>
-            <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Not Started</div>
+            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
         </div>
     );
 }

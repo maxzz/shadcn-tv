@@ -1,12 +1,15 @@
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { LoadersTest } from "./1-p-loaders";
-import { BubblesDemo } from "./2-bubbles";
-import { SpinnerSpherees } from "./3-sphere";
+import { LoadersTest } from "../1-p-loaders";
+import { BubblesDemo } from "../2-bubbles";
+import { SpinnerSpherees } from "../3-sphere";
 import { classNames } from "@/utils";
 
 export function StyledTabs() {
+    const { activeTabs } = useSnapshot(appSettings).demosState;
     return (
-        <Tabs defaultValue="loaders1">
+        <Tabs defaultValue="loaders1" value={activeTabs.loadersStyled} onValueChange={(v) => appSettings.demosState.activeTabs.loadersStyled = v}>
             
             <TabsList className={classNames("mb-2", tabsListWrapClasses)}>
                 <TabsTrigger value="loaders1">Blocks</TabsTrigger>

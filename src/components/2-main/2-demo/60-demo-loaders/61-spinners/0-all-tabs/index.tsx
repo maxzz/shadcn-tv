@@ -1,20 +1,23 @@
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
-import { SpinnerSvg } from "./1-simple/1-spinner-svg";
-import { SpinnerDiv } from "./1-simple/2-spinner-div";
-import { Spinner9 } from "./1-simple/3-spinner9";
-import { SpinnerEmoji } from "./1-simple/4-spinner-emoji";
-import { TwoCircles } from "./1-simple/5-two-circles";
-import { TextBar } from "./1-simple/6-text-bar";
-import { ThreeDotsLoader } from "./1-simple/9-tree-dots";
-import { RainbowCircles } from "./2-rainbow-circles";
-import { DotsRing } from "./3-dots-ring";
-import { Spinner7 } from "./4-commet";
-import { SpinnerRadial } from "./5-radial";
+import { SpinnerSvg } from "../1-simple/1-spinner-svg";
+import { SpinnerDiv } from "../1-simple/2-spinner-div";
+import { Spinner9 } from "../1-simple/3-spinner9";
+import { SpinnerEmoji } from "../1-simple/4-spinner-emoji";
+import { TwoCircles } from "../1-simple/5-two-circles";
+import { TextBar } from "../1-simple/6-text-bar";
+import { ThreeDotsLoader } from "../1-simple/9-tree-dots";
+import { RainbowCircles } from "../2-rainbow-circles";
+import { DotsRing } from "../3-dots-ring";
+import { Spinner7 } from "../4-commet";
+import { SpinnerRadial } from "../5-radial";
 import { classNames } from "@/utils";
 
 export function SpinnerTabs() {
+    const { activeTabs } = useSnapshot(appSettings).demosState;
     return (
-        <Tabs defaultValue="loaders1">
+        <Tabs defaultValue="loaders1" value={activeTabs.loadersSpinners} onValueChange={(v) => appSettings.demosState.activeTabs.loadersSpinners = v}>
             
             <TabsList className={classNames("mb-2", tabsListWrapClasses)}>
                 <TabsTrigger value="loaders1">Simple</TabsTrigger>

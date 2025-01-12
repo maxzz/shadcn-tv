@@ -1,3 +1,5 @@
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, TabsTrigger, TooltipProvider } from "@/components/ui/shadcn";
 import { SolidColorPickerDemo } from "../10-color-picker";
 import { GradientColorPickerDemo } from "../20-gradient-color-picker";
@@ -7,8 +9,9 @@ import { FlipClockDemo } from "../50-flip-clock";
 import { CalendarDemo } from "../60-calendar/7-demo-calendar";
 
 export function Tabs_Pickers() {
+    const { activeTabs } = useSnapshot(appSettings).demosState;
     return (
-        <Tabs defaultValue="picker5">
+        <Tabs defaultValue="picker5" value={activeTabs.pickers} onValueChange={(v) => appSettings.demosState.activeTabs.pickers = v}>
             <TabsList className="mb-2">
                 <TabsTrigger value="picker1">Color</TabsTrigger>
                 <TabsTrigger value="picker2">Gradient</TabsTrigger>

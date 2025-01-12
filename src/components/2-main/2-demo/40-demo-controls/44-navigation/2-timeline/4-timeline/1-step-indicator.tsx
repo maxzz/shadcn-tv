@@ -4,16 +4,16 @@ import { classNames } from "@/utils";
 import "./step-indicator.css";
 import { Button } from "@/components/ui/shadcn";
 
-const orientationAtom = atom<"horizontal" | "vertical">("horizontal");
+const horizontalAtom = atom<boolean>(true);
 const stepAtom = atom(0);
 
 export function StepIndicator4() {
-    const [orientation, setOrientation] = useAtom(orientationAtom);
+    const [horizontal, setHorizontal] = useAtom(horizontalAtom);
     const [step, setStep] = useAtom(stepAtom);
     return (
         <div className="my-4 p-4 bg-muted/50 border border-border">
 
-            <form className={orientation === "horizontal" ? "max-w-xl" : "max-w-lg"}>
+            <div className={classNames("@container/form", horizontal ? "max-w-[96rem]" : "max-w-48")}>
                 <div className="steps">
                     <Step step={0} label="About You" />
                     <div className="steps__connector"></div>
@@ -30,9 +30,9 @@ export function StepIndicator4() {
                     <Step step={4} label="Contract" />
                 </div>
 
-                <NavButtons stepAtom={stepAtom} orientationAtom={orientationAtom} />
-            </form>
+            </div>
 
+            <NavButtons stepAtom={stepAtom} horizontalAtom={horizontalAtom} />
         </div>
     );
 }
@@ -46,15 +46,15 @@ function Step({ step, label }: { step: number; label: ReactNode; }) {
     );
 }
 
-function NavButtons({ stepAtom, orientationAtom }: { stepAtom: PrimitiveAtom<number>; orientationAtom: PrimitiveAtom<"horizontal" | "vertical">; }) {
-    const [orientation, setOrientation] = useAtom(orientationAtom);
+function NavButtons({ stepAtom, horizontalAtom }: { stepAtom: PrimitiveAtom<number>; horizontalAtom: PrimitiveAtom<boolean>; }) {
+    const [horizontal, setHorizontal] = useAtom(horizontalAtom);
     const [step, setStep] = useAtom(stepAtom);
     return (
         <div className="btn-group">
-            <Button variant="outline" onClick={() => setOrientation(orientation === "horizontal" ? "vertical" : "horizontal")}>
-                {orientation === "horizontal" ? "Vertical" : "Horizontal"}
+            <Button variant="outline" onClick={() => setHorizontal(h => !h)}>
+                {horizontal ? "Horizontal" : "Vertical"}
             </Button>
-            
+
             <button className="btn" type="button" data-action="prev" disabled>Previous</button>
             <button className="btn" type="button" data-action="next">Next</button>
         </div>

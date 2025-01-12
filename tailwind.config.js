@@ -27,5 +27,6 @@ export default {
         require('./tailwind/tailwind-plugin-shadcn-feedback.mts'),
         require("./tailwind/tailwind-plugin-overflow-overlay"),
         require("tailwind-scrollbar"),
+        require("@tailwindcss/container-queries"),
     ],
 };

@@ -25,13 +25,13 @@ button {
 	display: flex;
 	height: 100vh;
 } */
-form {
+/* form {
 	container: form / inline-size;
 	margin: auto;
 	padding: 1.5em;
 	width: 100%;
 	max-width: 36em;
-}
+} */
 .btn {
 	background-color: var(--primary);
 	border-radius: 0.25em;
@@ -39,9 +39,7 @@ form {
 	cursor: pointer;
 	display: block;
 	padding: 0.375em 0.75em;
-	transition:
-		background-color var(--trans-dur) var(--trans-timing),
-		opacity var(--trans-dur) var(--trans-timing);
+	transition: background-color var(--trans-dur) var(--trans-timing), opacity var(--trans-dur) var(--trans-timing);
 	width: 100%;
 	-webkit-appearance: none;
 	appearance: none;
@@ -91,9 +89,7 @@ form {
 			height: 100%;
 			transform: scale(1,0);
 			transform-origin: 50% 0;
-			transition:
-				background-color var(--trans-dur),
-				transform var(--trans-dur) var(--trans-timing);
+			transition: background-color var(--trans-dur), transform var(--trans-dur) var(--trans-timing);
 		}
 	}
 	&__step {
@@ -106,9 +102,7 @@ form {
 			color: hsl(var(--hue),10%,50%);
 			font-size: 0.75em;
 			line-height: 2;
-			transition:
-				color var(--trans-dur) var(--trans-timing),
-				font-weight var(--trans-dur) var(--trans-timing);
+			transition: color var(--trans-dur) var(--trans-timing), font-weight var(--trans-dur) var(--trans-timing);
 		}
 		&-number {
 			background-color: hsl(var(--hue),10%,80%);
@@ -118,9 +112,7 @@ form {
 			text-align: center;
 			width: 1.5em;
 			height: 1.5em;
-			transition:
-				background-color var(--trans-dur) var(--trans-timing),
-				box-shadow var(--trans-dur) var(--trans-timing);
+			transition: background-color var(--trans-dur) var(--trans-timing), box-shadow var(--trans-dur) var(--trans-timing);
 		}
 		&--current &-name,
 		&--done &-name {

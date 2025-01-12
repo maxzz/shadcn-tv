@@ -1,1 +1,1 @@
-export * from "./0-all-tabs";
+export * from "./50-all-tabs";

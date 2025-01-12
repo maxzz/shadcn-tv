@@ -5,7 +5,7 @@ import { ResizableDemo } from "../2-demo/30-demo-resizable";
 import { Tabs_Controls } from "../2-demo/40-demo-controls";
 import { Tabs_Toasts } from "../2-demo/50-demo-toasts";
 import { Tabs_Loaders } from "../2-demo/60-demo-loaders";
-import { Tabs_Pickers } from "../2-demo/70-pickers/0-all-tabs";
+import { Tabs_Pickers } from "../2-demo/70-pickers";
 
 export const showcasesData: Showcase[] = [
     { id: '10', component: <Tabs_Table />            /**/, name: "Tables", },

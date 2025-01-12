@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, tabsListWrapClasses, TabsTrigger } from "@/components/ui/shadcn";
 import { classNames } from "@/utils";
-import { SpinnerTabs } from "./1-spinners";
-import { StyledTabs } from "./2-styled";
-import { EffectsTabs } from "./3-effects";
+import { SpinnerTabs } from "../61-spinners";
+import { StyledTabs } from "../62-styled";
+import { EffectsTabs } from "../63-effects";
 
 export function Tabs_Loaders() {
     return (

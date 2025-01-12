@@ -1,9 +1,9 @@
 import { SonnerDemo } from "../1-demo-sonner";
 import { RadixToastDemo } from "../2-demo-radix-toast";
 import { DrawerDemo } from "../3-demo-drawer";
-import { MenubarDemo } from "../4-menubar";
-import { MenuDropdownDemo } from "../5-menu-popup/inidex";
-import { DialogDemoWoTrigger } from "../6-dialog/1-dialog-wo-trigger";
+import { MenubarDemo } from "../54-menubar";
+import { MenuDropdownDemo } from "../55-menu-popup/inidex";
+import { DialogDemoWoTrigger } from "../56-dialog/1-dialog-wo-trigger";
 
 const rootClasses = "relative min-w-12";
 const ulClasses = "absolute px-1 py-1 border-border border rounded overflow-hidden flex gap-1";

@@ -5,6 +5,7 @@ import { BreadcrumbDemo } from "../3-demo-breadcrumb";
 import { PaginationDemo } from "../3-demo-pagination";
 import { StepsDemo12 } from "../4-timeline-1";
 import { Timeline3WithIcon, TimelineDemo2 } from "../5-timeline-23";
+import { StepsDemo5 } from "../6-steps-ai";
 
 export function SubTab_Navigation() {
     const { activeTabs } = useSnapshot(appSettings).demosState;
@@ -16,6 +17,7 @@ export function SubTab_Navigation() {
                 <TabsTrigger value="nav3">Timeline1</TabsTrigger>
                 <TabsTrigger value="nav4">Timeline2</TabsTrigger>
                 <TabsTrigger value="nav5">Timeline3</TabsTrigger>
+                <TabsTrigger value="nav6">Timeline5</TabsTrigger>
             </TabsList>
 
             <TabsContent value="nav1">
@@ -36,6 +38,10 @@ export function SubTab_Navigation() {
 
             <TabsContent value="nav5">
                 <Timeline3WithIcon />
+            </TabsContent>
+
+            <TabsContent value="nav6">
+                <StepsDemo5 />
             </TabsContent>
         </Tabs>
     );

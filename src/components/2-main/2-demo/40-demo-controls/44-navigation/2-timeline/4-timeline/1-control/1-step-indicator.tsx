@@ -16,8 +16,8 @@ type StepIndicatorCtx = {
 };
 
 const stepItems: ReactNode[] = [
-    "About You",
-    "About Book",
+    <div className="">About You</div>,
+    <div className="flex flex-col items-center text-xs"><div className="font-semibold">About Book</div> <div className="text-[.65rem]">Second line</div></div>,
     "Review",
     "Signing",
     "Contract",
@@ -42,25 +42,10 @@ function StepIndicatorBody({ stepAtom }: { stepAtom: PrimitiveAtom<number>; }) {
                 (label, idx) => {
                     return (<>
                         <Step stepNumber={idx} label={label} stepAtom={stepAtom} key={idx} />
-
                         {idx < stepItems.length - 1 && <div className="steps__connector" />}
                     </>);
                 })
             }
-
-            {/* <Step stepNumber={0} stepAtom={stepAtom} label="About You" />
-            <div className="steps__connector"></div>
-
-            <Step stepNumber={1} stepAtom={stepAtom} label="About Book" />
-            <div className="steps__connector"></div>
-
-            <Step stepNumber={2} stepAtom={stepAtom} label="Review" />
-            <div className="steps__connector"></div>
-
-            <Step stepNumber={3} stepAtom={stepAtom} label="Signing" />
-            <div className="steps__connector"></div>
-
-            <Step stepNumber={4} stepAtom={stepAtom} label="Contract" /> */}
         </div>
     );
 }

@@ -52,7 +52,7 @@ function Step({ idx, label, isActive, isLast, status }: StepProps) {
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
-    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
+    const statusClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
 
     const Icon =
         status === "Completed"
@@ -64,23 +64,27 @@ function Step({ idx, label, isActive, isLast, status }: StepProps) {
                     : null;
 
     return (
-        <div className="flex items-start gap-4 w-96">
-            <div className="flex flex-col items-center">
-                <div className="relative size-6">
-                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
-                        {Icon}
+        <div className="flex items-start justify-between gap-4 w-96">
+            <div className="flex items-start gap-4">
+
+                <div className="flex flex-col items-center">
+                    
+                    <div className="relative size-6">
+                        <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
+                            {Icon}
+                        </div>
+                        <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
                     </div>
-                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
+
+                    {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
                 </div>
 
-                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
+                <div className="flex-1">
+                    <p className="text-sm font-medium">{label}</p>
+                </div>
             </div>
 
-            <div className="flex-1">
-                <p className="text-sm font-medium">{label}</p>
-            </div>
-
-            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
+            <div className={`text-sm font-medium ${statusClasses}`}>{status}</div>
         </div>
     );
 }

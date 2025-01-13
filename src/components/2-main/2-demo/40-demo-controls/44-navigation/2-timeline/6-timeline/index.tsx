@@ -1,19 +1,17 @@
-import { type ReactNode, type SVGAttributes } from "react"; //https://www.youtube.com/watch?v=9iXKv5A5E9E //https://codepen.io/mfg888/pen/qBozZvj
+import { type ReactNode, type SVGAttributes } from "react"; //Y: "tailwind css timeline" //https://www.youtube.com/watch?v=9iXKv5A5E9E //https://codepen.io/mfg888/pen/qBozZvj
 import { classNames } from "@/utils";
 
 export function Timeline6Codepen() {
     return (
         <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4">
 
-            <section className="pt-20 bg-gray-100 flex justify-center">
+            <section className="flex justify-center">
                 <div className="max-w-80">
                     <h2 className="text-xl text-gray-700 mb-7">Recent Updates</h2>
                     <ul>
                         <li className="relative pb-5 flex items-baseline gap-6">
                             <div className="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="bi bi-circle-fill fill-gray-400" viewBox="0 0 16 16">
-                                    <circle cx="8" cy="8" r="8" />
-                                </svg>
+                                <Circle />
                             </div>
                             <div>
                                 <p className="text-sm text-gray-600">18-8-2022</p>
@@ -22,9 +20,7 @@ export function Timeline6Codepen() {
                         </li>
                         <li className="relative flex items-baseline gap-6 pb-5">
                             <div className="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="bi bi-circle-fill fill-gray-400" viewBox="0 0 16 16">
-                                    <circle cx="8" cy="8" r="8" />
-                                </svg>
+                                <Circle />
                             </div>
                             <div>
                                 <p className="text-sm text-gray-600">18-8-2022</p>
@@ -33,9 +29,7 @@ export function Timeline6Codepen() {
                         </li>
                         <li className="relative flex items-baseline gap-6 pb-5">
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" className="bi bi-circle-fill fill-gray-400" viewBox="0 0 16 16">
-                                    <circle cx="8" cy="8" r="8" />
-                                </svg>
+                                <Circle />
                             </div>
                             <div>
                                 <p className="text-sm text-gray-600">18-8-2022</p>
@@ -47,6 +41,14 @@ export function Timeline6Codepen() {
             </section>
 
         </div>
+    );
+}
+
+function Circle({ className, isLast, ...rest }: SVGAttributes<SVGElement> & { isLast?: boolean }) {
+    return (
+        <svg className="size-3 fill-gray-400" viewBox="0 0 16 16" {...rest}>
+            <circle cx="8" cy="8" r="8" />
+        </svg>
     );
 }
 

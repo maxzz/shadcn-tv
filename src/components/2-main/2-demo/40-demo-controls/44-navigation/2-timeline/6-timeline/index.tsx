@@ -7,23 +7,23 @@ export function Timeline6Codepen() {
 
             <section className="flex justify-center">
                 <div className="max-w-80">
-                    <h2 className="text-xl text-gray-700 mb-7">Recent Updates</h2>
+                    <h2 className="mb-4 text-xl text-gray-700">Recent Updates</h2>
                     <ul>
-                        <li className="relative pb-5 flex items-baseline gap-6">
+                        <li className={liClasses}>
                             <Circle />
                             <div>
                                 <p className="text-sm text-gray-600">18-8-2022</p>
                                 <p className="mt-2 text-gray-600 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores incidunt blanditiis dignissimos, enim earum mollitia.</p>
                             </div>
                         </li>
-                        <li className="relative flex items-baseline gap-6 pb-5">
+                        <li className={liClasses}>
                             <Circle />
                             <div>
                                 <p className="text-sm text-gray-600">18-8-2022</p>
                                 <p className="mt-2 text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
                             </div>
                         </li>
-                        <li className="relative flex items-baseline gap-6 pb-5">
+                        <li className={liClasses}>
                             <Circle isLast />
                             <div>
                                 <p className="text-sm text-gray-600">18-8-2022</p>
@@ -38,22 +38,21 @@ export function Timeline6Codepen() {
     );
 }
 
+const liClasses = "relative pb-5 flex items-baseline gap-6";
+
 function Circle({ isLast, ...rest }: SVGAttributes<SVGElement> & { isLast?: boolean; }) {
-    return (<>
-        {isLast
-            ? <div><CircleIcon {...rest} /></div>
-            :
-            <div className="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-gray-400">
-                <CircleIcon {...rest} />
-            </div>
-        }
-    </>);
+    const circleClasses = isLast ? "" : "before:absolute before:left-[6px] before:h-full before:w-[1px] before:bg-gray-400";
+    return (
+        <div className={circleClasses}>
+            <CircleIcon {...rest} />
+        </div>
+    );
 }
 
 function CircleIcon({ className, ...rest }: SVGAttributes<SVGElement>) {
     return (
-        <svg className="size-3 fill-gray-400" viewBox="0 0 16 16" {...rest}>
-            <circle cx="8" cy="8" r="8" />
+        <svg className="size-3 fill-gray-400/50" viewBox="0 0 24 24" {...rest}>
+            <circle cx="12" cy="12" r="12" />
         </svg>
     );
 }

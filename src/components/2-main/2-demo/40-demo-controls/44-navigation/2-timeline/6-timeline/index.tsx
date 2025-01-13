@@ -6,28 +6,28 @@ export function Timeline6Codepen() {
         <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4">
 
             <section className="flex justify-center">
-                <div className="max-w-80">
+                <div className="max-w-80 [--size:35px] [--linew:2px]">
                     <h2 className="mb-4 text-xl text-gray-700">Recent Updates</h2>
                     <ul>
                         <li className={liClasses}>
                             <Circle />
-                            <div>
-                                <p className="text-sm text-gray-600">18-8-2022</p>
-                                <p className="mt-2 text-gray-600 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores incidunt blanditiis dignissimos, enim earum mollitia.</p>
+                            <div className={textClasses}>
+                                <p className={titleClasses}>18-8-2022</p>
+                                <p className={explanationClasses}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores incidunt blanditiis dignissimos, enim earum mollitia.</p>
                             </div>
                         </li>
                         <li className={liClasses}>
                             <Circle />
-                            <div>
-                                <p className="text-sm text-gray-600">18-8-2022</p>
-                                <p className="mt-2 text-gray-600 text-sm">Lorem ipsum dolor sit amet.</p>
+                            <div className={textClasses}>
+                                <p className={titleClasses}>18-8-2022</p>
+                                <p className={explanationClasses}>Lorem ipsum dolor sit amet.</p>
                             </div>
                         </li>
                         <li className={liClasses}>
                             <Circle isLast />
-                            <div>
-                                <p className="text-sm text-gray-600">18-8-2022</p>
-                                <p className="mt-2 text-gray-600 text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est?</p>
+                            <div className={textClasses}>
+                                <p className={titleClasses}>18-8-2022</p>
+                                <p className={explanationClasses}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est?</p>
                             </div>
                         </li>
                     </ul>
@@ -38,20 +38,41 @@ export function Timeline6Codepen() {
     );
 }
 
-const liClasses = "relative pb-5 flex items-baseline gap-6";
+const liClasses = "relative pb-5 flex 1items-baseline items-top gap-4";
+
+const lineClasses = "\
+[line-height:var(--size)] \
+before:absolute \
+before:left-[calc(var(--size)/2-calc(var(--linew)/2))] \
+before:top-[calc(var(--size))] \
+before:h-[calc(100%-var(--size))] \
+before:1h-full \
+before:w-[var(--linew)] \
+before:bg-gray-400 \
+";
+
+//const textClasses = "-mt-[calc(var(--size)/2)]";
+const textClasses = "";
+// const titleClasses = "text-sm font-bold text-gray-600";
+// const titleClasses = "mt-[calc(var(--size)/2)] text-sm font-bold text-gray-600"; // There should be also a half of the font size to make it look good.
+const titleClasses = "mt-[calc(var(--size)/2)] -translate-y-1/2 text-sm font-bold text-gray-600"; // OK but not perfect; explanation should be shifted
+
+const explanationClasses = "-mt-2 text-gray-600 text-sm";
 
 function Circle({ isLast, ...rest }: SVGAttributes<SVGElement> & { isLast?: boolean; }) {
-    const circleClasses = isLast ? "" : "before:absolute before:left-[6px] before:h-full before:w-[1px] before:bg-gray-400";
+    const circleClasses = isLast ? "" : lineClasses;
     return (
         <div className={circleClasses}>
-            <CircleIcon {...rest} />
+            {/* <CircleIcon {...rest} /> */}
+            {/* <CheckIcon className="size-[var(--size)] border border-foreground rounded-full" {...rest} /> */}
+            <LoaderIcon className="p-1 size-[var(--size)] border border-foreground rounded-full 1animate-spin [animation-duration:20s]" {...rest} />
         </div>
     );
 }
 
 function CircleIcon({ className, ...rest }: SVGAttributes<SVGElement>) {
     return (
-        <svg className="size-3 fill-gray-400/50" viewBox="0 0 24 24" {...rest}>
+        <svg className="size-[var(--size)] fill-gray-400/50" viewBox="0 0 24 24" {...rest}>
             <circle cx="12" cy="12" r="12" />
         </svg>
     );

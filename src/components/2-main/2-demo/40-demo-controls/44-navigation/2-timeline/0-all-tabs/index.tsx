@@ -1,9 +1,9 @@
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn";
-import { StepsDemo12 } from "../1-timeline";
+import { StepsDemo12 } from "../1-timeline-sam";
 import { Timeline3WithIcon, TimelineDemo2 } from "../2-timeline-23";
-import { StepIndicator4 } from "../4-timeline";
+import { StepIndicator4 } from "../4-timeline-horiz-vert";
 import { Timeline5WithAI } from "../5-timeline-steps-ai";
 import { Timeline6Codepen } from "../6-timeline";
 

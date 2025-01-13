@@ -43,11 +43,12 @@ function StepIndicatorBody({ stepAtom }: { stepAtom: PrimitiveAtom<number>; }) {
 
 function Step({ stepNumber, label, stepAtom }: { stepNumber: number; label: ReactNode; stepAtom: PrimitiveAtom<number>; }) {
     const [step, setStep] = useAtom(stepAtom);
-    const completedClasses = step > stepNumber ? "steps__step--done" : "";
-    const currentClasses = step === stepNumber ? "steps__step--current" : "";
+    const completedClasses = step > stepNumber && "steps__step--done";
+    const currentClasses = step === stepNumber && "steps__step--current";
     return (
         <div
-            className={classNames("steps__step cursor-pointer", completedClasses, currentClasses)} data-step={stepNumber}
+            data-step={stepNumber}
+            className={classNames("steps__step cursor-pointer", completedClasses, currentClasses)}
             onClick={() => setStep(stepNumber)}
         >
             <div className="steps__step-number">{stepNumber + 1}</div>
@@ -60,9 +61,10 @@ function NavButtons({ stepAtom, horizontalAtom }: { stepAtom: PrimitiveAtom<numb
     const [horizontal, setHorizontal] = useAtom(horizontalAtom);
     const [step, setStep] = useAtom(stepAtom);
     return (
-        <div className="btn-group">
-            <Button variant="outline" onClick={() => setHorizontal(h => !h)}>
-                {horizontal ? "Horizontal" : "Vertical"}
+        <div className="mt-4 grid grid-cols-[1fr,auto,auto] gap-2">
+
+            <Button variant="outline" className="justify-self-start" onClick={() => setHorizontal(h => !h)}>
+                {horizontal ? "Prefer Horizontal" : "Vertical"}
             </Button>
 
             <Button
@@ -80,9 +82,6 @@ function NavButtons({ stepAtom, horizontalAtom }: { stepAtom: PrimitiveAtom<numb
             >
                 Next
             </Button>
-
-            {/* <button className="btn" type="button" data-action="prev" disabled>Previous</button>
-            <button className="btn" type="button" data-action="next">Next</button> */}
         </div>
     );
 }

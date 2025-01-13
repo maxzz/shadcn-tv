@@ -1,1 +1,1 @@
-export * from "./1-step-indicator";
+export * from "./1-control/1-step-indicator";

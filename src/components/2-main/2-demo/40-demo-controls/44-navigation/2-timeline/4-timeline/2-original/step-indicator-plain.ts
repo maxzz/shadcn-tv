@@ -5,10 +5,8 @@
 // });
 
 class StepIndicator {
-    /** Element used for this step indicator */
-    el: HTMLElement | null;
-    /** Number of steps */
-    steps = 5;
+    el: HTMLElement | null; // Element used for this step indicator
+    steps = 5; //Number of steps
 
     private _step = 0;
     get step(): number {
@@ -19,6 +17,7 @@ class StepIndicator {
         this._step = value;
         this.checkExtremes();
     }
+
     /**
      * @param el CSS selector of the step indicator element
      */
@@ -28,6 +27,7 @@ class StepIndicator {
         this.displayStep(this.step);
         this.checkExtremes();
     }
+
     /**
      * @param e Click event
      */
@@ -41,18 +41,21 @@ class StepIndicator {
             this.next();
         }
     }
+
     /** Go to the previous step. */
     prev(): void {
         if (this.step > 0) {
             --this.step;
         }
     }
+
     /** Go to the next step. */
     next(): void {
         if (this.step < this.steps - 1) {
             ++this.step;
         }
     }
+
     /** Disable the Previous or Next button if hitting the first or last step. */
     checkExtremes(): void {
         const prevBtnEl = document.querySelector(`[data-action="prev"]`) as HTMLButtonElement;
@@ -65,6 +68,7 @@ class StepIndicator {
             nextBtnEl.disabled = this.step >= this.steps - 1;
         }
     }
+    
     /**
      * Update the indicator for a targeted step.
      * @param targetStep Index of the step

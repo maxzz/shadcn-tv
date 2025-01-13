@@ -4,7 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn
 import { StepsDemo12 } from "../1-timeline";
 import { Timeline3WithIcon, TimelineDemo2 } from "../2-timeline-23";
 import { StepIndicator4 } from "../4-timeline";
-import { Timeline5WithAI } from "../5-timeline5-steps-ai";
+import { Timeline5WithAI } from "../5-timeline-steps-ai";
+import { Timeline6Codepen } from "../6-timeline";
 
 export function SubTab_Timeline() {
     const { activeTabs } = useSnapshot(appSettings).demosState;
@@ -16,6 +17,7 @@ export function SubTab_Timeline() {
                 <TabsTrigger value="3">Timeline3</TabsTrigger>
                 <TabsTrigger value="4">Timeline4</TabsTrigger>
                 <TabsTrigger value="5">Timeline5</TabsTrigger>
+                <TabsTrigger value="6">Timeline6</TabsTrigger>
             </TabsList>
 
             <TabsContent value="1">
@@ -36,6 +38,10 @@ export function SubTab_Timeline() {
 
             <TabsContent value="5">
                 <Timeline5WithAI />
+            </TabsContent>
+
+            <TabsContent value="6">
+                <Timeline6Codepen />
             </TabsContent>
         </Tabs>
     );

@@ -9,6 +9,20 @@ const stepAtom = atom(0);
 
 const nSteps = 5;
 
+type StepIndicatorCtx = {
+    items: ReactNode[];                     // Array of labels for each step
+    stepAtom: PrimitiveAtom<number>;        // Current step
+    horizontalAtom: PrimitiveAtom<boolean>; // orientation of the step indicator (horizontal or vertical)
+};
+
+const stepItems: ReactNode[] = [
+    "About You",
+    "About Book",
+    "Review",
+    "Signing",
+    "Contract",
+];
+
 export function StepIndicator4() {
     const horizontal = useAtomValue(horizontalAtom);
     return (
@@ -24,7 +38,17 @@ export function StepIndicator4() {
 function StepIndicatorBody({ stepAtom }: { stepAtom: PrimitiveAtom<number>; }) {
     return (
         <div className="steps">
-            <Step stepNumber={0} stepAtom={stepAtom} label="About You" />
+            {stepItems.map(
+                (label, idx) => {
+                    return (<>
+                        <Step stepNumber={idx} label={label} stepAtom={stepAtom} key={idx} />
+
+                        {idx < stepItems.length - 1 && <div className="steps__connector" />}
+                    </>);
+                })
+            }
+
+            {/* <Step stepNumber={0} stepAtom={stepAtom} label="About You" />
             <div className="steps__connector"></div>
 
             <Step stepNumber={1} stepAtom={stepAtom} label="About Book" />
@@ -36,7 +60,7 @@ function StepIndicatorBody({ stepAtom }: { stepAtom: PrimitiveAtom<number>; }) {
             <Step stepNumber={3} stepAtom={stepAtom} label="Signing" />
             <div className="steps__connector"></div>
 
-            <Step stepNumber={4} stepAtom={stepAtom} label="Contract" />
+            <Step stepNumber={4} stepAtom={stepAtom} label="Contract" /> */}
         </div>
     );
 }

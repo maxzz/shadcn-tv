@@ -69,7 +69,7 @@ function Step({ idx, label, isActive, isLast, status }: StepProps) {
 
                 <div className="flex flex-col items-center">
                     
-                    <div className="relative size-6">
+                    <div className="relative size-12">
                         <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
                             {Icon}
                         </div>
@@ -79,7 +79,7 @@ function Step({ idx, label, isActive, isLast, status }: StepProps) {
                     {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
                 </div>
 
-                <div className="flex-1">
+                <div className="flex-1 pt-3">
                     <p className="text-sm font-medium">{label}</p>
                 </div>
             </div>

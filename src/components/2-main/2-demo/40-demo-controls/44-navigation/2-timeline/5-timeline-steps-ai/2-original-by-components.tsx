@@ -35,13 +35,6 @@ export function Timeline5WithAI() {
             {stepItems.map((item, idx) => (
                 <Step key={idx} label={item.label} isActive={item.isActive} isLast={item.isLast} status={item.status} />
             ))}
-
-            {/*
-            <Step1 label="Fetching inspiration" isActive={true} status="Completed" />
-            <Step2 label="Applying your styles" isActive={true} status="In Progress" />
-            <Step3 label="Making modifications" isActive={false} status="Not Started" />
-            <Step4 label="Final touches" isActive={false} isLast={true} status="Not Started" />
-            */}
         </div>
     );
 }

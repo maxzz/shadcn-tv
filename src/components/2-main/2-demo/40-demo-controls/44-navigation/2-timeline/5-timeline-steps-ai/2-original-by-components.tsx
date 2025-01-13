@@ -6,7 +6,7 @@ type StepItem = {
     isActive: boolean;
     isLast?: boolean;
     status: StatusEnum;
-}
+};
 
 const enum StatusEnum {
     Completed = "Completed",
@@ -31,38 +31,48 @@ const stepItems: StepItem[] = [
  */
 export function Timeline5WithAI() {
     return (
-        <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4 debug">
+        <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4 1debug">
             {stepItems.map((item, idx) => (
-                <Step key={idx} label={item.label} isActive={item.isActive} isLast={item.isLast} status={item.status} />
+                <Step idx={idx} label={item.label} isActive={item.isActive} isLast={item.isLast} status={item.status} key={idx} />
             ))}
         </div>
     );
 }
 
 type StepProps = {
+    idx: number;
     label: ReactNode;
     isActive: boolean;
     isLast?: boolean;
     status: ReactNode;
 };
 
-function Step({ label, isActive, isLast, status }: StepProps) {
+function Step({ idx, label, isActive, isLast, status }: StepProps) {
 
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
     const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
 
+    const Icon =
+        status === "Completed"
+            ? <CheckIcon className="size-4" />
+            : status === "In Progress"
+                ? <LoaderIcon className="size-4 1animate-spin" />
+                : status === "Not Started"
+                    ? <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{idx + 1}</span>
+                    : null;
+
     return (
         <div className="flex items-start gap-4 w-96">
             <div className="flex flex-col items-center">
                 <div className="relative size-6">
                     <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
-                        <CheckIcon className="size-4" />
+                        {Icon}
                     </div>
                     <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
                 </div>
-                
+
                 {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
             </div>
 
@@ -70,103 +80,6 @@ function Step({ label, isActive, isLast, status }: StepProps) {
                 <p className="text-sm font-medium">{label}</p>
             </div>
 
-            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
-        </div>
-    );
-}
-
-
-function Step1({ label, isActive, isLast, status }: StepProps) {
-    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
-    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
-    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
-    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
-    return (
-        <div className="flex items-start gap-4 w-96">
-            <div className="flex flex-col items-center">
-                <div className="relative size-6">
-                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
-                        <CheckIcon className="size-4" />
-                    </div>
-                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
-                </div>
-                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
-            </div>
-            <div className="flex-1">
-                <p className="text-sm font-medium">{label}</p>
-            </div>
-            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
-        </div>
-    );
-}
-
-function Step2({ label, isActive, isLast, status }: StepProps) {
-    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
-    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
-    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
-    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
-    return (
-        <div className="flex items-start gap-4 w-96">
-            <div className="flex flex-col items-center">
-                <div className="relative size-6">
-                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
-                        <LoaderIcon className="size-4 animate-spin" />
-                    </div>
-                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
-                </div>
-                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
-            </div>
-            <div className="flex-1">
-                <p className="text-sm font-medium">{label}</p>
-            </div>
-            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
-        </div>
-    );
-}
-
-function Step3({ label, isActive, isLast, status }: StepProps) {
-    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
-    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
-    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
-    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
-    return (
-        <div className="flex items-start gap-4 w-96">
-            <div className="flex flex-col items-center">
-                <div className="relative size-6">
-                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
-                        <span className="text-sm font-medium text-gray-500 dark:text-gray-400">3</span>
-                    </div>
-                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
-                </div>
-                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
-            </div>
-            <div className="flex-1">
-                <p className="text-sm font-medium">{label}</p>
-            </div>
-            <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
-        </div>
-    );
-}
-
-function Step4({ label, isActive, isLast, status }: StepProps) {
-    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
-    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
-    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
-    const textClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
-    return (
-        <div className="flex items-start gap-4 w-96">
-            <div className="flex flex-col items-center">
-                <div className="relative size-6">
-                    <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
-                        <span className="text-sm font-medium text-gray-500 dark:text-gray-400">4</span>
-                    </div>
-                    <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
-                </div>
-                {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
-            </div>
-            <div className="flex-1">
-                <p className="text-sm font-medium">{label}</p>
-            </div>
             <div className={`text-sm font-medium ${textClasses}`}>{status}</div>
         </div>
     );

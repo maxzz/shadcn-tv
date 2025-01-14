@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/shadcn";
 
 type StepItem = {
     label: ReactNode;
-    isActive: boolean;
-    isLast?: boolean;
 };
 
 const enum StatusEnum {
@@ -16,10 +14,10 @@ const enum StatusEnum {
 }
 
 const stepItems: StepItem[] = [
-    { label: "Fetching inspiration", isActive: true, },
-    { label: "Applying your styles", isActive: true, },
-    { label: "Making modifications", isActive: false, },
-    { label: "Final touches", isActive: false, isLast: true, },
+    { label: "Fetching inspiration", },
+    { label: "Applying your styles", },
+    { label: "Making modifications", },
+    { label: "Final touches", },
 ];
 
 const currentStepAtom = atom(1);
@@ -46,7 +44,7 @@ export function Timeline5WithAI() {
                                 ? StatusEnum.InProgress
                                 : StatusEnum.NotStarted;
                     return (
-                        <Step idx={idx} label={item.label} isActive={item.isActive} isLast={item.isLast} status={status} key={idx} />
+                        <Step idx={idx} label={item.label} isLast={idx === stepItems.length - 1} status={status} key={idx} />
                     );
                 })}
             </div>
@@ -66,7 +64,6 @@ export function Timeline5WithAI() {
 type StepProps = {
     idx: number;
     label: ReactNode;
-    isActive: boolean;
     isLast?: boolean;
     status: ReactNode;
 };

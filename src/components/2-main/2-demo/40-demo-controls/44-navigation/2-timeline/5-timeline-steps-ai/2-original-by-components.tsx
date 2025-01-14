@@ -1,11 +1,12 @@
 import { type ReactNode, type SVGAttributes } from "react";
+import { atom, useAtom } from "jotai";
 import { classNames } from "@/utils";
+import { Button } from "@/components/ui/shadcn";
 
 type StepItem = {
     label: ReactNode;
     isActive: boolean;
     isLast?: boolean;
-    status: StatusEnum;
 };
 
 const enum StatusEnum {
@@ -15,11 +16,13 @@ const enum StatusEnum {
 }
 
 const stepItems: StepItem[] = [
-    { label: "Fetching inspiration", isActive: true, status: StatusEnum.Completed, },
-    { label: "Applying your styles", isActive: true, status: StatusEnum.InProgress, },
-    { label: "Making modifications", isActive: false, status: StatusEnum.NotStarted, },
-    { label: "Final touches", isActive: false, isLast: true, status: StatusEnum.NotStarted, },
+    { label: "Fetching inspiration", isActive: true, },
+    { label: "Applying your styles", isActive: true, },
+    { label: "Making modifications", isActive: false, },
+    { label: "Final touches", isActive: false, isLast: true, },
 ];
+
+const currentStepAtom = atom(1);
 
 /**
  * v0 by Vercel.
@@ -30,11 +33,32 @@ const stepItems: StepItem[] = [
  * Prompt tm: A multi-step loading screen, where the steps are arranged vertically if there is enough height in the parent container otherwise horizontally. Each step has a small circle on the left, followed by a one-line description of the text, and a status indicator on the right. The left-hand circles are connected by a thin line that becomes colored-in once the step is complete. Display the loading indicator with 4 steps, where the first is complete, the second is in-progress, and the third and fourth haven't started. Make each step as a component customized by params.
  */
 export function Timeline5WithAI() {
+    const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
     return (
-        <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4 1debug">
-            {stepItems.map((item, idx) => (
-                <Step idx={idx} label={item.label} isActive={item.isActive} isLast={item.isLast} status={item.status} key={idx} />
-            ))}
+        <div className="my-4 px-4 py-2 bg-muted ">
+
+            <div className="flex flex-col items-start gap-4 1debug">
+                {stepItems.map((item, idx) => {
+                    const status =
+                        idx < currentStep
+                            ? StatusEnum.Completed
+                            : idx === currentStep
+                                ? StatusEnum.InProgress
+                                : StatusEnum.NotStarted;
+                    return (
+                        <Step idx={idx} label={item.label} isActive={item.isActive} isLast={item.isLast} status={status} key={idx} />
+                    );
+                })}
+            </div>
+
+            <div className="flex items-center justify-end gap-4">
+                <Button variant="outline" size="xs" onClick={() => setCurrentStep((s) => s - 1)} disabled={currentStep < 0}>
+                    Prev
+                </Button>
+                <Button variant="outline" size="xs" onClick={() => setCurrentStep((s) => s + 1)} disabled={currentStep >= stepItems.length - 1}>
+                    Next
+                </Button>
+            </div>
         </div>
     );
 }
@@ -47,11 +71,12 @@ type StepProps = {
     status: ReactNode;
 };
 
-function Step({ idx, label, isActive, isLast, status }: StepProps) {
+function Step({ idx, label, isLast, status }: StepProps) {
+    const isActive = status !== StatusEnum.NotStarted;
 
     const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
     const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
-    const lineClasses = isActive ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
+    const lineClasses = status === StatusEnum.Completed ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
     const statusClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
 
     const Icon =

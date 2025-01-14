@@ -71,38 +71,28 @@ type StepProps = {
 type StepClasses = {
     circleClasses: string;
     frameClasses: string;
-    lineClasses: string;
     statusClasses: string;
 };
 
-const stepClasses: Record<StatusEnum, StepClasses> = {
-    [StatusEnum.Completed]: {
-        circleClasses: "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900",
-        frameClasses: "border-gray-900 dark:border-gray-50",
-        lineClasses: "bg-gray-900 dark:bg-gray-50",
-        statusClasses: "text-gray-900 dark:text-gray-50",
-    },
-    [StatusEnum.InProgress]: {
-        circleClasses: "bg-gray-300 dark:bg-gray-700",
-        frameClasses: "border-gray-300 dark:border-gray-700",
-        lineClasses: "bg-gray-300 dark:bg-gray-50",
-        statusClasses: "text-gray-500 dark:text-gray-400",
-    },
-    [StatusEnum.NotStarted]: {
-        circleClasses: "bg-gray-300 dark:bg-gray-700",
-        frameClasses: "border-gray-300 dark:border-gray-700",
-        lineClasses: "bg-gray-300 dark:bg-gray-50",
-        statusClasses: "text-gray-500 dark:text-gray-400",
-    },
-} as const;
+const activeStepClasses: StepClasses = {
+    circleClasses: "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900",
+    frameClasses: "border-gray-900 dark:border-gray-50",
+    statusClasses: "text-gray-900 dark:text-gray-50",
+};
+
+const inactiveStepClasses: StepClasses = {
+    circleClasses: "bg-gray-300 dark:bg-gray-700",
+    frameClasses: "border-gray-300 dark:border-gray-700",
+    statusClasses: "text-gray-500 dark:text-gray-400",
+};
+
+const completeLineClasses = "bg-gray-900 dark:bg-gray-50";
+const incompleteLineClasses = "bg-gray-300 dark:bg-gray-50";
 
 function Step({ idx, label, isLast, status }: StepProps) {
     const isActive = status !== StatusEnum.NotStarted;
-
-    const circleClasses = isActive ? "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900" : "bg-gray-300 dark:bg-gray-700";
-    const circleFrameClasses = isActive ? "border-gray-900 dark:border-gray-50" : "border-gray-300 dark:border-gray-700";
-    const lineClasses = status === StatusEnum.Completed ? "bg-gray-900 dark:bg-gray-50" : "bg-gray-300 dark:bg-gray-50";
-    const statusClasses = isActive ? "text-gray-900 dark:text-gray-50" : "text-gray-500 dark:text-gray-400";
+    const classes = isActive ? activeStepClasses : inactiveStepClasses;
+    const lineClasses = status === StatusEnum.Completed ? completeLineClasses : incompleteLineClasses;
 
     const Icon =
         status === "Completed"
@@ -120,10 +110,10 @@ function Step({ idx, label, isLast, status }: StepProps) {
                 <div className="flex flex-col items-center">
 
                     <div className="relative size-[calc(var(--size))]">
-                        <div className={`absolute inset-0 flex items-center justify-center rounded-full ${circleClasses}`}>
+                        <div className={`absolute inset-0 flex items-center justify-center rounded-full ${classes.circleClasses}`}>
                             {Icon}
                         </div>
-                        <div className={`absolute inset-0 rounded-full border-2 ${circleFrameClasses}`} />
+                        <div className={`absolute inset-0 rounded-full border-2 ${classes.frameClasses}`} />
                     </div>
 
                     {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}
@@ -134,7 +124,7 @@ function Step({ idx, label, isLast, status }: StepProps) {
                 </div>
             </div>
 
-            <div className={`pt-[var(--pt)] text-sm font-medium ${statusClasses}`}>{status}</div>
+            <div className={`pt-[var(--pt)] text-sm font-medium ${classes.statusClasses}`}>{status}</div>
         </div>
     );
 }

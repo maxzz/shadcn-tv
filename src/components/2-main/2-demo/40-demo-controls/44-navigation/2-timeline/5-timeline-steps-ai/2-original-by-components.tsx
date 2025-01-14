@@ -35,9 +35,9 @@ const currentStepAtom = atom(1);
 export function Timeline5WithAI() {
     const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
     return (
-        <div className="my-4 px-4 py-2 bg-muted ">
+        <div className="my-4 flex flex-col gap-2 1debug">
 
-            <div className="flex flex-col items-start gap-4 1debug">
+            <div className="p-4 bg-muted flex flex-col items-start gap-4">
                 {stepItems.map((item, idx) => {
                     const status =
                         idx < currentStep
@@ -55,7 +55,7 @@ export function Timeline5WithAI() {
                 <Button variant="outline" size="xs" onClick={() => setCurrentStep((s) => s - 1)} disabled={currentStep < 0}>
                     Prev
                 </Button>
-                <Button variant="outline" size="xs" onClick={() => setCurrentStep((s) => s + 1)} disabled={currentStep >= stepItems.length - 1}>
+                <Button variant="outline" size="xs" onClick={() => setCurrentStep((s) => s + 1)} disabled={currentStep >= stepItems.length}>
                     Next
                 </Button>
             </div>

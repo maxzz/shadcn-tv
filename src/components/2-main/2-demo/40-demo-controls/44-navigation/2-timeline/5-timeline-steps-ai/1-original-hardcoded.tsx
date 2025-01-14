@@ -11,7 +11,7 @@ import { classNames } from "@/utils";
  */
 export function Timeline5WithAIHardcoded() {
     return (
-        <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4 debug">
+        <div className="my-4 p-4 bg-muted flex flex-col items-start gap-4 1debug">
             <Step1 label="Fetching inspiration" isActive={true} status="Completed" />
             <Step2 label="Applying your styles" isActive={true} status="In Progress" />
             <Step3 label="Making modifications" isActive={false} status="Not Started" />

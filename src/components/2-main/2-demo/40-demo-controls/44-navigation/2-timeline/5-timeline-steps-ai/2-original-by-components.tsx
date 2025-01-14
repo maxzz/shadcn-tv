@@ -68,6 +68,34 @@ type StepProps = {
     status: ReactNode;
 };
 
+type StepClasses = {
+    circleClasses: string;
+    frameClasses: string;
+    lineClasses: string;
+    statusClasses: string;
+};
+
+const stepClasses: Record<StatusEnum, StepClasses> = {
+    [StatusEnum.Completed]: {
+        circleClasses: "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900",
+        frameClasses: "border-gray-900 dark:border-gray-50",
+        lineClasses: "bg-gray-900 dark:bg-gray-50",
+        statusClasses: "text-gray-900 dark:text-gray-50",
+    },
+    [StatusEnum.InProgress]: {
+        circleClasses: "bg-gray-300 dark:bg-gray-700",
+        frameClasses: "border-gray-300 dark:border-gray-700",
+        lineClasses: "bg-gray-300 dark:bg-gray-50",
+        statusClasses: "text-gray-500 dark:text-gray-400",
+    },
+    [StatusEnum.NotStarted]: {
+        circleClasses: "bg-gray-300 dark:bg-gray-700",
+        frameClasses: "border-gray-300 dark:border-gray-700",
+        lineClasses: "bg-gray-300 dark:bg-gray-50",
+        statusClasses: "text-gray-500 dark:text-gray-400",
+    },
+} as const;
+
 function Step({ idx, label, isLast, status }: StepProps) {
     const isActive = status !== StatusEnum.NotStarted;
 

@@ -74,25 +74,32 @@ type StepClasses = {
     statusClasses: string;
 };
 
-const activeStepClasses: StepClasses = {
-    circleClasses: "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900",
-    frameClasses: "border-gray-900 dark:border-gray-50",
-    statusClasses: "text-gray-900 dark:text-gray-50",
+type StepClasses2 = {
+    started: StepClasses;
+    notStarted: StepClasses;
 };
 
-const inactiveStepClasses: StepClasses = {
-    circleClasses: "bg-gray-300 dark:bg-gray-700",
-    frameClasses: "border-gray-300 dark:border-gray-700",
-    statusClasses: "text-gray-500 dark:text-gray-400",
+const stepClasses = {
+    started: {
+        circleClasses: "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900",
+        frameClasses: "border-gray-900 dark:border-gray-50",
+        statusClasses: "text-gray-900 dark:text-gray-50",
+    },
+    notStarted: {
+        circleClasses: "bg-gray-300 dark:bg-gray-700",
+        frameClasses: "border-gray-300 dark:border-gray-700",
+        statusClasses: "text-gray-500 dark:text-gray-400",
+    },
 };
 
-const completeLineClasses = "bg-gray-900 dark:bg-gray-50";
-const incompleteLineClasses = "bg-gray-300 dark:bg-gray-50";
+const lineStepClasses = {
+    complete: "bg-gray-900 dark:bg-gray-50",
+    incomplete: "bg-gray-300 dark:bg-gray-50",
+};
 
 function Step({ idx, label, isLast, status }: StepProps) {
-    const isActive = status !== StatusEnum.NotStarted;
-    const classes = isActive ? activeStepClasses : inactiveStepClasses;
-    const lineClasses = status === StatusEnum.Completed ? completeLineClasses : incompleteLineClasses;
+    const classes = status !== StatusEnum.NotStarted ? stepClasses.started : stepClasses.notStarted;
+    const lineClasses = status === StatusEnum.Completed ? lineStepClasses.complete : lineStepClasses.incomplete;
 
     const Icon =
         status === "Completed"

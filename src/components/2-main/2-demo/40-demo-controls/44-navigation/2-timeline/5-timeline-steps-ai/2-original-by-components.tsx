@@ -61,13 +61,6 @@ export function Timeline5WithAI() {
     );
 }
 
-type StepProps = {
-    idx: number;
-    label: ReactNode;
-    isLast?: boolean;
-    status: ReactNode;
-};
-
 type StepClasses = {
     circleClasses: string;
     circleBorderClasses: string;
@@ -97,6 +90,13 @@ const stepClasses = {
 const lineStepClasses = {
     complete: "bg-[#5c90f0]",
     incomplete: "bg-[#5c90f0]/20",
+};
+
+type StepProps = {
+    idx: number;
+    label: ReactNode;
+    isLast?: boolean;
+    status: ReactNode;
 };
 
 function Step({ idx, label, isLast, status }: StepProps) {

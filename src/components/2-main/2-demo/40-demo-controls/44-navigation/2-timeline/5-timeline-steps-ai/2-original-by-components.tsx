@@ -35,7 +35,7 @@ export function Timeline5WithAI() {
     return (
         <div className="my-4 flex flex-col gap-2 1debug">
 
-            <div className="p-4 bg-muted/20 flex flex-col items-start gap-4">
+            <div className="p-4 max-w-96 bg-muted/20 flex flex-col items-start gap-4">
                 {stepItems.map((item, idx) => {
                     const status =
                         idx < currentStep
@@ -113,7 +113,7 @@ function Step({ idx, label, isLast, status }: StepProps) {
                     : null;
 
     return (
-        <div className="flex items-start justify-between gap-4 w-96 [--size:32px] [--pt:4px]"> {/* as usual pt is half of a quarter of the size: (48:12) (32:4), but 24:1 */}
+        <div className="flex items-start justify-between gap-4 w-full [--size:32px] [--pt:4px]"> {/* as usual pt is half of a quarter of the size: (48:12) (32:4), but 24:1 */}
 
             <div className="flex items-start gap-4">
                 <div className="flex flex-col items-center">

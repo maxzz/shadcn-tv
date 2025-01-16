@@ -49,7 +49,7 @@ export function Timeline5WithAI() {
                 })}
             </div>
 
-            <div className="flex items-center justify-end gap-4">
+            <div className="flex items-center justify-end gap-1">
                 <Button variant="outline" size="xs" onClick={() => setCurrentStep((s) => s - 1)} disabled={currentStep < 0}>
                     Prev
                 </Button>
@@ -70,7 +70,7 @@ type StepProps = {
 
 type StepClasses = {
     circleClasses: string;
-    frameClasses: string;
+    circleBorderClasses: string;
     statusClasses: string;
 };
 
@@ -81,16 +81,16 @@ type StepClasses2 = {
 
 const stepClasses = {
     started: {
-        circleClasses: "bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900",
-        frameClasses: "border-gray-900 dark:border-gray-50",
+        circleClasses: "bg-foreground text-background",
+        circleBorderClasses: "border-muted",
         statusClasses: "text-gray-900 dark:text-gray-50",
     },
     notStarted: {
         circleClasses: "bg-gray-300 dark:bg-gray-700",
-        frameClasses: "border-gray-300 dark:border-gray-700",
+        circleBorderClasses: "border-gray-300 dark:border-gray-700",
         statusClasses: "text-gray-500 dark:text-gray-400",
     },
-};
+} as StepClasses2;
 
 const lineStepClasses = {
     complete: "bg-gray-900 dark:bg-gray-50",
@@ -120,7 +120,7 @@ function Step({ idx, label, isLast, status }: StepProps) {
                         <div className={`absolute inset-0 flex items-center justify-center rounded-full ${classes.circleClasses}`}>
                             {Icon}
                         </div>
-                        <div className={`absolute inset-0 rounded-full border-2 ${classes.frameClasses}`} />
+                        <div className={`absolute inset-0 rounded-full border-2 ${classes.circleBorderClasses}`} />
                     </div>
 
                     {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}

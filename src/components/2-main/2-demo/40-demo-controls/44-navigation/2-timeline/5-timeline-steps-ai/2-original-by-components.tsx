@@ -35,7 +35,7 @@ export function Timeline5WithAI() {
     return (
         <div className="my-4 flex flex-col gap-2 1debug">
 
-            <div className="p-4 bg-muted flex flex-col items-start gap-4">
+            <div className="p-4 bg-muted/20 flex flex-col items-start gap-4">
                 {stepItems.map((item, idx) => {
                     const status =
                         idx < currentStep
@@ -79,22 +79,24 @@ type StepClasses2 = {
     notStarted: StepClasses;
 };
 
+const acsentColor = "#5c90f0";
+
 const stepClasses = {
     started: {
-        circleClasses: "bg-foreground text-background",
-        circleBorderClasses: "border-muted",
-        statusClasses: "text-gray-900 dark:text-gray-50",
+        circleClasses: "text-background bg-[#5c90f0]",
+        circleBorderClasses: "bg-[#5c90f0]/50",
+        statusClasses: "text-foreground",
     },
     notStarted: {
-        circleClasses: "bg-gray-300 dark:bg-gray-700",
-        circleBorderClasses: "border-gray-300 dark:border-gray-700",
-        statusClasses: "text-gray-500 dark:text-gray-400",
+        circleClasses: "text-foreground",
+        circleBorderClasses: "bg-foreground/10",
+        statusClasses: "text-foreground/50",
     },
 } as StepClasses2;
 
 const lineStepClasses = {
-    complete: "bg-gray-900 dark:bg-gray-50",
-    incomplete: "bg-gray-300 dark:bg-gray-50",
+    complete: "bg-[#5c90f0]",
+    incomplete: "bg-[#5c90f0]/20",
 };
 
 function Step({ idx, label, isLast, status }: StepProps) {
@@ -117,10 +119,10 @@ function Step({ idx, label, isLast, status }: StepProps) {
                 <div className="flex flex-col items-center">
 
                     <div className="relative size-[calc(var(--size))]">
-                        <div className={`absolute inset-0 flex items-center justify-center rounded-full ${classes.circleClasses}`}>
+                        <div className={`absolute inset-0 rounded-full ${classes.circleBorderClasses}`} />
+                        <div className={`absolute inset-1 rounded-full ${classes.circleClasses} flex items-center justify-center`}>
                             {Icon}
                         </div>
-                        <div className={`absolute inset-0 rounded-full border-2 ${classes.circleBorderClasses}`} />
                     </div>
 
                     {!isLast && <div className={`-mb-4 w-[2px] h-10 ${lineClasses}`} />}

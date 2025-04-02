@@ -3,7 +3,6 @@ import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from
 import * as Prim from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { cn } from "@/utils";
-import { DialogPortalProps } from "@radix-ui/react-dialog";
 
 const Dialog = Prim.Root;
 const DialogClose = Prim.Close;
@@ -59,7 +58,7 @@ grid gap-4";
 
 type DialogContentProps = ComponentPropsWithoutRef<typeof Prim.Content> & {
     modal?: boolean;
-    container?: DialogPortalProps['container'];
+    container?: Prim.DialogPortalProps['container'];
     noClose?: boolean;
     withScroll?: boolean; // by default DialogContent has no scroll for popups
     hiddenTitle?: string; // If headenTitle is not provided, then parent component should provide own Prim.Title (same for aria-describedby)

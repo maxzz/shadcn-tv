@@ -1,30 +1,19 @@
+import { type ComponentPropsWithoutRef } from "react";
 import { useSnapshot } from "valtio";
 import { appSettings } from "@/store/app-settings";
+import { classNames, type ThemeMode } from "@/utils";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./dropdown-menu";
 import { Button } from "./button";
 import { IconDark, IconLight, IconSystem } from "../icons/normal";
 import { ChevronDown, CheckIcon } from 'lucide-react';
-import { ThemeMode } from "@/utils";
 
-function MenuItem({ label, theme, current }: { label: string; theme: ThemeMode; current: ThemeMode; }) {
-    return (
-        <DropdownMenuItem className="grid grid-cols-[16px,1fr] items-center gap-x-2" onClick={() => appSettings.theme = theme}>
-            {current === theme && <CheckIcon className="size-4" />}
-
-            <div className="col-start-2">
-                {label}
-            </div>
-        </DropdownMenuItem>
-    );
-}
-
-export function ThemeSwitch() {
+export function ThemeSwitch({className, ...rest}: ComponentPropsWithoutRef<"div">) {
     const { theme: snapTheme } = useSnapshot(appSettings);
     const isDark = snapTheme === "dark";
     const isSystem = snapTheme === "system";
     const isLight = !isDark && !isSystem;
     return (
-        <div className="focus-within:ring-1 focus-within:ring-ring rounded-md flex items-center">
+        <div className={classNames("focus-within:ring-1 focus-within:ring-ring rounded-md flex items-center", className)} {...rest}>
             <Button
                 variant="ghost"
                 size="xs"
@@ -52,5 +41,17 @@ export function ThemeSwitch() {
 
             </DropdownMenu>
         </div>
+    );
+}
+
+function MenuItem({ label, theme, current }: { label: string; theme: ThemeMode; current: ThemeMode; }) {
+    return (
+        <DropdownMenuItem className="grid grid-cols-[16px,1fr] items-center gap-x-2" onClick={() => appSettings.theme = theme}>
+            {current === theme && <CheckIcon className="size-4" />}
+
+            <div className="col-start-2">
+                {label}
+            </div>
+        </DropdownMenuItem>
     );
 }
